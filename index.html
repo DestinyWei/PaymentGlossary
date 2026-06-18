@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
   // Error sink persists across replaceWith since it's on window, not the DOM.
   window.addEventListener('error', function(e) {
+    if (e.filename && e.filename.indexOf('chrome-extension://') === 0) return;
     var p = document.body || document.documentElement;
     var d = document.getElementById('__bundler_err') || p.appendChild(document.createElement('div'));
     d.id = '__bundler_err';
@@ -164,11 +165,370 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
       window.Babel.transformScriptTags();
     }
+    enhanceGlossaryNavigation();
   } catch (err) {
     setStatus('Error unpacking: ' + err.message);
     console.error('Bundle unpack error:', err);
   }
 });
+
+function enhanceGlossaryNavigation() {
+  const slugById = {
+    fund: 'fund-flow',
+    card: 'card-acquiring',
+    trade: 'trade-payments',
+    fx: 'fx-cross-border',
+    crypto: 'crypto-payments',
+    ucard: 'crypto-card',
+    comp: 'compliance',
+    lic: 'licenses',
+    stable: 'stablecoin-licenses',
+    roles: 'institutional-roles',
+    txlife: 'transaction-lifecycle',
+    biz: 'business-metrics'
+  };
+  const idBySlug = Object.fromEntries(Object.entries(slugById).map(([id, slug]) => [slug, id]));
+  const sections = Array.from(document.querySelectorAll('.section[id^="sec-"]'));
+  const navLinks = Array.from(document.querySelectorAll('#sidebar a'));
+  const anchorBySlug = {};
+  const searchItems = [];
+  const slugCounts = {};
+
+  injectGlossaryEnhancementStyles();
+
+  function normalize(text) {
+    return (text || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  }
+
+  function readableTitle(el, sectionTitle) {
+    if (el.classList.contains('term-item')) {
+      return [el.querySelector('.term-abbr'), el.querySelector('.term-en'), el.querySelector('.term-zh')]
+        .map(node => node ? node.textContent.trim() : '')
+        .filter(Boolean)
+        .join(' · ');
+    }
+    const titleNode = el.querySelector('.card-title, .label, .level-head, .case-label, .section-title');
+    return titleNode ? titleNode.textContent.replace(/\s+/g, ' ').trim() : sectionTitle;
+  }
+
+  function makeSlug(text, fallback) {
+    const ascii = (text.match(/[A-Za-z0-9][A-Za-z0-9+&/ .-]*/g) || []).join(' ');
+    const base = (ascii || fallback)
+      .toLowerCase()
+      .replace(/&/g, ' and ')
+      .replace(/\+/g, ' plus ')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, 48) || fallback;
+    slugCounts[base] = (slugCounts[base] || 0) + 1;
+    return slugCounts[base] === 1 ? base : base + '-' + slugCounts[base];
+  }
+
+  function setActiveSection(id, options = {}) {
+    const section = document.getElementById('sec-' + id);
+    if (!section) return false;
+    sections.forEach(item => item.classList.remove('active'));
+    navLinks.forEach(item => item.classList.remove('active'));
+    section.classList.add('active');
+    const activeLink = navLinks.find(link => link.dataset.sectionId === id);
+    if (activeLink) activeLink.classList.add('active');
+
+    const slug = slugById[id] || id;
+    const targetSlug = options.target && options.target !== section ? options.target.dataset.glossaryAnchor : '';
+    if (options.updateHash !== false) {
+      const nextHash = '#' + slug + (targetSlug ? '/' + targetSlug : '');
+      if (window.location.hash !== nextHash) history.pushState(null, '', nextHash);
+    }
+
+    const target = options.target || section;
+    if (options.scroll !== false) {
+      target.scrollIntoView({ behavior: options.instant ? 'auto' : 'smooth', block: 'start' });
+    }
+    if (options.target) {
+      options.target.classList.remove('glossary-hit');
+      void options.target.offsetWidth;
+      options.target.classList.add('glossary-hit');
+      window.setTimeout(() => options.target.classList.remove('glossary-hit'), 1600);
+    }
+    return true;
+  }
+
+  function parseSectionIdFromLink(link) {
+    const raw = link.getAttribute('onclick') || '';
+    const match = raw.match(/show\('([^']+)'\)/);
+    return match ? match[1] : '';
+  }
+
+  navLinks.forEach(link => {
+    const id = parseSectionIdFromLink(link);
+    if (!id) return;
+    link.dataset.sectionId = id;
+    link.href = '#' + (slugById[id] || id);
+    link.removeAttribute('onclick');
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      setActiveSection(id, { updateHash: true });
+    });
+  });
+
+  sections.forEach(section => {
+    const sectionId = section.id.replace(/^sec-/, '');
+    const sectionSlug = slugById[sectionId] || sectionId;
+    const sectionTitle = readableTitle(section, sectionId);
+    const sectionAnchor = makeSlug(sectionTitle, sectionSlug);
+    section.dataset.glossaryAnchor = sectionAnchor;
+    anchorBySlug[sectionSlug] = section;
+    searchItems.push({
+      title: sectionTitle,
+      context: '板块',
+      text: normalize(section.innerText),
+      sectionId,
+      sectionSlug,
+      targetSlug: sectionAnchor,
+      target: section
+    });
+
+    Array.from(section.querySelectorAll('.term-item, .grid-card, .level-card, .card')).forEach((el, index) => {
+      const title = readableTitle(el, sectionTitle);
+      if (!title || title === sectionTitle) return;
+      const targetSlug = makeSlug(title, sectionSlug + '-' + index);
+      el.dataset.glossaryAnchor = targetSlug;
+      anchorBySlug[sectionSlug + '/' + targetSlug] = el;
+      searchItems.push({
+        title,
+        context: sectionTitle,
+        text: normalize(el.innerText),
+        sectionId,
+        sectionSlug,
+        targetSlug,
+        target: el
+      });
+    });
+  });
+
+  window.show = function(id) {
+    return setActiveSection(id, { updateHash: true });
+  };
+
+  function resolveHash() {
+    const raw = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+    if (!raw) return null;
+    const parts = raw.split('/').filter(Boolean);
+    const sectionId = idBySlug[parts[0]] || (document.getElementById('sec-' + parts[0]) ? parts[0] : '');
+    if (!sectionId) return null;
+    const sectionSlug = slugById[sectionId] || sectionId;
+    const target = parts[1] ? anchorBySlug[sectionSlug + '/' + parts[1]] : null;
+    return { sectionId, target };
+  }
+
+  function routeFromHash(options = {}) {
+    const route = resolveHash();
+    if (!route) return setActiveSection('fund', { updateHash: false, scroll: false });
+    return setActiveSection(route.sectionId, {
+      target: route.target,
+      updateHash: false,
+      scroll: !!route.target,
+      instant: options.instant
+    });
+  }
+
+  function findMatches(query) {
+    const q = normalize(query);
+    if (!q) return [];
+    return searchItems
+      .map(item => {
+        const title = normalize(item.title);
+        let score = 0;
+        if (title === q) score += 120;
+        if (title.startsWith(q)) score += 80;
+        if (title.includes(q)) score += 55;
+        if (item.text.includes(q)) score += 20;
+        return { ...item, score };
+      })
+      .filter(item => item.score > 0)
+      .sort((a, b) => b.score - a.score || a.title.length - b.title.length)
+      .slice(0, 8);
+  }
+
+  function addSearchBox() {
+    const header = document.querySelector('header');
+    const meta = document.querySelector('.header-meta');
+    if (!header || document.querySelector('.glossary-search')) return;
+    const form = document.createElement('form');
+    form.className = 'glossary-search';
+    form.setAttribute('role', 'search');
+    form.innerHTML = `
+      <div class="glossary-search-box">
+        <span class="glossary-search-icon">⌕</span>
+        <input type="search" autocomplete="off" spellcheck="false" placeholder="搜索术语，例如 TPV、COBO、PCI、稳定币">
+      </div>
+      <div class="glossary-search-results" aria-live="polite"></div>
+    `;
+    if (meta) meta.insertAdjacentElement('afterend', form);
+    else header.appendChild(form);
+
+    const input = form.querySelector('input');
+    const results = form.querySelector('.glossary-search-results');
+    let activeMatches = [];
+
+    function render(matches) {
+      activeMatches = matches;
+      if (!input.value.trim()) {
+        results.innerHTML = '';
+        results.classList.remove('open');
+        return;
+      }
+      if (!matches.length) {
+        results.innerHTML = '<div class="glossary-search-empty">没有找到匹配术语</div>';
+        results.classList.add('open');
+        return;
+      }
+      results.innerHTML = matches.map((item, index) => `
+        <button type="button" class="glossary-search-result" data-index="${index}">
+          <span>${escapeHtml(item.title)}</span>
+          <small>${escapeHtml(item.context)}</small>
+        </button>
+      `).join('');
+      results.classList.add('open');
+    }
+
+    function jump(item) {
+      if (!item) return;
+      input.blur();
+      results.classList.remove('open');
+      input.value = item.title;
+      setActiveSection(item.sectionId, { target: item.target, updateHash: true });
+    }
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      jump(activeMatches[0]);
+    });
+    input.addEventListener('input', () => render(findMatches(input.value)));
+    input.addEventListener('focus', () => render(findMatches(input.value)));
+    input.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        results.classList.remove('open');
+        input.blur();
+      }
+    });
+    results.addEventListener('click', event => {
+      const button = event.target.closest('.glossary-search-result');
+      if (!button) return;
+      jump(activeMatches[Number(button.dataset.index)]);
+    });
+    document.addEventListener('click', event => {
+      if (!form.contains(event.target)) results.classList.remove('open');
+    });
+  }
+
+  function escapeHtml(text) {
+    return String(text).replace(/[&<>"']/g, ch => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[ch]));
+  }
+
+  addSearchBox();
+  routeFromHash({ instant: true });
+  window.addEventListener('hashchange', () => routeFromHash({ instant: true }));
+}
+
+function injectGlossaryEnhancementStyles() {
+  if (document.getElementById('glossary-enhancement-styles')) return;
+  const style = document.createElement('style');
+  style.id = 'glossary-enhancement-styles';
+  style.textContent = `
+    .glossary-search {
+      position: relative;
+      max-width: 560px;
+      margin-top: 22px;
+    }
+    .glossary-search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      padding: 0 14px;
+    }
+    .glossary-search-icon {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 18px;
+      line-height: 1;
+    }
+    .glossary-search input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--text);
+      font: 14px/1.4 var(--sans);
+    }
+    .glossary-search input::placeholder { color: var(--text3); }
+    .glossary-search-results {
+      display: none;
+      position: absolute;
+      z-index: 30;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 12px 34px rgba(12,49,36,0.12);
+    }
+    .glossary-search-results.open { display: block; }
+    .glossary-search-result {
+      display: grid;
+      gap: 3px;
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      padding: 11px 14px;
+      text-align: left;
+      font: 13px/1.35 var(--sans);
+    }
+    .glossary-search-result:last-child { border-bottom: 0; }
+    .glossary-search-result:hover,
+    .glossary-search-result:focus {
+      background: var(--bg2);
+      outline: 0;
+    }
+    .glossary-search-result small {
+      color: var(--text2);
+      font: 11px/1.3 var(--mono);
+    }
+    .glossary-search-empty {
+      padding: 12px 14px;
+      color: var(--text2);
+      font: 13px/1.4 var(--sans);
+    }
+    .glossary-hit {
+      animation: glossary-pulse 1.6s ease;
+    }
+    @keyframes glossary-pulse {
+      0%, 100% { box-shadow: var(--shadow); }
+      25% { box-shadow: 0 0 0 3px rgba(0,152,89,0.18), var(--shadow); }
+    }
+    @media (max-width: 720px) {
+      .glossary-search { max-width: none; }
+      .glossary-search-box { height: 42px; }
+    }
+  `;
+  document.head.appendChild(style);
+}
 
   </script>
 
