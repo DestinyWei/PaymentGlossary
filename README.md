@@ -5,6 +5,8 @@ PaymentGlossary 是 AllScale 的支付知识站，包括支付行业术语手册
 ## 项目结构
 
 - `index.html`：Vercel 部署入口和支付术语手册主页。
+- `analytics.js`：Vercel Web Analytics 的全站加载入口，本地预览时不会发送数据。
+- `favicon.ico`、`favicon-32x32.png`、`apple-touch-icon.png`：由 AllScale 官方 Media Kit 图标生成的站点图标。
 - `articles/index.html`：专题文章索引，对应线上 `/articles/`。
 - `articles/<slug>/index.html`：独立文章页面，对应线上 `/articles/<slug>/`。
 - `articles/content.json`：文章标题、摘要和正文的结构化数据源。
@@ -39,6 +41,20 @@ https://payment.0xhowe.top/articles/<slug>/
 ```
 
 AllScale 中文社媒：<https://x.com/allscale_zh>
+
+## 访问数据
+
+网站已接入 Vercel Web Analytics。首次使用时，在对应 Vercel 项目的 **Analytics** 页面点击 **Enable**，然后重新部署一次；数据会显示在该项目的 Analytics 仪表盘中。
+
+- `Page Views`：所选时间范围内的总浏览量，可切换到每日趋势。
+- `Visitors`：每日独立访客及所选时间范围内的访客趋势。
+- `Bounce Rate`：只浏览一个页面便离开的会话比例。
+- `Pages / Referrers`：热门页面、热门文章及外部访问来源。
+- `Country / Device / Browser / OS`：地区和访问设备分布。
+
+Vercel 的访客识别不使用 Cookie；本地 `localhost` 或 `127.0.0.1` 预览不会加载统计脚本。可查看的历史总量取决于当前 Vercel 套餐的数据保留周期。
+
+AllScale 品牌图标来源：<https://www.allscale.io/media-kit>
 
 ## 新增文章
 

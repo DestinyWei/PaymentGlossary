@@ -54,6 +54,10 @@ def page_head(title: str, description: str, canonical: str, image: str) -> str:
   <title>{esc(title)}</title>
   <meta name="description" content="{esc(description)}">
   <link rel="canonical" href="{esc(canonical)}">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="AllScale 支付知识库">
   <meta property="og:title" content="{esc(title)}">
@@ -62,6 +66,7 @@ def page_head(title: str, description: str, canonical: str, image: str) -> str:
   <meta property="og:image" content="{esc(SITE_URL + image)}">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
 </head>"""
 
 

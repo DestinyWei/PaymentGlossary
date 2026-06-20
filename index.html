@@ -3,6 +3,10 @@
 <head>
   <meta charset="utf-8">
   <title>支付行业术语手册 — AllScale</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #009859; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
@@ -194,6 +198,7 @@ function enhanceGlossaryNavigation() {
   const searchItems = [];
   const slugCounts = {};
 
+  ensureSiteMetadata();
   injectGlossaryEnhancementStyles();
 
   function normalize(text) {
@@ -450,6 +455,29 @@ function enhanceGlossaryNavigation() {
   addSearchBox();
   routeFromHash({ instant: true });
   window.addEventListener('hashchange', () => routeFromHash({ instant: true }));
+}
+
+function ensureSiteMetadata() {
+  const links = [
+    { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
+    { rel: 'icon', href: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+    { rel: 'manifest', href: '/site.webmanifest' }
+  ];
+  links.forEach(attributes => {
+    if (document.head.querySelector(`link[rel="${attributes.rel}"][href="${attributes.href}"]`)) return;
+    const link = document.createElement('link');
+    Object.entries(attributes).forEach(([name, value]) => link.setAttribute(name, value));
+    document.head.appendChild(link);
+  });
+
+  if (!document.querySelector('script[data-allscale-analytics]')) {
+    const analytics = document.createElement('script');
+    analytics.src = '/analytics.js';
+    analytics.defer = true;
+    analytics.dataset.allscaleAnalytics = '';
+    document.head.appendChild(analytics);
+  }
 }
 
 function injectGlossaryEnhancementStyles() {
