@@ -76,6 +76,11 @@ def render_blocks(blocks: list[dict[str, object]]) -> str:
         elif kind in {"ul", "ol"}:
             items = "".join(f"<li>{esc(item)}</li>" for item in block["items"])
             rendered.append(f"<{kind}>{items}</{kind}>")
+        elif kind == "image":
+            rendered.append(
+                f'<figure class="article-figure"><img src="{esc(block["src"])}" '
+                f'alt="{esc(block["alt"])}" loading="lazy" decoding="async"></figure>'
+            )
     return "\n".join(rendered)
 
 

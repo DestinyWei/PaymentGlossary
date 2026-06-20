@@ -12,6 +12,7 @@ PaymentGlossary 是 AllScale 的支付知识站，包括支付行业术语手册
 - `articles/styles.css`：文章索引和正文页共用样式。
 - `scripts/build_articles.py`：根据 `content.json` 生成文章页、站点地图和爬虫配置。
 - `scripts/import_articles.py`：从完整合集 PDF 导入首批文章及插图的一次性工具。
+- `scripts/import_docx_images.py`：从完整合集 DOCX 导入文章原始配图并插入对应章节。
 - `sitemap.xml`、`robots.txt`：搜索引擎发现文件，由构建脚本生成。
 
 ## 本地预览
@@ -52,6 +53,18 @@ python3 scripts/build_articles.py
 4. 本地检查文章索引、独立页面、上一篇/下一篇链接和移动端布局。
 
 `slug` 发布后应保持稳定，避免已有分享链接和搜索引擎收录失效。
+
+## 重新导入完整合集
+
+当完整合集源文件更新时，按“正文 → 配图 → 静态页面”的顺序重新生成：
+
+```bash
+python3 scripts/import_articles.py "/path/to/AllScale 支付术语科普系列文章 · 完整合集.pdf"
+python3 scripts/import_docx_images.py "/path/to/AllScale 支付术语科普系列文章 · 完整合集.docx"
+python3 scripts/build_articles.py
+```
+
+DOCX 图片导入必须在 PDF 正文导入之后执行，否则正文导入会覆盖图片块。
 
 ## 更新流程
 

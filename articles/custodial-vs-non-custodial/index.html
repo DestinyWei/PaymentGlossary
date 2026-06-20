@@ -43,18 +43,22 @@
 <h2>一、先搞懂一样东西：私钥</h2>
 <p>链上资产的归属，不靠「账号 + 密码」，而靠一样东西：私钥。</p>
 <p>私钥是一串只有持有者掌握的密钥。规则很明确：谁拥有私钥，谁就能动这笔钱，没有例外。你的钱包地址是公开的（像账号，别人可以往里打钱），私钥是保密的（像最终的控制权）。</p>
+<figure class="article-figure"><img src="/articles/assets/custodial-vs-non-custodial-02.webp" alt="Custodial vs Non-custodial：你的稳定币到底归谁管？：二、托管 vs 自托管：私钥在谁手里" loading="lazy" decoding="async"></figure>
 <h2>二、托管 vs 自托管：私钥在谁手里</h2>
 <p>区别只有一个：这把私钥，是平台替你拿着，还是你自己拿着。</p>
 <ul><li>托管型（Custodial）：私钥由平台保管。你在交易所或平台上看到的余额，本</li></ul>
 <p>质是「平台记在账上、欠你的一个数字」，真正的链上私钥在平台手里。好处是体验像银行 App，忘了密码能找回、操作简单。代价是你得信任这家平台：不挪用、不跑路、不被黑。2022 年 FTX 暴雷就是最惨烈的反面教材：用户账面上有余额，平台却早把钱挪走了。</p>
 <ul><li>自托管型（Non-custodial）：私钥只有你自己掌握，平台只是个工具，碰不到你的钱。好处是平台跑路、被查封、被黑客攻破，都拿不走你的资产。代价同样直接：私钥一旦丢了或被盗，没有任何人能帮你找回，这里没有「忘记密码」按钮。</li></ul>
 <p>一句话概括：托管是「方便，但要信任别人」；自托管是「自由，但自己负责」。 圈里那句老话「Not your keys, not your coins（钥匙不在你手，币就不算你的）」，说的正是这件事。</p>
+<figure class="article-figure"><img src="/articles/assets/custodial-vs-non-custodial-03.webp" alt="Custodial vs Non-custodial：你的稳定币到底归谁管？：三、几个相关的钱包概念" loading="lazy" decoding="async"></figure>
 <h2>三、几个相关的钱包概念</h2>
 <ul><li>综合钱包（Omnibus wallet）：平台用一个或少数几个链上地址，把很多用户的资金混在一起管理，谁有多少靠平台内部账本来进行记账。这是托管模式的典型做法，对平台省事，但用户的钱混在一起，在链上看不到清晰的单独归属。</li><li>热钱包（Hot wallet）与冷钱包（Cold wallet）：热钱包联网，方便随时交易，但暴露在攻击面下；冷钱包离线保管，安全但取用不便。机构通常把大部分资产放冷钱包、留一小部分在热钱包周转。</li><li>MPC（多方计算）：把一把私钥拆成几部分、分开保管，避免「单点丢失就全没」。它是让自托管变得更安全、也更好用的关键技术之一。</li></ul>
+<figure class="article-figure"><img src="/articles/assets/custodial-vs-non-custodial-04.webp" alt="Custodial vs Non-custodial：你的稳定币到底归谁管？：四、AllScale 为什么把自托管写进名字里" loading="lazy" decoding="async"></figure>
 <h2>四、AllScale 为什么把自托管写进名字里</h2>
 <p>到这里就能看懂 AllScale 和大多数支付、钱包平台的根本不同了：它是一家自托管稳定币数字银行。商户收到的稳定币，进的是商户自己掌握私钥的钱包，AllScale 碰不到、也挪不走。</p>
 <p>这对商户意味着两件实在事：一是平台层面的「跑路」「挤兑」风险基本被消除，钱本来就不在平台账上，自然谈不上被平台卷走；二是资金在链上归属清晰、公开可查，而不是像综合钱包那样混作一团。</p>
 <p>自托管在带来安全和可控性的同时，也把责任交给了用户。 私钥和助记词的保管，是用户自己的事情。所以一个好的自托管产品（包括 AllScale 在做的），重点不在于「替你保管资产」，而在于用 MPC、社交恢复这类技术，在不碰你资产的前提下，尽量降低「私钥一丢就血本无归」的风险，让自托管既守得住自由，又不至于那么吓人。</p>
+<figure class="article-figure"><img src="/articles/assets/custodial-vs-non-custodial-05.webp" alt="Custodial vs Non-custodial：你的稳定币到底归谁管？：小结" loading="lazy" decoding="async"></figure>
 <h2>小结</h2>
 <p>私钥：谁握着私钥，谁就能动这笔钱；链上归属看私钥，不看账号密码。托管 Custodial：私钥在平台手里，方便但要信任平台（FTX 是反例）。自托管 Non-custodial：私钥只在你手里，平台拿不走，但丢了也没人能找回。</p>
 <p>一句话：托管是「方便但靠信任」，自托管是「自由但自己负责」——AllScale 选的是后者。</p>

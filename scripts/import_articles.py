@@ -165,6 +165,14 @@ def remove_title(lines: list[str], title: str) -> list[str]:
     raise ValueError(f"Could not match article title: {title}")
 
 
+def truncate_at(lines: list[str], marker: str) -> list[str]:
+    marker_key = canonical(marker)
+    for index, line in enumerate(lines):
+        if canonical(line) == marker_key:
+            return lines[:index]
+    return lines
+
+
 def split_chunks(lines: list[str]) -> list[str]:
     chunks: list[str] = []
     current = ""
@@ -271,7 +279,7 @@ def main() -> None:
     reader = PdfReader(str(args.pdf))
     output = []
     for index, metadata in enumerate(ARTICLES):
-        end = ARTICLES[index + 1]["start"] - 1 if index + 1 < len(ARTICLES) else 59
+        end = ARTICLES[index + 1]["start"] - 1 if index + 1 < len(ARTICLES) else 60
         layout_lines: list[str] = []
         source_lines: list[str] = []
         for page_number in range(metadata["start"], end + 1):
@@ -281,6 +289,9 @@ def main() -> None:
             if page_number == metadata["start"]:
                 layout_page = remove_title(layout_page, metadata["title"])
                 source_page = remove_title(source_page, metadata["title"])
+            if index == len(ARTICLES) - 1 and page_number == 60:
+                layout_page = truncate_at(layout_page, "关于 AllScale")
+                source_page = truncate_at(source_page, "关于 AllScale")
             layout_lines.extend(layout_page)
             layout_lines.append("")
             source_lines.extend(source_page)

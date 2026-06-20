@@ -44,18 +44,22 @@
 <h2>一、一笔交易，其实分四步走</h2>
 <p>把「刷卡」到「到账」拆开看，背后是四个阶段：</p>
 <ul><li>授权（Auth）：发卡行确认这张卡有钱、是本人、可以扣，然后先冻结对应的额度。注意：这一步钱还没真正动，只是「预留」住，有点像住酒店时先交一笔押金。</li><li>请款（Capture）：商户正式发起「我要把这笔钱拿走」，被冻结的额度这才变成真正的扣款。Auth 和 Capture 之间可能隔几小时到几天，比如很多电商是发货时才 Capture。</li><li>清算（Clearing）：各方对账。卡组织把这段时间里的每一笔交易明细，在发卡行和收单行之间交换、核对清楚。注意：这一步是每一笔交易都要过，但过的是数据，不是钱。</li><li>结算（Settlement）：真正划钱的一步，但它不是一笔笔划。卡组织会把每家银行在一个结算周期（通常按日）内的所有交易轧差（Netting），算出每家的净额（某家银行总共该付或该收多少），最后只划转这一个净额。所以一家银行一天可能有几百万笔交易，和清算对手之间往往最终只结算一笔净额（省去海量逐笔划转）。钱这样划到收单行、再进商户账户，走到这一步，商户才算真正拿到钱。</li></ul>
+<figure class="article-figure"><img src="/articles/assets/auth-capture-settlement-02.webp" alt="Auth、Capture、Settlement：钱落袋之前的完整旅程：二、为什么「已扣款」不等于「已到账」" loading="lazy" decoding="async"></figure>
 <h2>二、为什么「已扣款」不等于「已到账」</h2>
 <p>这里是最关键的认知：你看到的「支付成功」，通常只走到 Auth 或 Capture；而钱真正落进商户口袋，要等到 Settlement。</p>
 <p>这中间隔着清算和结算的周期，也就是大家常听到的 T+1 / T+2——交易日之后第 1 天、第 2 天才到账。如果是跨境，往往还要更久。这就是「我明明付了，商户怎么还没收到」的真相：钱在路上，只是你看不见。</p>
+<figure class="article-figure"><img src="/articles/assets/auth-capture-settlement-03.webp" alt="Auth、Capture、Settlement：钱落袋之前的完整旅程：顺便把第 3 篇的内容回顾下，当时我们说 Void（撤销）和 Refund（退款）是两回事，现在你就能理解为什么了：" loading="lazy" decoding="async"></figure>
 <p>顺便把第 3 篇的内容回顾下，当时我们说 Void（撤销）和 Refund（退款）是两回事，现在你就能理解为什么了：</p>
 <ul><li>在 Capture / Settlement 之前，钱还没真动，可以直接 Void 撤销冻结；</li><li>一旦 Settlement 完成、钱已到账，就只能 Refund 原路退回。</li></ul>
 <p>不同时间点，决定了你「反悔」的方式不同。同时这个时间差还有个副产品，叫在途资金（Float）：钱已经离开买家、但还没到商户，中间这段时间躺在系统里，谁持有谁就能赚一笔利息。这个我们留到第 8 篇讲跨境时再展开。</p>
+<figure class="article-figure"><img src="/articles/assets/auth-capture-settlement-04.webp" alt="Auth、Capture、Settlement：钱落袋之前的完整旅程：三、稳定币：几乎没有「生命周期」" loading="lazy" decoding="async"></figure>
 <h2>三、稳定币：几乎没有「生命周期」</h2>
 <p>回到我们每天在做的事。稳定币的链上转账，基本把上面这四步压成了一步：</p>
 <p>买家钱包转出资金 → 链上确认 → 商户钱包收到资金。</p>
 <p>没有「先冻结再扣款」，也没有 T+1 / T+2 的清算结算周期。链上确认（通常几秒到几分钟）就是终局，商户当场拿到、当场就能用。传统支付里那个折腾两天的 Settlement，在链上就是「区块确认」的那一下。</p>
 <p>和第 3 篇说的「不可逆是把双刃剑」一样，这里的「快」也有两面：传统的清算结算周期虽然慢，但这段时间也是一个纠错窗口，有处理的余地。稳定币 T+0 的结算效率虽然非常高，但代价是没有这个缓冲。对现金流敏感、做跨境收款的商户来说，「钱到就是到、不用再等两天」本身就是实打实的好处。</p>
 <p>AllScale 做的，正是把「显示已付款」和「真正到账」之间那条 T+1 / T+2 的鸿沟直接抹掉。</p>
+<figure class="article-figure"><img src="/articles/assets/auth-capture-settlement-05.webp" alt="Auth、Capture、Settlement：钱落袋之前的完整旅程：小结" loading="lazy" decoding="async"></figure>
 <h2>小结</h2>
 <p>授权 Auth：发卡行确认可扣，先冻结额度，钱还没动。请款 Capture：正式发起扣款，冻结变实扣。清算 Clearing：各方对账，算清谁付谁多少。结算 Settlement：</p>
 <p>钱真正进商户账户，常见 T+1 / T+2。</p>

@@ -382,6 +382,17 @@ img {
   margin-top: 8px;
 }
 
+.article-figure {
+  margin: 24px 0 30px;
+}
+
+.article-figure img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
 .social-cta {
   margin: 54px 0 30px;
   border-top: 1px solid var(--line);

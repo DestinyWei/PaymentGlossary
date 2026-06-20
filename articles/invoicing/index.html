@@ -48,19 +48,23 @@
 <p>Checkout = 东西摆在这儿，你当场买、当场付。即时交易，一手交钱一手交货，典型场景是电商。</p>
 <p>Invoicing = 我先干活或先发货，再给你开一张单，你之后再付。中间隔着一段“账期”，典型场景是自由职业、咨询、B2B 供货。</p>
 <p>简单说，Checkout 是“先付钱”，Invoicing 是“后付钱”。绝大多数生意的收款，不是这两种里的一种，就是两种的组合。</p>
+<figure class="article-figure"><img src="/articles/assets/invoicing-02.webp" alt="钱还没到，账单先到——Invoicing 到底在解决什么？：二、一张 Invoice 上有哪些角色" loading="lazy" decoding="async"></figure>
 <h2>二、一张 Invoice 上有哪些角色</h2>
 <p>一张合格的收款单，至少要说清三件事：谁收钱、谁付钱、为什么付。这里涉及到两个新术语：</p>
 <ul><li>Beneficiary（收款方）：钱最终进谁的账，也就是开单的你。</li><li>Remitter（汇款方）：掏钱的那一方，也就是你的客户。</li></ul>
 <p>除了这两个角色，单子上还得有金额、事由（干了什么），以及一个容易被忽略的关键项——账期（Payment Terms），比如常见的 Net 30，意思是“收到单后 30 天内付清”。</p>
 <p>为什么要把这些分得这么清？因为在 Invoicing 里，开单和到账之间天然有个缺口：客户可能在另一个国家、用另一种货币、隔着好几天才付。麻烦，几乎都藏在这段缺口里。</p>
+<figure class="article-figure"><img src="/articles/assets/invoicing-03.webp" alt="钱还没到，账单先到——Invoicing 到底在解决什么？：三、传统跨境开票收款的麻烦" loading="lazy" decoding="async"></figure>
 <h2>三、传统跨境开票收款的麻烦</h2>
 <p>如果你的客户在海外，传统流程下通常会卡在三个地方：</p>
 <ul><li>等：客户走电汇（Wire / TT），跨境到账常要 2 到 5 个工作日，中间还可能被中转行扣一笔费、备注信息丢失（这套机制第 7 篇细讲）。</li><li>损：你开的是美元，客户付的是另一种货币，中间换汇被吃掉一道汇差。单子写 1000 美元，到账可能少几十美元（第 8 篇细讲）。</li><li>乱：对账。这笔钱对应哪张单？金额对得上吗？跨境转账的备注经常缺失或被截断，财务只能靠人肉比对。</li></ul>
 <p>对自由职业者和小团队来说，“追款 + 对账”经常比干活本身还累。</p>
+<figure class="article-figure"><img src="/articles/assets/invoicing-04.webp" alt="钱还没到，账单先到——Invoicing 到底在解决什么？：四、换一种 Invoicing：以 AllScale 为例" loading="lazy" decoding="async"></figure>
 <h2>四、换一种 Invoicing：以 AllScale 为例</h2>
 <p>如果收的是稳定币（USDT、USDC），整个流程则会轻松得多。以 AllScale Invoicing 为例，整个流程是：</p>
 <ul><li>开单：填好金额、事由、收款币种，生成一张收款单和一条链接。</li><li>发送：把链接发给客户，邮件、微信、Telegram 都行。</li><li>收款：客户点开，连钱包或扫码付款，链上几秒确认。</li><li>到账：钱直接进你自托管的钱包，不经过平台账户中转。 对账：每一笔都有一张链上收据，一笔对一单，金额来源清清楚楚。</li></ul>
 <p>没有要等好几天的电汇，没有被悄悄吃掉的汇差，对账也不用再人肉比对——单子和收据在链上一一对应。</p>
+<figure class="article-figure"><img src="/articles/assets/invoicing-05.webp" alt="钱还没到，账单先到——Invoicing 到底在解决什么？：小结" loading="lazy" decoding="async"></figure>
 <h2>小结</h2>
 <p>Checkout 解决“当场买、当场付”，Invoicing 解决“先干活、后收钱”。两者合起来，基本覆盖了一门生意所有的收款场景。</p>
 <p>但“收到钱”不等于万事大吉：万一客户要退款呢？万一付完又反悔、发起争议呢？下一篇我们讲 Refund（退款）和 Chargeback（拒付），看看钱收了之后还能不能被拿回去，以及为什么这件事在卡支付和稳定币的世界里，结局完全不同。</p></div>
