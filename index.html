@@ -422,6 +422,20 @@ function enhanceGlossaryNavigation() {
     });
   }
 
+  function addSiteLinks() {
+    const top = document.querySelector('.header-top');
+    if (!top || top.querySelector('.glossary-site-links')) return;
+    const links = document.createElement('div');
+    links.className = 'glossary-site-links';
+    links.setAttribute('role', 'navigation');
+    links.setAttribute('aria-label', '站点导航');
+    links.innerHTML = `
+      <a href="/articles/">专题文章</a>
+      <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">中文社媒 ↗</a>
+    `;
+    top.appendChild(links);
+  }
+
   function escapeHtml(text) {
     return String(text).replace(/[&<>"']/g, ch => ({
       '&': '&amp;',
@@ -432,6 +446,7 @@ function enhanceGlossaryNavigation() {
     }[ch]));
   }
 
+  addSiteLinks();
   addSearchBox();
   routeFromHash({ instant: true });
   window.addEventListener('hashchange', () => routeFromHash({ instant: true }));
@@ -446,6 +461,29 @@ function injectGlossaryEnhancementStyles() {
       position: relative;
       max-width: 560px;
       margin-top: 22px;
+    }
+    .glossary-site-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: auto;
+      margin-left: auto;
+    }
+    .glossary-site-links a {
+      display: inline-flex;
+      align-items: center;
+      width: auto;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text2);
+      padding: 6px 9px;
+      text-decoration: none;
+      font: 11px/1.2 var(--sans);
+      font-weight: 600;
+    }
+    .glossary-site-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
     }
     .glossary-search-box {
       display: flex;
@@ -525,6 +563,11 @@ function injectGlossaryEnhancementStyles() {
     @media (max-width: 720px) {
       .glossary-search { max-width: none; }
       .glossary-search-box { height: 42px; }
+      .header-top-label,
+      .header-top-div { display: none; }
+      .glossary-site-links { gap: 5px; }
+      .glossary-site-links a { padding: 5px 7px; }
+      .glossary-site-links a:last-child { display: none; }
     }
   `;
   document.head.appendChild(style);

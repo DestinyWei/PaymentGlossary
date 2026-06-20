@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KYC、KYB、AML：合规这些词，到底在管什么？｜AllScale</title>
+  <meta name="description" content="分清个人身份识别、企业尽调与反洗钱监控分别解决什么问题。">
+  <link rel="canonical" href="https://payment.0xhowe.top/articles/kyc-kyb-aml/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale 支付知识库">
+  <meta property="og:title" content="KYC、KYB、AML：合规这些词，到底在管什么？｜AllScale">
+  <meta property="og:description" content="分清个人身份识别、企业尽调与反洗钱监控分别解决什么问题。">
+  <meta property="og:url" content="https://payment.0xhowe.top/articles/kyc-kyb-aml/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/kyc-kyb-aml.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/" aria-label="AllScale 支付术语手册">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="/">术语手册</a>
+      <a href="/articles/" class="active">专题文章</a>
+      <a class="social-link" href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">中文社媒 ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="面包屑">
+    <a href="/">术语手册</a><span>/</span><a href="/articles/">专题文章</a><span>/</span><span>第 14 篇</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale 支付术语科普 · 第 14 篇</div>
+      <h1>KYC、KYB、AML：合规这些词，到底在管什么？</h1>
+      <p class="article-deck">分清个人身份识别、企业尽调与反洗钱监控分别解决什么问题。</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/kyc-kyb-aml.webp" alt="KYC、KYB、AML：合规这些词，到底在管什么？">
+    <div class="article-body"><p>前面十三篇术语科普文章讲的都是「怎么把钱收得更快、更省」。但有一组词，做跨境和稳定币生意绕不开，很多人一听就皱眉，且有一部分人在一开始并没有把它当回事最后却被狠狠上了一课。</p>
+<p>它们就是 KYA、KYC、KYB、KYT、AML，这一篇我们把它们讲清楚：它们到底在管什么、为什么要管，以及为什么对稳定币生意来说，合规反而是加分项。</p>
+<h2>一、AML：所有合规动作的总目标</h2>
+<p>我们先来认识合规中最大的词：AML（Anti-Money Laundering，反洗钱）。</p>
+<p>它是这一整套合规的总纲，目标就一句话：防止犯罪所得（贩毒、诈骗、行贿等等）通过金融系统「洗白」成看似干净的钱。 各国法律都要求金融机构包括做支付、做稳定币的企业承担反洗钱义务。</p>
+<p>下面那几个 K 开头的词，本质上都是为 AML 服务的具体手段。常和 AML 一起出现的还有 CTF（Counter-Terrorism Financing，反恐融资），目标是避免资金被用于恐怖活动中。</p>
+<h2>二、KYC 与 KYB：先搞清楚「你是谁」</h2>
+<p>反洗钱的第一步，是别让匿名的坏人混进来。所以开户时要先验明身份：</p>
+<ul><li>KYC（Know Your Customer，客户身份识别）：核实个人客户的真实身份，你是不是真人、是不是本人、有没有上制裁名单。开户时交身份证或护照、做人脸识别，就是 KYC。</li><li>KYB（Know Your Business，企业身份识别）：同样的事，但对象是企业，核实这家公司是否真实存在、谁是背后的实际控制人（也就是 UBO，最终受益人）、业务是否合法。</li></ul>
+<p>总的来说，KYC 查个人，KYB 查公司，目的都是把身份先核清楚。</p>
+<h2>三、KYT 与 KYA：既盯交易，也查地址</h2>
+<p>开户时查清身份还不够，坏人也可能开完户再干坏事。所以还要持续盯着链上的动静，这里有两种审查程度不同的手段：</p>
+<ul><li>KYT（Know Your Transaction，交易监控）：盯的是「交易」。实时监控交易行为，有没有异常的大额、可疑的频繁进出、和高风险地址的往来。一旦发现可疑，</li></ul>
+<p>机构要按规定上报（也就是 STR / SAR，可疑交易报告）。</p>
+<ul><li>KYA（Know Your Address，地址识别）：盯的是「地址」。对一个具体的钱包地址做风险画像，它过去和哪个地址有过资金往来、是否为制裁地址、混币器资金或被盗资金。</li></ul>
+<p>那这两者是什么关系？概念上，它们是两个不同视角，一个看交易、一个看地址。但实际操作中，KYT 往往把 KYA 包含了进去：一套成熟的交易监控引擎，在审一笔交易时通常会顺带核对收发双方的地址在不在制裁名单、是不是高风险（这正是 KYA 在做的事），还会沿着资金链往上游回溯若干层，看这笔钱有没有间接沾过那些高风险来源。</p>
+<p>所以更准确的说法是：KYA 与其说是和 KYT 并列的独立流程，不如说是 KYT 审交易时调用的「地址情报」这一层。当然这也意味着平台的审查制度会有不同的严格程度，KYA 相对轻松一些，KYT 则更为严格一些。</p>
+<p>值得一提的是，在稳定币这种链上场景，KYA 和 KYT 反而更好做：链上交易公开可查、资金流向可追溯，非法资金想藏，比在传统现金世界里难得多。</p>
+<h2>四、为什么合规对稳定币生意反而是加分项</h2>
+<p>不少人对稳定币有个误解，以为它是用来「绕开监管」的。事实恰恰相反：一门能长期做下去、能接入主流客户和银行的稳定币生意，靠的正是合规。</p>
+<p>原因有三：一是前面说的，链上可追溯，KYT 天然好做，洗钱反而更难藏；二是合规让平台能拿到牌照、接入银行通道、服务正规企业（全球牌照这块第 16 篇会讲）；三是对商户来说，选一个合规的平台，意味着自己的资金更安全，不容易因为对手方出事而被牵连。</p>
+<p>合规也有它的成本和门槛：实名验证、审核、记录留存，都要花时间和精力。但它换来的，是这门生意能不能长久、能不能摆上台面。对认真做生意的人，这是一层保护，而不是负担。</p>
+<p>AllScale 作为在受监管框架下运作的自托管稳定币数字银行，把合规做在前面，正是为了让商户的跨境收付既高效，又走得长远。</p>
+<h2>小结</h2>
+<p>AML 反洗钱：总目标，防止脏钱洗白；CTF 反恐融资是它的孪生兄弟。KYC /KYB：开户时核身份——KYC 查个人，KYB 查公司。KYT 交易监控：持续盯交易有没有异常；链上可追溯，反而更好查。</p>
+<p>一句话：合规不是绕开监管，而是让稳定币生意能上台面、走得远的前提。</p>
+<p>下一篇讲加密世界一条很特别的合规规则：当稳定币在不同平台之间转移时，监管要求平台之间互相传递发送方和接收方的身份信息——这就是「转账规则（Travel Rule）」，以及它背后的 VASP（虚拟资产服务商）。</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>继续关注 AllScale 支付科普</h2>
+    <p>后续文章和支付行业内容会在 AllScale 中文社媒同步发布。</p>
+    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 @allscale_zh ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="文章翻页"><a href="/articles/stablecoin-cross-border-payment/"><small>上一篇</small><strong>同一笔跨境生意，从 6 天到 6 分钟：稳定币版的旅程</strong></a><a href="/articles/vasp-travel-rule/"><small>下一篇</small><strong>VASP 和 Travel Rule：加密世界绕不开的一条合规规则</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 AllScale 中文社媒</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "KYC、KYB、AML：合规这些词，到底在管什么？", "description": "分清个人身份识别、企业尽调与反洗钱监控分别解决什么问题。", "image": "https://payment.0xhowe.top/articles/assets/kyc-kyb-aml.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/articles/kyc-kyb-aml/"}</script>
+</body>
+</html>
