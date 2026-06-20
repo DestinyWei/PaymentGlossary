@@ -45,8 +45,10 @@ document.addEventListener('DOMContentLoaded', async function() {
   const loading = document.getElementById('__bundler_loading');
   function setStatus(msg) { if (loading) loading.textContent = msg; }
 
-  // Error sink persists across replaceWith since it's on window, not the DOM.
-  window.addEventListener('error', function(e) {
+  // Keep the unpacker error UI limited to fatal boot errors. Browser resource
+  // failures, such as blocked analytics scripts, should not surface to visitors.
+  window.__bundlerErrorHandler = function(e) {
+    if (e.target && e.target !== window) return;
     if (e.filename && e.filename.indexOf('chrome-extension://') === 0) return;
     var p = document.body || document.documentElement;
     var d = document.getElementById('__bundler_err') || p.appendChild(document.createElement('div'));
@@ -55,7 +57,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     d.textContent = (d.textContent ? d.textContent + String.fromCharCode(10) : '') +
       '[bundle] ' + (e.message || e.type) +
       (e.filename ? ' (' + e.filename.slice(0, 60) + ':' + e.lineno + ')' : '');
-  }, true);
+  };
+  window.addEventListener('error', window.__bundlerErrorHandler, true);
 
   try {
     const manifestEl = document.querySelector('script[type="__bundler/manifest"]');
@@ -170,6 +173,8 @@ document.addEventListener('DOMContentLoaded', async function() {
       window.Babel.transformScriptTags();
     }
     enhanceGlossaryNavigation();
+    window.removeEventListener('error', window.__bundlerErrorHandler, true);
+    delete window.__bundlerErrorHandler;
   } catch (err) {
     setStatus('Error unpacking: ' + err.message);
     console.error('Bundle unpack error:', err);
