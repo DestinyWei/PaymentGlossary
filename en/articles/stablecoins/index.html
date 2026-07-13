@@ -52,6 +52,7 @@
 <p>crypto Crypto had one big problem from day one: the prices moved too much. Bitcoin up 10% today, down 15% tomorrow was routine. That makes it hard to use as money.</p>
 <p>Nobody wants to pay salaries or settle invoices in something that might shrink overnight.</p>
 <p>Stablecoins were built to fix that. At heart they&#x27;re still crypto, but the price is pegged to a stable asset, usually the US dollar, so that 1 stablecoin stays roughly equal to $1 no matter what the market does.</p>
+<figure class="article-figure"><img src="/articles/assets/en-stablecoins-02.webp" alt="What exactly is a stablecoin? And how does it stay &quot;stable&quot; at $1?: The ones you hear about most, USDT (Tether) and USDC (Circle), fall in this camp. They keep the good parts of crypto (on-chain, peer-to-peer, global, settles in minutes) and add the stability of fiat. The &quot;cross-border settlement in stablecoins&quot; idea from earlier articles only works because of this &quot;stable&quot; part." loading="lazy" decoding="async"></figure>
 <p>The ones you hear about most, USDT (Tether) and USDC (Circle), fall in this camp.</p>
 <p>They keep the good parts of crypto (on-chain, peer-to-peer, global, settles in minutes) and add the stability of fiat. The &quot;cross-border settlement in stablecoins&quot; idea from earlier articles only works because of this &quot;stable&quot; part.</p>
 <h2>2. How it stays stable: reserves, plus mint and burn</h2>
@@ -59,6 +60,7 @@
 <p>That in-and-out flow runs on two actions:</p>
 <ul><li>Mint: Someone hands the issuer $1, and the issuer mints 1 new stablecoin to give back, while adding the $1 to reserves. Result: 1 more stablecoin in circulation, $1 more in reserves.</li><li>Burn: Someone brings 1 stablecoin back to redeem it, the issuer returns $1, and burns that coin (permanently removed, no longer in circulation). Result: 1 fewer stablecoin, $1 less in reserves.</li></ul>
 <p>In theory then, the number of stablecoins in circulation always matches the dollars in reserve. Every coin has $1 sitting behind it.</p>
+<figure class="article-figure"><img src="/articles/assets/en-stablecoins-03.webp" alt="What exactly is a stablecoin? And how does it stay &quot;stable&quot; at $1?: That&#x27;s also why the price stays near $1: you can redeem 1-for-1 anytime. If the market price drifts, say down to $0.98, someone buys cheap and redeems at $1 to pocket the spread. That arbitrage pushes the price back to $1. That pull-back force is where the peg gets its strength." loading="lazy" decoding="async"></figure>
 <p>That&#x27;s also why the price stays near $1: you can redeem 1-for-1 anytime. If the market price drifts, say down to $0.98, someone buys cheap and redeems at $1 to pocket the spread. That arbitrage pushes the price back to $1. That pull-back force is where the peg gets its strength.</p>
 <h2>3. But not every stablecoin is equally stable</h2>
 <p>The other side of the story matters just as much: the &quot;stable&quot; part isn&#x27;t automatic.</p>
@@ -67,9 +69,11 @@
 <p>assets, the peg can break. It has happened before: in 2022, an algorithmic stablecoin called UST (backed by algorithms, not real reserves) collapsed to zero. In 2023, USDC briefly slipped below $1 when Silicon Valley Bank, one of its reserve banks, ran into trouble.</p>
 <p>So when picking a stablecoin, three things actually matter: are the reserves sufficient, are they transparent and auditable, and is the issuer regulated.</p>
 <p>USDT and USDC became market leaders on the strength of relatively transparent reserves and compliance backing.</p>
+<figure class="article-figure"><img src="/articles/assets/en-stablecoins-04.webp" alt="What exactly is a stablecoin? And how does it stay &quot;stable&quot; at $1?: 4. So how do you actually use a stablecoin" loading="lazy" decoding="async"></figure>
 <h2>4. So how do you actually use a stablecoin</h2>
 <p>Stablecoins solve the &quot;stable value&quot; part. But putting them to work in a business needs two more steps: how you turn your fiat into stablecoins and back into spendable money (that&#x27;s the next article, on-ramp and off-ramp), and where the stablecoins live and who holds them (article 12, self-custody).</p>
 <p>That&#x27;s where AllScale fits in: merchants can send and receive cross-border payments in mainstream stablecoins, while the coins stay in a wallet the merchant controls. You get the stability and speed of stablecoins without handing your assets to a platform.</p>
+<figure class="article-figure"><img src="/articles/assets/en-stablecoins-05.webp" alt="What exactly is a stablecoin? And how does it stay &quot;stable&quot; at $1?: Recap" loading="lazy" decoding="async"></figure>
 <p>Recap Stablecoin: a crypto asset pegged to fiat (usually USD), aiming for 1 coin ≈ $1, combining crypto&#x27;s efficiency with fiat&#x27;s stability. Mint: deposit $1, create 1 coin. Burn: redeem $1, destroy 1 coin. Circulation always matches reserves. What decides whether it stays stable: whether the reserves are sufficient, transparent, and regulated. Stability is engineered, not automatic.</p>
 <p>Next article covers the door between the crypto world and the real one: how do you turn fiat into stablecoins, and stablecoins back into fiat? That&#x27;s on-ramp and off-ramp.</p></div>
   </article>

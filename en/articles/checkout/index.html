@@ -55,18 +55,21 @@
 <p>It is not the same thing as the payment itself. The payment is the money actually moving, which we&#x27;ll get to later. Checkout is just the doorway — like the register at the front of a supermarket. You pay at the register, but the mechanics of how money leaves your card and lands in the store&#x27;s account happen behind the scenes.</p>
 <p>Hold onto this distinction. It comes up again:</p>
 <ul><li>Checkout = the front counter (what you see)</li><li>Gateway, processor, and friends = the kitchen (the plumbing you don&#x27;t see, unpacked in Posts 4 and 5)</li></ul>
+<figure class="article-figure"><img src="/articles/assets/en-checkout-02.webp" alt="You&#x27;ve clicked &#x27;Pay Now&#x27; a thousand times. Do you actually know what Checkout is?: 2. Three shapes Checkout tends to take" loading="lazy" decoding="async"></figure>
 <h2>2. Three shapes Checkout tends to take</h2>
 <p>Not every business has a full shopping site. In practice, Checkout usually shows up in one of three forms:</p>
 <ol><li>Embedded checkout: built directly into the site or app. The buyer never leaves.</li></ol>
 <p>This is what big platforms default to.</p>
 <ol><li>Payment link: the checkout compressed into a single URL you can send someone. Great for freelancers with no website, people selling courses in group chats, or a one-off invoice. Drop the link in WhatsApp, they click, they pay.</li><li>QR code: same idea, printed on a table tent or thrown up on a screen. Market stalls, storefronts, event booths. Scan, pay, done.</li></ol>
 <p>All three are the same idea underneath: strip as much friction as possible out of the &quot;actually pay&quot; step. Less friction, higher conversion. That is the entire reason Checkout exists.</p>
+<figure class="article-figure"><img src="/articles/assets/en-checkout-03.webp" alt="You&#x27;ve clicked &#x27;Pay Now&#x27; a thousand times. Do you actually know what Checkout is?: 3. Why traditional Checkout keeps getting stuck" loading="lazy" decoding="async"></figure>
 <h2>3. Why traditional Checkout keeps getting stuck</h2>
 <p>You&#x27;ve probably hit some version of this:</p>
 <ul><li>You type in the card number, expiration, CVV — then get bounced into an SMS verification step (that&#x27;s 3DS; we&#x27;ll cover it later)</li><li>You buy something from a foreign site and a mystery &quot;currency conversion fee&quot;</li></ul>
 <p>appears at the end</p>
 <ul><li>You want to buy, but the site doesn&#x27;t accept cards from your region, so you just… can&#x27;t The root cause isn&#x27;t the checkout page. It&#x27;s the old, layered clearing system sitting behind card payments. Every time you tap &quot;Pay,&quot; the request has to hop through the issuer, the card scheme, and the acquirer. We will pull that apart post by post.</li></ul>
 <p>For now, remember this: the checkout page looks simple. Whatever&#x27;s tripping you up is happening in the pipes behind it.</p>
+<figure class="article-figure"><img src="/articles/assets/en-checkout-04.webp" alt="You&#x27;ve clicked &#x27;Pay Now&#x27; a thousand times. Do you actually know what Checkout is?: 4. A different Checkout — using AllScale" loading="lazy" decoding="async"></figure>
 <h2>4. A different Checkout — using AllScale</h2>
 <p>If a buyer pays with a stablecoin (USDT, USDC), the checkout step gets a lot shorter.</p>
 <p>Here&#x27;s how it plays out on AllScale Checkout:</p>
@@ -79,6 +82,7 @@
 <p>They pay in USDT or USDC and the money lands in the merchant&#x27;s self-custody wallet.</p>
 <p>It fits people already doing business inside Telegram — sellers of digital goods, courses, paid memberships, signal groups. In the old world, those sellers were either giving up 8–12% to Stripe, Gumroad, or Patreon, or stuck in manual workflows where the buyer DMs a tx hash and someone adds them to the group by hand. TG Store collapses &quot;get paid + auto-deliver / add to group&quot; into a single tap inside a chat window.</p>
 <p>Put differently: Checkout doesn&#x27;t have to be a &quot;page.&quot; When all your customers live in a chat app, the best checkout is the chat app itself.</p>
+<figure class="article-figure"><img src="/articles/assets/en-checkout-05.webp" alt="You&#x27;ve clicked &#x27;Pay Now&#x27; a thousand times. Do you actually know what Checkout is?: Wrap-up" loading="lazy" decoding="async"></figure>
 <h2>Wrap-up</h2>
 <p>Checkout is the door between you and paying. The easier the door opens, the easier the business runs.</p>
 <p>This post covered only the front counter. Next up: Invoicing — what changes when you are not selling stock off a shelf but sending a customer a bill and waiting for them to pay it. Some new characters walk on stage there.</p></div>

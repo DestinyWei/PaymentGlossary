@@ -53,10 +53,12 @@
 <p>The total fee rate a merchant pays on each card payment has a name: MDR (Merchant Discount Rate).</p>
 <p>If this coffee has an MDR of 3%, then on the $15 the customer paid, the merchant nets $14.55, and $0.45 gets deducted.</p>
 <p>But that $0.45 doesn&#x27;t go to one party. MDR is a bundled price, stuffed with three different slices that go to three different players.</p>
+<figure class="article-figure"><img src="/articles/assets/en-card-vs-stablecoin-fees-02.webp" alt="A 100-yuan cup of coffee: card vs stablecoin, how much less does the merchant actually get?: 2. Who gets the $0.45" loading="lazy" decoding="async"></figure>
 <h2>2. Who gets the $0.45</h2>
 <p>Sticking with the coffee example, here&#x27;s how the $0.45 splits (exact ratios vary by card type and region, this is just illustrative):</p>
 <ul><li>Interchange fee: The big slice, around $0.30. This goes to the issuing bank, the bank that issued the customer&#x27;s card. It takes the largest share because it carries the credit and risk (fronting the money, fraud protection, dispute handling).</li><li>Scheme fee: A small slice, around $0.05. This goes to card schemes like Visa and Mastercard, as a toll for using their &quot;highway.&quot;</li><li>Acquirer markup: The remaining $0.10 or so. This is what the acquirer or payment service provider earns, and it&#x27;s the only slice that&#x27;s negotiable. When you talk fees with your acquirer, this is basically what you&#x27;re talking about.</li></ul>
 <p>One line to remember: your fee ≈ issuer (big) + card scheme (small) + acquirer (markup).</p>
+<figure class="article-figure"><img src="/articles/assets/en-card-vs-stablecoin-fees-03.webp" alt="A 100-yuan cup of coffee: card vs stablecoin, how much less does the merchant actually get?: 3. Two traps: opaque pricing, and cross-border stacking" loading="lazy" decoding="async"></figure>
 <h2>3. Two traps: opaque pricing, and cross-border</h2>
 <p>stacking Trap one: you may not see how the $0.45 splits.</p>
 <p>For the same 3%, there are two ways to price it:</p>
@@ -68,6 +70,7 @@
 <p>Trap two: cross-border stacks the rate higher.</p>
 <p>Domestic card payments might run under 1%. Cross-border often climbs to 3–4% or more. That&#x27;s because you&#x27;re layering several extra costs onto the base rate: crossborder interchange is more expensive to begin with, there&#x27;s a currency conversion fee (covered in Part 8), and there may be one or two extra hops in the middle, each taking a cut.</p>
 <p>For merchants doing cross-border business, those percentage points add up to real money over a year.</p>
+<figure class="article-figure"><img src="/articles/assets/en-card-vs-stablecoin-fees-04.webp" alt="A 100-yuan cup of coffee: card vs stablecoin, how much less does the merchant actually get?: 4. Stablecoins: driving the toll to near zero" loading="lazy" decoding="async"></figure>
 <h2>4. Stablecoins: driving the toll to near zero</h2>
 <p>Back to what we do every day. Stablecoin payments don&#x27;t have the issuer / scheme / acquirer stack layered on top of each other (this is the &quot;cutting out the middleman&quot; story from Part 4). So there&#x27;s no interchange, no scheme fee.</p>
 <p>The main cost is the on-chain gas fee (network fee), typically a few cents flat, and largely independent of the payment size.</p>
@@ -76,6 +79,7 @@
 <p>B2B, cross-border, businesses with clear delivery.</p>
 <p>What AllScale does is help merchants skip this whole cascade of middlemen,</p>
 <p>dropping cross-border collection costs from &quot;a few percent&quot; to &quot;a few cents in network fees.&quot;</p>
+<figure class="article-figure"><img src="/articles/assets/en-card-vs-stablecoin-fees-05.webp" alt="A 100-yuan cup of coffee: card vs stablecoin, how much less does the merchant actually get?: Recap" loading="lazy" decoding="async"></figure>
 <p>Recap MDR: the total fee rate per card payment. Interchange: the big slice, goes to the issuer. Scheme fee: small slice, goes to Visa/Mastercard. Acquirer markup: what the acquirer earns, and the only slice you can negotiate.</p>
 <p>One line: the $0.45 skimmed from your $15 coffee mostly went to the issuer.</p>
 <p>Stablecoins basically don&#x27;t charge this toll.</p>

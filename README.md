@@ -20,6 +20,7 @@ PaymentGlossary 是 AllScale 的双语支付知识站，包括中英文支付行
 - `scripts/build_articles.py`：根据 `content.json` 生成文章页、站点地图和爬虫配置。
 - `scripts/import_articles.py`：从完整合集 PDF 导入首批文章及插图的一次性工具。
 - `scripts/import_english_articles.py`：从英文完整合集 PDF 导入英文文章及英文头图的一次性工具。
+- `scripts/import_english_docx_images.py`：从英文完整合集 DOCX 导入英文文章原始配图并插入对应章节。
 - `scripts/import_docx_images.py`：从完整合集 DOCX 导入文章原始配图并插入对应章节。
 - `sitemap.xml`、`robots.txt`：搜索引擎发现文件，由构建脚本生成。
 
@@ -93,10 +94,11 @@ python3 scripts/build_articles.py
 python3 scripts/import_articles.py "/path/to/AllScale 支付术语科普系列文章 · 完整合集.pdf"
 python3 scripts/import_docx_images.py "/path/to/AllScale 支付术语科普系列文章 · 完整合集.docx"
 python3 scripts/import_english_articles.py "/path/to/AllScale Payment Glossary Series · Complete Anthology_Watermark.pdf"
+python3 scripts/import_english_docx_images.py "/path/to/AllScale Payment Glossary Series · Complete Anthology.docx"
 python3 scripts/build_articles.py
 ```
 
-DOCX 图片导入必须在中文 PDF 正文导入之后执行，否则中文正文导入会覆盖图片块。英文 PDF 导入会生成 `articles/content.en.json` 和 `articles/assets/en-*.webp`。
+DOCX 图片导入必须在对应 PDF 正文导入之后执行，否则正文导入会覆盖图片块。英文 PDF 导入会生成 `articles/content.en.json` 和英文封面/头图；英文 DOCX 导入会补齐每篇文章内的章节配图。
 
 ## 更新流程
 
