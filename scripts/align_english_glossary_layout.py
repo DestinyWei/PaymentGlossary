@@ -51,6 +51,218 @@ NAV_GROUPS = [
     ]),
 ]
 
+EN_VISUALS = {
+    "fund": """
+<div class="card" data-en-visual="fund">
+  <div class="card-title">Payment movement: collection -> clearing -> settlement -> payout</div>
+  <div class="chain">
+    <div class="chain-node cn-gray">Customer pays</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-blue">COBO collection<br><small style="font-weight:400;font-size:10px">platform receives funds</small></div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-amber">Clearing<br><small style="font-weight:400;font-size:10px">fees, FX, net positions</small></div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-teal">Settlement<br><small style="font-weight:400;font-size:10px">money actually moves</small></div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-green">POBO payout</div>
+  </div>
+  <div class="case-box teal">
+    <div class="case-label teal">Example: group treasury pool</div>
+    Subsidiaries in Germany, France, and Poland collect into a UK treasury account, then pay suppliers centrally. Benefits: lower bank fees, centralized FX hedging, and real-time visibility into group cash.
+  </div>
+</div>
+""",
+    "card": """
+<div class="card" data-en-visual="card">
+  <div class="card-title">A $100 online card payment, step by step</div>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Card data enters checkout.</strong> The browser sends encrypted card data to the gateway.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Tokenization.</strong> The gateway replaces raw PAN with a token and routes the auth request.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Network routing.</strong> The acquirer sends the request through Visa/Mastercard to the issuer.</div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Issuer decision.</strong> The issuer checks balance, CVV, fraud signals, and places a hold. No final settlement yet.</div></div>
+  <div class="step"><div class="step-num green">5</div><div class="step-body"><strong>Capture, clearing, settlement.</strong> The merchant captures after fulfillment; the network clears and settles net funds, usually T+1/T+2.</div></div>
+  <hr class="div">
+  <div class="chain"><div class="chain-node cn-blue">MDR</div><div class="chain-arrow">=</div><div class="chain-node cn-pink">Interchange</div><div class="chain-arrow">+</div><div class="chain-node cn-purple">Scheme fee</div><div class="chain-arrow">+</div><div class="chain-node cn-teal">Acquirer markup</div></div>
+</div>
+""",
+    "trade": """
+<div class="card" data-en-visual="trade">
+  <div class="card-title">Trade-payment instruments by risk allocation</div>
+  <table class="tbl">
+    <tbody><tr><th>Instrument</th><th>When buyer pays</th><th>Who carries risk</th><th>Typical use</th></tr>
+    <tr><td><span class="badge badge-blue">LC</span> Letter of Credit</td><td>Bank pays when documents match</td><td>Bank-backed, lowest seller risk</td><td>Large first-time international deals</td></tr>
+    <tr><td><span class="badge badge-teal">D/P</span> Documents against Payment</td><td>Buyer pays before receiving documents</td><td>Moderate seller protection</td><td>Medium-trust trade flows</td></tr>
+    <tr><td><span class="badge badge-amber">D/A</span> Documents against Acceptance</td><td>Buyer accepts bill and pays later</td><td>Seller carries buyer credit risk</td><td>Long-term buyers with bargaining power</td></tr>
+  </tbody></table>
+  <div class="case-box amber">
+    <div class="case-label amber">LC flow</div>
+    Contract -> buyer asks issuing bank to open LC -> advising bank notifies seller -> seller ships goods -> documents are checked -> bank pays -> buyer reimburses bank and collects goods.
+  </div>
+</div>
+""",
+    "fx": """
+<div class="card" data-en-visual="fx">
+  <div class="card-title">Where cross-border cost hides</div>
+  <div class="chain">
+    <div class="chain-node cn-gray">Sender currency</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-amber">FX quote<br><small style="font-weight:400;font-size:10px">mid-market +/- spread</small></div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-blue">Correspondent chain</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-teal">Local rail</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-green">Beneficiary receives</div>
+  </div>
+  <div class="grid2">
+    <div class="grid-card"><div class="label">Bank wire</div><div class="body">Costs can appear as transfer fees, intermediary deductions, FX spread, and delayed value date.</div></div>
+    <div class="grid-card"><div class="label">Stablecoin rail</div><div class="body">The chain transfer can settle quickly, but on/off-ramp spread, liquidity, and compliance still determine final cost.</div></div>
+  </div>
+</div>
+""",
+    "crypto": """
+<div class="card" data-en-visual="crypto">
+  <div class="card-title">Stablecoin checkout lifecycle</div>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Payment request.</strong> Merchant creates an invoice, QR code, address, asset, network, and expiry window.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Broadcast.</strong> Payer signs and submits the transaction from a wallet or exchange account.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Detection.</strong> Payment provider monitors mempool and confirmations, then fires a webhook.</div></div>
+  <div class="step"><div class="step-num green">4</div><div class="step-body"><strong>Settlement choice.</strong> Merchant keeps stablecoins, swaps to another asset, or off-ramps to fiat.</div></div>
+  <table class="tbl">
+    <tbody><tr><th>License trigger</th><th>Why it matters</th></tr>
+    <tr><td>VASP / CASP</td><td>Custody, exchange, broker, transfer, or crypto-asset service activity.</td></tr>
+    <tr><td>MSB / MTL / EMI</td><td>Fiat movement, money transmission, stored value, or e-money issuance.</td></tr>
+  </tbody></table>
+</div>
+""",
+    "ucard": """
+<div class="card" data-en-visual="ucard">
+  <div class="card-title">Crypto card spend flow, inside roughly 200ms</div>
+  <div class="chain">
+    <div class="chain-node cn-gray">Card tap</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-purple">Visa/MC auth</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-amber">Issuer checks crypto balance</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-teal">Real-time off-ramp</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-green">Merchant receives fiat</div>
+  </div>
+  <div class="grid2">
+    <div class="grid-card"><div class="label">Pre-converted balance</div><div class="body">Crypto is converted to fiat before spending. Simpler UX and lower spend-time volatility.</div></div>
+    <div class="grid-card"><div class="label">Real-time conversion</div><div class="body">Crypto remains crypto until authorization. More flexible, but depends on instant liquidity and risk controls.</div></div>
+  </div>
+</div>
+""",
+    "comp": """
+<div class="card" data-en-visual="comp">
+  <div class="card-title">Compliance pipeline for payment and crypto flows</div>
+  <div class="chain">
+    <div class="chain-node cn-blue">KYC / KYB</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-purple">Sanctions screening</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-amber">Transaction monitoring</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-red">Alert review</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-teal">SAR / STR filing</div>
+  </div>
+  <table class="tbl">
+    <tbody><tr><th>Regulator / standard setter</th><th>Scope</th></tr>
+    <tr><td>FinCEN / OFAC</td><td>US MSB registration, AML reporting, and sanctions enforcement.</td></tr>
+    <tr><td>FATF</td><td>Global AML/CFT standards including Travel Rule for VASPs.</td></tr>
+    <tr><td>MAS / SFC / FCA / EBA</td><td>Regional payment, e-money, virtual asset, and conduct supervision.</td></tr>
+  </tbody></table>
+</div>
+""",
+    "lic": """
+<div class="card" data-en-visual="lic">
+  <div class="card-title">World license map, simplified by operating region</div>
+  <div class="diagram">
+    <svg viewBox="0 0 760 320" role="img" aria-label="Simplified world license map">
+      <rect width="760" height="320" fill="#F2F8F5"></rect>
+      <ellipse cx="155" cy="125" rx="105" ry="58" fill="#CFE0F2" stroke="#2E6DA4"></ellipse>
+      <ellipse cx="215" cy="225" rx="70" ry="46" fill="#D8D2F2" stroke="#5C4BB0"></ellipse>
+      <ellipse cx="380" cy="108" rx="82" ry="48" fill="#BFE6D6" stroke="#0E7C6B"></ellipse>
+      <ellipse cx="455" cy="170" rx="58" ry="36" fill="#EFD9AE" stroke="#8C5A11"></ellipse>
+      <ellipse cx="430" cy="235" rx="72" ry="48" fill="#C9E0AE" stroke="#047857"></ellipse>
+      <ellipse cx="590" cy="150" rx="125" ry="68" fill="#EFC6D4" stroke="#A6396A"></ellipse>
+      <text x="155" y="116" text-anchor="middle" fill="#2E6DA4" font-size="15" font-weight="700">US / Canada</text>
+      <text x="155" y="137" text-anchor="middle" fill="#2E6DA4" font-size="12">MSB · MTL · BitLicense</text>
+      <text x="215" y="222" text-anchor="middle" fill="#5C4BB0" font-size="15" font-weight="700">LatAm</text>
+      <text x="215" y="243" text-anchor="middle" fill="#5C4BB0" font-size="12">PSP · Pix</text>
+      <text x="380" y="101" text-anchor="middle" fill="#0E7C6B" font-size="15" font-weight="700">Europe / UK</text>
+      <text x="380" y="122" text-anchor="middle" fill="#0E7C6B" font-size="12">EMI · PI · MiCA</text>
+      <text x="455" y="166" text-anchor="middle" fill="#8C5A11" font-size="15" font-weight="700">Middle East</text>
+      <text x="455" y="187" text-anchor="middle" fill="#8C5A11" font-size="12">VARA · ADGM</text>
+      <text x="430" y="232" text-anchor="middle" fill="#047857" font-size="15" font-weight="700">Africa</text>
+      <text x="430" y="253" text-anchor="middle" fill="#047857" font-size="12">PSO · PSP</text>
+      <text x="590" y="145" text-anchor="middle" fill="#A6396A" font-size="15" font-weight="700">APAC</text>
+      <text x="590" y="166" text-anchor="middle" fill="#A6396A" font-size="12">MPI · VATP · SVF</text>
+    </svg>
+  </div>
+  <div class="case-box teal"><div class="case-label teal">How to read it</div>Licensing is activity-based and jurisdiction-specific. The same product may need payment, e-money, money transmission, virtual asset, custody, and FX permissions in different markets.</div>
+</div>
+""",
+    "stable": """
+<div class="card" data-en-visual="stable">
+  <div class="card-title">Stablecoin license and trust stack</div>
+  <div class="chain"><div class="chain-node cn-blue">Issuer</div><div class="chain-arrow">-></div><div class="chain-node cn-teal">Segregated reserve</div><div class="chain-arrow">-></div><div class="chain-node cn-amber">Attestation</div><div class="chain-arrow">-></div><div class="chain-node cn-purple">Redemption right</div><div class="chain-arrow">-></div><div class="chain-node cn-green">Payment utility</div></div>
+  <table class="tbl">
+    <tbody><tr><th>Project type</th><th>Typical compliance signal</th><th>Why users care</th></tr>
+    <tr><td>USDC-style issuer</td><td>US state licenses, money service registration, reserve attestations</td><td>Institutional trust and redemption confidence.</td></tr>
+    <tr><td>MiCA EMT issuer</td><td>EU e-money token authorization</td><td>EU market access and clearer consumer rights.</td></tr>
+    <tr><td>Payment platform</td><td>Payment/e-money licenses plus crypto permissions</td><td>Can combine checkout, settlement, conversion, and payout.</td></tr>
+  </tbody></table>
+</div>
+""",
+    "roles": """
+<div class="card" data-en-visual="roles">
+  <div class="card-title">Institution role map</div>
+  <div class="diagram">
+    <svg viewBox="0 0 700 360" role="img" aria-label="Payment institution role map">
+      <defs><marker id="arrow-en" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5"/></marker></defs>
+      <rect width="700" height="360" fill="#F2F8F5"></rect>
+      <g fill="#FFFFFF" stroke="#C5DDD4" stroke-width="1">
+        <rect x="260" y="24" width="180" height="48" rx="8"></rect>
+        <rect x="250" y="102" width="200" height="54" rx="8"></rect>
+        <rect x="45" y="205" width="150" height="54" rx="8"></rect>
+        <rect x="275" y="205" width="150" height="54" rx="8"></rect>
+        <rect x="505" y="205" width="150" height="54" rx="8"></rect>
+        <rect x="250" y="292" width="200" height="44" rx="8"></rect>
+      </g>
+      <g fill="none" stroke="#83968F" marker-end="url(#arrow-en)">
+        <path d="M350 72V102"></path><path d="M250 129H195"></path><path d="M450 129H505"></path>
+        <path d="M120 205L300 156"></path><path d="M350 156V205"></path><path d="M580 205L400 156"></path><path d="M350 259V292"></path>
+      </g>
+      <g font-family="Inter, sans-serif" text-anchor="middle" font-size="13" fill="#0C3124" font-weight="700">
+        <text x="350" y="53">Cardholder / Buyer</text><text x="350" y="128">Gateway</text><text x="350" y="146" font-size="11" fill="#83968F" font-weight="500">encrypt · tokenize · route</text>
+        <text x="120" y="230">PSP / PayFac</text><text x="350" y="230">Acquirer / MoR</text><text x="580" y="230">Processor</text><text x="350" y="318">Network / Issuer</text>
+      </g>
+    </svg>
+  </div>
+  <div class="case-box"><div class="case-label">Risk ownership</div>The entity touching the customer is not always the regulated principal. Contracts, sponsorship, agency status, and outsourcing rules decide who owns settlement, chargeback, safeguarding, and AML risk.</div>
+</div>
+""",
+    "txlife": """
+<div class="card" data-en-visual="txlife">
+  <div class="card-title">Transaction lifecycle overview</div>
+  <div class="chain">
+    <div class="chain-node cn-gray">Auth</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-blue">Capture</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-blue">Clearing</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-teal">Settlement</div><div class="chain-arrow">-></div>
+    <div class="chain-node cn-green">Payout</div><div class="chain-arrow">/</div>
+    <div class="chain-node cn-red">Refund or dispute</div>
+  </div>
+  <div class="grid2">
+    <div class="grid-card" style="border-left:3px solid #8C5A11"><div class="label" style="color:var(--amber)">Void</div><div class="body">Before capture: release the hold, no new money movement, usually no fee.</div></div>
+    <div class="grid-card" style="border-left:3px solid #C13A2D"><div class="label" style="color:var(--red)">Refund</div><div class="body">After settlement: reverse value back to the payer, usually slower and costlier.</div></div>
+  </div>
+</div>
+""",
+    "biz": """
+<div class="card" data-en-visual="biz">
+  <div class="card-title">Core payment-business math</div>
+  <div class="chain">
+    <div class="chain-node cn-blue">TPV</div><div class="chain-arrow">x</div>
+    <div class="chain-node cn-amber">Take rate</div><div class="chain-arrow">=</div>
+    <div class="chain-node cn-teal">Gross revenue</div><div class="chain-arrow">-</div>
+    <div class="chain-node cn-purple">Pass-through costs</div><div class="chain-arrow">=</div>
+    <div class="chain-node cn-green">Net revenue</div>
+  </div>
+  <div class="grid2">
+    <div class="grid-card"><div class="label">GMV</div><div class="body">Total commerce value on a platform, including transactions not processed by the platform's own payment stack.</div></div>
+    <div class="grid-card"><div class="label">TPV</div><div class="body">Payment value actually processed. Payment-company valuation usually starts from TPV, take rate, and margin quality.</div></div>
+  </div>
+</div>
+""",
+}
+
 
 def extract_chinese_design_css() -> str:
     zh = ZH_INDEX.read_text()
@@ -202,7 +414,7 @@ def extract_english_sections() -> str:
         main = re.search(r"<main>\s*(.*?)\s*</main>", html, re.S)
         if not main:
             raise RuntimeError("Could not find aligned English <main> content")
-        return main.group(1).strip()
+        return enrich_sections(main.group(1).strip())
 
     sections = []
     for match in re.finditer(r'<section class="section[^"]*" id="([^"]+)">.*?</section>', html, re.S):
@@ -212,7 +424,29 @@ def extract_english_sections() -> str:
         sections.append(transform_section(match.group(0), source_id))
     if len(sections) != len(SECTION_ID_MAP):
         raise RuntimeError(f"Expected {len(SECTION_ID_MAP)} English sections, found {len(sections)}")
-    return "\n\n".join(sections)
+    return enrich_sections("\n\n".join(sections))
+
+
+def enrich_sections(main_html: str) -> str:
+    for section_id, visual in EN_VISUALS.items():
+        marker = f'data-en-visual="{section_id}"'
+        section_match = re.search(
+            r'(<div id="sec-' + re.escape(section_id) + r'" class="section[^>]*>)(.*?)(?=\n<div id="sec-|</main>|$)',
+            main_html,
+            re.S,
+        )
+        if not section_match or marker in section_match.group(2):
+            continue
+        section = section_match.group(0)
+        section = re.sub(
+            r'(<p class="section-desc">.*?</p>)',
+            r'\1\n' + visual.strip(),
+            section,
+            count=1,
+            flags=re.S,
+        )
+        main_html = main_html[:section_match.start()] + section + main_html[section_match.end():]
+    return main_html
 
 
 def build_nav() -> str:
