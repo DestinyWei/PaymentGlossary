@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The real journey of a cross-border card payment: 5 players, 6 days, 12 dollars lost | AllScale</title>
+  <meta name="description" content="Walk through a cross-border card order and see where time, fees, FX spread, and reserves enter the journey.">
+  <link rel="canonical" href="https://payment.0xhowe.top/en/articles/cross-border-card-payment/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/cross-border-card-payment/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/cross-border-card-payment/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale Payments Knowledge Base">
+  <meta property="og:title" content="The real journey of a cross-border card payment: 5 players, 6 days, 12 dollars lost | AllScale">
+  <meta property="og:description" content="Walk through a cross-border card order and see where time, fees, FX spread, and reserves enter the journey.">
+  <meta property="og:url" content="https://payment.0xhowe.top/en/articles/cross-border-card-payment/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/en-cross-border-card-payment.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/en/" aria-label="AllScale Glossary">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/en/">Glossary</a>
+      <a href="/en/articles/" class="active">Articles</a>
+      <a class="language-link" href="/zh/articles/cross-border-card-payment/">中文</a>
+      <a class="social-link" href="https://x.com/allscale" target="_blank" rel="noreferrer">AllScale ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/en/">Glossary</a><span>/</span><a href="/en/articles/">Articles</a><span>/</span><span>07</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale Payment Glossary · 07</div>
+      <h1>The real journey of a cross-border card payment: 5 players, 6 days, 12 dollars lost</h1>
+      <p class="article-deck">Walk through a cross-border card order and see where time, fees, FX spread, and reserves enter the journey.</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/en-cross-border-card-payment.webp" alt="The real journey of a cross-border card payment: 5 players, 6 days, 12 dollars lost">
+    <div class="article-body"><p>The last few articles took the machine apart piece by piece: Part 4 covered the four players, Part 5 covered the lifecycle of one transaction, Part 6 broke down the fees.</p>
+<p>This one puts the pieces back together. We&#x27;re going to follow a real cross-border payment from start to finish.</p>
+<p>The star is one order: Sarah, an American shopper, buys a $200 dress from a Chinese seller&#x27;s direct-to-consumer site with her Visa card. We&#x27;re going to track this $200: where it goes, how long it takes, and how much survives to the Chinese seller.</p>
+<p>Disclaimer: the days and fees below are rough illustrations for educational purposes.</p>
+<p>Actual numbers vary by bank, card type, and region.</p>
+<h2>1. The few seconds after clicking &quot;Pay&quot; (Day 0)</h2>
+<p>Sarah clicks &quot;Pay now.&quot; What happens in those few seconds is exactly what Parts 4 and 5 covered:</p>
+<p>Payment gateway encrypts her card info → processor sends the authorization request → routed via Visa (card scheme) to Sarah&#x27;s issuing bank (a U.S. bank) → issuer checks balance and risk, holds the $200 → auth approved, response travels back the same path in seconds.</p>
+<p>Sarah sees &quot;Payment successful&quot; on her screen. But remember the key insight from Part 5: no money has actually moved yet. It&#x27;s just been held. The Chinese seller has received exactly zero at this point.</p>
+<h2>2. The next few days: capture, clearing, cross-border</h2>
+<p>transit (Days 1–5)</p>
+<p>The seller ships the goods and formally submits a Capture. Only now does the $200 hold on Sarah&#x27;s card turn into a real debit. Next comes Clearing, where Visa reconciles the transaction between the issuing bank and the acquiring bank.</p>
+<p>The real headache is the final step, Settlement, especially the &quot;cross-border&quot; part.</p>
+<p>The money needs to get from the U.S. to the Chinese seller&#x27;s account. In the traditional banking system, the path usually looks like this:</p>
+<ul><li>Money first clears between banks on the U.S. side, then SWIFT (the global interbank messaging system, covered in Part 9) sends the cross-border instructions;</li><li>U.S. and Chinese banks mostly don&#x27;t hold direct accounts with each other, so the payment routes through a third bank both sides trust. This is called a correspondent bank;</li><li>If there&#x27;s no shared correspondent, you add an intermediary bank to relay the payment.</li></ul>
+<p>Every extra hop adds a day or two, another fee, and possibly another FX markup on currency conversion. There&#x27;s no central dispatcher on this route. It&#x27;s a relay race between banks, which makes it slow and opaque. Where exactly is the money right now? Often nobody can say.</p>
+<h2>3. Arrival: what the seller actually receives (around</h2>
+<p>Day 6)</p>
+<p>About 6 business days later, the money finally lands in the Chinese seller&#x27;s account.</p>
+<p>Rough math on how much got peeled off the $200 along the way:</p>
+<ul><li>MDR fee: cross-border rate at 3.5%, roughly $7 deducted (Part 6);</li><li>FX spread on currency conversion: USD to RMB gets shaved once, roughly $2–3 (covered in Part 8);</li><li>Intermediary / wire transfer fees: the one or two hops in the middle skim a few more dollars.</li></ul>
+<p>Add it all up and the seller ends up with around $188, after waiting nearly a week.</p>
+<p>On a small $200 order, the pipeline alone costs 5–6%. Scale that up to a $10,000 order and the erosion gets ugly.</p>
+<h2>4. What the same trip looks like with stablecoins</h2>
+<p>Back to what we do every day. If Sarah paid the $200 with USDC (a stablecoin):</p>
+<p>Her wallet sends → on-chain confirmation (seconds to minutes) → Chinese seller&#x27;s wallet receives.</p>
+<p>No issuer, scheme, or acquirer relay. No SWIFT. No correspondent or intermediary banks. No T+ several days of settlement waiting. The seller receives around $199.9 (minus a few cents in on-chain network fees), and it&#x27;s usable immediately.</p>
+<p>Same $200: traditional path lost about $12 and took 6 days. Stablecoin path lost a few cents and took a few minutes.</p>
+<p>To be fair, the fees layered into the traditional cross-border path pay for bank risk controls, dispute handling, and consumer protection (Part 3). Stablecoins push cost and time to a minimum, and the tradeoff is that both parties or the platform need to cover those protections themselves. That makes stablecoins a good fit for B2B, cross-border, and businesses with clear delivery, which is exactly what Sarah&#x27;s order looks like.</p>
+<p>What AllScale does is turn this &quot;6 days, 5 players, $12 lost&quot; trip into &quot;a few minutes, peer to peer, a few cents.&quot;</p>
+<p>Recap</p>
+<ul><li>A cross-border card payment goes through authorization, capture, clearing, and settlement. Cross-border settlement adds SWIFT, correspondent banks, and intermediary banks in a relay.</li><li>It&#x27;s slow because there&#x27;s no central dispatcher, just banks handing off one after another. It&#x27;s expensive because every hop charges a fee, on top of the MDR and FX spread.</li></ul>
+<p>Next up, we zoom in on the most hidden fee in this whole trip: the FX spread on currency conversion. The rate on the board says one thing, but after the exchange you always feel short. We&#x27;ll unpack the mid-market rate and the spread to show you this &quot;invisible fee.&quot;</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>Keep learning with AllScale</h2>
+    <p>Future articles and payment education updates will be published through AllScale channels.</p>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/en/articles/card-vs-stablecoin-fees/"><small>Previous</small><strong>A 100-yuan cup of coffee: card vs stablecoin, how much less does the merchant actually get?</strong></a><a href="/en/articles/fx-spread/"><small>Next</small><strong>Mid-market rate vs. what you actually get: the hidden spread</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The real journey of a cross-border card payment: 5 players, 6 days, 12 dollars lost", "description": "Walk through a cross-border card order and see where time, fees, FX spread, and reserves enter the journey.", "image": "https://payment.0xhowe.top/articles/assets/en-cross-border-card-payment.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/en/articles/cross-border-card-payment/", "inLanguage": "en"}</script>
+</body>
+</html>

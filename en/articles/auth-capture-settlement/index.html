@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auth, Capture, Settlement: The full journey before the money lands in the pocket | AllScale</title>
+  <meta name="description" content="Follow a card transaction through authorization, capture, clearing, settlement, and final merchant payout.">
+  <link rel="canonical" href="https://payment.0xhowe.top/en/articles/auth-capture-settlement/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/auth-capture-settlement/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/auth-capture-settlement/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale Payments Knowledge Base">
+  <meta property="og:title" content="Auth, Capture, Settlement: The full journey before the money lands in the pocket | AllScale">
+  <meta property="og:description" content="Follow a card transaction through authorization, capture, clearing, settlement, and final merchant payout.">
+  <meta property="og:url" content="https://payment.0xhowe.top/en/articles/auth-capture-settlement/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/en-auth-capture-settlement.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/en/" aria-label="AllScale Glossary">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/en/">Glossary</a>
+      <a href="/en/articles/" class="active">Articles</a>
+      <a class="language-link" href="/zh/articles/auth-capture-settlement/">中文</a>
+      <a class="social-link" href="https://x.com/allscale" target="_blank" rel="noreferrer">AllScale ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/en/">Glossary</a><span>/</span><a href="/en/articles/">Articles</a><span>/</span><span>05</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale Payment Glossary · 05</div>
+      <h1>Auth, Capture, Settlement: The full journey before the money lands in the pocket</h1>
+      <p class="article-deck">Follow a card transaction through authorization, capture, clearing, settlement, and final merchant payout.</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/en-auth-capture-settlement.webp" alt="Auth, Capture, Settlement: The full journey before the money lands in the pocket">
+    <div class="article-body"><p>In the last post we followed four roles handing off an &quot;authorization&quot; in two seconds.</p>
+<p>But have you ever run into this: your phone shows &quot;payment successful,&quot; &quot;charged,&quot; and yet the merchant says &quot;we haven&#x27;t received it&quot;?</p>
+<p>The gap in the middle is the rest of the transaction&#x27;s lifecycle. This post covers that final stretch.</p>
+<h2>1. One Transaction, Four Steps</h2>
+<p>Take &quot;card swiped&quot; to &quot;money landed&quot; apart, and behind it are four stages:</p>
+<ul><li>Authorization (Auth): the issuer confirms the card has funds, it&#x27;s the real cardholder, and the charge is allowed. Then it puts a hold on the amount. Note: at this step no money actually moves. It&#x27;s just reserved, kind of like the deposit you leave at a hotel.</li><li>Capture: the merchant formally initiates &quot;I want to take that money.&quot; The held amount now becomes an actual charge. Auth and Capture can be hours or days apart — many e-commerce merchants only Capture when they ship.</li><li>Clearing: everyone reconciles. The card scheme takes every transaction from that window and exchanges the details between issuer and acquirer to match them up. Note: every transaction goes through this step, but it&#x27;s data moving, not money.</li><li>Settlement: this is where the money actually moves — but it doesn&#x27;t move one transaction at a time. Within a settlement cycle (usually daily), the card scheme takes every transaction each bank is involved in and does Netting — calculating the net amount each bank owes or is owed, then moving just that one net figure. So a bank might have millions of transactions in a day, but only settle a single net number with each counterpart (saving the pain of moving every transaction individually). The money flows to the acquirer this way, then into the merchant&#x27;s account. This is the step where the merchant actually has the money.</li></ul>
+<h2>2. Why &quot;Charged&quot; Doesn&#x27;t Mean &quot;Received&quot;</h2>
+<p>This is the key insight: the &quot;payment successful&quot; you see usually only made it to Auth or Capture. The money actually landing in the merchant&#x27;s pocket has to wait for Settlement.</p>
+<p>Between them is the clearing and settlement cycle — the T+1 / T+2 you often hear about, meaning the money arrives 1 or 2 days after the transaction day. Cross-border, it&#x27;s often longer. That&#x27;s the truth behind &quot;I paid, why hasn&#x27;t the merchant received it&quot;: the money is on the road, you just can&#x27;t see it.</p>
+<p>While we&#x27;re here, let&#x27;s revisit post #3, where we said Void and Refund are two different things. Now you can see why:</p>
+<ul><li>Before Capture / Settlement, the money hasn&#x27;t actually moved, so you can Void the hold directly.</li><li>Once Settlement is done and the money has landed, the only path is a Refund, sending it back along the same route.</li></ul>
+<p>Different points in time mean different ways to reverse. That time gap also has a side effect called Float: the money has left the buyer but hasn&#x27;t reached the merchant, sitting in the system in between. Whoever holds it earns interest. We&#x27;ll get into this in post #8 on cross-border.</p>
+<h2>3. Stablecoins: Almost No &quot;Lifecycle&quot; at All</h2>
+<p>Back to what we do every day. On-chain stablecoin transfers basically compress those four steps into one:</p>
+<p>Buyer&#x27;s wallet sends → on-chain confirmation → merchant&#x27;s wallet receives.</p>
+<p>There&#x27;s no &quot;hold now, charge later,&quot; no T+1 / T+2 clearing and settlement cycle. Onchain confirmation (usually seconds to minutes) is final. The merchant has the money on the spot, and can use it on the spot. That two-day Settlement in traditional payments is a single &quot;block confirmation&quot; on-chain.</p>
+<p>Like the &quot;irreversibility is a double-edged sword&quot; from post #3, &quot;fast&quot; has two sides too. The traditional clearing and settlement cycle is slow, but that window is also an error-correction window, with room to intervene. Stablecoin T+0 settlement is very efficient, but the tradeoff is no buffer. For merchants sensitive to cash flow, especially those doing cross-border collection, &quot;the money lands when it lands, no more two-day wait&quot; is a real, tangible benefit.</p>
+<p>AllScale is built to erase that T+1 / T+2 gap between &quot;shows as paid&quot; and &quot;actually received.&quot;</p>
+<h2>Wrap-Up</h2>
+<p>Auth: the issuer confirms the charge is possible, puts a hold on the amount, no money moves yet. Capture: formally initiates the charge, the hold becomes an actual debit. Clearing: everyone reconciles, figures out who owes whom what. Settlement: money actually lands in the merchant&#x27;s account, typically T+1 / T+2.</p>
+<p>One line: &quot;charged&quot; isn&#x27;t &quot;received.&quot; Traditional payments go through four steps and take a day or two to actually land. Stablecoins do it in almost one step.</p>
+<p>Next time we&#x27;ll answer the question left hanging since post #4: every role on that path takes a cut, so what&#x27;s your fee actually made of, and who&#x27;s taking what? We&#x27;ll break open MDR, Interchange, and Scheme fee — all the pieces hidden behind that fee rate.</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>Keep learning with AllScale</h2>
+    <p>Future articles and payment education updates will be published through AllScale channels.</p>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/en/articles/payment-roles/"><small>Previous</small><strong>Why does &quot;payment failed&quot; happen? Understand these four roles and it clicks</strong></a><a href="/en/articles/card-vs-stablecoin-fees/"><small>Next</small><strong>A 100-yuan cup of coffee: card vs stablecoin, how much less does the merchant actually get?</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Auth, Capture, Settlement: The full journey before the money lands in the pocket", "description": "Follow a card transaction through authorization, capture, clearing, settlement, and final merchant payout.", "image": "https://payment.0xhowe.top/articles/assets/en-auth-capture-settlement.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/en/articles/auth-capture-settlement/", "inLanguage": "en"}</script>
+</body>
+</html>

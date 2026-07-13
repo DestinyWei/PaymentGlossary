@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment Industry Glossary | AllScale</title>
+  <meta name="description" content="AllScale bilingual payment glossary covering fund flows, card acquiring, cross-border payments, stablecoins, compliance, payment licenses, and payment business metrics.">
+  <link rel="canonical" href="https://payment.0xhowe.top/en/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+  <style>
+    :root {
+      --bg: #fdfffe;
+      --wash: #f2f8f5;
+      --line: #dce9e4;
+      --line-strong: #c5ddd4;
+      --paper: #fff;
+      --green: #009859;
+      --green-dark: #063d2c;
+      --text: #12372c;
+      --muted: #6f857e;
+      --blue: #2e6da4;
+      --amber: #8c5a11;
+      --pink: #a6396a;
+      --shadow: 0 12px 30px rgba(8, 60, 43, .08);
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "SFMono-Regular", Consolas, ui-monospace, monospace;
+      --serif: Georgia, "Times New Roman", serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.65; }
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(253, 255, 254, .96);
+      backdrop-filter: blur(14px);
+    }
+    .topbar-inner, .hero-inner, .layout { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .topbar-inner { display: flex; align-items: center; min-height: 72px; gap: 22px; }
+    .brand { display: inline-flex; align-items: center; text-decoration: none; }
+    .brand img { width: 124px; }
+    .tagline { color: var(--muted); font-family: var(--mono); font-size: 13px; }
+    .nav { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      background: var(--paper);
+      padding: 8px 13px;
+      color: var(--green-dark);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .nav a.primary { border-color: var(--green); background: var(--green); color: #fff; }
+    .hero { border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #fff 0%, var(--wash) 100%); }
+    .hero-inner { padding: 62px 0 40px; }
+    .eyebrow { color: var(--green); font-family: var(--mono); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { max-width: 840px; margin: 14px 0 18px; color: var(--green-dark); font-family: var(--serif); font-size: clamp(42px, 6vw, 72px); font-weight: 500; line-height: 1.08; }
+    h1 em { color: var(--green); font-style: normal; }
+    .hero p { max-width: 760px; margin: 0; color: var(--muted); font-size: 18px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .meta span { border: 1px solid var(--line); background: var(--paper); padding: 7px 12px; color: var(--muted); font-family: var(--mono); font-size: 12px; }
+    .search { position: relative; max-width: 620px; margin-top: 28px; }
+    .search-box { display: flex; align-items: center; gap: 10px; height: 48px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: var(--shadow); padding: 0 14px; }
+    .search-box span { color: var(--green); font-family: var(--mono); font-size: 18px; }
+    .search input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--text); font: 15px/1.4 var(--sans); }
+    .results { display: none; position: absolute; z-index: 30; top: calc(100% + 8px); left: 0; right: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: 0 16px 38px rgba(8, 60, 43, .12); }
+    .results.open { display: block; }
+    .result { display: grid; width: 100%; gap: 2px; border: 0; border-bottom: 1px solid var(--line); background: transparent; padding: 11px 14px; text-align: left; cursor: pointer; font: 14px/1.35 var(--sans); color: var(--text); }
+    .result:hover, .result:focus { background: var(--wash); outline: 0; }
+    .result small { color: var(--muted); font-family: var(--mono); font-size: 11px; }
+    .layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 42px; padding: 42px 0 76px; }
+    aside { position: sticky; top: 92px; align-self: start; border-right: 1px solid var(--line); padding-right: 22px; }
+    aside h2 { margin: 0 0 12px; color: var(--muted); font-family: var(--mono); font-size: 12px; text-transform: uppercase; }
+    .side-link { display: block; border-left: 3px solid transparent; padding: 8px 10px; color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 720; }
+    .side-link.active, .side-link:hover { border-left-color: var(--green); background: var(--wash); color: var(--green-dark); }
+    .section { display: none; }
+    .section.active { display: block; }
+    .section h2 { margin: 0 0 8px; color: var(--green-dark); font-family: var(--serif); font-size: clamp(32px, 4vw, 48px); font-weight: 500; }
+    .section-desc { margin: 0 0 26px; color: var(--muted); font-size: 17px; }
+    .card { border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: var(--shadow); padding: 24px; margin-bottom: 18px; }
+    .card h3 { margin: 0 0 14px; color: var(--green-dark); font-size: 21px; line-height: 1.35; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .term { border: 1px solid var(--line); border-radius: 8px; background: var(--wash); padding: 15px; }
+    .term b { display: block; color: var(--green-dark); font-size: 15px; }
+    .term span { display: block; margin-top: 4px; color: var(--muted); font-size: 14px; }
+    .note { border-left: 4px solid var(--green); background: var(--wash); padding: 14px 16px; color: var(--text); }
+    .hit { animation: pulse 1.4s ease; }
+    @keyframes pulse { 25% { box-shadow: 0 0 0 3px rgba(0, 152, 89, .2), var(--shadow); } }
+    @media (max-width: 850px) {
+      .topbar-inner, .hero-inner, .layout { width: min(100% - 28px, 1180px); }
+      .topbar-inner { flex-wrap: wrap; padding: 12px 0; }
+      .tagline { display: none; }
+      .nav { width: 100%; margin-left: 0; overflow-x: auto; }
+      .layout { grid-template-columns: 1fr; }
+      aside { position: static; border-right: 0; border-bottom: 1px solid var(--line); padding: 0 0 18px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/en/" aria-label="AllScale Payment Glossary">
+        <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+      </a>
+      <div class="tagline">Checkout · Knowledge Base</div>
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="primary" href="/en/articles/">Articles →</a>
+        <a href="/zh/">中文</a>
+        <a href="https://x.com/allscale" target="_blank" rel="noreferrer">AllScale ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Payments Reference</div>
+      <h1>Payment Industry <em>Glossary</em></h1>
+      <p>A practical English reference for the payment terms behind checkout, acquiring, cross-border settlement, stablecoins, compliance, licensing, and business metrics.</p>
+      <div class="meta"><span>v3.0 · Bilingual</span><span>12 sections</span><span>200+ terms</span></div>
+      <form class="search" role="search">
+        <div class="search-box"><span>⌕</span><input type="search" autocomplete="off" spellcheck="false" placeholder="Search terms, e.g. TPV, COBO, PCI, stablecoin"></div>
+        <div class="results" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <div class="layout">
+    <aside>
+      <h2>Core Architecture</h2>
+      <a class="side-link" href="/en/glossary/fund-flow/" data-section="fund-flow">Fund Flow</a>
+      <a class="side-link" href="/en/glossary/card-acquiring/" data-section="card-acquiring">Card Acquiring</a>
+      <a class="side-link" href="/en/glossary/trade-payments/" data-section="trade-payments">Trade Payments</a>
+      <a class="side-link" href="/en/glossary/fx-cross-border/" data-section="fx-cross-border">FX & Cross-Border</a>
+      <h2>Crypto</h2>
+      <a class="side-link" href="/en/glossary/crypto-payments/" data-section="crypto-payments">Crypto Payments</a>
+      <a class="side-link" href="/en/glossary/crypto-card/" data-section="crypto-card">Crypto Cards</a>
+      <h2>Compliance</h2>
+      <a class="side-link" href="/en/glossary/compliance/" data-section="compliance">Compliance</a>
+      <a class="side-link" href="/en/glossary/licenses/" data-section="licenses">License Map</a>
+      <a class="side-link" href="/en/glossary/stablecoin-licenses/" data-section="stablecoin-licenses">Stablecoin Licenses</a>
+      <h2>Operations</h2>
+      <a class="side-link" href="/en/glossary/institutional-roles/" data-section="institutional-roles">Institutional Roles</a>
+      <a class="side-link" href="/en/glossary/transaction-lifecycle/" data-section="transaction-lifecycle">Transaction Lifecycle</a>
+      <a class="side-link" href="/en/glossary/business-metrics/" data-section="business-metrics">Business Metrics</a>
+    </aside>
+
+    <main>
+      <section class="section active" id="fund-flow">
+        <h2>Fund Flow</h2>
+        <p class="section-desc">How money moves from payer to payee, from collection to payout, reconciliation, and settlement.</p>
+        <div class="card">
+          <h3>COBO + POBO</h3>
+          <div class="grid">
+            <div class="term"><b>COBO · Collection On Behalf Of</b><span>A platform collects money for a merchant or subsidiary. Funds enter an account operated by the platform while the economic owner is another party.</span></div>
+            <div class="term"><b>POBO · Payment On Behalf Of</b><span>A platform pays suppliers, sellers, or partners on behalf of another company.</span></div>
+            <div class="term"><b>Omnibus Account</b><span>A pooled account where funds for many users are held together, with internal ledgers tracking each user's balance.</span></div>
+            <div class="term"><b>Reconciliation</b><span>Matching invoices, payments, fees, refunds, and settlement records so finance knows which money belongs to which transaction.</span></div>
+          </div>
+          <p class="note">Crypto analogy: an exchange omnibus wallet often feels like a user balance, but the chain sees pooled custody and internal ledgering.</p>
+        </div>
+      </section>
+
+      <section class="section" id="card-acquiring">
+        <h2>Card Acquiring</h2>
+        <p class="section-desc">The card-payment stack from checkout to authorization, capture, clearing, settlement, disputes, and merchant payout.</p>
+        <div class="card"><h3>Core roles</h3><div class="grid">
+          <div class="term"><b>Cardholder</b><span>The buyer who owns and uses the payment card.</span></div>
+          <div class="term"><b>Issuer</b><span>The bank or fintech that issued the card and approves or declines the authorization.</span></div>
+          <div class="term"><b>Card Scheme</b><span>Visa, Mastercard, Amex, UnionPay, and other networks that set rules and route messages.</span></div>
+          <div class="term"><b>Acquirer</b><span>The merchant's financial institution for card acceptance and settlement.</span></div>
+          <div class="term"><b>Gateway</b><span>The technical layer that encrypts and routes payment requests.</span></div>
+          <div class="term"><b>Processor</b><span>The infrastructure provider that handles authorization, clearing, and settlement files.</span></div>
+        </div></div>
+      </section>
+
+      <section class="section" id="trade-payments">
+        <h2>Trade Payments</h2>
+        <p class="section-desc">B2B collection, invoices, payment terms, supplier payouts, and working-capital instruments.</p>
+        <div class="card"><h3>Invoice-led payments</h3><div class="grid">
+          <div class="term"><b>Invoice</b><span>A document stating who pays whom, for what, how much, and by when.</span></div>
+          <div class="term"><b>Beneficiary</b><span>The party that ultimately receives the money.</span></div>
+          <div class="term"><b>Remitter</b><span>The party sending the payment.</span></div>
+          <div class="term"><b>Net 30</b><span>A payment term requiring payment within 30 days of invoice receipt.</span></div>
+          <div class="term"><b>AP / AR</b><span>Accounts payable and accounts receivable. The two finance workflows around bills and collections.</span></div>
+          <div class="term"><b>Escrow</b><span>A neutral holding arrangement where funds are released only after conditions are met.</span></div>
+        </div></div>
+      </section>
+
+      <section class="section" id="fx-cross-border">
+        <h2>FX & Cross-Border</h2>
+        <p class="section-desc">Why international money movement takes time, loses value, and needs banks, messages, and liquidity corridors.</p>
+        <div class="card"><h3>Cross-border primitives</h3><div class="grid">
+          <div class="term"><b>SWIFT</b><span>A global messaging network for bank instructions. It moves messages, not the money itself.</span></div>
+          <div class="term"><b>Correspondent Bank</b><span>A bank that holds accounts for another bank to support international payments.</span></div>
+          <div class="term"><b>Nostro / Vostro</b><span>Mirror terms for accounts one bank holds with another in a foreign currency.</span></div>
+          <div class="term"><b>Mid-market Rate</b><span>The midpoint between buy and sell prices in the wholesale FX market.</span></div>
+          <div class="term"><b>FX Spread</b><span>The difference between the mid-market rate and the rate quoted to the user.</span></div>
+          <div class="term"><b>Cut-off Time</b><span>The daily deadline after which a payment is processed on the next business day.</span></div>
+        </div></div>
+      </section>
+
+      <section class="section" id="crypto-payments">
+        <h2>Crypto Payments</h2>
+        <p class="section-desc">Stablecoin payments, wallets, on-chain settlement, ramps, and crypto-native checkout flows.</p>
+        <div class="card"><h3>Stablecoin payment terms</h3><div class="grid">
+          <div class="term"><b>Stablecoin</b><span>A token designed to maintain a stable value, commonly pegged to USD.</span></div>
+          <div class="term"><b>USDT / USDC</b><span>The two most common USD stablecoins used for payments and settlement.</span></div>
+          <div class="term"><b>On-ramp</b><span>The path from fiat money into crypto or stablecoins.</span></div>
+          <div class="term"><b>Off-ramp</b><span>The path from crypto or stablecoins back into fiat bank money.</span></div>
+          <div class="term"><b>Settlement Finality</b><span>The point after which a transaction is practically irreversible.</span></div>
+          <div class="term"><b>Gas Fee</b><span>The network fee paid to execute a blockchain transaction.</span></div>
+        </div></div>
+      </section>
+
+      <section class="section" id="crypto-card">
+        <h2>Crypto Cards</h2>
+        <p class="section-desc">How cards funded by crypto balances connect wallets, issuers, card networks, and merchant acceptance.</p>
+        <div class="card"><h3>Crypto card stack</h3><div class="grid">
+          <div class="term"><b>Crypto Card</b><span>A card product where spending is funded by a crypto or stablecoin balance, often converted before card settlement.</span></div>
+          <div class="term"><b>Program Manager</b><span>The company that packages card operations, user experience, compliance, and partner orchestration.</span></div>
+          <div class="term"><b>BIN Sponsor</b><span>A licensed institution that sponsors the card program into a card network.</span></div>
+          <div class="term"><b>Spend Authorization</b><span>The decision to approve or decline a card spend based on balance, compliance, and risk checks.</span></div>
+        </div></div>
+      </section>
+
+      <section class="section" id="compliance">
+        <h2>Compliance</h2>
+        <p class="section-desc">Identity, business verification, transaction monitoring, sanctions screening, and regulatory reporting.</p>
+        <div class="card"><h3>Core compliance terms</h3><div class="grid">
+          <div class="term"><b>KYC</b><span>Know Your Customer. Verifying the identity of an individual customer.</span></div>
+          <div class="term"><b>KYB</b><span>Know Your Business. Verifying a company, its ownership, and its controllers.</span></div>
+          <div class="term"><b>AML</b><span>Anti-Money Laundering. Controls to detect and prevent criminal financial activity.</span></div>
+          <div class="term"><b>Sanctions Screening</b><span>Checking users and counterparties against restricted-party lists.</span></div>
+          <div class="term"><b>Travel Rule</b><span>A requirement that originator and beneficiary information travels with qualifying transfers.</span></div>
+          <div class="term"><b>VASP</b><span>Virtual Asset Service Provider, such as an exchange, custodian, broker, or transfer platform.</span></div>
+        </div></div>
+      </section>
+
+      <section class="section" id="licenses">
+        <h2>License Map</h2>
+        <p class="section-desc">Payments are territorial. There is no single license that lets a company collect and pay everywhere.</p>
+        <div class="card"><h3>Regional licenses</h3><div class="grid">
+          <div class="term"><b>US MTL</b><span>Money Transmitter License, obtained state by state in the United States.</span></div>
+          <div class="term"><b>EU EMI / PI</b><span>Electronic Money Institution and Payment Institution licenses under European frameworks.</span></div>
+          <div class="term"><b>UK FCA E-money</b><span>UK authorization for e-money issuance and payment services.</span></div>
+          <div class="term"><b>Singapore MPI</b><span>Major Payment Institution license regulated by MAS.</span></div>
+          <div class="term"><b>Hong Kong MSO / SVF</b><span>Money service and stored-value facility licensing categories.</span></div>
+          <div class="term"><b>Dubai VARA</b><span>Virtual asset licensing framework for Dubai.</span></div>
+        </div></div>
+      </section>
+
+      <section class="section" id="stablecoin-licenses">
+        <h2>Stablecoin Licenses</h2>
+        <p class="section-desc">Stablecoin issuance and service activity may trigger e-money, payment, custody, broker, or virtual-asset rules.</p>
+        <div class="card"><h3>Stablecoin regulatory map</h3><div class="grid">
+          <div class="term"><b>Issuer</b><span>The entity that mints and redeems the stablecoin and manages reserve obligations.</span></div>
+          <div class="term"><b>Reserve</b><span>The cash, bank deposits, T-bills, or other assets backing the stablecoin.</span></div>
+          <div class="term"><b>MiCA EMT</b><span>EU e-money token category under the Markets in Crypto-Assets framework.</span></div>
+          <div class="term"><b>CASP</b><span>Crypto-Asset Service Provider under EU MiCA.</span></div>
+          <div class="term"><b>Custody License</b><span>Authorization to hold crypto assets or private keys for clients.</span></div>
+          <div class="term"><b>Redemption Right</b><span>The user's legal or contractual right to exchange tokens back for fiat value.</span></div>
+        </div></div>
+      </section>
+
+      <section class="section" id="institutional-roles">
+        <h2>Institutional Roles</h2>
+        <p class="section-desc">Payment companies are networks of licensed institutions, banks, processors, compliance vendors, and liquidity partners.</p>
+        <div class="card"><h3>Who does what</h3><div class="grid">
+          <div class="term"><b>PSP</b><span>Payment Service Provider. A company that helps merchants accept and manage payments.</span></div>
+          <div class="term"><b>PayFac</b><span>Payment Facilitator. A platform that onboards sub-merchants under a master merchant structure.</span></div>
+          <div class="term"><b>Banking Partner</b><span>A bank that provides accounts, payment rails, sponsorship, or safeguarding.</span></div>
+          <div class="term"><b>Liquidity Provider</b><span>A partner supplying FX, crypto, or fiat liquidity for conversion and settlement.</span></div>
+          <div class="term"><b>Compliance Vendor</b><span>A provider for KYC, KYB, AML monitoring, sanctions, device risk, or fraud signals.</span></div>
+          <div class="term"><b>Custodian</b><span>A licensed entity that holds client assets or private keys.</span></div>
+        </div></div>
+      </section>
+
+      <section class="section" id="transaction-lifecycle">
+        <h2>Transaction Lifecycle</h2>
+        <p class="section-desc">The stages a transaction passes through before it becomes final, posted, reconciled, and paid out.</p>
+        <div class="card"><h3>Lifecycle checkpoints</h3><div class="grid">
+          <div class="term"><b>Authorization</b><span>The issuer approves a payment request and places a hold on funds.</span></div>
+          <div class="term"><b>Capture</b><span>The merchant confirms the transaction should be charged.</span></div>
+          <div class="term"><b>Clearing</b><span>Transaction data and fees are exchanged between institutions.</span></div>
+          <div class="term"><b>Settlement</b><span>Net funds move between banks or counterparties.</span></div>
+          <div class="term"><b>Refund</b><span>The merchant sends money back after a transaction has settled.</span></div>
+          <div class="term"><b>Chargeback</b><span>A cardholder dispute routed through the issuer and card network.</span></div>
+        </div></div>
+      </section>
+
+      <section class="section" id="business-metrics">
+        <h2>Business Metrics</h2>
+        <p class="section-desc">The operating metrics investors and payment teams use to understand scale, monetization, retention, and risk.</p>
+        <div class="card"><h3>Metrics quick reference</h3><div class="grid">
+          <div class="term"><b>TPV</b><span>Total Payment Volume. The value of payments processed through the platform.</span></div>
+          <div class="term"><b>GMV</b><span>Gross Merchandise Volume. Total commerce value, including transactions not processed by the platform's own payment stack.</span></div>
+          <div class="term"><b>Take Rate</b><span>Net revenue divided by payment volume.</span></div>
+          <div class="term"><b>NRR</b><span>Net Revenue Retention, measuring expansion and contraction across existing customers.</span></div>
+          <div class="term"><b>LTV / CAC</b><span>Lifetime value divided by customer acquisition cost.</span></div>
+          <div class="term"><b>ARR / MRR</b><span>Annual or monthly recurring revenue from subscriptions or platform fees.</span></div>
+        </div></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const sections = [...document.querySelectorAll('.section')];
+    const navLinks = [...document.querySelectorAll('.side-link')];
+    const results = document.querySelector('.results');
+    const input = document.querySelector('.search input');
+    const items = [];
+
+    function normalize(text) {
+      return (text || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+    function sectionUrl(slug, target = '') {
+      return '/en/glossary/' + slug + '/' + (target ? '#' + encodeURIComponent(target) : '');
+    }
+
+    sections.forEach(section => {
+      const slug = section.id;
+      const title = section.querySelector('h2').textContent.trim();
+      items.push({ title, context: 'Section', text: normalize(section.innerText), slug, target: section });
+      [...section.querySelectorAll('.term, .card')].forEach((el, index) => {
+        const label = el.querySelector('b, h3')?.textContent.trim();
+        if (!label) return;
+        const anchor = label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || slug + '-' + index;
+        el.dataset.anchor = anchor;
+        items.push({ title: label, context: title, text: normalize(el.innerText), slug, anchor, target: el });
+      });
+    });
+
+    function setActive(slug, options = {}) {
+      const section = document.getElementById(slug) || document.getElementById('fund-flow');
+      sections.forEach(item => item.classList.remove('active'));
+      navLinks.forEach(item => item.classList.toggle('active', item.dataset.section === section.id));
+      section.classList.add('active');
+      const target = options.target || section;
+      if (options.updateUrl !== false) history.pushState(null, '', sectionUrl(section.id, options.anchor || ''));
+      if (options.scroll) target.scrollIntoView({ behavior: options.instant ? 'auto' : 'smooth', block: 'start' });
+      if (options.target) {
+        options.target.classList.remove('hit');
+        void options.target.offsetWidth;
+        options.target.classList.add('hit');
+        setTimeout(() => options.target.classList.remove('hit'), 1400);
+      }
+    }
+
+    function route() {
+      const parts = location.pathname.split('/').filter(Boolean);
+      const slug = parts[parts.indexOf('glossary') + 1] || 'fund-flow';
+      const hash = decodeURIComponent(location.hash.replace(/^#/, ''));
+      const section = document.getElementById(slug) ? slug : 'fund-flow';
+      const target = hash ? document.querySelector('#' + CSS.escape(section) + ' [data-anchor="' + CSS.escape(hash) + '"]') : null;
+      setActive(section, { updateUrl: false, scroll: !!target, target, anchor: hash, instant: true });
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        setActive(link.dataset.section, { updateUrl: true, scroll: true });
+      });
+    });
+
+    function matches(query) {
+      const q = normalize(query);
+      if (!q) return [];
+      return items.map(item => {
+        const title = normalize(item.title);
+        let score = 0;
+        if (title === q) score += 120;
+        if (title.startsWith(q)) score += 80;
+        if (title.includes(q)) score += 55;
+        if (item.text.includes(q)) score += 20;
+        return { ...item, score };
+      }).filter(item => item.score > 0).sort((a, b) => b.score - a.score).slice(0, 8);
+    }
+
+    function render(found) {
+      if (!input.value.trim()) {
+        results.classList.remove('open');
+        results.innerHTML = '';
+        return;
+      }
+      if (!found.length) {
+        results.innerHTML = '<div class="result"><span>No matching terms</span></div>';
+        results.classList.add('open');
+        return;
+      }
+      results.innerHTML = found.map((item, index) => '<button type="button" class="result" data-index="' + index + '"><span>' + item.title + '</span><small>' + item.context + '</small></button>').join('');
+      results.classList.add('open');
+      results._matches = found;
+    }
+
+    function jump(item) {
+      if (!item) return;
+      input.value = item.title;
+      input.blur();
+      results.classList.remove('open');
+      setActive(item.slug, { target: item.target, anchor: item.anchor || '', updateUrl: true, scroll: true });
+    }
+
+    document.querySelector('.search').addEventListener('submit', event => {
+      event.preventDefault();
+      jump((results._matches || [])[0]);
+    });
+    input.addEventListener('input', () => render(matches(input.value)));
+    input.addEventListener('focus', () => render(matches(input.value)));
+    results.addEventListener('click', event => {
+      const button = event.target.closest('.result');
+      if (!button || !results._matches) return;
+      jump(results._matches[Number(button.dataset.index)]);
+    });
+    document.addEventListener('click', event => {
+      if (!event.target.closest('.search')) results.classList.remove('open');
+    });
+    addEventListener('popstate', route);
+    addEventListener('hashchange', route);
+    route();
+  </script>
+</body>
+</html>

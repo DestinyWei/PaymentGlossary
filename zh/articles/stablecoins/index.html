@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>稳定币到底是什么？凭什么能「稳」在 1 美元？ | AllScale</title>
+  <meta name="description" content="从储备、铸造与销毁机制出发，理解稳定币的锚定逻辑与风险来源。">
+  <link rel="canonical" href="https://payment.0xhowe.top/zh/articles/stablecoins/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/stablecoins/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/stablecoins/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale 支付知识库">
+  <meta property="og:title" content="稳定币到底是什么？凭什么能「稳」在 1 美元？ | AllScale">
+  <meta property="og:description" content="从储备、铸造与销毁机制出发，理解稳定币的锚定逻辑与风险来源。">
+  <meta property="og:url" content="https://payment.0xhowe.top/zh/articles/stablecoins/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/stablecoins.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/zh/" aria-label="AllScale 术语手册">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/zh/">术语手册</a>
+      <a href="/zh/articles/" class="active">专题文章</a>
+      <a class="language-link" href="/en/articles/stablecoins/">English</a>
+      <a class="social-link" href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">中文社媒 ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/zh/">术语手册</a><span>/</span><a href="/zh/articles/">专题文章</a><span>/</span><span>10</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale 支付术语科普 · 10</div>
+      <h1>稳定币到底是什么？凭什么能「稳」在 1 美元？</h1>
+      <p class="article-deck">从储备、铸造与销毁机制出发，理解稳定币的锚定逻辑与风险来源。</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/stablecoins.webp" alt="稳定币到底是什么？凭什么能「稳」在 1 美元？">
+    <div class="article-body"><p>前面九篇，我们一直在讲传统支付的麻烦：又慢、又贵、又绕。而每讲到「怎么解决」，稳定币都会出来露个脸。这一篇我们正面回答两个问题：稳定币到底是什么？它凭什么能「稳」？</p>
+<h2>一、稳定币是什么：给加密货币装上「稳定器」</h2>
+<p>加密货币在最开始之初有个常见的问题，价格太能波动了。比特币今天涨 10%、明天跌 15% 是常事。这让它很难当「钱」用：没人愿意用一个明天可能缩水的东西去发工资、付货款。</p>
+<p>稳定币就是来解决这件事的。 它本质上还是一种加密货币，但价格被锚定在某个稳定资产上，通常是美元，目标是让 1 枚稳定币始终约等于 1 美元，不随行情上蹿下跳。</p>
+<p>你常听到的 USDT（Tether）、USDC（Circle）就是这类。它一边保留了加密货币的好处（链上、点对点、全球通用、几分钟到账），一边又有法币的稳定。前面几篇说的「用稳定币跨境收款」，能成立的前提正是这个「稳」。</p>
+<figure class="article-figure"><img src="/articles/assets/stablecoins-02.webp" alt="稳定币到底是什么？凭什么能「稳」在 1 美元？：二、凭什么能稳：靠储备，加上铸造和销毁" loading="lazy" decoding="async"></figure>
+<h2>二、凭什么能稳：靠储备，加上铸造和销毁</h2>
+<p>最主流的一类稳定币（法币抵押型），逻辑其实特别朴素：发行方每发行 1 枚稳定币，就在储备里对应存进 1 美元（现金，或短期美债这类高流动性资产）。</p>
+<p>这一存一取，靠两个动作完成：</p>
+<ul><li>铸造（Mint）：有人拿 1 美元交给发行方，发行方就「铸造」出 1 枚新的稳定币给他，同时把这 1 美元收进储备。结果是：市面上的稳定币多 1 枚，储备里多 1 美元。</li><li>销毁（Burn）：有人拿 1 枚稳定币找发行方赎回，发行方还他 1 美元，同时把这枚币「销毁」掉（永久销账，不再流通）。结果是：稳定币少 1 枚，储备少 1 美元。</li></ul>
+<p>所以理论上，流通中的稳定币数量，始终等于储备里的美元数量，每一枚背后都压着 1 美元。</p>
+<p>这也解释了它为什么能稳在 1 美元附近：因为你随时能 1 比 1 赎回。万一市场价格偏离了，比如跌到 0.98，就会有人低价买进、再按 1 美元赎回赚差价，这一买一赎，自然把价格拉回 1。这个「拉回」的力量，就是锚定的底气。</p>
+<figure class="article-figure"><img src="/articles/assets/stablecoins-03.webp" alt="稳定币到底是什么？凭什么能「稳」在 1 美元？：三、但不是所有稳定币都一样稳" loading="lazy" decoding="async"></figure>
+<h2>三、但不是所有稳定币都一样稳</h2>
+<p>这里必须说清楚另一面：稳定币的「稳」不是天生的，全靠背后那 1 美元是不是真在、且随时拿得出来。</p>
+<p>如果储备不透明、被发行方挪用、或者拿去买了高风险资产，这个「锚」就可能断。历史上已经出现过多次：2022 年，一种靠算法（而非真实储备）维持的稳定币 UST 直接崩盘归零；2023 年，USDC 也因为存储备的银行（硅谷银行）暴雷，短暂跌破过 1 美元。</p>
+<p>所以挑稳定币，真正该看的是三件事：储备够不够、透不透明可不可审计、发行方受</p>
+<p>不受监管。 USDT、USDC 能成为市场主流，靠的正是相对透明的储备和合规背书。</p>
+<figure class="article-figure"><img src="/articles/assets/stablecoins-04.webp" alt="稳定币到底是什么？凭什么能「稳」在 1 美元？：四、那稳定币怎么用起来" loading="lazy" decoding="async"></figure>
+<h2>四、那稳定币怎么用起来</h2>
+<p>稳定币解决了「价值稳定」，但要真正用它做生意，还差两步：你手里的人民币怎么变成稳定币、稳定币又怎么变回能花的钱（这是下一篇的「入金 / 出金」）；以及这些稳定币放在哪、归谁保管（这是第 12 篇的「自托管」）。</p>
+<p>AllScale 的位置就在这里：让商户用主流稳定币完成跨境收付，同时把币留在自己掌控的钱包里，既能吃到稳定币的稳定与高效，又不用把资产交给平台代管。</p>
+<figure class="article-figure"><img src="/articles/assets/stablecoins-05.webp" alt="稳定币到底是什么？凭什么能「稳」在 1 美元？：小结" loading="lazy" decoding="async"></figure>
+<h2>小结</h2>
+<p>稳定币：锚定法币（通常是美元）的加密货币，目标是 1 枚 ≈ 1 美元，兼具加密货币的高效和法币的稳定。铸造 Mint：存入 1 美元、生成 1 枚币；销毁 Burn：赎回 1 美元、销掉 1 枚币。流通量始终对应储备量。稳不稳的关键：背后的储备是否充足、透明、受监管——「稳」是撑出来的，不是天生的。</p>
+<p>下一篇我们讲那道连接现实世界的门：手里的法币怎么换成稳定币、稳定币又怎么换回法币？也就是入金（on-ramp）和出金（off-ramp）。</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>继续关注 AllScale 支付科普</h2>
+    <p>后续文章和支付行业内容会在 AllScale 中文社媒同步发布。</p>
+    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 @allscale_zh ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/zh/articles/swift-correspondent-banking/"><small>上一篇</small><strong>SWIFT、代理行、中转行：跨境的钱在路上经历了什么？</strong></a><a href="/zh/articles/on-ramp-off-ramp/"><small>下一篇</small><strong>On-ramp 和 Off-ramp：进出加密世界的两道门</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 AllScale 中文社媒</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "稳定币到底是什么？凭什么能「稳」在 1 美元？", "description": "从储备、铸造与销毁机制出发，理解稳定币的锚定逻辑与风险来源。", "image": "https://payment.0xhowe.top/articles/assets/stablecoins.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/zh/articles/stablecoins/", "inLanguage": "zh-CN"}</script>
+</body>
+</html>

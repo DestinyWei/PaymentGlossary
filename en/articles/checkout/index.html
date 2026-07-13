@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>You&#x27;ve clicked &#x27;Pay Now&#x27; a thousand times. Do you actually know what Checkout is? | AllScale</title>
+  <meta name="description" content="Start with the checkout page and separate the visible payment entry point from the payment machinery behind it.">
+  <link rel="canonical" href="https://payment.0xhowe.top/en/articles/checkout/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/checkout/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/checkout/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale Payments Knowledge Base">
+  <meta property="og:title" content="You&#x27;ve clicked &#x27;Pay Now&#x27; a thousand times. Do you actually know what Checkout is? | AllScale">
+  <meta property="og:description" content="Start with the checkout page and separate the visible payment entry point from the payment machinery behind it.">
+  <meta property="og:url" content="https://payment.0xhowe.top/en/articles/checkout/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/en-checkout.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/en/" aria-label="AllScale Glossary">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/en/">Glossary</a>
+      <a href="/en/articles/" class="active">Articles</a>
+      <a class="language-link" href="/zh/articles/checkout/">中文</a>
+      <a class="social-link" href="https://x.com/allscale" target="_blank" rel="noreferrer">AllScale ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/en/">Glossary</a><span>/</span><a href="/en/articles/">Articles</a><span>/</span><span>01</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale Payment Glossary · 01</div>
+      <h1>You&#x27;ve clicked &#x27;Pay Now&#x27; a thousand times. Do you actually know what Checkout is?</h1>
+      <p class="article-deck">Start with the checkout page and separate the visible payment entry point from the payment machinery behind it.</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/en-checkout.webp" alt="You&#x27;ve clicked &#x27;Pay Now&#x27; a thousand times. Do you actually know what Checkout is?">
+    <div class="article-body"><p>You open a shopping site, drop something in the cart, and land on a page asking for your card number, payment method, and finally a &quot;Pay Now&quot; button. That&#x27;s Checkout.</p>
+<p>You&#x27;ve probably used one a thousand times, but almost no one stops to ask: what is this thing, really? Is it the same as &quot;payment&quot;? And why do some sites let you sail through in ten seconds while others leave you stuck at the last step, unable to pay?</p>
+<p>This is the first post in the series. We&#x27;re starting with the piece you already know, so the rest of the payment world has something solid to build on.</p>
+<h2>1. What Checkout actually is</h2>
+<p>Checkout is the interface — or the moment — where a merchant lets a buyer complete a payment.</p>
+<p>It is not the same thing as the payment itself. The payment is the money actually moving, which we&#x27;ll get to later. Checkout is just the doorway — like the register at the front of a supermarket. You pay at the register, but the mechanics of how money leaves your card and lands in the store&#x27;s account happen behind the scenes.</p>
+<p>Hold onto this distinction. It comes up again:</p>
+<ul><li>Checkout = the front counter (what you see)</li><li>Gateway, processor, and friends = the kitchen (the plumbing you don&#x27;t see, unpacked in Posts 4 and 5)</li></ul>
+<h2>2. Three shapes Checkout tends to take</h2>
+<p>Not every business has a full shopping site. In practice, Checkout usually shows up in one of three forms:</p>
+<ol><li>Embedded checkout: built directly into the site or app. The buyer never leaves.</li></ol>
+<p>This is what big platforms default to.</p>
+<ol><li>Payment link: the checkout compressed into a single URL you can send someone. Great for freelancers with no website, people selling courses in group chats, or a one-off invoice. Drop the link in WhatsApp, they click, they pay.</li><li>QR code: same idea, printed on a table tent or thrown up on a screen. Market stalls, storefronts, event booths. Scan, pay, done.</li></ol>
+<p>All three are the same idea underneath: strip as much friction as possible out of the &quot;actually pay&quot; step. Less friction, higher conversion. That is the entire reason Checkout exists.</p>
+<h2>3. Why traditional Checkout keeps getting stuck</h2>
+<p>You&#x27;ve probably hit some version of this:</p>
+<ul><li>You type in the card number, expiration, CVV — then get bounced into an SMS verification step (that&#x27;s 3DS; we&#x27;ll cover it later)</li><li>You buy something from a foreign site and a mystery &quot;currency conversion fee&quot;</li></ul>
+<p>appears at the end</p>
+<ul><li>You want to buy, but the site doesn&#x27;t accept cards from your region, so you just… can&#x27;t The root cause isn&#x27;t the checkout page. It&#x27;s the old, layered clearing system sitting behind card payments. Every time you tap &quot;Pay,&quot; the request has to hop through the issuer, the card scheme, and the acquirer. We will pull that apart post by post.</li></ul>
+<p>For now, remember this: the checkout page looks simple. Whatever&#x27;s tripping you up is happening in the pipes behind it.</p>
+<h2>4. A different Checkout — using AllScale</h2>
+<p>If a buyer pays with a stablecoin (USDT, USDC), the checkout step gets a lot shorter.</p>
+<p>Here&#x27;s how it plays out on AllScale Checkout:</p>
+<p>For the buyer:</p>
+<ol><li>Pick &quot;pay with stablecoin&quot;</li><li>Connect a wallet or scan a QR</li><li>Confirm on-chain</li><li>Done — usually settled in a few seconds For the merchant:</li></ol>
+<ul><li>No card networks, no acquiring banks to integrate with</li><li>Self-custody: the money lands directly in a wallet the merchant controls. No platform-owned holding account in between.</li></ul>
+<p>(Why self-custody matters is a Post 12 question. Skipping ahead here.)</p>
+<p>Putting Checkout inside a chat: AllScale TG Store Go back to the point from earlier — Checkout&#x27;s job is just to reduce friction. Follow that logic and the &quot;container&quot; for it keeps getting lighter:</p>
+<p>Full shopping site → payment link → QR code → skip the page entirely and put Checkout inside a chat app AllScale&#x27;s TG Store (allscale.store) is that last step: your Telegram bot is the storefront and the checkout, all at once. The buyer runs /start in the chat, browses, pays — without ever leaving Telegram, and without installing anything.</p>
+<p>They pay in USDT or USDC and the money lands in the merchant&#x27;s self-custody wallet.</p>
+<p>It fits people already doing business inside Telegram — sellers of digital goods, courses, paid memberships, signal groups. In the old world, those sellers were either giving up 8–12% to Stripe, Gumroad, or Patreon, or stuck in manual workflows where the buyer DMs a tx hash and someone adds them to the group by hand. TG Store collapses &quot;get paid + auto-deliver / add to group&quot; into a single tap inside a chat window.</p>
+<p>Put differently: Checkout doesn&#x27;t have to be a &quot;page.&quot; When all your customers live in a chat app, the best checkout is the chat app itself.</p>
+<h2>Wrap-up</h2>
+<p>Checkout is the door between you and paying. The easier the door opens, the easier the business runs.</p>
+<p>This post covered only the front counter. Next up: Invoicing — what changes when you are not selling stock off a shelf but sending a customer a bill and waiting for them to pay it. Some new characters walk on stage there.</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>Keep learning with AllScale</h2>
+    <p>Future articles and payment education updates will be published through AllScale channels.</p>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><span></span><a href="/en/articles/invoicing/"><small>Next</small><strong>The invoice arrives before the money does — what is Invoicing really solving?</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "You've clicked 'Pay Now' a thousand times. Do you actually know what Checkout is?", "description": "Start with the checkout page and separate the visible payment entry point from the payment machinery behind it.", "image": "https://payment.0xhowe.top/articles/assets/en-checkout.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/en/articles/checkout/", "inLanguage": "en"}</script>
+</body>
+</html>

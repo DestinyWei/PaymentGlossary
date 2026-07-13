@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>钱还没到，账单先到——Invoicing 到底在解决什么？ | AllScale</title>
+  <meta name="description" content="从 Invoice、账期和对账入手，看懂 B2B 与跨境业务为什么需要开票收款。">
+  <link rel="canonical" href="https://payment.0xhowe.top/zh/articles/invoicing/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/invoicing/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/invoicing/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale 支付知识库">
+  <meta property="og:title" content="钱还没到，账单先到——Invoicing 到底在解决什么？ | AllScale">
+  <meta property="og:description" content="从 Invoice、账期和对账入手，看懂 B2B 与跨境业务为什么需要开票收款。">
+  <meta property="og:url" content="https://payment.0xhowe.top/zh/articles/invoicing/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/invoicing.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/zh/" aria-label="AllScale 术语手册">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/zh/">术语手册</a>
+      <a href="/zh/articles/" class="active">专题文章</a>
+      <a class="language-link" href="/en/articles/invoicing/">English</a>
+      <a class="social-link" href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">中文社媒 ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/zh/">术语手册</a><span>/</span><a href="/zh/articles/">专题文章</a><span>/</span><span>02</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale 支付术语科普 · 02</div>
+      <h1>钱还没到，账单先到——Invoicing 到底在解决什么？</h1>
+      <p class="article-deck">从 Invoice、账期和对账入手，看懂 B2B 与跨境业务为什么需要开票收款。</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/invoicing.webp" alt="钱还没到，账单先到——Invoicing 到底在解决什么？">
+    <div class="article-body"><p>你接了个活儿：设计一个 logo、写一段代码、做一次咨询。干完了，怎么收钱？总不能让客户掏现金吧，这时你可以给他一张“单”，写清楚做了什么、多少钱、往哪儿付。</p>
+<p>这张单就是 Invoice（发票 / 收款单），而开单收款的整个动作，叫 Invoicing。</p>
+<p>上一篇我们讲了 Checkout，这一篇讲 Invoicing。它们都是“收款”，但解决的是两类完全不同的生意。</p>
+<h2>一、Invoice 到底是什么</h2>
+<p>Invoice 是一张说清“谁、向谁、为什么、收多少、什么时候付”的收款单据，Invoicing 就是围绕这张单完成收款的全过程。</p>
+<p>它和 Checkout 最大的区别，是时间：</p>
+<p>Checkout = 东西摆在这儿，你当场买、当场付。即时交易，一手交钱一手交货，典型场景是电商。</p>
+<p>Invoicing = 我先干活或先发货，再给你开一张单，你之后再付。中间隔着一段“账期”，典型场景是自由职业、咨询、B2B 供货。</p>
+<p>简单说，Checkout 是“先付钱”，Invoicing 是“后付钱”。绝大多数生意的收款，不是这两种里的一种，就是两种的组合。</p>
+<figure class="article-figure"><img src="/articles/assets/invoicing-02.webp" alt="钱还没到，账单先到——Invoicing 到底在解决什么？：二、一张 Invoice 上有哪些角色" loading="lazy" decoding="async"></figure>
+<h2>二、一张 Invoice 上有哪些角色</h2>
+<p>一张合格的收款单，至少要说清三件事：谁收钱、谁付钱、为什么付。这里涉及到两个新术语：</p>
+<ul><li>Beneficiary（收款方）：钱最终进谁的账，也就是开单的你。</li><li>Remitter（汇款方）：掏钱的那一方，也就是你的客户。</li></ul>
+<p>除了这两个角色，单子上还得有金额、事由（干了什么），以及一个容易被忽略的关键项——账期（Payment Terms），比如常见的 Net 30，意思是“收到单后 30 天内付清”。</p>
+<p>为什么要把这些分得这么清？因为在 Invoicing 里，开单和到账之间天然有个缺口：客户可能在另一个国家、用另一种货币、隔着好几天才付。麻烦，几乎都藏在这段缺口里。</p>
+<figure class="article-figure"><img src="/articles/assets/invoicing-03.webp" alt="钱还没到，账单先到——Invoicing 到底在解决什么？：三、传统跨境开票收款的麻烦" loading="lazy" decoding="async"></figure>
+<h2>三、传统跨境开票收款的麻烦</h2>
+<p>如果你的客户在海外，传统流程下通常会卡在三个地方：</p>
+<ul><li>等：客户走电汇（Wire / TT），跨境到账常要 2 到 5 个工作日，中间还可能被中转行扣一笔费、备注信息丢失（这套机制第 7 篇细讲）。</li><li>损：你开的是美元，客户付的是另一种货币，中间换汇被吃掉一道汇差。单子写 1000 美元，到账可能少几十美元（第 8 篇细讲）。</li><li>乱：对账。这笔钱对应哪张单？金额对得上吗？跨境转账的备注经常缺失或被截断，财务只能靠人肉比对。</li></ul>
+<p>对自由职业者和小团队来说，“追款 + 对账”经常比干活本身还累。</p>
+<figure class="article-figure"><img src="/articles/assets/invoicing-04.webp" alt="钱还没到，账单先到——Invoicing 到底在解决什么？：四、换一种 Invoicing：以 AllScale 为例" loading="lazy" decoding="async"></figure>
+<h2>四、换一种 Invoicing：以 AllScale 为例</h2>
+<p>如果收的是稳定币（USDT、USDC），整个流程则会轻松得多。以 AllScale Invoicing 为例，整个流程是：</p>
+<ul><li>开单：填好金额、事由、收款币种，生成一张收款单和一条链接。</li><li>发送：把链接发给客户，邮件、微信、Telegram 都行。</li><li>收款：客户点开，连钱包或扫码付款，链上几秒确认。</li><li>到账：钱直接进你自托管的钱包，不经过平台账户中转。 对账：每一笔都有一张链上收据，一笔对一单，金额来源清清楚楚。</li></ul>
+<p>没有要等好几天的电汇，没有被悄悄吃掉的汇差，对账也不用再人肉比对——单子和收据在链上一一对应。</p>
+<figure class="article-figure"><img src="/articles/assets/invoicing-05.webp" alt="钱还没到，账单先到——Invoicing 到底在解决什么？：小结" loading="lazy" decoding="async"></figure>
+<h2>小结</h2>
+<p>Checkout 解决“当场买、当场付”，Invoicing 解决“先干活、后收钱”。两者合起来，基本覆盖了一门生意所有的收款场景。</p>
+<p>但“收到钱”不等于万事大吉：万一客户要退款呢？万一付完又反悔、发起争议呢？下一篇我们讲 Refund（退款）和 Chargeback（拒付），看看钱收了之后还能不能被拿回去，以及为什么这件事在卡支付和稳定币的世界里，结局完全不同。</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>继续关注 AllScale 支付科普</h2>
+    <p>后续文章和支付行业内容会在 AllScale 中文社媒同步发布。</p>
+    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 @allscale_zh ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/zh/articles/checkout/"><small>上一篇</small><strong>你点过上千次“立即支付”，但真的懂 Checkout 吗？</strong></a><a href="/zh/articles/chargeback/"><small>下一篇</small><strong>商户最怕的一个词：Chargeback</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 AllScale 中文社媒</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "钱还没到，账单先到——Invoicing 到底在解决什么？", "description": "从 Invoice、账期和对账入手，看懂 B2B 与跨境业务为什么需要开票收款。", "image": "https://payment.0xhowe.top/articles/assets/invoicing.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/zh/articles/invoicing/", "inLanguage": "zh-CN"}</script>
+</body>
+</html>

@@ -1,0 +1,1966 @@
+[
+  {
+    "order": 1,
+    "slug": "checkout",
+    "title": "You've clicked 'Pay Now' a thousand times. Do you actually know what Checkout is?",
+    "summary": "Start with the checkout page and separate the visible payment entry point from the payment machinery behind it.",
+    "image": "/articles/assets/en-checkout.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "You open a shopping site, drop something in the cart, and land on a page asking for your card number, payment method, and finally a \"Pay Now\" button. That's Checkout."
+      },
+      {
+        "type": "p",
+        "text": "You've probably used one a thousand times, but almost no one stops to ask: what is this thing, really? Is it the same as \"payment\"? And why do some sites let you sail through in ten seconds while others leave you stuck at the last step, unable to pay?"
+      },
+      {
+        "type": "p",
+        "text": "This is the first post in the series. We're starting with the piece you already know, so the rest of the payment world has something solid to build on."
+      },
+      {
+        "type": "h2",
+        "text": "1. What Checkout actually is"
+      },
+      {
+        "type": "p",
+        "text": "Checkout is the interface — or the moment — where a merchant lets a buyer complete a payment."
+      },
+      {
+        "type": "p",
+        "text": "It is not the same thing as the payment itself. The payment is the money actually moving, which we'll get to later. Checkout is just the doorway — like the register at the front of a supermarket. You pay at the register, but the mechanics of how money leaves your card and lands in the store's account happen behind the scenes."
+      },
+      {
+        "type": "p",
+        "text": "Hold onto this distinction. It comes up again:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Checkout = the front counter (what you see)",
+          "Gateway, processor, and friends = the kitchen (the plumbing you don't see, unpacked in Posts 4 and 5)"
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "2. Three shapes Checkout tends to take"
+      },
+      {
+        "type": "p",
+        "text": "Not every business has a full shopping site. In practice, Checkout usually shows up in one of three forms:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Embedded checkout: built directly into the site or app. The buyer never leaves."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "This is what big platforms default to."
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Payment link: the checkout compressed into a single URL you can send someone. Great for freelancers with no website, people selling courses in group chats, or a one-off invoice. Drop the link in WhatsApp, they click, they pay.",
+          "QR code: same idea, printed on a table tent or thrown up on a screen. Market stalls, storefronts, event booths. Scan, pay, done."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "All three are the same idea underneath: strip as much friction as possible out of the \"actually pay\" step. Less friction, higher conversion. That is the entire reason Checkout exists."
+      },
+      {
+        "type": "h2",
+        "text": "3. Why traditional Checkout keeps getting stuck"
+      },
+      {
+        "type": "p",
+        "text": "You've probably hit some version of this:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "You type in the card number, expiration, CVV — then get bounced into an SMS verification step (that's 3DS; we'll cover it later)",
+          "You buy something from a foreign site and a mystery \"currency conversion fee\""
+        ]
+      },
+      {
+        "type": "p",
+        "text": "appears at the end"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "You want to buy, but the site doesn't accept cards from your region, so you just… can't The root cause isn't the checkout page. It's the old, layered clearing system sitting behind card payments. Every time you tap \"Pay,\" the request has to hop through the issuer, the card scheme, and the acquirer. We will pull that apart post by post."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "For now, remember this: the checkout page looks simple. Whatever's tripping you up is happening in the pipes behind it."
+      },
+      {
+        "type": "h2",
+        "text": "4. A different Checkout — using AllScale"
+      },
+      {
+        "type": "p",
+        "text": "If a buyer pays with a stablecoin (USDT, USDC), the checkout step gets a lot shorter."
+      },
+      {
+        "type": "p",
+        "text": "Here's how it plays out on AllScale Checkout:"
+      },
+      {
+        "type": "p",
+        "text": "For the buyer:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Pick \"pay with stablecoin\"",
+          "Connect a wallet or scan a QR",
+          "Confirm on-chain",
+          "Done — usually settled in a few seconds For the merchant:"
+        ]
+      },
+      {
+        "type": "ul",
+        "items": [
+          "No card networks, no acquiring banks to integrate with",
+          "Self-custody: the money lands directly in a wallet the merchant controls. No platform-owned holding account in between."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "(Why self-custody matters is a Post 12 question. Skipping ahead here.)"
+      },
+      {
+        "type": "p",
+        "text": "Putting Checkout inside a chat: AllScale TG Store Go back to the point from earlier — Checkout's job is just to reduce friction. Follow that logic and the \"container\" for it keeps getting lighter:"
+      },
+      {
+        "type": "p",
+        "text": "Full shopping site → payment link → QR code → skip the page entirely and put Checkout inside a chat app AllScale's TG Store (allscale.store) is that last step: your Telegram bot is the storefront and the checkout, all at once. The buyer runs /start in the chat, browses, pays — without ever leaving Telegram, and without installing anything."
+      },
+      {
+        "type": "p",
+        "text": "They pay in USDT or USDC and the money lands in the merchant's self-custody wallet."
+      },
+      {
+        "type": "p",
+        "text": "It fits people already doing business inside Telegram — sellers of digital goods, courses, paid memberships, signal groups. In the old world, those sellers were either giving up 8–12% to Stripe, Gumroad, or Patreon, or stuck in manual workflows where the buyer DMs a tx hash and someone adds them to the group by hand. TG Store collapses \"get paid + auto-deliver / add to group\" into a single tap inside a chat window."
+      },
+      {
+        "type": "p",
+        "text": "Put differently: Checkout doesn't have to be a \"page.\" When all your customers live in a chat app, the best checkout is the chat app itself."
+      },
+      {
+        "type": "h2",
+        "text": "Wrap-up"
+      },
+      {
+        "type": "p",
+        "text": "Checkout is the door between you and paying. The easier the door opens, the easier the business runs."
+      },
+      {
+        "type": "p",
+        "text": "This post covered only the front counter. Next up: Invoicing — what changes when you are not selling stock off a shelf but sending a customer a bill and waiting for them to pay it. Some new characters walk on stage there."
+      }
+    ]
+  },
+  {
+    "order": 2,
+    "slug": "invoicing",
+    "title": "The invoice arrives before the money does — what is Invoicing really solving?",
+    "summary": "Understand invoices, payment terms, remitters, beneficiaries, and why cross-border B2B collection gets messy.",
+    "image": "/articles/assets/en-invoicing.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "You take on a gig: design a logo, write some code, run a consulting session. Job done. How do you get paid? You're not going to ask the client for cash, so you hand them a \"bill\" that spells out what you did, how much it costs, and where to pay."
+      },
+      {
+        "type": "p",
+        "text": "That bill is an Invoice, and the whole act of sending it and collecting payment is called Invoicing."
+      },
+      {
+        "type": "p",
+        "text": "Last time we covered Checkout. This time it's Invoicing. Both are about \"getting paid,\" but they solve two completely different kinds of business."
+      },
+      {
+        "type": "h2",
+        "text": "1. What Exactly Is an Invoice"
+      },
+      {
+        "type": "p",
+        "text": "An Invoice is a document that spells out \"who, to whom, why, how much, and by when.\" Invoicing is the entire process of getting paid through that document."
+      },
+      {
+        "type": "p",
+        "text": "The biggest difference between it and Checkout is timing:"
+      },
+      {
+        "type": "p",
+        "text": "Checkout = the goods are right here, you buy on the spot, you pay on the spot."
+      },
+      {
+        "type": "p",
+        "text": "Instant transaction, cash for goods. The classic example is e-commerce."
+      },
+      {
+        "type": "p",
+        "text": "Invoicing = I do the work or ship the goods first, then hand you a bill, and you pay later. There's a payment window in between. The classic examples are freelancing, consulting, and B2B supply."
+      },
+      {
+        "type": "p",
+        "text": "Put simply, Checkout is \"pay first,\" Invoicing is \"pay later.\" Almost every business's collection flow is one of these two, or some combination."
+      },
+      {
+        "type": "h2",
+        "text": "2. Who's on an Invoice"
+      },
+      {
+        "type": "p",
+        "text": "A proper invoice needs to be clear about at least three things: who's collecting, who's paying, and why. That brings in two new terms:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Beneficiary: the party the money ultimately lands with, i.e. you, the one sending the invoice.",
+          "Remitter: the party paying, i.e. your client."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Besides these two, the invoice needs the amount, the reason (what you did), and one item that gets overlooked — the Payment Terms. A common one is Net 30, meaning \"pay within 30 days of receiving the invoice.\""
+      },
+      {
+        "type": "p",
+        "text": "Why draw all these distinctions? Because with Invoicing, there's a natural gap between sending the invoice and the money landing in your account. The client might"
+      },
+      {
+        "type": "p",
+        "text": "be in another country, using another currency, paying several days later. Almost all the headaches hide in that gap."
+      },
+      {
+        "type": "h2",
+        "text": "3. The Headaches of Traditional Cross-Border"
+      },
+      {
+        "type": "p",
+        "text": "Invoicing If your client is overseas, the traditional flow usually gets stuck in three places:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Waiting: your client pays by wire (Wire / TT), and cross-border settlement often takes 2 to 5 business days. Correspondent banks may skim a fee along the way, and reference details get lost (post #7 will break down this mechanism).",
+          "Losses: you invoice in USD, the client pays in another currency, and the FX spread eats into the amount. A $1,000 invoice may land as a few dozen dollars short (post #8 goes deep).",
+          "Mess: reconciliation. Which invoice does this payment match? Do the amounts line up? Cross-border transfer memos often get truncated or dropped, so finance ends up matching things by hand."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "For freelancers and small teams, \"chasing payments plus reconciliation\" is often more exhausting than the actual work."
+      },
+      {
+        "type": "h2",
+        "text": "4. A Different Kind of Invoicing: AllScale as an"
+      },
+      {
+        "type": "p",
+        "text": "Example If you're getting paid in stablecoins (USDT, USDC), the whole process is a lot lighter."
+      },
+      {
+        "type": "p",
+        "text": "Using AllScale Invoicing as an example, the flow looks like this:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Create the invoice: fill in the amount, the reason, the currency, and it generates an invoice and a link.",
+          "Send it: send the link to your client — email, WeChat, Telegram, whatever works.",
+          "Get paid: the client opens it, connects a wallet or scans a QR code, and the payment confirms on-chain in seconds.",
+          "Settlement: the money goes straight into your self-custody wallet, no platform account acting as middleman. Reconciliation: every payment gets an on-chain receipt, one-to-one with the invoice, with the source clearly recorded."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "No multi-day wire, no FX spread quietly eating your money, no manual reconciliation — invoice and receipt line up on-chain, one-to-one."
+      },
+      {
+        "type": "h2",
+        "text": "Wrap-Up"
+      },
+      {
+        "type": "p",
+        "text": "Checkout solves \"buy on the spot, pay on the spot.\" Invoicing solves \"work first, get paid later.\" Between them, they cover pretty much every payment scenario a business runs into."
+      },
+      {
+        "type": "p",
+        "text": "But \"getting the money\" doesn't mean case closed. What if the client wants a refund?"
+      },
+      {
+        "type": "p",
+        "text": "What if they pay and then change their mind and file a dispute? Next time we'll cover Refund and Chargeback, and look at whether money that's been collected can still be taken back — and why the answer looks completely different between card payments and stablecoins."
+      }
+    ]
+  },
+  {
+    "order": 3,
+    "slug": "chargeback",
+    "title": "The one word every merchant fears: Chargeback",
+    "summary": "Separate voids, refunds, and chargebacks, then compare card reversals with stablecoin finality.",
+    "image": "/articles/assets/en-chargeback.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "We closed the last post with: getting paid doesn't mean case closed. Why? Because in the card payment world, a payment that lands in your account today can still get pulled out months later."
+      },
+      {
+        "type": "p",
+        "text": "This post covers two words that keep merchants up at night: Refund and Chargeback."
+      },
+      {
+        "type": "p",
+        "text": "Along the way, we'll explain why the same event plays out completely differently in the stablecoin world."
+      },
+      {
+        "type": "h2",
+        "text": "1. First, Untangle Three Different Things: Void, Refund,"
+      },
+      {
+        "type": "p",
+        "text": "Chargeback Money moves from buyer to your account through several checkpoints. Reversing it at different checkpoints has completely different names and consequences:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Void: the transaction was authorized but not yet actually charged, and you cancel it. The hold on the buyer's card is released, and it's as if the transaction never happened. The cleanest option.",
+          "Refund: the money has already settled into your account, and you actively send it back to the buyer. You're the one making the call — controlled, deliberate.",
+          "Chargeback: the buyer doesn't come to you. They go straight to their issuing bank and say \"I don't recognize this transaction,\" and the issuer forcibly pulls the money back out of your account. You have no control."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "The words \"authorization,\" \"charge,\" and \"settlement\" here are checkpoints in the lifecycle of a card transaction, which post #5 will unpack. For this post, just remember one thing: the later it is, the harder the reversal, and the worse it gets for the merchant."
+      },
+      {
+        "type": "h2",
+        "text": "2. Why Chargebacks Are a Merchant's Headache"
+      },
+      {
+        "type": "p",
+        "text": "Chargeback started out as a good mechanism for protecting consumers: if a card gets stolen, the goods never arrive, or the merchant plays dirty, the cardholder can pull the money back through the issuer."
+      },
+      {
+        "type": "p",
+        "text": "Sounds reasonable. The problem is it's easy to abuse:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Malicious chargebacks / friendly fraud: the buyer actually received the goods or used the service, but claims \"never got it\" or \"wasn't me\" to the bank, files a chargeback, and walks away with a freebie.",
+          "Burden of proof is on the merchant: you have to dig up shipping records, delivery confirmations, chat logs to appeal. The process is long and the win rate isn't great.",
+          "You pay either way: every chargeback triggers a chargeback fee from your acquirer, whether you win the appeal or not.",
+          "Chargeback rate is a red line: chargeback rate (CBR) = number of chargebacks ÷ total transactions. Cross the card scheme's threshold (usually 1%)"
+        ]
+      },
+      {
+        "type": "p",
+        "text": "and you get put on monitoring programs, hit with fines, or in serious cases, cut off from the acquiring channel entirely — which is the same as losing your business."
+      },
+      {
+        "type": "p",
+        "text": "For a lot of merchants, especially cross-border sellers, digital goods sellers, and anyone with high ticket prices, Chargeback isn't a casual \"oh, someone got a refund.\""
+      },
+      {
+        "type": "p",
+        "text": "It's a risk bomb that can go off at any time."
+      },
+      {
+        "type": "p",
+        "text": "Visa has rolled out a mechanism called RDR (Rapid Dispute Resolution) that lets merchants set rules upfront and auto-refund before things escalate into a formal chargeback. But this is a patch on top of the old system, not a real fix, and merchants still deal with the pain of chargeback risk."
+      },
+      {
+        "type": "h2",
+        "text": "3. Stablecoin World: Irreversibility Is a Double-Edged"
+      },
+      {
+        "type": "p",
+        "text": "Sword On-chain transfers have a fundamental property: once confirmed, they can't be reversed. No issuing bank can force money back, and the concept of \"chargeback\" simply doesn't exist."
+      },
+      {
+        "type": "p",
+        "text": "That's a real benefit for merchants:"
+      },
+      {
+        "type": "p",
+        "text": "No chargebacks means no friendly fraud, no chargeback fines, no CBR red line. The money you receive is final. You don't have to worry about it getting yanked back months later, and cash flow certainty goes up a lot."
+      },
+      {
+        "type": "p",
+        "text": "For buyers, it's the opposite — they lose the \"safety net\" of reversal. In card payments, if a cardholder gets scammed, pays the wrong person, or runs into a merchant that disappears, the issuer has their back. On-chain, once the money is sent, no one at the protocol level can help them get it back."
+      },
+      {
+        "type": "p",
+        "text": "The risk didn't vanish, it just moved. It shifted from \"merchants worried about chargebacks\" to \"buyers worried about scams.\" Buyers who run into a fraudulent merchant have almost no automatic remedy."
+      },
+      {
+        "type": "p",
+        "text": "In other words, stablecoins remove the \"hassle\" of chargeback, but they also remove the \"consumer protection\" that came with it. The mechanism protecting buyers is no longer the payment network itself. It has to come from somewhere else: merchant reputation, dispute or escrow mechanisms on the platform (like third-party Escrow), and traceable on-chain receipts."
+      },
+      {
+        "type": "p",
+        "text": "Which one is better depends on the scenario: B2B, transactions between known parties, or well-defined digital goods — irreversibility is a plus. Retail scenarios facing unknown consumers need extra trust and guarantee mechanisms to fill the gap."
+      },
+      {
+        "type": "h2",
+        "text": "4. How AllScale Handles It"
+      },
+      {
+        "type": "p",
+        "text": "AllScale runs on stablecoins and self-custody, so it doesn't have chargeback risk by design. That fits the micro-merchant and cross-border collection scenarios it serves — most of which are B2B or well-defined services, where the merchant's biggest fear is cross-border chargebacks."
+      },
+      {
+        "type": "p",
+        "text": "As for the \"buyer protection gap\" mentioned above, it's not unsolvable. Traceable onchain receipts (every transaction has a record) plus the delivery reason written into the invoice (the \"reason\" field from the last post's Invoicing section) already shrink the room for disputes. For scenarios that need stronger buyer protection, Escrow (third-party custody that releases funds only when conditions are met) is a standard industry solution — we'll get into this when we dive into specific cross-border scenarios later."
+      },
+      {
+        "type": "h2",
+        "text": "Wrap-Up"
+      },
+      {
+        "type": "p",
+        "text": "Void: not yet charged, straight cancel, cleanest. Refund: money has landed, you send it back yourself, controlled. Chargeback: buyer goes around you and forces the bank to pull the money, merchant is passive, pays fees, and getting past the chargeback rate threshold gets you cut off. Stablecoin irreversibility: kills chargebacks and friendly fraud, but also removes the buyer's reversal safety net — a benefit and a responsibility, depending on the scenario."
+      },
+      {
+        "type": "p",
+        "text": "Next time we're heading behind the counter: when a buyer hits \"pay,\" what roles does that money pass through before it lands with the merchant? We'll unpack the four characters who've been working backstage all along — Gateway, Processor, Acquirer, Issuer."
+      }
+    ]
+  },
+  {
+    "order": 4,
+    "slug": "payment-roles",
+    "title": "Why does \"payment failed\" happen? Understand these four roles and it clicks",
+    "summary": "Trace failed card payments through the cardholder, issuer, card scheme, acquirer, and merchant.",
+    "image": "/articles/assets/en-payment-roles.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "The first three posts stayed at the \"front counter\" — the Checkout, the invoice, the refund. Things you can see. This time we go backstage."
+      },
+      {
+        "type": "p",
+        "text": "You hit \"pay\" at the checkout, and less than two seconds later the money is in the merchant's account. But in those two seconds, your money has been handed off through at least four different characters behind the scenes. Today we'll introduce them one by one."
+      },
+      {
+        "type": "h2",
+        "text": "1. Start With an Analogy"
+      },
+      {
+        "type": "p",
+        "text": "Payments are a bit like shipping a package: you only see \"order placed\" and \"delivered,\" but in between there's pickup, sorting, long-haul transport, and last-mile delivery. Each step has someone doing the work, and each takes a cut."
+      },
+      {
+        "type": "p",
+        "text": "The four roles behind a card payment are the payment world's \"pickup, sorting, transport, last-mile.\" They map to:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Issuer (Issuing Bank): the bank that gave the buyer their card. The buyer's money sits here. It answers the key question — does this card have funds, is this really the cardholder, can this charge go through?",
+          "Scheme (Card Network): Visa, Mastercard, UnionPay, and so on. It doesn't touch the money itself. It's the \"highway\" and \"rulemaker\" connecting all the banks — setting standards, doing routing, making sure a card from one bank works at a terminal connected to another.",
+          "Acquirer (Acquiring Bank): the bank that signed the merchant, collecting money on their behalf. After all the back-and-forth, the money lands in the merchant's account through this bank.",
+          "Gateway & Processor: these two sit on the merchant side, forming the technical middle layer. Gateway handles \"data transport,\" securely encrypting and passing the buyer's card details into the system. Processor handles \"flow execution,\" shuttling authorization and clearing requests between all the parties."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Many companies (like Stripe) do both, which is why they often get treated as one role."
+      },
+      {
+        "type": "h2",
+        "text": "2. Four Roles, One Payment Journey"
+      },
+      {
+        "type": "p",
+        "text": "Here's what actually happens in those two seconds:"
+      },
+      {
+        "type": "p",
+        "text": "Buyer hits \"pay\" → Gateway collects and encrypts the card info → Processor initiates the authorization request → routed through the card scheme to the issuer → issuer checks balance and risk, approves or rejects → result comes back to the merchant along the same path."
+      },
+      {
+        "type": "p",
+        "text": "That only covers the \"authorization\" step. The money hasn't actually moved yet (the real charge, clearing, and settlement are in the next post). But you can already see two important things:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "First, money never goes \"directly\" from buyer to merchant. It gets relayed through four roles, and every hop takes a fee — which is the setup for the earlier hint."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Why fees are so high, post #6 will break down."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Second, every hop can get stuck. Gateway timeout, processor error, issuer risk rejection... any one of them breaks and you get that maddening \"payment failed\""
+        ]
+      },
+      {
+        "type": "p",
+        "text": "message. More hops mean more failure points."
+      },
+      {
+        "type": "h2",
+        "text": "3. Stablecoins: Compressing Four Roles Into One"
+      },
+      {
+        "type": "p",
+        "text": "Action Back to what we do every day. The stablecoin payment path is completely different:"
+      },
+      {
+        "type": "p",
+        "text": "Buyer's wallet → transfers directly to merchant's wallet → on-chain confirmation done."
+      },
+      {
+        "type": "p",
+        "text": "No issuer, no card scheme, no acquirer relay. Fewer middlemen means fewer fees, fewer failure points, and less waiting."
+      },
+      {
+        "type": "p",
+        "text": "Of course, there are always two sides (we covered this in post #3 on chargebacks): those four roles take a fee at every hop, but they also provide credit backing and dispute handling. Stablecoins remove the middlemen, and they hand that protection back to the two parties in the transaction — which is why they're a better fit for B2B, cross-border, and well-defined delivery scenarios."
+      },
+      {
+        "type": "p",
+        "text": "AllScale is built on exactly this \"middleman-free\" path: the money goes straight into a wallet the merchant controls, skipping the long relay."
+      },
+      {
+        "type": "h2",
+        "text": "Wrap-Up"
+      },
+      {
+        "type": "p",
+        "text": "Issuer: the buyer's money is here, and it approves the charge. Scheme: doesn't touch the money, connects everyone, sets the rules. Acquirer: collects on the merchant's behalf, and the money lands through it. Gateway + Processor: the tech layer on the merchant side, one transports data, the other runs the flow."
+      },
+      {
+        "type": "p",
+        "text": "One line: your money gets relayed through four roles behind the scenes, every hop takes a fee, every hop can fail — that's why traditional card payments are expensive and error-prone."
+      },
+      {
+        "type": "p",
+        "text": "Next time we pull the camera back further: after authorization, how does the money actually get \"charged,\" then \"cleared and settled\" into the merchant's account? We'll break open Auth, Capture, Clearing, and Settlement — the full lifecycle of one transaction."
+      }
+    ]
+  },
+  {
+    "order": 5,
+    "slug": "auth-capture-settlement",
+    "title": "Auth, Capture, Settlement: The full journey before the money lands in the pocket",
+    "summary": "Follow a card transaction through authorization, capture, clearing, settlement, and final merchant payout.",
+    "image": "/articles/assets/en-auth-capture-settlement.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "In the last post we followed four roles handing off an \"authorization\" in two seconds."
+      },
+      {
+        "type": "p",
+        "text": "But have you ever run into this: your phone shows \"payment successful,\" \"charged,\" and yet the merchant says \"we haven't received it\"?"
+      },
+      {
+        "type": "p",
+        "text": "The gap in the middle is the rest of the transaction's lifecycle. This post covers that final stretch."
+      },
+      {
+        "type": "h2",
+        "text": "1. One Transaction, Four Steps"
+      },
+      {
+        "type": "p",
+        "text": "Take \"card swiped\" to \"money landed\" apart, and behind it are four stages:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Authorization (Auth): the issuer confirms the card has funds, it's the real cardholder, and the charge is allowed. Then it puts a hold on the amount. Note: at this step no money actually moves. It's just reserved, kind of like the deposit you leave at a hotel.",
+          "Capture: the merchant formally initiates \"I want to take that money.\" The held amount now becomes an actual charge. Auth and Capture can be hours or days apart — many e-commerce merchants only Capture when they ship.",
+          "Clearing: everyone reconciles. The card scheme takes every transaction from that window and exchanges the details between issuer and acquirer to match them up. Note: every transaction goes through this step, but it's data moving, not money.",
+          "Settlement: this is where the money actually moves — but it doesn't move one transaction at a time. Within a settlement cycle (usually daily), the card scheme takes every transaction each bank is involved in and does Netting — calculating the net amount each bank owes or is owed, then moving just that one net figure. So a bank might have millions of transactions in a day, but only settle a single net number with each counterpart (saving the pain of moving every transaction individually). The money flows to the acquirer this way, then into the merchant's account. This is the step where the merchant actually has the money."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "2. Why \"Charged\" Doesn't Mean \"Received\""
+      },
+      {
+        "type": "p",
+        "text": "This is the key insight: the \"payment successful\" you see usually only made it to Auth or Capture. The money actually landing in the merchant's pocket has to wait for Settlement."
+      },
+      {
+        "type": "p",
+        "text": "Between them is the clearing and settlement cycle — the T+1 / T+2 you often hear about, meaning the money arrives 1 or 2 days after the transaction day. Cross-border, it's often longer. That's the truth behind \"I paid, why hasn't the merchant received it\": the money is on the road, you just can't see it."
+      },
+      {
+        "type": "p",
+        "text": "While we're here, let's revisit post #3, where we said Void and Refund are two different things. Now you can see why:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Before Capture / Settlement, the money hasn't actually moved, so you can Void the hold directly.",
+          "Once Settlement is done and the money has landed, the only path is a Refund, sending it back along the same route."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Different points in time mean different ways to reverse. That time gap also has a side effect called Float: the money has left the buyer but hasn't reached the merchant, sitting in the system in between. Whoever holds it earns interest. We'll get into this in post #8 on cross-border."
+      },
+      {
+        "type": "h2",
+        "text": "3. Stablecoins: Almost No \"Lifecycle\" at All"
+      },
+      {
+        "type": "p",
+        "text": "Back to what we do every day. On-chain stablecoin transfers basically compress those four steps into one:"
+      },
+      {
+        "type": "p",
+        "text": "Buyer's wallet sends → on-chain confirmation → merchant's wallet receives."
+      },
+      {
+        "type": "p",
+        "text": "There's no \"hold now, charge later,\" no T+1 / T+2 clearing and settlement cycle. Onchain confirmation (usually seconds to minutes) is final. The merchant has the money on the spot, and can use it on the spot. That two-day Settlement in traditional payments is a single \"block confirmation\" on-chain."
+      },
+      {
+        "type": "p",
+        "text": "Like the \"irreversibility is a double-edged sword\" from post #3, \"fast\" has two sides too. The traditional clearing and settlement cycle is slow, but that window is also an error-correction window, with room to intervene. Stablecoin T+0 settlement is very efficient, but the tradeoff is no buffer. For merchants sensitive to cash flow, especially those doing cross-border collection, \"the money lands when it lands, no more two-day wait\" is a real, tangible benefit."
+      },
+      {
+        "type": "p",
+        "text": "AllScale is built to erase that T+1 / T+2 gap between \"shows as paid\" and \"actually received.\""
+      },
+      {
+        "type": "h2",
+        "text": "Wrap-Up"
+      },
+      {
+        "type": "p",
+        "text": "Auth: the issuer confirms the charge is possible, puts a hold on the amount, no money moves yet. Capture: formally initiates the charge, the hold becomes an actual debit. Clearing: everyone reconciles, figures out who owes whom what. Settlement: money actually lands in the merchant's account, typically T+1 / T+2."
+      },
+      {
+        "type": "p",
+        "text": "One line: \"charged\" isn't \"received.\" Traditional payments go through four steps and take a day or two to actually land. Stablecoins do it in almost one step."
+      },
+      {
+        "type": "p",
+        "text": "Next time we'll answer the question left hanging since post #4: every role on that path takes a cut, so what's your fee actually made of, and who's taking what? We'll break open MDR, Interchange, and Scheme fee — all the pieces hidden behind that fee rate."
+      }
+    ]
+  },
+  {
+    "order": 6,
+    "slug": "card-vs-stablecoin-fees",
+    "title": "A 100-yuan cup of coffee: card vs stablecoin, how much less does the merchant actually get?",
+    "summary": "Use a concrete purchase to unpack MDR, interchange, network fees, acquirer markup, and stablecoin network costs.",
+    "image": "/articles/assets/en-card-vs-stablecoin-fees.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Part 4 broke down the four players behind a payment. Part 5 walked through the full lifecycle of one transaction. By now you've probably noticed: money passes through a lot of hands to reach the merchant, and every hand along the way skims a bit off the top."
+      },
+      {
+        "type": "p",
+        "text": "Today we lay out that \"toll\" so you can see it: a $15 coffee, customer pays $15 by card, how much does the merchant actually keep? Where do the missing dollars go?"
+      },
+      {
+        "type": "h2",
+        "text": "1. Meet the total: MDR"
+      },
+      {
+        "type": "p",
+        "text": "The total fee rate a merchant pays on each card payment has a name: MDR (Merchant Discount Rate)."
+      },
+      {
+        "type": "p",
+        "text": "If this coffee has an MDR of 3%, then on the $15 the customer paid, the merchant nets $14.55, and $0.45 gets deducted."
+      },
+      {
+        "type": "p",
+        "text": "But that $0.45 doesn't go to one party. MDR is a bundled price, stuffed with three different slices that go to three different players."
+      },
+      {
+        "type": "h2",
+        "text": "2. Who gets the $0.45"
+      },
+      {
+        "type": "p",
+        "text": "Sticking with the coffee example, here's how the $0.45 splits (exact ratios vary by card type and region, this is just illustrative):"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Interchange fee: The big slice, around $0.30. This goes to the issuing bank, the bank that issued the customer's card. It takes the largest share because it carries the credit and risk (fronting the money, fraud protection, dispute handling).",
+          "Scheme fee: A small slice, around $0.05. This goes to card schemes like Visa and Mastercard, as a toll for using their \"highway.\"",
+          "Acquirer markup: The remaining $0.10 or so. This is what the acquirer or payment service provider earns, and it's the only slice that's negotiable. When you talk fees with your acquirer, this is basically what you're talking about."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "One line to remember: your fee ≈ issuer (big) + card scheme (small) + acquirer (markup)."
+      },
+      {
+        "type": "h2",
+        "text": "3. Two traps: opaque pricing, and cross-border"
+      },
+      {
+        "type": "p",
+        "text": "stacking Trap one: you may not see how the $0.45 splits."
+      },
+      {
+        "type": "p",
+        "text": "For the same 3%, there are two ways to price it:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Blended rate: three slices bundled into one flat number, like \"3% + $0.05.\""
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Simple and easy, but you can't see the breakdown, and you can't tell how much markup the acquirer added."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "IC++ (Interchange Plus Plus): three slices itemized clearly. Interchange this much, scheme fee that much, acquirer markup this much. All spelled out."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Small merchants usually go with Blended for convenience. Large merchants prefer"
+      },
+      {
+        "type": "p",
+        "text": "IC++ so they can see the numbers and negotiate."
+      },
+      {
+        "type": "p",
+        "text": "Trap two: cross-border stacks the rate higher."
+      },
+      {
+        "type": "p",
+        "text": "Domestic card payments might run under 1%. Cross-border often climbs to 3–4% or more. That's because you're layering several extra costs onto the base rate: crossborder interchange is more expensive to begin with, there's a currency conversion fee (covered in Part 8), and there may be one or two extra hops in the middle, each taking a cut."
+      },
+      {
+        "type": "p",
+        "text": "For merchants doing cross-border business, those percentage points add up to real money over a year."
+      },
+      {
+        "type": "h2",
+        "text": "4. Stablecoins: driving the toll to near zero"
+      },
+      {
+        "type": "p",
+        "text": "Back to what we do every day. Stablecoin payments don't have the issuer / scheme / acquirer stack layered on top of each other (this is the \"cutting out the middleman\" story from Part 4). So there's no interchange, no scheme fee."
+      },
+      {
+        "type": "p",
+        "text": "The main cost is the on-chain gas fee (network fee), typically a few cents flat, and largely independent of the payment size."
+      },
+      {
+        "type": "p",
+        "text": "Compare the coffee again: card payment loses $0.45; stablecoin might cost a few cents in network fees. The larger the amount, and the more cross-border you go, the wider the gap. On a $10,000 cross-border payment, card can eat $200–300; stablecoin still costs a few cents."
+      },
+      {
+        "type": "p",
+        "text": "Card fees aren't pure waste, of course. Part of that 3% pays for the issuer's risk controls, dispute handling, and consumer protection (Part 3). Stablecoins push fees to near zero, which means those \"extras\" need to come from you or your platform another way. So the low-fee model fits best where you don't rely on those extras:"
+      },
+      {
+        "type": "p",
+        "text": "B2B, cross-border, businesses with clear delivery."
+      },
+      {
+        "type": "p",
+        "text": "What AllScale does is help merchants skip this whole cascade of middlemen,"
+      },
+      {
+        "type": "p",
+        "text": "dropping cross-border collection costs from \"a few percent\" to \"a few cents in network fees.\""
+      },
+      {
+        "type": "p",
+        "text": "Recap MDR: the total fee rate per card payment. Interchange: the big slice, goes to the issuer. Scheme fee: small slice, goes to Visa/Mastercard. Acquirer markup: what the acquirer earns, and the only slice you can negotiate."
+      },
+      {
+        "type": "p",
+        "text": "One line: the $0.45 skimmed from your $15 coffee mostly went to the issuer."
+      },
+      {
+        "type": "p",
+        "text": "Stablecoins basically don't charge this toll."
+      },
+      {
+        "type": "p",
+        "text": "Next up, a scenario piece: we thread the last three articles (four players, lifecycle, fees) into one full story. A cross-border card payment, from customer clicking \"Pay\" to merchant actually receiving the money. Who's involved, how many days it takes, how much gets skimmed off."
+      }
+    ]
+  },
+  {
+    "order": 7,
+    "slug": "cross-border-card-payment",
+    "title": "The real journey of a cross-border card payment: 5 players, 6 days, 12 dollars lost",
+    "summary": "Walk through a cross-border card order and see where time, fees, FX spread, and reserves enter the journey.",
+    "image": "/articles/assets/en-cross-border-card-payment.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "The last few articles took the machine apart piece by piece: Part 4 covered the four players, Part 5 covered the lifecycle of one transaction, Part 6 broke down the fees."
+      },
+      {
+        "type": "p",
+        "text": "This one puts the pieces back together. We're going to follow a real cross-border payment from start to finish."
+      },
+      {
+        "type": "p",
+        "text": "The star is one order: Sarah, an American shopper, buys a $200 dress from a Chinese seller's direct-to-consumer site with her Visa card. We're going to track this $200: where it goes, how long it takes, and how much survives to the Chinese seller."
+      },
+      {
+        "type": "p",
+        "text": "Disclaimer: the days and fees below are rough illustrations for educational purposes."
+      },
+      {
+        "type": "p",
+        "text": "Actual numbers vary by bank, card type, and region."
+      },
+      {
+        "type": "h2",
+        "text": "1. The few seconds after clicking \"Pay\" (Day 0)"
+      },
+      {
+        "type": "p",
+        "text": "Sarah clicks \"Pay now.\" What happens in those few seconds is exactly what Parts 4 and 5 covered:"
+      },
+      {
+        "type": "p",
+        "text": "Payment gateway encrypts her card info → processor sends the authorization request → routed via Visa (card scheme) to Sarah's issuing bank (a U.S. bank) → issuer checks balance and risk, holds the $200 → auth approved, response travels back the same path in seconds."
+      },
+      {
+        "type": "p",
+        "text": "Sarah sees \"Payment successful\" on her screen. But remember the key insight from Part 5: no money has actually moved yet. It's just been held. The Chinese seller has received exactly zero at this point."
+      },
+      {
+        "type": "h2",
+        "text": "2. The next few days: capture, clearing, cross-border"
+      },
+      {
+        "type": "p",
+        "text": "transit (Days 1–5)"
+      },
+      {
+        "type": "p",
+        "text": "The seller ships the goods and formally submits a Capture. Only now does the $200 hold on Sarah's card turn into a real debit. Next comes Clearing, where Visa reconciles the transaction between the issuing bank and the acquiring bank."
+      },
+      {
+        "type": "p",
+        "text": "The real headache is the final step, Settlement, especially the \"cross-border\" part."
+      },
+      {
+        "type": "p",
+        "text": "The money needs to get from the U.S. to the Chinese seller's account. In the traditional banking system, the path usually looks like this:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Money first clears between banks on the U.S. side, then SWIFT (the global interbank messaging system, covered in Part 9) sends the cross-border instructions;",
+          "U.S. and Chinese banks mostly don't hold direct accounts with each other, so the payment routes through a third bank both sides trust. This is called a correspondent bank;",
+          "If there's no shared correspondent, you add an intermediary bank to relay the payment."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Every extra hop adds a day or two, another fee, and possibly another FX markup on currency conversion. There's no central dispatcher on this route. It's a relay race between banks, which makes it slow and opaque. Where exactly is the money right now? Often nobody can say."
+      },
+      {
+        "type": "h2",
+        "text": "3. Arrival: what the seller actually receives (around"
+      },
+      {
+        "type": "p",
+        "text": "Day 6)"
+      },
+      {
+        "type": "p",
+        "text": "About 6 business days later, the money finally lands in the Chinese seller's account."
+      },
+      {
+        "type": "p",
+        "text": "Rough math on how much got peeled off the $200 along the way:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "MDR fee: cross-border rate at 3.5%, roughly $7 deducted (Part 6);",
+          "FX spread on currency conversion: USD to RMB gets shaved once, roughly $2–3 (covered in Part 8);",
+          "Intermediary / wire transfer fees: the one or two hops in the middle skim a few more dollars."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Add it all up and the seller ends up with around $188, after waiting nearly a week."
+      },
+      {
+        "type": "p",
+        "text": "On a small $200 order, the pipeline alone costs 5–6%. Scale that up to a $10,000 order and the erosion gets ugly."
+      },
+      {
+        "type": "h2",
+        "text": "4. What the same trip looks like with stablecoins"
+      },
+      {
+        "type": "p",
+        "text": "Back to what we do every day. If Sarah paid the $200 with USDC (a stablecoin):"
+      },
+      {
+        "type": "p",
+        "text": "Her wallet sends → on-chain confirmation (seconds to minutes) → Chinese seller's wallet receives."
+      },
+      {
+        "type": "p",
+        "text": "No issuer, scheme, or acquirer relay. No SWIFT. No correspondent or intermediary banks. No T+ several days of settlement waiting. The seller receives around $199.9 (minus a few cents in on-chain network fees), and it's usable immediately."
+      },
+      {
+        "type": "p",
+        "text": "Same $200: traditional path lost about $12 and took 6 days. Stablecoin path lost a few cents and took a few minutes."
+      },
+      {
+        "type": "p",
+        "text": "To be fair, the fees layered into the traditional cross-border path pay for bank risk controls, dispute handling, and consumer protection (Part 3). Stablecoins push cost and time to a minimum, and the tradeoff is that both parties or the platform need to cover those protections themselves. That makes stablecoins a good fit for B2B, cross-border, and businesses with clear delivery, which is exactly what Sarah's order looks like."
+      },
+      {
+        "type": "p",
+        "text": "What AllScale does is turn this \"6 days, 5 players, $12 lost\" trip into \"a few minutes, peer to peer, a few cents.\""
+      },
+      {
+        "type": "p",
+        "text": "Recap"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "A cross-border card payment goes through authorization, capture, clearing, and settlement. Cross-border settlement adds SWIFT, correspondent banks, and intermediary banks in a relay.",
+          "It's slow because there's no central dispatcher, just banks handing off one after another. It's expensive because every hop charges a fee, on top of the MDR and FX spread."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Next up, we zoom in on the most hidden fee in this whole trip: the FX spread on currency conversion. The rate on the board says one thing, but after the exchange you always feel short. We'll unpack the mid-market rate and the spread to show you this \"invisible fee.\""
+      }
+    ]
+  },
+  {
+    "order": 8,
+    "slug": "fx-spread",
+    "title": "Mid-market rate vs. what you actually get: the hidden spread",
+    "summary": "Learn the difference between the mid-market rate and the quoted rate that determines your real FX cost.",
+    "image": "/articles/assets/en-fx-spread.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Part 7 walked $200 through a full cross-border trip. In the math, one line item was \"FX spread on currency conversion.\" Two or three dollars doesn't look like much, but it's the sneakiest fee of them all, because you can't actually see it."
+      },
+      {
+        "type": "p",
+        "text": "When you do FX, nobody bills you a separate \"exchange rate fee.\" It's baked into the rate itself. This article drags it out into the open."
+      },
+      {
+        "type": "p",
+        "text": "Disclaimer: the rates and amounts below are illustrative, not real quotes. Actual rates depend on the channel."
+      },
+      {
+        "type": "h2",
+        "text": "1. Mid-market rate: the \"real\" rate"
+      },
+      {
+        "type": "p",
+        "text": "Look up USD to RMB on Google or XE (xe.com, a popular currency conversion site) and you'll see something like 1 USD = 7.20 RMB. That number has a name: the midmarket rate. It's the midpoint between the \"bid\" and \"ask\" in the interbank market, and it's the closest thing to a \"real\" exchange rate."
+      },
+      {
+        "type": "p",
+        "text": "But when you actually go convert money at a bank or platform, you never get this rate. Amusingly, XE itself says so right next to its converter: the mid-market rate is for reference only, and it's not what you'll get when you actually send money. Which tells you something built-in stands between the \"real rate\" and \"the rate you get.\""
+      },
+      {
+        "type": "h2",
+        "text": "2. The spread: profit hidden in the rate"
+      },
+      {
+        "type": "p",
+        "text": "The rate a platform gives you is always a bit \"worse\" than the mid-market rate:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "You convert USD to RMB, and they give you 7.10 instead of 7.20;",
+          "You convert RMB to USD, and they charge you a bit more."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "That gap is called the spread. It doesn't show up as a \"fee.\" It's baked directly into the rate. So after your conversion you just feel \"it seems short,\" without being able to point at where. That's why it's invisible."
+      },
+      {
+        "type": "p",
+        "text": "An example (numbers illustrative): you convert $1,000. At the mid-market rate of 7.20, you'd get 7,200 RMB. But the platform gives you 7.10, so you get 7,100 RMB. The 100 RMB difference is the spread, which works out to about 1.4% in hidden fees."
+      },
+      {
+        "type": "p",
+        "text": "The sign says \"zero fees,\" but you already paid 1.4%."
+      },
+      {
+        "type": "h2",
+        "text": "3. Why \"zero fees\" should make you cautious"
+      },
+      {
+        "type": "p",
+        "text": "Lots of platforms and banks advertise \"0% FX fees,\" but they make their money on the spread. \"Zero fees\" often just means the fee moved from \"on the invoice\" to \"inside the rate.\""
+      },
+      {
+        "type": "p",
+        "text": "So when doing FX, the question isn't whether they charge a fee. It's: how far is the rate you're getting from the mid-market rate? The farther, the higher the hidden cost. Spreads move by currency pair, amount, and platform. Smaller currencies and smaller retail amounts typically get wider spreads."
+      },
+      {
+        "type": "h2",
+        "text": "4. Stablecoins: use \"digital dollars\" and skip the"
+      },
+      {
+        "type": "p",
+        "text": "round trips If the whole transaction runs on a stablecoin (say USDC, pegged to USD), and both buyer and seller price and settle in the same \"digital dollar,\" no currency conversion happens in the middle, so no spread. Back to Part 7's story: Sarah pays with USDC, the Chinese seller receives USDC, and no FX takes place along the way."
+      },
+      {
+        "type": "p",
+        "text": "If the seller eventually wants to spend the money as RMB, they still need to do one FX (that's off-ramping, covered in Part 11), which can still carry a spread. What stablecoins eliminate is all the repeated, opaque FX conversions in the middle of the pipeline, not FX itself. They compress what used to be many hidden currency conversions into the one that's actually necessary at the end, and that one you can do through a transparent channel of your choice."
+      },
+      {
+        "type": "p",
+        "text": "What AllScale does is keep as much of cross-border collection and payment on the stablecoin layer as possible, helping merchants dodge the layers of invisible spreads baked into the pipeline."
+      },
+      {
+        "type": "p",
+        "text": "Recap Mid-market rate: the real interbank rate, the one you see on Google or XE. Spread: the tweak platforms apply to the real rate. It's a hidden fee, baked into the rate."
+      },
+      {
+        "type": "p",
+        "text": "One line: \"zero fees\" doesn't mean zero cost. The real question is how far your rate is from the mid-market rate."
+      },
+      {
+        "type": "p",
+        "text": "Next up we unpack the cross-border infrastructure hinted at in Part 7: how does money actually get moved across borders? We'll cover SWIFT, correspondent banking, intermediary banks, and the \"float\" (money sitting in transit, earning interest for someone else)."
+      }
+    ]
+  },
+  {
+    "order": 9,
+    "slug": "swift-correspondent-banking",
+    "title": "SWIFT, correspondent banks, intermediary banks: what cross-border money goes through",
+    "summary": "Understand SWIFT messages, correspondent banking, Nostro/Vostro accounts, and why wires take time.",
+    "image": "/articles/assets/en-swift-correspondent-banking.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Part 7 showed a cross-border payment passing through SWIFT, correspondent banks, and intermediary banks in a slow, expensive relay. We only touched on it briefly there. This article pulls the cross-border infrastructure apart and answers one question: how does money actually get \"moved\" across borders?"
+      },
+      {
+        "type": "h2",
+        "text": "1. SWIFT doesn't move money, it moves messages"
+      },
+      {
+        "type": "p",
+        "text": "A lot of people think cross-border transfers work by \"money flying overseas via SWIFT.\" That's not what happens."
+      },
+      {
+        "type": "p",
+        "text": "SWIFT is an encrypted messaging system between banks. Think of it as the banks' private encrypted WeChat. One bank uses it to send another bank a message in a standard format: \"Please debit this from me, credit account X for amount Y.\""
+      },
+      {
+        "type": "p",
+        "text": "Notice, it transmits instructions, not money itself. No money ever flows through SWIFT's network. So how does the money actually flow?"
+      },
+      {
+        "type": "h2",
+        "text": "2. Money moves because banks hold accounts with"
+      },
+      {
+        "type": "p",
+        "text": "each other This is the most counterintuitive and most important part of the system: banks hold accounts at each other."
+      },
+      {
+        "type": "p",
+        "text": "From Bank A's point of view:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "The account it holds at Bank B is called Nostro (Latin for \"ours\") — \"our money parked with you\";",
+          "The account Bank B holds at Bank A is called Vostro (Latin for \"yours\") — \"your money parked with us.\""
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Don't worry about memorizing the names. One line to remember: banks hold deposits and accounts with each other. So a \"cross-border payment\" is really just addition and subtraction on these account balances. When Bank A receives a SWIFT instruction, it credits Bank B's account on its books and debits the payer's account."
+      },
+      {
+        "type": "p",
+        "text": "The money has \"arrived.\" No physical currency needs to fly across borders."
+      },
+      {
+        "type": "h2",
+        "text": "3. What if there's no direct link: relay chains, and the"
+      },
+      {
+        "type": "p",
+        "text": "float Which leads to the obvious question: no bank holds accounts with every other bank in the world."
+      },
+      {
+        "type": "p",
+        "text": "So when Bank A and the recipient's bank don't have a direct account relationship, the payment routes through a third bank both sides do have accounts with. That middleman is called a correspondent bank. If no shared correspondent exists, you add an intermediary bank to the relay."
+      },
+      {
+        "type": "p",
+        "text": "A payment might travel: paying bank → correspondent bank → (intermediary bank) → receiving bank. Every extra hop adds a fee, a day or two, and possibly"
+      },
+      {
+        "type": "p",
+        "text": "another spread on FX conversion (Part 8). Information in the SWIFT message may also get truncated as it's passed along, causing delays or reconciliation headaches (see Part 2 on the pain of reconciliation)."
+      },
+      {
+        "type": "p",
+        "text": "There's also something most people don't notice: float. From the moment money leaves the paying bank until it arrives at the receiving bank, it sits in some intermediary account. Whoever holds the money in transit can earn interest on it."
+      },
+      {
+        "type": "p",
+        "text": "Cross-border amounts are large and settlement is slow, so this interest is meaningful."
+      },
+      {
+        "type": "p",
+        "text": "In other words, the system is \"slow\" partly because someone doesn't want it to be fast. Slow itself makes money."
+      },
+      {
+        "type": "h2",
+        "text": "4. Stablecoins: swap the \"web of trust\" for one shared"
+      },
+      {
+        "type": "p",
+        "text": "ledger Stablecoins run on a different logic than SWIFT."
+      },
+      {
+        "type": "p",
+        "text": "An on-chain stablecoin is a \"globally usable\" asset by design. Transferring it doesn't need the Nostro/Vostro web of interbank accounts. It doesn't need SWIFT to send an instruction and wait for the other side to move balances. It doesn't need correspondent or intermediary banks to relay. The payer's wallet sends, the recipient's wallet receives, peer-to-peer in minutes. Money no longer \"sits on the road,\" and float basically disappears."
+      },
+      {
+        "type": "p",
+        "text": "Stablecoins aren't \"infrastructure-free.\" They swap the traditional \"multi-party trust + messaging + mutual accounts\" arrangement for \"one shared public ledger.\" And when you want to turn stablecoins back into local fiat to spend, you still hook into the traditional system for that step (off-ramping, covered in Part 11). What stablecoins really erase is the long relay chain and the transit wait in the middle."
+      },
+      {
+        "type": "p",
+        "text": "That's exactly what AllScale is doing: letting cross-border money travel peer-to-peer on the stablecoin layer, bypassing the whole slow, opaque relay of SWIFT, correspondent banks, and intermediary banks."
+      },
+      {
+        "type": "p",
+        "text": "Recap SWIFT: an encrypted messaging system between banks. It transmits instructions, not money. Nostro / Vostro: accounts banks hold at each other. Cross-border payments are really adjustments to these balances. Correspondent / intermediary bank: a third bank relaying between two banks that don't hold accounts with each other. Each extra hop means another fee and more delay. Float: the money sitting in transit before arrival. Whoever holds it earns interest, which is one reason the system isn't in a hurry to speed up."
+      },
+      {
+        "type": "p",
+        "text": "Next up we switch angles: after all this talk about cross-border pain, what exactly is a stablecoin, and what makes it \"stable\"? We'll cover stablecoins themselves and the Mint / Burn mechanism that pegs them to fiat."
+      }
+    ]
+  },
+  {
+    "order": 10,
+    "slug": "stablecoins",
+    "title": "What exactly is a stablecoin? And how does it stay \"stable\" at $1?",
+    "summary": "Explain stablecoin reserves, issuance, redemption, peg stability, and the risks behind the promise.",
+    "image": "/articles/assets/en-stablecoins.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "The first nine articles kept circling back to the same headaches in traditional payments: slow, expensive, and roundabout. And every time we talked about how to fix them, stablecoins showed up. This article answers the two questions head-on: what is a stablecoin, and how does it stay \"stable\"?"
+      },
+      {
+        "type": "h2",
+        "text": "1. What a stablecoin is: a \"stabilizer\" bolted onto"
+      },
+      {
+        "type": "p",
+        "text": "crypto Crypto had one big problem from day one: the prices moved too much. Bitcoin up 10% today, down 15% tomorrow was routine. That makes it hard to use as money."
+      },
+      {
+        "type": "p",
+        "text": "Nobody wants to pay salaries or settle invoices in something that might shrink overnight."
+      },
+      {
+        "type": "p",
+        "text": "Stablecoins were built to fix that. At heart they're still crypto, but the price is pegged to a stable asset, usually the US dollar, so that 1 stablecoin stays roughly equal to $1 no matter what the market does."
+      },
+      {
+        "type": "p",
+        "text": "The ones you hear about most, USDT (Tether) and USDC (Circle), fall in this camp."
+      },
+      {
+        "type": "p",
+        "text": "They keep the good parts of crypto (on-chain, peer-to-peer, global, settles in minutes) and add the stability of fiat. The \"cross-border settlement in stablecoins\" idea from earlier articles only works because of this \"stable\" part."
+      },
+      {
+        "type": "h2",
+        "text": "2. How it stays stable: reserves, plus mint and burn"
+      },
+      {
+        "type": "p",
+        "text": "The most common type (fiat-backed stablecoins) works on a very plain logic: for every stablecoin issued, the issuer holds $1 in reserves (cash, or highly liquid assets like short-term US Treasuries)."
+      },
+      {
+        "type": "p",
+        "text": "That in-and-out flow runs on two actions:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Mint: Someone hands the issuer $1, and the issuer mints 1 new stablecoin to give back, while adding the $1 to reserves. Result: 1 more stablecoin in circulation, $1 more in reserves.",
+          "Burn: Someone brings 1 stablecoin back to redeem it, the issuer returns $1, and burns that coin (permanently removed, no longer in circulation). Result: 1 fewer stablecoin, $1 less in reserves."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "In theory then, the number of stablecoins in circulation always matches the dollars in reserve. Every coin has $1 sitting behind it."
+      },
+      {
+        "type": "p",
+        "text": "That's also why the price stays near $1: you can redeem 1-for-1 anytime. If the market price drifts, say down to $0.98, someone buys cheap and redeems at $1 to pocket the spread. That arbitrage pushes the price back to $1. That pull-back force is where the peg gets its strength."
+      },
+      {
+        "type": "h2",
+        "text": "3. But not every stablecoin is equally stable"
+      },
+      {
+        "type": "p",
+        "text": "The other side of the story matters just as much: the \"stable\" part isn't automatic."
+      },
+      {
+        "type": "p",
+        "text": "It only holds if the $1 behind each coin is really there, and can actually be redeemed on demand."
+      },
+      {
+        "type": "p",
+        "text": "If the reserves aren't transparent, or the issuer misuses them, or parks them in risky"
+      },
+      {
+        "type": "p",
+        "text": "assets, the peg can break. It has happened before: in 2022, an algorithmic stablecoin called UST (backed by algorithms, not real reserves) collapsed to zero. In 2023, USDC briefly slipped below $1 when Silicon Valley Bank, one of its reserve banks, ran into trouble."
+      },
+      {
+        "type": "p",
+        "text": "So when picking a stablecoin, three things actually matter: are the reserves sufficient, are they transparent and auditable, and is the issuer regulated."
+      },
+      {
+        "type": "p",
+        "text": "USDT and USDC became market leaders on the strength of relatively transparent reserves and compliance backing."
+      },
+      {
+        "type": "h2",
+        "text": "4. So how do you actually use a stablecoin"
+      },
+      {
+        "type": "p",
+        "text": "Stablecoins solve the \"stable value\" part. But putting them to work in a business needs two more steps: how you turn your fiat into stablecoins and back into spendable money (that's the next article, on-ramp and off-ramp), and where the stablecoins live and who holds them (article 12, self-custody)."
+      },
+      {
+        "type": "p",
+        "text": "That's where AllScale fits in: merchants can send and receive cross-border payments in mainstream stablecoins, while the coins stay in a wallet the merchant controls. You get the stability and speed of stablecoins without handing your assets to a platform."
+      },
+      {
+        "type": "p",
+        "text": "Recap Stablecoin: a crypto asset pegged to fiat (usually USD), aiming for 1 coin ≈ $1, combining crypto's efficiency with fiat's stability. Mint: deposit $1, create 1 coin. Burn: redeem $1, destroy 1 coin. Circulation always matches reserves. What decides whether it stays stable: whether the reserves are sufficient, transparent, and regulated. Stability is engineered, not automatic."
+      },
+      {
+        "type": "p",
+        "text": "Next article covers the door between the crypto world and the real one: how do you turn fiat into stablecoins, and stablecoins back into fiat? That's on-ramp and off-ramp."
+      }
+    ]
+  },
+  {
+    "order": 11,
+    "slug": "on-ramp-off-ramp",
+    "title": "On-ramp and off-ramp: the two doors in and out of the crypto world",
+    "summary": "Map how fiat enters crypto, how stablecoins return to bank money, and where CEXs, DEXs, and OTC desks fit.",
+    "image": "/articles/assets/en-on-ramp-off-ramp.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Article 10 explained what a stablecoin actually is. But there's a practical question: your money starts out in fiat like CNY or USD, so you need to turn it into stablecoins to use it. And after you receive payment in stablecoins, if you want to spend it, you have to turn it back."
+      },
+      {
+        "type": "p",
+        "text": "These two doors, \"in\" and \"out,\" are what this article is about: on-ramp and off-ramp."
+      },
+      {
+        "type": "p",
+        "text": "We'll cover OTC in more depth later, this one sticks to the basics."
+      },
+      {
+        "type": "h2",
+        "text": "1. The two doors: on-ramp and off-ramp"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "On-ramp: fiat → stablecoin. You swap fiat for USDT or USDC, \"getting on\" and entering the crypto world.",
+          "Off-ramp: stablecoin → fiat. You swap USDC back into fiat and withdraw to your bank card, \"getting off\" and returning to the real world."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Article 8 covered how stablecoins can strip out the layers of FX conversion in a cross-border chain. But the last step, turning the money back into spendable fiat, doesn't go away. It happens at the off-ramp door."
+      },
+      {
+        "type": "h2",
+        "text": "2. Three common channels: CEX, DEX, OTC"
+      },
+      {
+        "type": "p",
+        "text": "There are three main paths through these doors:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Centralized exchange (CEX): like Binance or Coinbase. The most common path, somewhere between a money changer and a broker. You register, do KYC, link a card or wire in funds, and you can buy or sell stablecoins. Low barrier, deep liquidity. The trade-off is you hand over your funds and ID to the platform.",
+          "Decentralized exchange (DEX): like Uniswap. On-chain automated swaps, connect your wallet directly, nobody holds your money for you. But mostly it's \"coin for coin\" (USDC for ETH, say). Actual fiat on/off-ramp still usually routes through a CEX or another fiat channel.",
+          "Over-the-counter (OTC): not on a public exchange order book. Buyer and seller (often via an OTC desk or market maker) negotiate directly and settle large trades. Large on/off-ramps often go this route. You get one price with no order book slippage, but you have to find a counterparty you trust."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "3. These two doors are where the real friction sits"
+      },
+      {
+        "type": "p",
+        "text": "Here's the thing that gets overlooked: on-chain transfers are fast and cheap (see articles 7 and 9), but the on/off-ramp doors are exactly where the friction of traditional finance comes back."
+      },
+      {
+        "type": "p",
+        "text": "At these doors you usually run into:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Identity checks: on/off-ramps mostly require KYC/KYB (compliance gets its own treatment in article 14), sometimes with review queues.",
+          "Fees: the channel fee itself, plus the FX spread you can never fully dodge (article 8).",
+          "Limits and compliance rules: the caps and rules vary a lot by region and by channel."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "So the \"fast and cheap\" story of stablecoins mostly plays out in the middle. Once you hit the two ramps, you're back in the rules of the real world. Which is why people say: the longer you stay in stablecoins and the fewer trips you take through the ramps, the better the whole system works."
+      },
+      {
+        "type": "h2",
+        "text": "4. AllScale: fewer trips through the ramps"
+      },
+      {
+        "type": "p",
+        "text": "For a merchant doing cross-border, the ideal setup looks like this: everyday sending and receiving stays in stablecoins (fast and cheap), and you only off-ramp when you actually need fiat."
+      },
+      {
+        "type": "p",
+        "text": "That's what AllScale ties together: receipts, holding (self-custody), and on/off-ramp channels when needed, so merchants don't ping-pong between the two doors, and don't get forced through multiple on/off-ramps just to handle a single receipt. (Why self-custody matters gets its own article next, number 12.)"
+      },
+      {
+        "type": "p",
+        "text": "Recap On-ramp: fiat into stablecoin, get on. Off-ramp: stablecoin back to fiat, get off. Three channels: CEX (exchange, low barrier but custodial), DEX (on-chain, self-custody but mostly coin-for-coin), OTC (off-market, large size, single price)."
+      },
+      {
+        "type": "p",
+        "text": "One line: on-chain transfers are fast and cheap, but the on/off-ramp doors are where traditional friction returns. Fewer trips through the doors, better overall."
+      },
+      {
+        "type": "p",
+        "text": "Next article covers a concept that runs through the whole series, and sits at the core of what AllScale does: where your stablecoins actually live and who controls them, that is, custodial vs non-custodial."
+      }
+    ]
+  },
+  {
+    "order": 12,
+    "slug": "custodial-vs-non-custodial",
+    "title": "Custodial vs Non-custodial: who actually controls your stablecoins?",
+    "summary": "Use private keys and asset control to compare custodial wallets with self-custody.",
+    "image": "/articles/assets/en-custodial-vs-non-custodial.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "This article covers the word that runs through the whole series, and sits right in the AllScale name: self-custody. It answers a question that sounds simple but plenty of people haven't fully thought through: where do your stablecoins actually live, and who controls them?"
+      },
+      {
+        "type": "h2",
+        "text": "1. First, one thing to understand: the private key"
+      },
+      {
+        "type": "p",
+        "text": "Ownership on-chain doesn't work on \"username + password.\" It works on one thing: the private key."
+      },
+      {
+        "type": "p",
+        "text": "A private key is a string only the holder has. The rule is clear: whoever holds the private key can move the money, no exceptions. Your wallet address is public (like an account number, anyone can send to it), the private key is secret (the actual control)."
+      },
+      {
+        "type": "h2",
+        "text": "2. Custodial vs non-custodial: who holds the key"
+      },
+      {
+        "type": "p",
+        "text": "The whole difference comes down to one question: is the platform holding the private key, or are you?"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Custodial: the platform holds the private key. The balance you see on an exchange or platform is really \"a number the platform owes you on its books.\" The actual on-chain private key sits with the platform. Upside: the experience feels like a banking app, forgot-password recovery works, operations are simple. The cost is trust. You need to trust the platform to not misuse funds, not run off, not get hacked."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "The FTX collapse in 2022 was the ugly version of this: users showed balances on their accounts, but the platform had already moved the money out."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Non-custodial: only you hold the private key. The platform is just a tool, it can't touch your money. Upside: if the platform folds, gets seized, or gets hacked, nobody can take your assets. The cost is equally direct. Lose your private key or get it stolen, and nobody can help you recover it. There is no \"forgot password\" button here."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "The one-line version: custodial is \"convenient but you have to trust someone,\" self-custody is \"free but on you.\" The old saying in crypto, \"Not your keys, not your coins,\" is exactly this idea."
+      },
+      {
+        "type": "h2",
+        "text": "3. A few related wallet concepts"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Omnibus wallet: the platform uses one or a few on-chain addresses to hold funds from many users mixed together, and tracks who owns what on an internal ledger. This is the standard custodial setup. Efficient for the platform, but user funds are pooled, and there's no clean per-user ownership visible on-chain.",
+          "Hot wallet and cold wallet: hot wallets are connected to the internet, easy for daily trading but exposed to attack. Cold wallets are kept offline, safer but slower to access. Institutions typically keep most assets in cold wallets, with a smaller working balance in hot wallets.",
+          "MPC (multi-party computation): splits a private key into several parts held separately, so \"one part lost, everything gone\" doesn't happen. It's one of the key technologies that makes self-custody safer and more usable."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "4. Why AllScale put self-custody in the name"
+      },
+      {
+        "type": "p",
+        "text": "At this point the difference between AllScale and most other payment or wallet platforms should be clear: it's a self-custody stablecoin digital bank. When a merchant receives stablecoins, they go into a wallet where the merchant holds the private key. AllScale can't touch them and can't move them."
+      },
+      {
+        "type": "p",
+        "text": "For merchants this cashes out in two practical ways. First, platform-level risk of \"running off\" or \"bank run\" is mostly gone. The money was never in the platform's accounts, so there's nothing to run off with. Second, ownership on-chain is clear and publicly verifiable, instead of pooled together like in an omnibus wallet."
+      },
+      {
+        "type": "p",
+        "text": "Self-custody trades convenience for control, and moves responsibility onto the user. Keeping the private key and the seed phrase safe is on you. A good selfcustody product (including what AllScale is building) isn't about \"holding your assets for you.\" It uses tools like MPC and social recovery to reduce the \"lose the key, lose everything\" risk without ever touching your assets. Self-custody keeps its freedom, without being quite so scary."
+      },
+      {
+        "type": "p",
+        "text": "Recap Private key: whoever holds it can move the money. On-chain ownership follows the key, not accounts and passwords. Custodial: platform holds the key, convenient but requires trust in the platform (FTX being the cautionary tale). Non-custodial: only you hold the key, the platform can't take it, but if you lose it, nobody can help."
+      },
+      {
+        "type": "p",
+        "text": "One line: custodial is \"convenient but based on trust,\" self-custody is \"free but on you.\" AllScale picked the second one."
+      },
+      {
+        "type": "p",
+        "text": "That's the three pieces of the stablecoin story now in place: the stablecoin itself, on/off-ramps, and self-custody. Next article puts them together and runs them through a real cross-border business scenario, as a direct comparison with the \"6 days, $12 chewed off\" journey from article 7."
+      }
+    ]
+  },
+  {
+    "order": 13,
+    "slug": "stablecoin-cross-border-payment",
+    "title": "Same cross-border business, 6 days to 6 minutes: the stablecoin version of the trip",
+    "summary": "Replace a traditional cross-border path with stablecoins and compare speed, cost, and control.",
+    "image": "/articles/assets/en-stablecoin-cross-border-payment.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Articles 10 through 12 laid out the three pieces of the stablecoin story: the stablecoin itself, on/off-ramps, and self-custody. This article puts them together and drops them into a real business scenario, as a head-to-head with the \"6 days, $12 chewed off\" journey from article 7."
+      },
+      {
+        "type": "p",
+        "text": "Disclaimer: the days and fees below are illustrative, not real data, actual numbers vary by channel."
+      },
+      {
+        "type": "h2",
+        "text": "1. Meet Lin, and his monthly cross-border headaches"
+      },
+      {
+        "type": "p",
+        "text": "Lin runs a small cross-border services team in Shenzhen. His clients are scattered across Europe, the US, and Southeast Asia, and every month there are a dozen or so cross-border receipts. He also employs a few overseas contractors, so every month he has to pay them."
+      },
+      {
+        "type": "p",
+        "text": "The traditional route means fighting three things every month: slow receipts (client wires take three to five days, and get nibbled at every layer), messy reconciliation (which payment matched which invoice, cross-border memos often don't line up), and slow payouts (paying overseas contractors is another round of SWIFT hops and fees). The $200 journey from article 7 happens to him a dozen-plus times a month."
+      },
+      {
+        "type": "h2",
+        "text": "2. Receiving and holding: minutes to settle, money"
+      },
+      {
+        "type": "p",
+        "text": "goes straight into his own wallet This time Lin switches to AllScale for all of the above."
+      },
+      {
+        "type": "p",
+        "text": "For receiving, he sends clients a stablecoin payment link (the Checkout and Invoicing flows from articles 1 and 2). The client pays in USDC, on-chain confirmation takes minutes, and the money lands straight in a wallet where Lin holds the private key, no platform account in the middle (that's self-custody from article 12)."
+      },
+      {
+        "type": "p",
+        "text": "After the money lands, two things change that he notices quickly. First, the USDC sits in his own wallet, not on a platform, so if the platform runs into trouble or a run, his money isn't in play. Second, every receipt leaves a receipt on-chain, one payment matching one invoice, so reconciliation doesn't need a human comparing rows anymore. The pain points article 2 raised about Invoicing (which payment for which invoice, missing cross-border memos) basically disappear here."
+      },
+      {
+        "type": "h2",
+        "text": "3. Paying and off-ramping: peer-to-peer payouts, fiat"
+      },
+      {
+        "type": "p",
+        "text": "only when needed To pay overseas contractors, Lin sends stablecoins directly: peer-to-peer, settles in minutes, works the same regardless of where the contractor lives, no more SWIFTand-correspondent-bank relay from article 9."
+      },
+      {
+        "type": "p",
+        "text": "As for \"converting back to CNY,\" he worked out one thing: there's no need to offramp every single receipt. Day to day he keeps things flowing in stablecoins, and only at month-end when he actually needs to pay rent or salaries in fiat does he run one off-ramp (article 11). Fewer trips through the door means the unavoidable FX spread and channel fees get charged fewer times."
+      },
+      {
+        "type": "h2",
+        "text": "4. Head-to-head with the journey in article 7"
+      },
+      {
+        "type": "p",
+        "text": "For the same kind of cross-border flow, the two paths compare like this:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Time: traditional takes three to five days or longer, stablecoin path takes minutes.",
+          "Cost: traditional loses 3–4% per transaction across fees, FX spread, and correspondent-bank charges. Stablecoin path costs a few cents in network fees, plus a single off-ramp at the end.",
+          "Reconciliation: traditional relies on manual matching, cross-border memos often missing. Stablecoin has every transaction on-chain, one payment matches one invoice.",
+          "Ownership of funds: traditional funds move through platform or bank systems."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Stablecoin funds sit in a wallet Lin controls himself."
+      },
+      {
+        "type": "p",
+        "text": "The stablecoin path has its own caveats. The on/off-ramps still need KYC (article 14 covers that). Private keys need to be kept safe (article 12). Stablecoins themselves"
+      },
+      {
+        "type": "p",
+        "text": "carry reserve and regulatory risks (article 10). It fits businesses like Lin's, doing frequent cross-border and willing to accept the trade-offs, not every use case for every person."
+      },
+      {
+        "type": "p",
+        "text": "For Lin, the math is easy: what used to be a dozen monthly rounds of \"6 days, a few percent shaved off\" is now \"minutes, a few cents.\" That's the change AllScale is trying to bring to cross-border business."
+      },
+      {
+        "type": "p",
+        "text": "Recap Receiving: stablecoin payment link, settles in minutes, money goes into a wallet Lin controls. Holding and reconciliation: funds aren't on a platform, every transaction is on-chain, reconciliation is clean. Paying and off-ramping: peer-to-peer payouts settle in minutes, off-ramp only when fiat is actually needed."
+      },
+      {
+        "type": "p",
+        "text": "One line: stablecoins plus self-custody turn the \"slow, expensive, messy\" of crossborder into \"fast, cheap, clear,\" on the condition you accept KYC at the ramps and keep your own private keys."
+      },
+      {
+        "type": "p",
+        "text": "Next article moves into the last big block of the series: compliance. Doing crossborder and stablecoin business means you can't dodge KYC, KYB, and AML. What are they actually about, and why? We'll start from the basics."
+      }
+    ]
+  },
+  {
+    "order": 14,
+    "slug": "kyc-kyb-aml",
+    "title": "KYC, KYB, AML: what are these compliance words actually trying to do?",
+    "summary": "Separate customer identity checks, business verification, and anti-money-laundering monitoring.",
+    "image": "/articles/assets/en-kyc-kyb-aml.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "The first thirteen articles were all about \"how to collect money faster and cheaper.\""
+      },
+      {
+        "type": "p",
+        "text": "But there's a cluster of words you can't dodge if you're doing cross-border or stablecoin business. A lot of people wince at the mention, and some who brush them off early end up learning the hard way."
+      },
+      {
+        "type": "p",
+        "text": "Those words are KYA, KYC, KYB, KYT, AML. In this article we'll sort them out: what each one is trying to do, why it matters, and why for a stablecoin business, compliance is actually a plus, not a minus."
+      },
+      {
+        "type": "h2",
+        "text": "1. AML: The Umbrella Goal Behind Every Compliance"
+      },
+      {
+        "type": "p",
+        "text": "Move Start with the biggest word in compliance: AML (Anti-Money Laundering)."
+      },
+      {
+        "type": "p",
+        "text": "It's the master frame for the whole compliance stack. The goal, in one sentence: stop criminal proceeds — from drug money, fraud, bribery, and the rest — from being \"washed\" through the financial system into money that looks clean."
+      },
+      {
+        "type": "p",
+        "text": "Laws in every country require financial institutions, including payment and stablecoin businesses, to shoulder AML duties."
+      },
+      {
+        "type": "p",
+        "text": "The K-words below are all specific tactics that serve AML. Alongside AML you'll often hear CFT (Counter-Terrorist Financing), which aims to keep funds from being channeled into terrorist activity."
+      },
+      {
+        "type": "h2",
+        "text": "2. KYC and KYB: Nail Down \"Who You Are\" First"
+      },
+      {
+        "type": "p",
+        "text": "Step one in AML is not letting anonymous bad actors slip in. So identity gets verified at account opening:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "KYC (Know Your Customer): Verify the real identity of an individual customer."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Are you a real person, are you the person you claim to be, are you on any sanctions list. Handing over your ID or passport at signup and doing a face scan — that's KYC."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "KYB (Know Your Business): Same thing, but for a company. Verify the business actually exists, who the UBO (Ultimate Beneficial Owner) really is, and whether the business is legitimate."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Put simply, KYC checks individuals, KYB checks companies. Both aim to lock down identity first."
+      },
+      {
+        "type": "h2",
+        "text": "3. KYT and KYA: Watching Transactions, Screening"
+      },
+      {
+        "type": "p",
+        "text": "Addresses"
+      },
+      {
+        "type": "p",
+        "text": "Nailing identity at signup isn't enough — bad actors can open accounts and then start misbehaving. So there's ongoing monitoring on-chain, with two tools at different levels of scrutiny:"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "KYT (Know Your Transaction): Watches transactions. Real-time monitoring for anything odd — unusually large amounts, suspicious frequency of moves in and out, exposure to high-risk addresses. When something suspicious surfaces, the institution has to file a report (that's the STR / SAR, Suspicious Activity Report).",
+          "KYA (Know Your Address): Watches addresses. Builds a risk profile for a specific wallet address — who it has moved funds with in the past, whether it's on a sanctions list, whether it's tied to mixer funds or stolen funds."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "So how do these two relate? Conceptually they're two different lenses — one on transactions, one on addresses. In practice, KYT usually absorbs KYA. A mature transaction-monitoring engine, while reviewing a transaction, will also check whether the sending and receiving addresses appear on sanctions lists or look high-risk (which is exactly what KYA does), and it'll trace the funds upstream a few hops to see if the money brushed against high-risk sources indirectly."
+      },
+      {
+        "type": "p",
+        "text": "A more accurate way to say it: KYA isn't so much a separate flow parallel to KYT as it is the \"address intelligence\" layer that KYT calls on when reviewing transactions. That also means platforms can dial the strictness up or down — KYA is the lighter touch, KYT the heavier one."
+      },
+      {
+        "type": "p",
+        "text": "Worth noting: in a stablecoin, on-chain setting, KYA and KYT are actually easier to run. On-chain transactions are public and traceable, so hiding illicit funds is much harder than in the traditional cash world."
+      },
+      {
+        "type": "h2",
+        "text": "4. Why Compliance Is a Plus for a Stablecoin"
+      },
+      {
+        "type": "p",
+        "text": "Business A lot of people misread stablecoins as something used to \"dodge regulation.\" The reality is the opposite: a stablecoin business that runs long-term, plugs into"
+      },
+      {
+        "type": "p",
+        "text": "mainstream customers and banks, and stays in the game — runs on compliance."
+      },
+      {
+        "type": "p",
+        "text": "Three reasons. First, as noted, on-chain traceability makes KYT natural, and money laundering is harder to hide. Second, compliance is what gets a platform licensed, connected to bank rails, and able to serve legitimate businesses (global licensing gets its own article — see article 16). Third, for merchants, picking a compliant platform means your funds are safer and you're less likely to get dragged down if a counterparty blows up."
+      },
+      {
+        "type": "p",
+        "text": "Compliance has a cost and a threshold: identity verification, reviews, record-keeping — all of it takes time and effort. What it buys, though, is longevity, and the ability to operate above board. For anyone serious about the business, it's a layer of protection, not a burden."
+      },
+      {
+        "type": "p",
+        "text": "AllScale operates as a self-custodial stablecoin digital bank under a regulated framework. Putting compliance up front is exactly what lets merchants' cross-border collections stay both efficient and sustainable."
+      },
+      {
+        "type": "p",
+        "text": "Recap AML (Anti-Money Laundering): The umbrella goal — keep dirty money from being washed clean. CFT (Counter-Terrorist Financing) is its twin.KYC / KYB: Identity verification at signup — KYC for individuals, KYB for companies.KYT (transaction monitoring): Ongoing watch for unusual transactions; being on-chain and traceable actually makes it easier."
+      },
+      {
+        "type": "p",
+        "text": "In one line: Compliance isn't about dodging regulation. It's the precondition for a stablecoin business to stand up in daylight and stick around."
+      },
+      {
+        "type": "p",
+        "text": "Next article: a compliance rule that's unique to crypto. When stablecoins move between platforms, regulators require the platforms to pass sender and receiver identity information to each other — that's the \"Travel Rule,\" and behind it sits the VASP (Virtual Asset Service Provider)."
+      }
+    ]
+  },
+  {
+    "order": 15,
+    "slug": "vasp-travel-rule",
+    "title": "VASP and the Travel Rule: the one compliance rule crypto can't route around",
+    "summary": "Define virtual asset service providers and why transaction sender/receiver information travels with funds.",
+    "image": "/articles/assets/en-vasp-travel-rule.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Crypto has one compliance rule that's lifted straight from the old wire-transfer playbook of traditional banking. It technically binds crypto service platforms (the VASPs we'll get to), but the effects land squarely on regular users and merchants."
+      },
+      {
+        "type": "p",
+        "text": "Plenty of people don't know it exists — until a transfer gets held up, reversed, or their account gets frozen."
+      },
+      {
+        "type": "p",
+        "text": "The rule is called the Travel Rule. This article walks through what it is, and the VASP concept that's inseparable from it."
+      },
+      {
+        "type": "h2",
+        "text": "1. FATF: Meet the \"Rule-Setter\""
+      },
+      {
+        "type": "p",
+        "text": "Where do these cross-border compliance standards come from? Mostly from one organization: FATF (Financial Action Task Force), an intergovernmental body that sets global AML and CFT standards."
+      },
+      {
+        "type": "p",
+        "text": "FATF itself isn't a law, but regulators worldwide draft and enforce their laws based on its recommendations. It doesn't govern you directly, but the practical binding force is strong. You can think of it as the global compliance \"rule-setter.\""
+      },
+      {
+        "type": "h2",
+        "text": "2. VASP: Who Has to Follow These Rules"
+      },
+      {
+        "type": "p",
+        "text": "The next term decides who bears the load: VASP (Virtual Asset Service Provider)."
+      },
+      {
+        "type": "p",
+        "text": "It refers to institutions offering crypto-related services — exchanges, wallet providers, custodians, stablecoin on/off-ramp platforms, and so on. Put simply: if you're helping other people buy, sell, hold, or move crypto assets, you're probably a VASP, and you carry compliance obligations similar to those of a traditional financial institution."
+      },
+      {
+        "type": "h2",
+        "text": "3. Travel Rule: The Old Wire-Transfer Rule, Ported On-"
+      },
+      {
+        "type": "p",
+        "text": "Chain Look at traditional banks first. The law says: when you send a wire, you have to include originator and beneficiary identity information (who's sending to whom) so funds stay traceable and auditable. That information \"travels with the money,\" hence the Travel Rule."
+      },
+      {
+        "type": "p",
+        "text": "FATF extended this rule into crypto: when virtual assets move between two VASPs and the amount crosses a certain threshold, the sending platform has to pass sender and recipient identity information to the receiving platform."
+      },
+      {
+        "type": "p",
+        "text": "The tricky part: on-chain addresses are anonymous by nature, just strings of characters that reveal nothing about who's behind them. The Travel Rule forces platforms to build a separate off-chain system for passing identity information so both sides can match records. That's one of the thorniest technical problems in crypto compliance. Sanctions screening usually rides along with it — checking whether counterparties appear on lists like OFAC's."
+      },
+      {
+        "type": "h2",
+        "text": "4. What This Means for a Stablecoin Business"
+      },
+      {
+        "type": "p",
+        "text": "For merchants, it's very concrete: whether the platform you use is a compliant VASP, and whether it actually implements the Travel Rule and sanctions screening properly, directly determines whether your money gets stuck or frozen during transfers or on/off-ramping. When you pick a platform, this deserves a serious look."
+      },
+      {
+        "type": "p",
+        "text": "For platforms, only by doing this well can you legally operate in multiple countries and regions and connect with banks and mainstream partners. It's both a barrier and a moat."
+      },
+      {
+        "type": "p",
+        "text": "Compliance has real costs, of course: collecting information, coordinating between platforms, adding a few extra steps for users. What it buys is the ability to run crossborder and stay in business long-term."
+      },
+      {
+        "type": "p",
+        "text": "AllScale operates under a regulated framework and puts the Travel Rule and sanctions screening in place up front — exactly so merchant funds can move both compliantly and without getting stuck for compliance reasons."
+      },
+      {
+        "type": "p",
+        "text": "Recap FATF: The international body that sets global AML and CFT standards — the rulesetter.VASP (Virtual Asset Service Provider): Institutions that offer crypto trading, custody, or transfer services, carrying compliance obligations.Travel Rule: When assets move between VASPs, originator and beneficiary identity information has to travel with the money — the old wire-transfer rule, ported on-chain."
+      },
+      {
+        "type": "p",
+        "text": "In one line: The Travel Rule makes crypto transfers \"named and traceable\" too. It's a gate stablecoins have to pass through to join mainstream finance."
+      },
+      {
+        "type": "p",
+        "text": "Next article closes out the whole series: a map of stablecoin and payment licenses across the world's major regions — the US, Europe, Hong Kong, Singapore, Dubai."
+      },
+      {
+        "type": "p",
+        "text": "What each one issues, how strict they are, and which \"passports\" you actually need to run a global business."
+      }
+    ]
+  },
+  {
+    "order": 16,
+    "slug": "payment-licenses",
+    "title": "Why there's no \"one license that works everywhere\" for payments",
+    "summary": "Compare territorial payment regulation across the US, EU, Hong Kong, Singapore, and Dubai.",
+    "image": "/articles/assets/en-payment-licenses.webp",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "This is the last article in the series. Over the past fifteen, we've covered how money gets collected and paid, why traditional cross-border is slow and expensive, how stablecoins speed things up and cut costs, and what compliance is trying to do. This piece answers the last question: to run a global business, which \"passports\" do you actually need? We'll lay out the licenses in the major regions as a map."
+      },
+      {
+        "type": "h2",
+        "text": "1. First, Remember One Guiding Rule: Licenses Are"
+      },
+      {
+        "type": "p",
+        "text": "Territorial In payments and stablecoins, there's no single license that works everywhere."
+      },
+      {
+        "type": "p",
+        "text": "Every country and region issues its own and does its own supervision. Wherever you want to collect and pay, wherever you want to serve customers, you need that jurisdiction's \"passport.\""
+      },
+      {
+        "type": "p",
+        "text": "That's why any global payments company you look at is really a long stack of \"multijurisdiction licenses\" — not one universal cert. Below we'll focus on five major markets."
+      },
+      {
+        "type": "h2",
+        "text": "2. The \"Passports\" of Five Major Markets"
+      },
+      {
+        "type": "ul",
+        "items": [
+          "US: Most Fragmented, Also Most Expensive At the federal level, to do a money business you first have to register with FinCEN as an MSB (Money Services Business) — but registration isn't a license. To actually move money, you have to apply state by state for an MTL (Money Transmitter License). Forty-eight states plus Washington DC, one at a time. High cost, long timelines."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "On stablecoins, the US passed its first federal stablecoin act in 2025 (the GENIUS Act), setting up a unified federal framework for stablecoin issuance for the first time."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Europe / UK: Relatively Unified The EU has two license types: EMI (Electronic Money Institution) and PI (Payment Institution). The key advantage is the \"passporting\" mechanism — get licensed in one member state and you can operate across the entire EU."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "For crypto, under the MiCA (Markets in Crypto-Assets Regulation) framework that took effect in 2024, what gets issued is the CASP (Crypto-Asset Service Provider) license."
+      },
+      {
+        "type": "p",
+        "text": "The UK went its own way after Brexit — crypto businesses have to register with the FCA (Financial Conduct Authority)."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Hong Kong: The Most Watched For stored-value payments there's the SVF (Stored Value Facility) license, and virtual asset trading platforms need the VATP (Virtual Asset Trading Platform) license from the SFC (Securities and Futures Commission)."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "The newest, most closely watched piece is Hong Kong's stablecoin licensing regime:"
+      },
+      {
+        "type": "p",
+        "text": "Hong Kong's Stablecoins Ordinance took effect in August 2025, and in April 2026 the HKMA (Hong Kong Monetary Authority) issued its first batch of stablecoin issuer licenses. The recipients were HSBC, plus Anchorpoint — a joint venture from Standard Chartered, HKT, and Animoca. The bar to get licensed is extremely high, with regulatory requirements essentially in line with traditional banking."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Singapore: Cleanly Tiered Under the PSA (Payment Services Act), licenses are issued in two tiers by business scale: MPI (Major Payment Institution) and SPI (Standard Payment Institution)."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Crypto-related business falls under the DPT (Digital Payment Token) service category inside that framework."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Dubai / UAE: Purpose-Built for Crypto Dubai set up VARA (Virtual Assets Regulatory Authority) specifically, issuing VASP (Virtual Asset Service Provider) licenses. Abu Dhabi's ADGM (Abu Dhabi Global Market) runs a separate financial licensing regime."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "3. What This Means for a Stablecoin Business"
+      },
+      {
+        "type": "p",
+        "text": "Licenses aren't wall decoration. They directly determine which markets you can legally serve and whether you can connect to local banks. How many places a platform holds licenses in basically defines the map it can cover."
+      },
+      {
+        "type": "p",
+        "text": "For merchants, when picking a platform, you need to check whether it has the right credentials in your target markets. That's directly tied to whether your money moves in and out of that region smoothly. A platform with no license in the country you're doing business in — no matter how fast or cheap it is — can be shut down by local regulators at any time."
+      },
+      {
+        "type": "p",
+        "text": "That's why the compliance topics from the last two articles (14 and 15) and the licensing map in this one, taken together, are the bedrock for whether a stablecoin business can \"go global and last.\""
+      },
+      {
+        "type": "p",
+        "text": "AllScale, as a self-custodial stablecoin digital bank, is building out the right credentials under a regulated framework — the point being to let merchants' crossborder collections legally and reliably cover more markets."
+      },
+      {
+        "type": "h2",
+        "text": "4. Sixteen Articles In, We've Actually Walked the Full"
+      },
+      {
+        "type": "p",
+        "text": "Path of One Payment Looking back: we started with the Checkout that users tap every day (article 1), moved through invoicing, refunds, the four actors behind the scenes, the lifecycle of a single transaction, and the fees taken at every hop — enough to see why traditional payments are slow, expensive, and roundabout. Then we walked into stablecoins, on/off-ramps, and self-custody, and saw a faster, cheaper path. Finally, through compliance and licensing, we saw how that path can hold up and stand up to daylight."
+      },
+      {
+        "type": "p",
+        "text": "The essence of payments hasn't really changed: move money safely and accurately from one party to another. What's changed is that we finally have a more efficient way to do this oldest of jobs."
+      },
+      {
+        "type": "p",
+        "text": "That's what AllScale is trying to do."
+      },
+      {
+        "type": "p",
+        "text": "Recap Licenses are territorial: There's no global license — you get the license of the place you're doing business in.Major markets: US (federal MSB + state MTLs, fragmented and pricey), EU (EMI / PI / MiCA, one country covers all), Hong Kong (just entered its stablecoin licensing era), Singapore (PSA tiered by scale), Dubai (VARA, purposebuilt for crypto)."
+      },
+      {
+        "type": "p",
+        "text": "In one line: Compliance and licensing aren't the enemy of a stablecoin business."
+      },
+      {
+        "type": "p",
+        "text": "They're the bedrock that lets it go global and last."
+      },
+      {
+        "type": "p",
+        "text": "That's the wrap on the \"Payment Industry Terminology\" series. The terms across all sixteen articles are compiled into a full PDF cheat sheet — from Checkout to global licensing, one file that keeps cross-border payment jargon from turning you away."
+      },
+      {
+        "type": "p",
+        "text": "Follow AllScale Chinese, DM us to join the group and pick it up, and drop by to share the potholes you've hit in cross-border collections. Thanks for coming along the whole way!"
+      }
+    ]
+  }
+]

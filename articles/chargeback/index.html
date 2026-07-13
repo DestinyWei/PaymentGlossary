@@ -1,94 +1,12 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>商户最怕的一个词：Chargeback｜AllScale</title>
-  <meta name="description" content="分清撤销、退款与拒付，以及卡支付和稳定币在交易终局性上的根本差异。">
-  <link rel="canonical" href="https://payment.0xhowe.top/articles/chargeback/">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="AllScale 支付知识库">
-  <meta property="og:title" content="商户最怕的一个词：Chargeback｜AllScale">
-  <meta property="og:description" content="分清撤销、退款与拒付，以及卡支付和稳定币在交易终局性上的根本差异。">
-  <meta property="og:url" content="https://payment.0xhowe.top/articles/chargeback/">
-  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/chargeback.webp">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/articles/styles.css">
-  <script defer src="/analytics.js" data-allscale-analytics></script>
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0; url=/zh/articles/chargeback/">
+  <link rel="canonical" href="https://payment.0xhowe.top/zh/articles/chargeback/">
+  <title>Article moved</title>
+  <script>location.replace("/zh/articles/chargeback/");</script>
 </head>
-<body>
-<header class="site-header">
-  <div class="site-header-inner">
-    <a class="brand" href="/" aria-label="AllScale 支付术语手册">
-      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
-    </a>
-    <nav class="site-nav" aria-label="主导航">
-      <a href="/">术语手册</a>
-      <a href="/articles/" class="active">专题文章</a>
-      <a class="social-link" href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">中文社媒 ↗</a>
-    </nav>
-  </div>
-</header>
-<main class="article-shell">
-  <nav class="breadcrumb" aria-label="面包屑">
-    <a href="/">术语手册</a><span>/</span><a href="/articles/">专题文章</a><span>/</span><span>第 03 篇</span>
-  </nav>
-  <article>
-    <header class="article-header">
-      <div class="article-kicker">AllScale 支付术语科普 · 第 03 篇</div>
-      <h1>商户最怕的一个词：Chargeback</h1>
-      <p class="article-deck">分清撤销、退款与拒付，以及卡支付和稳定币在交易终局性上的根本差异。</p>
-    </header>
-    <img class="article-hero-image" src="/articles/assets/chargeback.webp" alt="商户最怕的一个词：Chargeback">
-    <div class="article-body"><p>上一篇结尾我们说：收到钱，不等于万事大吉。为什么？因为在卡支付的世界里，一笔钱进了你账户，几个月后还可能被划走。</p>
-<p>这一篇讲两个让商户睡不着觉的词：Refund（退款）和 Chargeback（拒付）。顺带说清楚，为什么同样一件事，到了稳定币的世界里结局完全不同。</p>
-<h2>一、先分清：撤销、退款、拒付是三件事</h2>
-<p>钱从买家到你手里，中间有几个时间节点。在不同节点把钱退回去，叫法和后果完全不一样：</p>
-<ul><li>Void（撤销）：授权了、但还没真正扣款之前，直接取消。买家卡上被冻结的额度释放掉，等于这笔交易没发生过，最干净。</li><li>Refund（退款）：钱已经结算到你账上了，你主动把钱退回给买家。是你点头的、可控的动作。</li><li>Chargeback（拒付）：买家不找你，直接找他的发卡行说「这笔交易我不认」，发卡行强制把钱从你账户划回去。你完全被动。</li></ul>
-<p>这里出现了授权、扣款、结算几个词，是一笔卡交易的生命周期节点，第 5 篇会专门拆。这一篇你只要记住一句话：越往后，撤销越难、对商户越不利。</p>
-<figure class="article-figure"><img src="/articles/assets/chargeback-02.webp" alt="商户最怕的一个词：Chargeback：二、Chargeback 为什么让商户头疼" loading="lazy" decoding="async"></figure>
-<h2>二、Chargeback 为什么让商户头疼</h2>
-<p>Chargeback 本来是个保护消费者的好机制：卡被盗刷、东西没收到、商户耍赖，持卡人可以通过发卡行把钱追回来。</p>
-<p>听起来很合理，但这个机制的问题在于很容易被滥用：</p>
-<ul><li>恶意拒付 / 友好欺诈（Friendly Fraud）：买家明明收到了货、用了服务，却谎称「没收到」或「不是我买的」，向银行发起拒付，白嫖一单。</li><li>举证责任在商户：你要拿出发货凭证、签收记录、聊天记录去申诉，流程长、成功率还不高。</li><li>申诉输赢都要交钱：每发生一笔拒付，收单方都会向你收一笔拒付手续费，不管你最后申诉成不成功。</li><li>拒付率是条高压线：拒付率（CBR，Chargeback Rate）= 拒付笔数 ÷ 总交易笔数。一旦超过卡组织的红线（通常是 1%），你会被列入监控计划、被罚款，严重的直接被关掉收单通道——等于断了生意。</li></ul>
-<p>所以对很多商户，尤其是做跨境、卖数字商品、高客单价的，Chargeback 不是「偶尔退个款」这么轻松，而是一颗随时爆发的风险炸弹。</p>
-<p>与此同时，Visa 也推出了一个 RDR（Rapid Dispute Resolution，快速争议解决）的机制，让商户提前设好规则、自动退款，避免事情升级成正式拒付。但这本质是在旧体系上打补丁，并不能从根本上解决问题，商家依然饱受 Chargeback 风险的痛苦。</p>
-<figure class="article-figure"><img src="/articles/assets/chargeback-03.webp" alt="商户最怕的一个词：Chargeback：三、稳定币世界：不可逆是把双刃剑" loading="lazy" decoding="async"></figure>
-<h2>三、稳定币世界：不可逆是把双刃剑</h2>
-<p>链上转账有个根本特性：交易一旦确认，不可逆。没有发卡行能强制把钱划回去，也根本不存在「拒付」这个动作。</p>
-<p>这一点对商户是实打实的好处：</p>
-<p>没有 Chargeback，就没有友好欺诈，没有拒付罚款，也没有 CBR 这条高压线。收到的钱是「终局」的，不用担心几个月后被划走，现金流的确定性强很多。</p>
-<p>相反对于买家而言，他们失去了「反悔安全网」。在卡支付里，持卡人被骗、付错、遇到商户跑路，还有发卡行兜底；链上付出去的钱，协议层面没有任何人能帮他追回来。</p>
-<p>风险只是被转移了，没有消失。它从「商户怕被拒付」转移到了「买家怕被骗」。一旦遇到骗子商户，买家几乎没有自动救济的渠道。</p>
-<p>也就是说，稳定币去掉了 Chargeback 这个「麻烦」，同时也去掉了它背后的「消费者保护」。这套机制对买家的保护，不再来自支付网络本身，而要靠别的东西补上：商户信誉、平台的争议或担保机制（比如第三方托管 Escrow）、以及可追溯的链上收据。</p>
-<p>哪种更好，取决于场景：B2B、熟人交易、交付清晰的数字商品，不可逆是优点；面向陌生消费者的零售场景，就需要额外的信任和担保设计来补位。</p>
-<figure class="article-figure"><img src="/articles/assets/chargeback-04.webp" alt="商户最怕的一个词：Chargeback：四、AllScale 怎么处理" loading="lazy" decoding="async"></figure>
-<h2>四、AllScale 怎么处理</h2>
-<p>AllScale 走的是稳定币加自托管的路线，所以天然没有 Chargeback 风险。这一点和它服务的微商户、跨境收款场景是契合的——这些场景大多是 B2B 或交付明确的服务，商户最怕的恰恰就是跨境拒付。</p>
-<p>至于上面说的「买家保护缺失」，也不是无解。可追溯的链上收据（每笔交易都有据可查）、加上开单时写明的交付事由（就是上一篇 Invoicing 里的「事由」字段），本身就压缩了纠纷的模糊空间。对需要更强买家保护的场景，Escrow（第三方托管，资金满足条件才释放）是行业通行的补充方案——这块我们后面讲具体跨境场景时会展开。</p>
-<figure class="article-figure"><img src="/articles/assets/chargeback-05.webp" alt="商户最怕的一个词：Chargeback：小结" loading="lazy" decoding="async"></figure>
-<h2>小结</h2>
-<p>Void：还没扣款，直接取消，最干净。 Refund：钱已到账，你主动退，可控。Chargeback：买家绕过你直接找银行强制划款，商户被动、要交罚款，拒付率超标还会被关通道。 稳定币不可逆：消灭了拒付和友好欺诈，但也拿掉了消费者的反悔安全网——它既是优点也是责任，取决于用在什么场景。</p>
-<p>下一篇我们正式钻进「幕后」：买家点一下「支付」，这笔钱到底要经过哪些角色，才最终落到商户手里？我们会拆开 Gateway、Processor、Acquirer、Issuer 这四个一直在背后干活、你却从没见过的角色。</p></div>
-  </article>
-
-  <section class="social-cta">
-    <h2>继续关注 AllScale 支付科普</h2>
-    <p>后续文章和支付行业内容会在 AllScale 中文社媒同步发布。</p>
-    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 @allscale_zh ↗</a>
-  </section>
-  <nav class="article-pagination" aria-label="文章翻页"><a href="/articles/invoicing/"><small>上一篇</small><strong>钱还没到，账单先到——Invoicing 到底在解决什么？</strong></a><a href="/articles/payment-roles/"><small>下一篇</small><strong>为什么有时候会「支付失败」？看懂这四个角色就明白了</strong></a></nav>
-</main>
-<footer class="site-footer">
-  <div class="footer-inner">
-    <span>© 2026 AllScale · Payments Knowledge Base</span>
-    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 AllScale 中文社媒</a>
-  </div>
-</footer>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "商户最怕的一个词：Chargeback", "description": "分清撤销、退款与拒付，以及卡支付和稳定币在交易终局性上的根本差异。", "image": "https://payment.0xhowe.top/articles/assets/chargeback.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/articles/chargeback/"}</script>
-</body>
+<body><a href="/zh/articles/chargeback/">Continue</a></body>
 </html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>同一笔跨境生意，从 6 天到 6 分钟：稳定币版的旅程 | AllScale</title>
+  <meta name="description" content="把传统跨境链路替换成稳定币路径，比较时间、费用与责任边界的变化。">
+  <link rel="canonical" href="https://payment.0xhowe.top/zh/articles/stablecoin-cross-border-payment/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/stablecoin-cross-border-payment/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/stablecoin-cross-border-payment/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale 支付知识库">
+  <meta property="og:title" content="同一笔跨境生意，从 6 天到 6 分钟：稳定币版的旅程 | AllScale">
+  <meta property="og:description" content="把传统跨境链路替换成稳定币路径，比较时间、费用与责任边界的变化。">
+  <meta property="og:url" content="https://payment.0xhowe.top/zh/articles/stablecoin-cross-border-payment/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/stablecoin-cross-border-payment.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/zh/" aria-label="AllScale 术语手册">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/zh/">术语手册</a>
+      <a href="/zh/articles/" class="active">专题文章</a>
+      <a class="language-link" href="/en/articles/stablecoin-cross-border-payment/">English</a>
+      <a class="social-link" href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">中文社媒 ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/zh/">术语手册</a><span>/</span><a href="/zh/articles/">专题文章</a><span>/</span><span>13</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale 支付术语科普 · 13</div>
+      <h1>同一笔跨境生意，从 6 天到 6 分钟：稳定币版的旅程</h1>
+      <p class="article-deck">把传统跨境链路替换成稳定币路径，比较时间、费用与责任边界的变化。</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/stablecoin-cross-border-payment.webp" alt="同一笔跨境生意，从 6 天到 6 分钟：稳定币版的旅程">
+    <div class="article-body"><p>第 10 到 12 篇，我们把稳定币方案的三块拼图讲完了：稳定币本身、出入金、自托管。这一篇把它们拼起来，放进一个真实的生意场景，和第 7 篇那趟「又慢又贵、被吃掉 12 美元」的旅程正面比一比。</p>
+<p>声明：下文的天数和费用是科普示意，不代表真实数据，具体因渠道而异。</p>
+<h2>一、认识小林，和他每个月的跨境烦恼</h2>
+<p>小林在深圳带一个做跨境服务的小团队。客户散在欧美和东南亚，每月要收十几笔跨境款；同时他还雇了几个海外的外包同事，每月得给他们发钱。</p>
+<p>走传统路子，他每个月都在和三件事较劲：收款慢（客户电汇过来，三五天才到，还被层层扣费）、对账乱（哪笔到账对应哪张单，跨境备注经常对不上）、发钱也慢（给海外同事打款，又是一轮 SWIFT 接力和手续费）。第 7 篇那趟 200 美元的旅程，他每个月要经历十几次。</p>
+<figure class="article-figure"><img src="/articles/assets/stablecoin-cross-border-payment-02.webp" alt="同一笔跨境生意，从 6 天到 6 分钟：稳定币版的旅程：二、收款与持有：几分钟到账，钱直接进自己的钱包" loading="lazy" decoding="async"></figure>
+<h2>二、收款与持有：几分钟到账，钱直接进自己的钱包</h2>
+<p>这次小林改用 AllScale 来完成上述需求。</p>
+<p>收款这一步，他给客户发的是一张稳定币收款链接（就是第 1、2 篇讲的 Checkout 和 Invoicing）。客户用 USDC 付款，几分钟链上确认，钱直接进小林自己掌握私钥的钱包，不经过平台账户中转（第 12 篇的自托管）。</p>
+<p>钱到账后还有两个变化他很快就感受到了：一是这笔 USDC 在他自己钱包里，不躺在平台账上，平台跑路、挤兑都跟他的钱无关；二是每一笔收款在链上都有一条收据，一笔对一单，对账不用再靠人肉比对。第 2 篇讲 Invoicing 时说的对账痛点（哪笔钱对应哪张单、跨境备注还常缺失），到这儿就基本消失了。</p>
+<figure class="article-figure"><img src="/articles/assets/stablecoin-cross-border-payment-03.webp" alt="同一笔跨境生意，从 6 天到 6 分钟：稳定币版的旅程：三、付款与出金：发钱点对点，需要时才落地法币" loading="lazy" decoding="async"></figure>
+<h2>三、付款与出金：发钱点对点，需要时才落地法币</h2>
+<p>给海外外包同事发钱，小林直接用稳定币转账：点对点，几分钟到，对方在哪个国家都一样，不用再走第 9 篇那套 SWIFT、代理行、中转行的接力。</p>
+<p>至于「换回人民币」，他想清楚了一件事：没必要每收一笔就出金一次。日常收付他都用稳定币周转，只在月底真正要把一部分钱落地、交房租发工资时，才走一次出金（off-ramp，第 11 篇）。过门的次数少了，那道躲不掉的换汇点差和通道费，自然也就少摊了几回。</p>
+<figure class="article-figure"><img src="/articles/assets/stablecoin-cross-border-payment-04.webp" alt="同一笔跨境生意，从 6 天到 6 分钟：稳定币版的旅程：四、和第 7 篇那趟旅程，正面比一比" loading="lazy" decoding="async"></figure>
+<h2>四、和第 7 篇那趟旅程，正面比一比</h2>
+<p>同一类跨境收付，两条路的差别大致是这样：</p>
+<ul><li>时间：传统路径三五天甚至更久；稳定币路径几分钟。</li><li>成本：传统路径一笔被 3% 到 4% 的手续费、汇率点差、中转费层层磨损；稳定币路径只需要几分钱的链上网络费，加上最后出金那一次的成本。</li><li>对账：传统靠人肉核对、跨境备注还常丢；稳定币每笔交易链上可查，一笔对一单。</li><li>资金归属：传统资金在平台或银行体系里转；稳定币的钱在小林自己掌握私钥的钱包里。</li></ul>
+<p>但稳定币路径也有需要注意的地方：出入金那两道门仍然要做实名（KYC，第 14 篇讲）；私钥得自己保管好（第 12 篇）；稳定币本身也会有储备和监管层面的风险（第 10 篇）。它最适合的，是像小林这样本来就高频跨境、愿意接受这些前提的生意，而不是所有人、所有场景。</p>
+<p>对小林来说，账可以算得很清楚：以前每月十几趟「6 天、被磨掉几个点」的折腾，现在变成了「几分钟、几分钱」。这就是 AllScale 想给跨境生意带来的改变。</p>
+<figure class="article-figure"><img src="/articles/assets/stablecoin-cross-border-payment-05.webp" alt="同一笔跨境生意，从 6 天到 6 分钟：稳定币版的旅程：小结" loading="lazy" decoding="async"></figure>
+<h2>小结</h2>
+<p>收款：稳定币链接收款，几分钟到账，钱进自己掌握私钥的钱包。持有与对账：钱不在平台账上，每笔链上有据，对账清晰。付款与出金：发钱点对点几分钟到，只在需要落地法币时才出金一次。</p>
+<p>一句话：稳定币 + 自托管，把跨境收付的「慢、贵、乱」压成了「快、省、清楚」——前提是接受出入金实名、自己保管私钥这些门槛。</p>
+<p>下一篇我们进入整个系列的最后一大块：合规。做跨境和稳定币生意，绕不开 KYC、KYB、AML 这些词，它们到底在管什么、为什么管？我们从合规的基础概念讲起。</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>继续关注 AllScale 支付科普</h2>
+    <p>后续文章和支付行业内容会在 AllScale 中文社媒同步发布。</p>
+    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 @allscale_zh ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/zh/articles/custodial-vs-non-custodial/"><small>上一篇</small><strong>Custodial vs Non-custodial：你的稳定币到底归谁管？</strong></a><a href="/zh/articles/kyc-kyb-aml/"><small>下一篇</small><strong>KYC、KYB、AML：合规这些词，到底在管什么？</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 AllScale 中文社媒</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "同一笔跨境生意，从 6 天到 6 分钟：稳定币版的旅程", "description": "把传统跨境链路替换成稳定币路径，比较时间、费用与责任边界的变化。", "image": "https://payment.0xhowe.top/articles/assets/stablecoin-cross-border-payment.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/zh/articles/stablecoin-cross-border-payment/", "inLanguage": "zh-CN"}</script>
+</body>
+</html>

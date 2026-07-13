@@ -97,7 +97,18 @@ img {
   color: var(--green-dark);
 }
 
+.site-nav .language-link {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 7px 11px;
+  color: var(--green-dark);
+}
+
 .site-nav .social-link:hover {
+  border-color: var(--green);
+}
+
+.site-nav .language-link:hover {
   border-color: var(--green);
 }
 

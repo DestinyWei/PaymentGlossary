@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mid-market rate vs. what you actually get: the hidden spread | AllScale</title>
+  <meta name="description" content="Learn the difference between the mid-market rate and the quoted rate that determines your real FX cost.">
+  <link rel="canonical" href="https://payment.0xhowe.top/en/articles/fx-spread/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/fx-spread/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/fx-spread/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale Payments Knowledge Base">
+  <meta property="og:title" content="Mid-market rate vs. what you actually get: the hidden spread | AllScale">
+  <meta property="og:description" content="Learn the difference between the mid-market rate and the quoted rate that determines your real FX cost.">
+  <meta property="og:url" content="https://payment.0xhowe.top/en/articles/fx-spread/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/en-fx-spread.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/en/" aria-label="AllScale Glossary">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/en/">Glossary</a>
+      <a href="/en/articles/" class="active">Articles</a>
+      <a class="language-link" href="/zh/articles/fx-spread/">中文</a>
+      <a class="social-link" href="https://x.com/allscale" target="_blank" rel="noreferrer">AllScale ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/en/">Glossary</a><span>/</span><a href="/en/articles/">Articles</a><span>/</span><span>08</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale Payment Glossary · 08</div>
+      <h1>Mid-market rate vs. what you actually get: the hidden spread</h1>
+      <p class="article-deck">Learn the difference between the mid-market rate and the quoted rate that determines your real FX cost.</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/en-fx-spread.webp" alt="Mid-market rate vs. what you actually get: the hidden spread">
+    <div class="article-body"><p>Part 7 walked $200 through a full cross-border trip. In the math, one line item was &quot;FX spread on currency conversion.&quot; Two or three dollars doesn&#x27;t look like much, but it&#x27;s the sneakiest fee of them all, because you can&#x27;t actually see it.</p>
+<p>When you do FX, nobody bills you a separate &quot;exchange rate fee.&quot; It&#x27;s baked into the rate itself. This article drags it out into the open.</p>
+<p>Disclaimer: the rates and amounts below are illustrative, not real quotes. Actual rates depend on the channel.</p>
+<h2>1. Mid-market rate: the &quot;real&quot; rate</h2>
+<p>Look up USD to RMB on Google or XE (xe.com, a popular currency conversion site) and you&#x27;ll see something like 1 USD = 7.20 RMB. That number has a name: the midmarket rate. It&#x27;s the midpoint between the &quot;bid&quot; and &quot;ask&quot; in the interbank market, and it&#x27;s the closest thing to a &quot;real&quot; exchange rate.</p>
+<p>But when you actually go convert money at a bank or platform, you never get this rate. Amusingly, XE itself says so right next to its converter: the mid-market rate is for reference only, and it&#x27;s not what you&#x27;ll get when you actually send money. Which tells you something built-in stands between the &quot;real rate&quot; and &quot;the rate you get.&quot;</p>
+<h2>2. The spread: profit hidden in the rate</h2>
+<p>The rate a platform gives you is always a bit &quot;worse&quot; than the mid-market rate:</p>
+<ul><li>You convert USD to RMB, and they give you 7.10 instead of 7.20;</li><li>You convert RMB to USD, and they charge you a bit more.</li></ul>
+<p>That gap is called the spread. It doesn&#x27;t show up as a &quot;fee.&quot; It&#x27;s baked directly into the rate. So after your conversion you just feel &quot;it seems short,&quot; without being able to point at where. That&#x27;s why it&#x27;s invisible.</p>
+<p>An example (numbers illustrative): you convert $1,000. At the mid-market rate of 7.20, you&#x27;d get 7,200 RMB. But the platform gives you 7.10, so you get 7,100 RMB. The 100 RMB difference is the spread, which works out to about 1.4% in hidden fees.</p>
+<p>The sign says &quot;zero fees,&quot; but you already paid 1.4%.</p>
+<h2>3. Why &quot;zero fees&quot; should make you cautious</h2>
+<p>Lots of platforms and banks advertise &quot;0% FX fees,&quot; but they make their money on the spread. &quot;Zero fees&quot; often just means the fee moved from &quot;on the invoice&quot; to &quot;inside the rate.&quot;</p>
+<p>So when doing FX, the question isn&#x27;t whether they charge a fee. It&#x27;s: how far is the rate you&#x27;re getting from the mid-market rate? The farther, the higher the hidden cost. Spreads move by currency pair, amount, and platform. Smaller currencies and smaller retail amounts typically get wider spreads.</p>
+<h2>4. Stablecoins: use &quot;digital dollars&quot; and skip the</h2>
+<p>round trips If the whole transaction runs on a stablecoin (say USDC, pegged to USD), and both buyer and seller price and settle in the same &quot;digital dollar,&quot; no currency conversion happens in the middle, so no spread. Back to Part 7&#x27;s story: Sarah pays with USDC, the Chinese seller receives USDC, and no FX takes place along the way.</p>
+<p>If the seller eventually wants to spend the money as RMB, they still need to do one FX (that&#x27;s off-ramping, covered in Part 11), which can still carry a spread. What stablecoins eliminate is all the repeated, opaque FX conversions in the middle of the pipeline, not FX itself. They compress what used to be many hidden currency conversions into the one that&#x27;s actually necessary at the end, and that one you can do through a transparent channel of your choice.</p>
+<p>What AllScale does is keep as much of cross-border collection and payment on the stablecoin layer as possible, helping merchants dodge the layers of invisible spreads baked into the pipeline.</p>
+<p>Recap Mid-market rate: the real interbank rate, the one you see on Google or XE. Spread: the tweak platforms apply to the real rate. It&#x27;s a hidden fee, baked into the rate.</p>
+<p>One line: &quot;zero fees&quot; doesn&#x27;t mean zero cost. The real question is how far your rate is from the mid-market rate.</p>
+<p>Next up we unpack the cross-border infrastructure hinted at in Part 7: how does money actually get moved across borders? We&#x27;ll cover SWIFT, correspondent banking, intermediary banks, and the &quot;float&quot; (money sitting in transit, earning interest for someone else).</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>Keep learning with AllScale</h2>
+    <p>Future articles and payment education updates will be published through AllScale channels.</p>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/en/articles/cross-border-card-payment/"><small>Previous</small><strong>The real journey of a cross-border card payment: 5 players, 6 days, 12 dollars lost</strong></a><a href="/en/articles/swift-correspondent-banking/"><small>Next</small><strong>SWIFT, correspondent banks, intermediary banks: what cross-border money goes through</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Mid-market rate vs. what you actually get: the hidden spread", "description": "Learn the difference between the mid-market rate and the quoted rate that determines your real FX cost.", "image": "https://payment.0xhowe.top/articles/assets/en-fx-spread.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/en/articles/fx-spread/", "inLanguage": "en"}</script>
+</body>
+</html>

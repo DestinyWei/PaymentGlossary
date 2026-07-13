@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>为什么有时候会「支付失败」？看懂这四个角色就明白了 | AllScale</title>
+  <meta name="description" content="拆解持卡人、发卡行、卡组织、收单行和商户，找到支付失败发生的位置。">
+  <link rel="canonical" href="https://payment.0xhowe.top/zh/articles/payment-roles/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/payment-roles/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/payment-roles/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale 支付知识库">
+  <meta property="og:title" content="为什么有时候会「支付失败」？看懂这四个角色就明白了 | AllScale">
+  <meta property="og:description" content="拆解持卡人、发卡行、卡组织、收单行和商户，找到支付失败发生的位置。">
+  <meta property="og:url" content="https://payment.0xhowe.top/zh/articles/payment-roles/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/payment-roles.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/zh/" aria-label="AllScale 术语手册">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/zh/">术语手册</a>
+      <a href="/zh/articles/" class="active">专题文章</a>
+      <a class="language-link" href="/en/articles/payment-roles/">English</a>
+      <a class="social-link" href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">中文社媒 ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/zh/">术语手册</a><span>/</span><a href="/zh/articles/">专题文章</a><span>/</span><span>04</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale 支付术语科普 · 04</div>
+      <h1>为什么有时候会「支付失败」？看懂这四个角色就明白了</h1>
+      <p class="article-deck">拆解持卡人、发卡行、卡组织、收单行和商户，找到支付失败发生的位置。</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/payment-roles.webp" alt="为什么有时候会「支付失败」？看懂这四个角色就明白了">
+    <div class="article-body"><p>前三篇我们一直在讲「前台」—— 你看得见的收银台、账单、退款。这一篇正式钻进「幕后」。</p>
+<p>你在收银台点一下「支付」，到钱进商户账户，整个过程通常不到两秒。但就在这两秒里，你的钱在背后接力经过了至少四个角色，今天我们来把他们一个一个给大家讲明白。</p>
+<h2>一、先打个比方</h2>
+<p>支付有点像寄快递：你只看到「下单」和「签收」两步，但中间其实有揽件、分拣、长途运输、末端派送一连串环节，每个环节都有专人负责，也都要收一份钱。</p>
+<p>一笔卡支付背后那四个角色，就是支付世界里的「揽件、分拣、运输、派送」。与之对应的分别是：</p>
+<ul><li>发卡行（Issuer）：给买家发银行卡的那家银行，买家的钱就存在这儿。它负责回答一个关键问题——这张卡有没有钱、是不是本人、这笔钱能不能扣。</li><li>卡组织（Scheme / Network）：Visa、Mastercard、银联这些。它本身不碰钱，扮演的是连接所有银行的「高速公路」加「规则制定者」——定标准、做路由、保证一家银行的卡能在另一家的机器上刷得通。</li><li>收单行（Acquirer）：和商户签约、帮商户收钱的那家银行。钱兜兜转转，最终是经它进到商户账户里。</li><li>支付网关与支付处理商（Gateway &amp; Processor）：这两个在商户这一侧，是技术中间层。Gateway（支付网关）负责「传数据」，把买家的卡信息安全加密后送进系统；Processor（支付处理商）负责「跑流程」，把授权、清算这些请求在各方之间来回传递。很多公司（比如 Stripe）同时干了这两件事，所以平时容易被当成一个</li></ul>
+<p>角色。</p>
+<figure class="article-figure"><img src="/articles/assets/payment-roles-02.webp" alt="为什么有时候会「支付失败」？看懂这四个角色就明白了：二、四个角色构成了一次支付的旅程" loading="lazy" decoding="async"></figure>
+<h2>二、四个角色构成了一次支付的旅程</h2>
+<p>现在看这两秒里到底发生了什么：</p>
+<p>买家点「支付」 → Gateway 收集并加密卡信息 → Processor 发起授权请求 → 经卡组织 路由到 发卡行 → 发卡行检查余额和风控，批准或拒绝 → 结果原路返回商户。</p>
+<figure class="article-figure"><img src="/articles/assets/payment-roles-03.webp" alt="为什么有时候会「支付失败」？看懂这四个角色就明白了：这里只走完了「授权」这一步，钱还没真正到账（真正的扣款、清算、结算在下一篇讲）。但你已经能看出两件重要的事：" loading="lazy" decoding="async"></figure>
+<p>这里只走完了「授权」这一步，钱还没真正到账（真正的扣款、清算、结算在下一篇讲）。但你已经能看出两件重要的事：</p>
+<ul><li>第一，钱从来不是「直接」从买家到商户的。 它在四个角色之间接力，每一跳都有人收一笔费用——这就是上一个系列埋的伏笔，手续费为什么那么高，第 6 篇会专门拆。</li><li>第二，每一跳都可能卡住。 网关超时、处理商报错、发卡行风控拒绝……任何一环出问题，你看到的就是那句让人抓狂的「支付失败」。环节越多，失败点越多。</li></ul>
+<figure class="article-figure"><img src="/articles/assets/payment-roles-04.webp" alt="为什么有时候会「支付失败」？看懂这四个角色就明白了：三、稳定币：把四个角色压成一个动作" loading="lazy" decoding="async"></figure>
+<h2>三、稳定币：把四个角色压成一个动作</h2>
+<p>回到我们每天在做的事。稳定币支付的链路，和上面这套完全不同：</p>
+<p>买家钱包 → 直接转给商户钱包 → 链上验证完成。</p>
+<p>没有发卡行、没有卡组织、没有收单行的层层接力。少了中间人，就少了费用、少了失败点、也少了等待。</p>
+<p>当然，凡事都有两面（这点我们在第 3 篇讲拒付时说过）：这四个角色虽然每一跳都收费，但他们也提供了信用背书和争议处理。稳定币去掉了中间人，也就把这部分保障交还给了交易双方自己——所以它更适合 B2B、跨境、交付清晰的场景。</p>
+<p>AllScale 做的，正是这条「去中间人」的路径：钱直接进商户自己掌控的钱包，不经过这一长串中转。</p>
+<figure class="article-figure"><img src="/articles/assets/payment-roles-05.webp" alt="为什么有时候会「支付失败」？看懂这四个角色就明白了：小结" loading="lazy" decoding="async"></figure>
+<h2>小结</h2>
+<p>发卡行 Issuer：买家的钱在这儿，负责批准扣款。 卡组织 Scheme：不碰钱，是连接各方的高速公路和规则方。 收单行 Acquirer：帮商户收钱，钱最终经它入账。 网关 Gateway + 处理商 Processor：商户侧的技术层，一个传数据、一个跑流程。</p>
+<p>一句话：你的钱在背后接力过四个角色，每一跳都收费、都可能失败——这就是传统</p>
+<p>卡支付又贵又容易出错的根源。</p>
+<p>下一篇我们把镜头继续往后拉：授权之后，钱具体是怎么被「扣下来」、再「清算结算」到商户账户的？我们会拆开 Auth、Capture、Clearing、Settlement 这一笔交易的完整生命周期。</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>继续关注 AllScale 支付科普</h2>
+    <p>后续文章和支付行业内容会在 AllScale 中文社媒同步发布。</p>
+    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 @allscale_zh ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/zh/articles/chargeback/"><small>上一篇</small><strong>商户最怕的一个词：Chargeback</strong></a><a href="/zh/articles/auth-capture-settlement/"><small>下一篇</small><strong>Auth、Capture、Settlement：钱落袋之前的完整旅程</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 AllScale 中文社媒</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "为什么有时候会「支付失败」？看懂这四个角色就明白了", "description": "拆解持卡人、发卡行、卡组织、收单行和商户，找到支付失败发生的位置。", "image": "https://payment.0xhowe.top/articles/assets/payment-roles.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/zh/articles/payment-roles/", "inLanguage": "zh-CN"}</script>
+</body>
+</html>

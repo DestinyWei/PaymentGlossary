@@ -1,95 +1,12 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>一笔跨境卡支付的真实旅程：5 个角色、6 天、少了 12 美元｜AllScale</title>
-  <meta name="description" content="跟随一笔跨境订单，看看资金经过授权、清算和银行接力后还剩多少。">
-  <link rel="canonical" href="https://payment.0xhowe.top/articles/cross-border-card-payment/">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="AllScale 支付知识库">
-  <meta property="og:title" content="一笔跨境卡支付的真实旅程：5 个角色、6 天、少了 12 美元｜AllScale">
-  <meta property="og:description" content="跟随一笔跨境订单，看看资金经过授权、清算和银行接力后还剩多少。">
-  <meta property="og:url" content="https://payment.0xhowe.top/articles/cross-border-card-payment/">
-  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/cross-border-card-payment.webp">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/articles/styles.css">
-  <script defer src="/analytics.js" data-allscale-analytics></script>
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0; url=/zh/articles/cross-border-card-payment/">
+  <link rel="canonical" href="https://payment.0xhowe.top/zh/articles/cross-border-card-payment/">
+  <title>Article moved</title>
+  <script>location.replace("/zh/articles/cross-border-card-payment/");</script>
 </head>
-<body>
-<header class="site-header">
-  <div class="site-header-inner">
-    <a class="brand" href="/" aria-label="AllScale 支付术语手册">
-      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
-    </a>
-    <nav class="site-nav" aria-label="主导航">
-      <a href="/">术语手册</a>
-      <a href="/articles/" class="active">专题文章</a>
-      <a class="social-link" href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">中文社媒 ↗</a>
-    </nav>
-  </div>
-</header>
-<main class="article-shell">
-  <nav class="breadcrumb" aria-label="面包屑">
-    <a href="/">术语手册</a><span>/</span><a href="/articles/">专题文章</a><span>/</span><span>第 07 篇</span>
-  </nav>
-  <article>
-    <header class="article-header">
-      <div class="article-kicker">AllScale 支付术语科普 · 第 07 篇</div>
-      <h1>一笔跨境卡支付的真实旅程：5 个角色、6 天、少了 12 美元</h1>
-      <p class="article-deck">跟随一笔跨境订单，看看资金经过授权、清算和银行接力后还剩多少。</p>
-    </header>
-    <img class="article-hero-image" src="/articles/assets/cross-border-card-payment.webp" alt="一笔跨境卡支付的真实旅程：5 个角色、6 天、少了 12 美元">
-    <div class="article-body"><p>前面几篇我们一块一块拆了零件：第 4 篇讲了四个角色，第 5 篇讲了一笔交易的生命周期，第 6 篇拆了手续费。这一篇我们把零件装回去，跟着一笔真实的跨境收款，从头到尾走一遍。</p>
-<p>主角是一笔订单：美国顾客 Sarah，在一家中国卖家的独立站上，买了一件 200 美元的衣服，刷的是 Visa 卡。我们就盯着这 200 美元，看它怎么走、花多久、最后剩多少，到中国卖家手里。</p>
-<p>声明：下面的天数和费用都是粗略示意，仅供科普使用，具体因银行、卡种、地区而异。</p>
-<h2>一、点击「支付」的那几秒（第 0 天）</h2>
-<p>Sarah 点下「立即支付」。这几秒里发生的事，正是第 4、5 篇讲过的：</p>
-<p>支付网关（Gateway）加密她的卡信息 → 处理商（Processor）发起授权请求 → 经 Visa（卡组织）路由到 Sarah 的发卡行（美国某银行）→ 发卡行检查余额和风控，冻结这 200 美元 → 授权通过，结果几秒内原路返回。</p>
-<p>Sarah 屏幕上跳出「支付成功」。但请记住第 5 篇的关键认知：这一步钱还没真动，只是被冻结了。 中国卖家这时一分钱都还没收到。</p>
-<figure class="article-figure"><img src="/articles/assets/cross-border-card-payment-02.webp" alt="一笔跨境卡支付的真实旅程：5 个角色、6 天、少了 12 美元：二、接下来几天：扣款、对账、跨境搬运（第 1–5 天）" loading="lazy" decoding="async"></figure>
-<h2>二、接下来几天：扣款、对账、跨境搬运（第 1–5 天）</h2>
-<p>卖家发了货，正式发起请款（Capture），Sarah 卡上被冻结的 200 美元这才变成真正的扣款。接着是清算（Clearing），Visa 在发卡行和收单行之间把这笔交易对账核实。</p>
-<p>真正的麻烦，出在最后一步结算（Settlement），尤其是「跨境」这三个字上。</p>
-<p>钱要从美国，搬到中国卖家的收款账户。传统银行体系里，这段路通常是这样走的：</p>
-<ul><li>钱先在美国这侧的银行间清算，再通过 SWIFT（全球银行间的报文系统，第 9 篇会专门讲）发出跨境指令；</li><li>美国的银行和中国的银行之间，大多没有直接的账户关系，于是要借道彼此都信任的第三家银行，这叫代理行（Correspondent banking）；</li><li>如果两边连共同的代理行都没有，还得再加一个中转行（Intermediary bank）接力。</li></ul>
-<p>每多一跳，就多一两天、多扣一笔费、还可能在转换货币时再吃一道汇率差。 这条路上没有一个「总调度」，全靠不同银行间一棒接一棒，所以又慢又不透明——钱到底走到哪了，常常谁也说不清。</p>
-<figure class="article-figure"><img src="/articles/assets/cross-border-card-payment-03.webp" alt="一笔跨境卡支付的真实旅程：5 个角色、6 天、少了 12 美元：三、到账：卖家最后拿到多少（第 6 天前后）" loading="lazy" decoding="async"></figure>
-<h2>三、到账：卖家最后拿到多少（第 6 天前后）</h2>
-<p>大约 6 个工作日后，钱终于到了中国卖家账上。我们粗略算笔账，看 200 美元一路被扒了多少层：</p>
-<ul><li>手续费（MDR）：跨境费率按 3.5% 算，扣掉约 7 美元（第 6 篇）；</li><li>货币转换的汇率差：美元换人民币时被吃掉一道，约 2–3 美元（这个第 8 篇会讲）；</li><li>中转 / 电汇杂费：跨境路上那一两跳，再扣掉若干美元。</li></ul>
-<p>各种费用算下来，卖家实际到手大概 188 美元上下，还等了将近一周。一笔 200 美元的小单，光通道成本就去掉了 5-6%；如果这是一笔 1 万美元甚至更大的订单，磨损掉的金额会更吓人。</p>
-<figure class="article-figure"><img src="/articles/assets/cross-border-card-payment-04.webp" alt="一笔跨境卡支付的真实旅程：5 个角色、6 天、少了 12 美元：四、换成稳定币，这趟旅程会变成什么样" loading="lazy" decoding="async"></figure>
-<h2>四、换成稳定币，这趟旅程会变成什么样</h2>
-<p>回到我们每天在做的事。如果 Sarah 用 USDC（一种稳定币）付这 200 美元：</p>
-<p>她的钱包转出 → 链上确认（几秒到几分钟）→ 中国卖家的钱包收到。</p>
-<p>没有发卡行、卡组织、收单行的层层接力，没有 SWIFT，没有代理行和中转行，也没有 T+ 几天的结算等待。卖家收到的是大约 199.9 美元（只扣掉几分钱的链上网络费），而且当场就能用。</p>
-<p>同一笔 200 美元：传统路径少了约 12 美元、等了 6 天；稳定币路径少了几分钱、等了几分钟。</p>
-<p>当然，传统跨境路径的那一层层费用里，包含了银行的风控、争议处理和消费者保护（第 3 篇）。稳定币把成本和时间压到极低，代价是这些保障要靠交易双方或平台自己补上。所以它最适合 B2B、跨境、交付清晰的生意，而这恰恰是 Sarah 这类跨境订单的典型案例。</p>
-<p>AllScale 做的，就是把这趟「6 天、5 个角色、少 12 美元」的旅程，换成「几分钟、点对点、几分钱」。</p>
-<figure class="article-figure"><img src="/articles/assets/cross-border-card-payment-05.webp" alt="一笔跨境卡支付的真实旅程：5 个角色、6 天、少了 12 美元：小结" loading="lazy" decoding="async"></figure>
-<h2>小结</h2>
-<ul><li>一笔跨境卡支付，要走完授权、请款、清算、结算四步，跨境结算还要经 SWIFT、代理行、中转行层层接力。</li><li>慢，是因为没有总调度，全靠银行一棒接一棒；贵，是因为每一跳都收费，外加手续费和汇率差。</li></ul>
-<p>下一篇我们会盯住这趟旅程里最隐蔽的一道扣费——货币转换的汇率差。明明汇率牌价是一个数，为什么换完总觉得少了点？我们会拆开中间汇率（Mid-market rate）和点差（Spread），看清这笔「看不见的费用」。</p></div>
-  </article>
-
-  <section class="social-cta">
-    <h2>继续关注 AllScale 支付科普</h2>
-    <p>后续文章和支付行业内容会在 AllScale 中文社媒同步发布。</p>
-    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 @allscale_zh ↗</a>
-  </section>
-  <nav class="article-pagination" aria-label="文章翻页"><a href="/articles/card-vs-stablecoin-fees/"><small>上一篇</small><strong>一杯 100 块的咖啡：刷卡和稳定币，商户到手差多少？</strong></a><a href="/articles/fx-spread/"><small>下一篇</small><strong>中间汇率 vs 你拿到的汇率：那道藏起来的点差</strong></a></nav>
-</main>
-<footer class="site-footer">
-  <div class="footer-inner">
-    <span>© 2026 AllScale · Payments Knowledge Base</span>
-    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 AllScale 中文社媒</a>
-  </div>
-</footer>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "一笔跨境卡支付的真实旅程：5 个角色、6 天、少了 12 美元", "description": "跟随一笔跨境订单，看看资金经过授权、清算和银行接力后还剩多少。", "image": "https://payment.0xhowe.top/articles/assets/cross-border-card-payment.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/articles/cross-border-card-payment/"}</script>
-</body>
+<body><a href="/zh/articles/cross-border-card-payment/">Continue</a></body>
 </html>

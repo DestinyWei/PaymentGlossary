@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KYC, KYB, AML: what are these compliance words actually trying to do? | AllScale</title>
+  <meta name="description" content="Separate customer identity checks, business verification, and anti-money-laundering monitoring.">
+  <link rel="canonical" href="https://payment.0xhowe.top/en/articles/kyc-kyb-aml/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/kyc-kyb-aml/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/kyc-kyb-aml/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale Payments Knowledge Base">
+  <meta property="og:title" content="KYC, KYB, AML: what are these compliance words actually trying to do? | AllScale">
+  <meta property="og:description" content="Separate customer identity checks, business verification, and anti-money-laundering monitoring.">
+  <meta property="og:url" content="https://payment.0xhowe.top/en/articles/kyc-kyb-aml/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/en-kyc-kyb-aml.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/en/" aria-label="AllScale Glossary">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/en/">Glossary</a>
+      <a href="/en/articles/" class="active">Articles</a>
+      <a class="language-link" href="/zh/articles/kyc-kyb-aml/">中文</a>
+      <a class="social-link" href="https://x.com/allscale" target="_blank" rel="noreferrer">AllScale ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/en/">Glossary</a><span>/</span><a href="/en/articles/">Articles</a><span>/</span><span>14</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale Payment Glossary · 14</div>
+      <h1>KYC, KYB, AML: what are these compliance words actually trying to do?</h1>
+      <p class="article-deck">Separate customer identity checks, business verification, and anti-money-laundering monitoring.</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/en-kyc-kyb-aml.webp" alt="KYC, KYB, AML: what are these compliance words actually trying to do?">
+    <div class="article-body"><p>The first thirteen articles were all about &quot;how to collect money faster and cheaper.&quot;</p>
+<p>But there&#x27;s a cluster of words you can&#x27;t dodge if you&#x27;re doing cross-border or stablecoin business. A lot of people wince at the mention, and some who brush them off early end up learning the hard way.</p>
+<p>Those words are KYA, KYC, KYB, KYT, AML. In this article we&#x27;ll sort them out: what each one is trying to do, why it matters, and why for a stablecoin business, compliance is actually a plus, not a minus.</p>
+<h2>1. AML: The Umbrella Goal Behind Every Compliance</h2>
+<p>Move Start with the biggest word in compliance: AML (Anti-Money Laundering).</p>
+<p>It&#x27;s the master frame for the whole compliance stack. The goal, in one sentence: stop criminal proceeds — from drug money, fraud, bribery, and the rest — from being &quot;washed&quot; through the financial system into money that looks clean.</p>
+<p>Laws in every country require financial institutions, including payment and stablecoin businesses, to shoulder AML duties.</p>
+<p>The K-words below are all specific tactics that serve AML. Alongside AML you&#x27;ll often hear CFT (Counter-Terrorist Financing), which aims to keep funds from being channeled into terrorist activity.</p>
+<h2>2. KYC and KYB: Nail Down &quot;Who You Are&quot; First</h2>
+<p>Step one in AML is not letting anonymous bad actors slip in. So identity gets verified at account opening:</p>
+<ul><li>KYC (Know Your Customer): Verify the real identity of an individual customer.</li></ul>
+<p>Are you a real person, are you the person you claim to be, are you on any sanctions list. Handing over your ID or passport at signup and doing a face scan — that&#x27;s KYC.</p>
+<ul><li>KYB (Know Your Business): Same thing, but for a company. Verify the business actually exists, who the UBO (Ultimate Beneficial Owner) really is, and whether the business is legitimate.</li></ul>
+<p>Put simply, KYC checks individuals, KYB checks companies. Both aim to lock down identity first.</p>
+<h2>3. KYT and KYA: Watching Transactions, Screening</h2>
+<p>Addresses</p>
+<p>Nailing identity at signup isn&#x27;t enough — bad actors can open accounts and then start misbehaving. So there&#x27;s ongoing monitoring on-chain, with two tools at different levels of scrutiny:</p>
+<ul><li>KYT (Know Your Transaction): Watches transactions. Real-time monitoring for anything odd — unusually large amounts, suspicious frequency of moves in and out, exposure to high-risk addresses. When something suspicious surfaces, the institution has to file a report (that&#x27;s the STR / SAR, Suspicious Activity Report).</li><li>KYA (Know Your Address): Watches addresses. Builds a risk profile for a specific wallet address — who it has moved funds with in the past, whether it&#x27;s on a sanctions list, whether it&#x27;s tied to mixer funds or stolen funds.</li></ul>
+<p>So how do these two relate? Conceptually they&#x27;re two different lenses — one on transactions, one on addresses. In practice, KYT usually absorbs KYA. A mature transaction-monitoring engine, while reviewing a transaction, will also check whether the sending and receiving addresses appear on sanctions lists or look high-risk (which is exactly what KYA does), and it&#x27;ll trace the funds upstream a few hops to see if the money brushed against high-risk sources indirectly.</p>
+<p>A more accurate way to say it: KYA isn&#x27;t so much a separate flow parallel to KYT as it is the &quot;address intelligence&quot; layer that KYT calls on when reviewing transactions. That also means platforms can dial the strictness up or down — KYA is the lighter touch, KYT the heavier one.</p>
+<p>Worth noting: in a stablecoin, on-chain setting, KYA and KYT are actually easier to run. On-chain transactions are public and traceable, so hiding illicit funds is much harder than in the traditional cash world.</p>
+<h2>4. Why Compliance Is a Plus for a Stablecoin</h2>
+<p>Business A lot of people misread stablecoins as something used to &quot;dodge regulation.&quot; The reality is the opposite: a stablecoin business that runs long-term, plugs into</p>
+<p>mainstream customers and banks, and stays in the game — runs on compliance.</p>
+<p>Three reasons. First, as noted, on-chain traceability makes KYT natural, and money laundering is harder to hide. Second, compliance is what gets a platform licensed, connected to bank rails, and able to serve legitimate businesses (global licensing gets its own article — see article 16). Third, for merchants, picking a compliant platform means your funds are safer and you&#x27;re less likely to get dragged down if a counterparty blows up.</p>
+<p>Compliance has a cost and a threshold: identity verification, reviews, record-keeping — all of it takes time and effort. What it buys, though, is longevity, and the ability to operate above board. For anyone serious about the business, it&#x27;s a layer of protection, not a burden.</p>
+<p>AllScale operates as a self-custodial stablecoin digital bank under a regulated framework. Putting compliance up front is exactly what lets merchants&#x27; cross-border collections stay both efficient and sustainable.</p>
+<p>Recap AML (Anti-Money Laundering): The umbrella goal — keep dirty money from being washed clean. CFT (Counter-Terrorist Financing) is its twin.KYC / KYB: Identity verification at signup — KYC for individuals, KYB for companies.KYT (transaction monitoring): Ongoing watch for unusual transactions; being on-chain and traceable actually makes it easier.</p>
+<p>In one line: Compliance isn&#x27;t about dodging regulation. It&#x27;s the precondition for a stablecoin business to stand up in daylight and stick around.</p>
+<p>Next article: a compliance rule that&#x27;s unique to crypto. When stablecoins move between platforms, regulators require the platforms to pass sender and receiver identity information to each other — that&#x27;s the &quot;Travel Rule,&quot; and behind it sits the VASP (Virtual Asset Service Provider).</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>Keep learning with AllScale</h2>
+    <p>Future articles and payment education updates will be published through AllScale channels.</p>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/en/articles/stablecoin-cross-border-payment/"><small>Previous</small><strong>Same cross-border business, 6 days to 6 minutes: the stablecoin version of the trip</strong></a><a href="/en/articles/vasp-travel-rule/"><small>Next</small><strong>VASP and the Travel Rule: the one compliance rule crypto can&#x27;t route around</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "KYC, KYB, AML: what are these compliance words actually trying to do?", "description": "Separate customer identity checks, business verification, and anti-money-laundering monitoring.", "image": "https://payment.0xhowe.top/articles/assets/en-kyc-kyb-aml.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/en/articles/kyc-kyb-aml/", "inLanguage": "en"}</script>
+</body>
+</html>

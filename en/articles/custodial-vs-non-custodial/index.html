@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Custodial vs Non-custodial: who actually controls your stablecoins? | AllScale</title>
+  <meta name="description" content="Use private keys and asset control to compare custodial wallets with self-custody.">
+  <link rel="canonical" href="https://payment.0xhowe.top/en/articles/custodial-vs-non-custodial/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/custodial-vs-non-custodial/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/custodial-vs-non-custodial/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale Payments Knowledge Base">
+  <meta property="og:title" content="Custodial vs Non-custodial: who actually controls your stablecoins? | AllScale">
+  <meta property="og:description" content="Use private keys and asset control to compare custodial wallets with self-custody.">
+  <meta property="og:url" content="https://payment.0xhowe.top/en/articles/custodial-vs-non-custodial/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/en-custodial-vs-non-custodial.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/en/" aria-label="AllScale Glossary">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/en/">Glossary</a>
+      <a href="/en/articles/" class="active">Articles</a>
+      <a class="language-link" href="/zh/articles/custodial-vs-non-custodial/">中文</a>
+      <a class="social-link" href="https://x.com/allscale" target="_blank" rel="noreferrer">AllScale ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/en/">Glossary</a><span>/</span><a href="/en/articles/">Articles</a><span>/</span><span>12</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale Payment Glossary · 12</div>
+      <h1>Custodial vs Non-custodial: who actually controls your stablecoins?</h1>
+      <p class="article-deck">Use private keys and asset control to compare custodial wallets with self-custody.</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/en-custodial-vs-non-custodial.webp" alt="Custodial vs Non-custodial: who actually controls your stablecoins?">
+    <div class="article-body"><p>This article covers the word that runs through the whole series, and sits right in the AllScale name: self-custody. It answers a question that sounds simple but plenty of people haven&#x27;t fully thought through: where do your stablecoins actually live, and who controls them?</p>
+<h2>1. First, one thing to understand: the private key</h2>
+<p>Ownership on-chain doesn&#x27;t work on &quot;username + password.&quot; It works on one thing: the private key.</p>
+<p>A private key is a string only the holder has. The rule is clear: whoever holds the private key can move the money, no exceptions. Your wallet address is public (like an account number, anyone can send to it), the private key is secret (the actual control).</p>
+<h2>2. Custodial vs non-custodial: who holds the key</h2>
+<p>The whole difference comes down to one question: is the platform holding the private key, or are you?</p>
+<ul><li>Custodial: the platform holds the private key. The balance you see on an exchange or platform is really &quot;a number the platform owes you on its books.&quot; The actual on-chain private key sits with the platform. Upside: the experience feels like a banking app, forgot-password recovery works, operations are simple. The cost is trust. You need to trust the platform to not misuse funds, not run off, not get hacked.</li></ul>
+<p>The FTX collapse in 2022 was the ugly version of this: users showed balances on their accounts, but the platform had already moved the money out.</p>
+<ul><li>Non-custodial: only you hold the private key. The platform is just a tool, it can&#x27;t touch your money. Upside: if the platform folds, gets seized, or gets hacked, nobody can take your assets. The cost is equally direct. Lose your private key or get it stolen, and nobody can help you recover it. There is no &quot;forgot password&quot; button here.</li></ul>
+<p>The one-line version: custodial is &quot;convenient but you have to trust someone,&quot; self-custody is &quot;free but on you.&quot; The old saying in crypto, &quot;Not your keys, not your coins,&quot; is exactly this idea.</p>
+<h2>3. A few related wallet concepts</h2>
+<ul><li>Omnibus wallet: the platform uses one or a few on-chain addresses to hold funds from many users mixed together, and tracks who owns what on an internal ledger. This is the standard custodial setup. Efficient for the platform, but user funds are pooled, and there&#x27;s no clean per-user ownership visible on-chain.</li><li>Hot wallet and cold wallet: hot wallets are connected to the internet, easy for daily trading but exposed to attack. Cold wallets are kept offline, safer but slower to access. Institutions typically keep most assets in cold wallets, with a smaller working balance in hot wallets.</li><li>MPC (multi-party computation): splits a private key into several parts held separately, so &quot;one part lost, everything gone&quot; doesn&#x27;t happen. It&#x27;s one of the key technologies that makes self-custody safer and more usable.</li></ul>
+<h2>4. Why AllScale put self-custody in the name</h2>
+<p>At this point the difference between AllScale and most other payment or wallet platforms should be clear: it&#x27;s a self-custody stablecoin digital bank. When a merchant receives stablecoins, they go into a wallet where the merchant holds the private key. AllScale can&#x27;t touch them and can&#x27;t move them.</p>
+<p>For merchants this cashes out in two practical ways. First, platform-level risk of &quot;running off&quot; or &quot;bank run&quot; is mostly gone. The money was never in the platform&#x27;s accounts, so there&#x27;s nothing to run off with. Second, ownership on-chain is clear and publicly verifiable, instead of pooled together like in an omnibus wallet.</p>
+<p>Self-custody trades convenience for control, and moves responsibility onto the user. Keeping the private key and the seed phrase safe is on you. A good selfcustody product (including what AllScale is building) isn&#x27;t about &quot;holding your assets for you.&quot; It uses tools like MPC and social recovery to reduce the &quot;lose the key, lose everything&quot; risk without ever touching your assets. Self-custody keeps its freedom, without being quite so scary.</p>
+<p>Recap Private key: whoever holds it can move the money. On-chain ownership follows the key, not accounts and passwords. Custodial: platform holds the key, convenient but requires trust in the platform (FTX being the cautionary tale). Non-custodial: only you hold the key, the platform can&#x27;t take it, but if you lose it, nobody can help.</p>
+<p>One line: custodial is &quot;convenient but based on trust,&quot; self-custody is &quot;free but on you.&quot; AllScale picked the second one.</p>
+<p>That&#x27;s the three pieces of the stablecoin story now in place: the stablecoin itself, on/off-ramps, and self-custody. Next article puts them together and runs them through a real cross-border business scenario, as a direct comparison with the &quot;6 days, $12 chewed off&quot; journey from article 7.</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>Keep learning with AllScale</h2>
+    <p>Future articles and payment education updates will be published through AllScale channels.</p>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/en/articles/on-ramp-off-ramp/"><small>Previous</small><strong>On-ramp and off-ramp: the two doors in and out of the crypto world</strong></a><a href="/en/articles/stablecoin-cross-border-payment/"><small>Next</small><strong>Same cross-border business, 6 days to 6 minutes: the stablecoin version of the trip</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Custodial vs Non-custodial: who actually controls your stablecoins?", "description": "Use private keys and asset control to compare custodial wallets with self-custody.", "image": "https://payment.0xhowe.top/articles/assets/en-custodial-vs-non-custodial.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/en/articles/custodial-vs-non-custodial/", "inLanguage": "en"}</script>
+</body>
+</html>

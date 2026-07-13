@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SWIFT、代理行、中转行：跨境的钱在路上经历了什么？ | AllScale</title>
+  <meta name="description" content="理解 SWIFT 报文、Nostro/Vostro 账户、代理行和在途资金如何共同运作。">
+  <link rel="canonical" href="https://payment.0xhowe.top/zh/articles/swift-correspondent-banking/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/swift-correspondent-banking/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/swift-correspondent-banking/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale 支付知识库">
+  <meta property="og:title" content="SWIFT、代理行、中转行：跨境的钱在路上经历了什么？ | AllScale">
+  <meta property="og:description" content="理解 SWIFT 报文、Nostro/Vostro 账户、代理行和在途资金如何共同运作。">
+  <meta property="og:url" content="https://payment.0xhowe.top/zh/articles/swift-correspondent-banking/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/swift-correspondent-banking.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/zh/" aria-label="AllScale 术语手册">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/zh/">术语手册</a>
+      <a href="/zh/articles/" class="active">专题文章</a>
+      <a class="language-link" href="/en/articles/swift-correspondent-banking/">English</a>
+      <a class="social-link" href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">中文社媒 ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/zh/">术语手册</a><span>/</span><a href="/zh/articles/">专题文章</a><span>/</span><span>09</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale 支付术语科普 · 09</div>
+      <h1>SWIFT、代理行、中转行：跨境的钱在路上经历了什么？</h1>
+      <p class="article-deck">理解 SWIFT 报文、Nostro/Vostro 账户、代理行和在途资金如何共同运作。</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/swift-correspondent-banking.webp" alt="SWIFT、代理行、中转行：跨境的钱在路上经历了什么？">
+    <div class="article-body"><p>第 7 篇我们看到，一笔跨境收款要经过 SWIFT、代理行、中转行层层接力，又慢又贵。当时只是一带而过，这一篇我们把这套「跨境基础设施」拆开，讲清楚一件事：钱到底是怎么「搬」过国境的？</p>
+<h2>一、SWIFT 不搬钱，它只传消息</h2>
+<p>很多人以为跨境汇款是「钱通过 SWIFT 飞到了国外」，然而事实并非如此。</p>
+<p>SWIFT 是一套银行之间的加密报文系统，你可以把它想成银行专用的「加密微信」。一家银行通过它给另一家银行发一条标准格式的消息：「请从我这边扣一笔、给某某账户打 X 元。」</p>
+<p>注意，它传的是指令，不是钱本身。钱一分都没有在 SWIFT 的网络里流动过，那钱到底是怎么流动的？</p>
+<figure class="article-figure"><img src="/articles/assets/swift-correspondent-banking-02.webp" alt="SWIFT、代理行、中转行：跨境的钱在路上经历了什么？：二、钱靠的是银行之间互相开的账户" loading="lazy" decoding="async"></figure>
+<h2>二、钱靠的是银行之间互相开的账户</h2>
+<p>这是整套体系最反直觉、也最关键的一点：银行之间，是互相在对方那里开了账户的。</p>
+<p>站在 A 银行的角度：</p>
+<ul><li>它存在 B 银行的那个账户，叫 Nostro（拉丁语「我们的」）——「我放在你那儿的钱」；</li><li>B 银行存在 A 银行的那个账户，叫 Vostro（拉丁语「你们的」）——「你放在我这儿的钱」。</li></ul>
+<p>名字记不住没关系，记住一句话就行：银行之间互相存了钱、开了户。 于是所谓「跨境付款」，本质上就是这些账户余额的加加减减，A 收到 SWIFT 指令后，在自己这边把 B 的账户加上一笔、把付款人扣掉一笔，钱就「到」了，根本不需要有真金白银飞越国境。</p>
+<figure class="article-figure"><img src="/articles/assets/swift-correspondent-banking-03.webp" alt="SWIFT、代理行、中转行：跨境的钱在路上经历了什么？：三、没有直接关系怎么办：接力，和那笔「在途资金」" loading="lazy" decoding="async"></figure>
+<h2>三、没有直接关系怎么办：接力，和那笔「在途资金」</h2>
+<p>基于上述情况，大家心中一定有个疑惑：没有哪家银行能跟全世界每一家银行都互开账户。</p>
+<p>所以当 A 银行和收款方的银行之间没有直接账户关系时，就得借道一家「双方都认识、都开了户」的第三方银行，这家中间人就叫 代理行（Correspondent banking）。如果连共同的代理行都找不到，还得再拉一个 中转行（Intermediary bank） 接力。</p>
+<p>于是一笔钱可能要走：付款行 → 代理行 →（中转行）→ 收款行。每多一跳，就多一道手续费、多一两天、还可能在某一跳换汇时被吃一道点差（第 8 篇），SWIFT 报文里的信息也可能在转手中被截断，导致到账延迟或对账困难（第 2 篇讲过的对账之痛）。</p>
+<p>这里还藏着一个很多人没意识到的东西 —— 在途资金（Float）：钱从付款行发出、</p>
+<p>还没到收款行之前，这段时间它就「躺」在某个中间账户里。谁持有这笔在途的钱，谁就能拿它去生息。 跨境金额大、到账慢，这笔利息相当可观。换句话说，这套体系「慢」，某种程度上是有人不那么希望它变快，因为慢本身就在生钱。</p>
+<figure class="article-figure"><img src="/articles/assets/swift-correspondent-banking-04.webp" alt="SWIFT、代理行、中转行：跨境的钱在路上经历了什么？：四、稳定币：把「互信网络」换成「一条公共账本」" loading="lazy" decoding="async"></figure>
+<h2>四、稳定币：把「互信网络」换成「一条公共账本」</h2>
+<p>与传统 SWIFT 系统不同，稳定币走的则是另一套逻辑。</p>
+<p>链上的稳定币本身就是一种「全球通用」的资产，转账不需要 Nostro / Vostro 这张银行互开账户的大网，不需要 SWIFT 发指令再等对方动账，也不需要代理行、中转行接力。付款方钱包转出，收款方钱包直接收到，几分钟内点对点完成。钱不再「躺在路上」，Float 这道东西也基本消失了。</p>
+<p>当然，稳定币不是「没有基础设施」，它只是把传统那套「多方互信 + 报文 + 互开账户」方案换成了「一本大家共享的公共账本」。而且当你想要把稳定币换回当地法币花出去时，仍然要接回传统体系那一道（也就是出金 / off-ramp，第 11 篇会讲）。它真正抹掉的，是中间那一长串接力和在途等待。</p>
+<p>这也正是 AllScale 在做的事：让跨境的钱在稳定币层面点对点走完，绕开 SWIFT、代理行、中转行那一整套又慢又不透明的跨境接力。</p>
+<figure class="article-figure"><img src="/articles/assets/swift-correspondent-banking-05.webp" alt="SWIFT、代理行、中转行：跨境的钱在路上经历了什么？：小结" loading="lazy" decoding="async"></figure>
+<h2>小结</h2>
+<p>SWIFT：银行间的加密报文系统，只传指令、不搬钱。Nostro / Vostro：银行之间互相开的账户，跨境付款本质是这些账户余额的增减。代理行 / 中转行：两家银行没有直接关系时，居中接力的第三方银行，每多一跳就多一道费用和延迟。在途资金 Float：钱在路上、还没到账的那段时间，谁持有谁生息——也是这套体系不急着变快的原因之一。</p>
+<p>下一篇我们换个角度：聊了这么多跨境的麻烦，稳定币到底是什么、凭什么能「稳」？我们会从头讲清稳定币本身，以及它锚定法币的铸造（Mint）与销毁（Burn）机制。</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>继续关注 AllScale 支付科普</h2>
+    <p>后续文章和支付行业内容会在 AllScale 中文社媒同步发布。</p>
+    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 @allscale_zh ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/zh/articles/fx-spread/"><small>上一篇</small><strong>中间汇率 vs 你拿到的汇率：那道藏起来的点差</strong></a><a href="/zh/articles/stablecoins/"><small>下一篇</small><strong>稳定币到底是什么？凭什么能「稳」在 1 美元？</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 AllScale 中文社媒</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SWIFT、代理行、中转行：跨境的钱在路上经历了什么？", "description": "理解 SWIFT 报文、Nostro/Vostro 账户、代理行和在途资金如何共同运作。", "image": "https://payment.0xhowe.top/articles/assets/swift-correspondent-banking.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/zh/articles/swift-correspondent-banking/", "inLanguage": "zh-CN"}</script>
+</body>
+</html>

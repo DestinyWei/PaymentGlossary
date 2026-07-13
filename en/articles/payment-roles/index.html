@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why does &quot;payment failed&quot; happen? Understand these four roles and it clicks | AllScale</title>
+  <meta name="description" content="Trace failed card payments through the cardholder, issuer, card scheme, acquirer, and merchant.">
+  <link rel="canonical" href="https://payment.0xhowe.top/en/articles/payment-roles/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/payment-roles/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/payment-roles/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale Payments Knowledge Base">
+  <meta property="og:title" content="Why does &quot;payment failed&quot; happen? Understand these four roles and it clicks | AllScale">
+  <meta property="og:description" content="Trace failed card payments through the cardholder, issuer, card scheme, acquirer, and merchant.">
+  <meta property="og:url" content="https://payment.0xhowe.top/en/articles/payment-roles/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/en-payment-roles.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/en/" aria-label="AllScale Glossary">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/en/">Glossary</a>
+      <a href="/en/articles/" class="active">Articles</a>
+      <a class="language-link" href="/zh/articles/payment-roles/">中文</a>
+      <a class="social-link" href="https://x.com/allscale" target="_blank" rel="noreferrer">AllScale ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/en/">Glossary</a><span>/</span><a href="/en/articles/">Articles</a><span>/</span><span>04</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale Payment Glossary · 04</div>
+      <h1>Why does &quot;payment failed&quot; happen? Understand these four roles and it clicks</h1>
+      <p class="article-deck">Trace failed card payments through the cardholder, issuer, card scheme, acquirer, and merchant.</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/en-payment-roles.webp" alt="Why does &quot;payment failed&quot; happen? Understand these four roles and it clicks">
+    <div class="article-body"><p>The first three posts stayed at the &quot;front counter&quot; — the Checkout, the invoice, the refund. Things you can see. This time we go backstage.</p>
+<p>You hit &quot;pay&quot; at the checkout, and less than two seconds later the money is in the merchant&#x27;s account. But in those two seconds, your money has been handed off through at least four different characters behind the scenes. Today we&#x27;ll introduce them one by one.</p>
+<h2>1. Start With an Analogy</h2>
+<p>Payments are a bit like shipping a package: you only see &quot;order placed&quot; and &quot;delivered,&quot; but in between there&#x27;s pickup, sorting, long-haul transport, and last-mile delivery. Each step has someone doing the work, and each takes a cut.</p>
+<p>The four roles behind a card payment are the payment world&#x27;s &quot;pickup, sorting, transport, last-mile.&quot; They map to:</p>
+<ul><li>Issuer (Issuing Bank): the bank that gave the buyer their card. The buyer&#x27;s money sits here. It answers the key question — does this card have funds, is this really the cardholder, can this charge go through?</li><li>Scheme (Card Network): Visa, Mastercard, UnionPay, and so on. It doesn&#x27;t touch the money itself. It&#x27;s the &quot;highway&quot; and &quot;rulemaker&quot; connecting all the banks — setting standards, doing routing, making sure a card from one bank works at a terminal connected to another.</li><li>Acquirer (Acquiring Bank): the bank that signed the merchant, collecting money on their behalf. After all the back-and-forth, the money lands in the merchant&#x27;s account through this bank.</li><li>Gateway &amp; Processor: these two sit on the merchant side, forming the technical middle layer. Gateway handles &quot;data transport,&quot; securely encrypting and passing the buyer&#x27;s card details into the system. Processor handles &quot;flow execution,&quot; shuttling authorization and clearing requests between all the parties.</li></ul>
+<p>Many companies (like Stripe) do both, which is why they often get treated as one role.</p>
+<h2>2. Four Roles, One Payment Journey</h2>
+<p>Here&#x27;s what actually happens in those two seconds:</p>
+<p>Buyer hits &quot;pay&quot; → Gateway collects and encrypts the card info → Processor initiates the authorization request → routed through the card scheme to the issuer → issuer checks balance and risk, approves or rejects → result comes back to the merchant along the same path.</p>
+<p>That only covers the &quot;authorization&quot; step. The money hasn&#x27;t actually moved yet (the real charge, clearing, and settlement are in the next post). But you can already see two important things:</p>
+<ul><li>First, money never goes &quot;directly&quot; from buyer to merchant. It gets relayed through four roles, and every hop takes a fee — which is the setup for the earlier hint.</li></ul>
+<p>Why fees are so high, post #6 will break down.</p>
+<ul><li>Second, every hop can get stuck. Gateway timeout, processor error, issuer risk rejection... any one of them breaks and you get that maddening &quot;payment failed&quot;</li></ul>
+<p>message. More hops mean more failure points.</p>
+<h2>3. Stablecoins: Compressing Four Roles Into One</h2>
+<p>Action Back to what we do every day. The stablecoin payment path is completely different:</p>
+<p>Buyer&#x27;s wallet → transfers directly to merchant&#x27;s wallet → on-chain confirmation done.</p>
+<p>No issuer, no card scheme, no acquirer relay. Fewer middlemen means fewer fees, fewer failure points, and less waiting.</p>
+<p>Of course, there are always two sides (we covered this in post #3 on chargebacks): those four roles take a fee at every hop, but they also provide credit backing and dispute handling. Stablecoins remove the middlemen, and they hand that protection back to the two parties in the transaction — which is why they&#x27;re a better fit for B2B, cross-border, and well-defined delivery scenarios.</p>
+<p>AllScale is built on exactly this &quot;middleman-free&quot; path: the money goes straight into a wallet the merchant controls, skipping the long relay.</p>
+<h2>Wrap-Up</h2>
+<p>Issuer: the buyer&#x27;s money is here, and it approves the charge. Scheme: doesn&#x27;t touch the money, connects everyone, sets the rules. Acquirer: collects on the merchant&#x27;s behalf, and the money lands through it. Gateway + Processor: the tech layer on the merchant side, one transports data, the other runs the flow.</p>
+<p>One line: your money gets relayed through four roles behind the scenes, every hop takes a fee, every hop can fail — that&#x27;s why traditional card payments are expensive and error-prone.</p>
+<p>Next time we pull the camera back further: after authorization, how does the money actually get &quot;charged,&quot; then &quot;cleared and settled&quot; into the merchant&#x27;s account? We&#x27;ll break open Auth, Capture, Clearing, and Settlement — the full lifecycle of one transaction.</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>Keep learning with AllScale</h2>
+    <p>Future articles and payment education updates will be published through AllScale channels.</p>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/en/articles/chargeback/"><small>Previous</small><strong>The one word every merchant fears: Chargeback</strong></a><a href="/en/articles/auth-capture-settlement/"><small>Next</small><strong>Auth, Capture, Settlement: The full journey before the money lands in the pocket</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Why does \"payment failed\" happen? Understand these four roles and it clicks", "description": "Trace failed card payments through the cardholder, issuer, card scheme, acquirer, and merchant.", "image": "https://payment.0xhowe.top/articles/assets/en-payment-roles.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/en/articles/payment-roles/", "inLanguage": "en"}</script>
+</body>
+</html>

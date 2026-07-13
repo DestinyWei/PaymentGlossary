@@ -1,96 +1,12 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>一杯 100 块的咖啡：刷卡和稳定币，商户到手差多少？｜AllScale</title>
-  <meta name="description" content="用一笔具体交易拆解 MDR、交换费、网络费与稳定币链上成本。">
-  <link rel="canonical" href="https://payment.0xhowe.top/articles/card-vs-stablecoin-fees/">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <meta property="og:type" content="article">
-  <meta property="og:site_name" content="AllScale 支付知识库">
-  <meta property="og:title" content="一杯 100 块的咖啡：刷卡和稳定币，商户到手差多少？｜AllScale">
-  <meta property="og:description" content="用一笔具体交易拆解 MDR、交换费、网络费与稳定币链上成本。">
-  <meta property="og:url" content="https://payment.0xhowe.top/articles/card-vs-stablecoin-fees/">
-  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/card-vs-stablecoin-fees.webp">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/articles/styles.css">
-  <script defer src="/analytics.js" data-allscale-analytics></script>
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0; url=/zh/articles/card-vs-stablecoin-fees/">
+  <link rel="canonical" href="https://payment.0xhowe.top/zh/articles/card-vs-stablecoin-fees/">
+  <title>Article moved</title>
+  <script>location.replace("/zh/articles/card-vs-stablecoin-fees/");</script>
 </head>
-<body>
-<header class="site-header">
-  <div class="site-header-inner">
-    <a class="brand" href="/" aria-label="AllScale 支付术语手册">
-      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
-    </a>
-    <nav class="site-nav" aria-label="主导航">
-      <a href="/">术语手册</a>
-      <a href="/articles/" class="active">专题文章</a>
-      <a class="social-link" href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">中文社媒 ↗</a>
-    </nav>
-  </div>
-</header>
-<main class="article-shell">
-  <nav class="breadcrumb" aria-label="面包屑">
-    <a href="/">术语手册</a><span>/</span><a href="/articles/">专题文章</a><span>/</span><span>第 06 篇</span>
-  </nav>
-  <article>
-    <header class="article-header">
-      <div class="article-kicker">AllScale 支付术语科普 · 第 06 篇</div>
-      <h1>一杯 100 块的咖啡：刷卡和稳定币，商户到手差多少？</h1>
-      <p class="article-deck">用一笔具体交易拆解 MDR、交换费、网络费与稳定币链上成本。</p>
-    </header>
-    <img class="article-hero-image" src="/articles/assets/card-vs-stablecoin-fees.webp" alt="一杯 100 块的咖啡：刷卡和稳定币，商户到手差多少？">
-    <div class="article-body"><p>第 4 篇我们拆开了支付背后的四个角色，第 5 篇走完了一笔交易的完整生命周期。你应该已经发现：一笔钱要经过这么多角色、这么多阶段才到账，而每经过一手，都有人顺手收一笔钱。</p>
-<p>今天就把这笔「过路费」摊开来给大家看：一杯 100 块的咖啡，顾客刷卡付了 100，商户最后到手多少？中间消失的那几块钱，到底进了谁的口袋？</p>
-<h2>一、先认识那个总数：MDR</h2>
-<p>商户每收一笔卡支付要付的总费率，有个名字叫 MDR（Merchant Discount Rate，商户手续费率）。</p>
-<p>假设这杯咖啡的 MDR 是 3%，那么顾客付的 100 块里，商户实际到手 97 块，3 块被扣掉了。</p>
-<p>但这 3 块不是被某一个人拿走的。MDR 是个「打包价」，里面塞了三份不同的钱，分给三个不同的角色。</p>
-<figure class="article-figure"><img src="/articles/assets/card-vs-stablecoin-fees-02.webp" alt="一杯 100 块的咖啡：刷卡和稳定币，商户到手差多少？：二、这 3 块钱，分给了谁" loading="lazy" decoding="async"></figure>
-<h2>二、这 3 块钱，分给了谁</h2>
-<p>继续用那杯咖啡，把 3 块钱拆开看（具体比例因卡种、地区而异，这里只是示意）：</p>
-<ul><li>交换费（Interchange）：大头，大约 2 块。这部分进了发卡行的口袋，也就是给顾客发卡的那家银行。它拿走了大部分费用，是因为它承担了授信和风险（垫钱、防盗刷、处理争议）。</li><li>卡组织费（Scheme fee）：很小一部分，大约 3 毛。交给 Visa、Mastercard 这些卡组织，算是借用它们那条「高速公路」的过路费。</li><li>收单加价（Acquirer markup）：剩下的大约 7 毛。这是收单行或支付服务商自己赚的，也是这三份里唯一能谈的一份——你跟收单方谈费率，谈的基本就是这块。</li></ul>
-<p>一句话记住：你的手续费 ≈ 发卡行（大头）+ 卡组织（小头）+ 收单方（加价）。</p>
-<figure class="article-figure"><img src="/articles/assets/card-vs-stablecoin-fees-03.webp" alt="一杯 100 块的咖啡：刷卡和稳定币，商户到手差多少？：三、费率的两个坑：看不透，和跨境叠加" loading="lazy" decoding="async"></figure>
-<h2>三、费率的两个坑：看不透，和跨境叠加</h2>
-<p>第一个坑：你可能根本看不出这 3 块是怎么分的。</p>
-<p>同样收你 3%，报价方式有两种：</p>
-<ul><li>混合费率（Blended rate）：把三份打包成一个固定数字报给你，比如「3% + 3 毛」。简单省事，但你看不到里面的分配，也看不出收单方到底加了多少价。</li><li>成本加成（IC++，Interchange Plus Plus）：把三份分开列清楚，交换费多少、卡组织费多少、收单方加价多少，明明白白。</li></ul>
-<p>小商户图省事，通常用 Blended；大商户为了透明和砍价，倾向用 IC++。</p>
-<p>第二个坑：跨境会让费率叠得更高。</p>
-<p>国内刷卡可能 1% 以内，跨境却常常去到 3% 到 4%、甚至更高。因为它在普通费率上又叠了好几层：跨境的交换费本身更贵、多了一道货币转换费（这个第 8 篇讲）、中间可能还多一两个中转环节，每一环都要分一杯羹。</p>
-<p>对做跨境生意的商户来说，这几个百分点一年累下来，是不小的一笔成本。</p>
-<figure class="article-figure"><img src="/articles/assets/card-vs-stablecoin-fees-04.webp" alt="一杯 100 块的咖啡：刷卡和稳定币，商户到手差多少？：四、稳定币：把过路费降到接近零" loading="lazy" decoding="async"></figure>
-<h2>四、稳定币：把过路费降到接近零</h2>
-<p>回到我们每天在做的事。稳定币支付没有发卡行、没有卡组织、没有收单行这套层层分钱的结构（这正是第 4 篇讲的「去中间人」），所以也就没有交换费、没有卡组织费。</p>
-<p>它的成本主要只剩链上的 Gas fee（网络手续费），通常是固定的几分到几毛，而且和金额大小基本无关。</p>
-<p>把那杯咖啡再拿出来对照：卡支付被抽走 3 块；稳定币可能只花几分钱的网络费。金额越大、跨境越多，这个差距越夸张。一笔 1 万美元的跨境收款，卡支付可能被吃掉两三百美元，稳定币还是那几分钱。</p>
-<p>当然，卡支付那 3% 的费用并不全是「白交」，里面也包含了发卡行的风控、争议处理和消费者保护（第 3 篇）。稳定币把费用压到接近零，同时也意味着这些「附加服务」得靠你自己或平台另想办法补上。所以低费率最适合本来就不太依赖这些附加服务的场景：B2B、跨境、交付清晰的生意。</p>
-<p>AllScale 做的，就是让商户跳过这一整套层层抽成，把跨境收款的成本，从「百分之几」打到「几分钱网络费」。</p>
-<figure class="article-figure"><img src="/articles/assets/card-vs-stablecoin-fees-05.webp" alt="一杯 100 块的咖啡：刷卡和稳定币，商户到手差多少？：小结" loading="lazy" decoding="async"></figure>
-<h2>小结</h2>
-<p>MDR：商户每笔要付的总费率。交换费 Interchange：大头，归发卡行。卡组织费 Scheme fee：小头，归 Visa、Mastercard。收单加价 Acquirer markup：收单方自己赚的，也是唯一能谈的部分。</p>
-<p>一句话：那杯 100 块咖啡被抽掉的 3 块，主要进了发卡行；稳定币几乎不收这笔过路费。</p>
-<p>下一篇是个「综合场景」：我们把这三篇（四个角色、生命周期、手续费）串成一个完整故事——一笔跨境卡支付，从顾客点下「支付」到商户真正拿到钱，到底经过了哪些角色、走了多少天、被扣了多少钱。</p></div>
-  </article>
-
-  <section class="social-cta">
-    <h2>继续关注 AllScale 支付科普</h2>
-    <p>后续文章和支付行业内容会在 AllScale 中文社媒同步发布。</p>
-    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 @allscale_zh ↗</a>
-  </section>
-  <nav class="article-pagination" aria-label="文章翻页"><a href="/articles/auth-capture-settlement/"><small>上一篇</small><strong>Auth、Capture、Settlement：钱落袋之前的完整旅程</strong></a><a href="/articles/cross-border-card-payment/"><small>下一篇</small><strong>一笔跨境卡支付的真实旅程：5 个角色、6 天、少了 12 美元</strong></a></nav>
-</main>
-<footer class="site-footer">
-  <div class="footer-inner">
-    <span>© 2026 AllScale · Payments Knowledge Base</span>
-    <a href="https://x.com/allscale_zh" target="_blank" rel="noreferrer">关注 AllScale 中文社媒</a>
-  </div>
-</footer>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "一杯 100 块的咖啡：刷卡和稳定币，商户到手差多少？", "description": "用一笔具体交易拆解 MDR、交换费、网络费与稳定币链上成本。", "image": "https://payment.0xhowe.top/articles/assets/card-vs-stablecoin-fees.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/articles/card-vs-stablecoin-fees/"}</script>
-</body>
+<body><a href="/zh/articles/card-vs-stablecoin-fees/">Continue</a></body>
 </html>

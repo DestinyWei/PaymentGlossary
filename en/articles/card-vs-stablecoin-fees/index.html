@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A 100-yuan cup of coffee: card vs stablecoin, how much less does the merchant actually get? | AllScale</title>
+  <meta name="description" content="Use a concrete purchase to unpack MDR, interchange, network fees, acquirer markup, and stablecoin network costs.">
+  <link rel="canonical" href="https://payment.0xhowe.top/en/articles/card-vs-stablecoin-fees/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/card-vs-stablecoin-fees/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/card-vs-stablecoin-fees/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale Payments Knowledge Base">
+  <meta property="og:title" content="A 100-yuan cup of coffee: card vs stablecoin, how much less does the merchant actually get? | AllScale">
+  <meta property="og:description" content="Use a concrete purchase to unpack MDR, interchange, network fees, acquirer markup, and stablecoin network costs.">
+  <meta property="og:url" content="https://payment.0xhowe.top/en/articles/card-vs-stablecoin-fees/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/en-card-vs-stablecoin-fees.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/en/" aria-label="AllScale Glossary">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/en/">Glossary</a>
+      <a href="/en/articles/" class="active">Articles</a>
+      <a class="language-link" href="/zh/articles/card-vs-stablecoin-fees/">中文</a>
+      <a class="social-link" href="https://x.com/allscale" target="_blank" rel="noreferrer">AllScale ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/en/">Glossary</a><span>/</span><a href="/en/articles/">Articles</a><span>/</span><span>06</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale Payment Glossary · 06</div>
+      <h1>A 100-yuan cup of coffee: card vs stablecoin, how much less does the merchant actually get?</h1>
+      <p class="article-deck">Use a concrete purchase to unpack MDR, interchange, network fees, acquirer markup, and stablecoin network costs.</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/en-card-vs-stablecoin-fees.webp" alt="A 100-yuan cup of coffee: card vs stablecoin, how much less does the merchant actually get?">
+    <div class="article-body"><p>Part 4 broke down the four players behind a payment. Part 5 walked through the full lifecycle of one transaction. By now you&#x27;ve probably noticed: money passes through a lot of hands to reach the merchant, and every hand along the way skims a bit off the top.</p>
+<p>Today we lay out that &quot;toll&quot; so you can see it: a $15 coffee, customer pays $15 by card, how much does the merchant actually keep? Where do the missing dollars go?</p>
+<h2>1. Meet the total: MDR</h2>
+<p>The total fee rate a merchant pays on each card payment has a name: MDR (Merchant Discount Rate).</p>
+<p>If this coffee has an MDR of 3%, then on the $15 the customer paid, the merchant nets $14.55, and $0.45 gets deducted.</p>
+<p>But that $0.45 doesn&#x27;t go to one party. MDR is a bundled price, stuffed with three different slices that go to three different players.</p>
+<h2>2. Who gets the $0.45</h2>
+<p>Sticking with the coffee example, here&#x27;s how the $0.45 splits (exact ratios vary by card type and region, this is just illustrative):</p>
+<ul><li>Interchange fee: The big slice, around $0.30. This goes to the issuing bank, the bank that issued the customer&#x27;s card. It takes the largest share because it carries the credit and risk (fronting the money, fraud protection, dispute handling).</li><li>Scheme fee: A small slice, around $0.05. This goes to card schemes like Visa and Mastercard, as a toll for using their &quot;highway.&quot;</li><li>Acquirer markup: The remaining $0.10 or so. This is what the acquirer or payment service provider earns, and it&#x27;s the only slice that&#x27;s negotiable. When you talk fees with your acquirer, this is basically what you&#x27;re talking about.</li></ul>
+<p>One line to remember: your fee ≈ issuer (big) + card scheme (small) + acquirer (markup).</p>
+<h2>3. Two traps: opaque pricing, and cross-border</h2>
+<p>stacking Trap one: you may not see how the $0.45 splits.</p>
+<p>For the same 3%, there are two ways to price it:</p>
+<ul><li>Blended rate: three slices bundled into one flat number, like &quot;3% + $0.05.&quot;</li></ul>
+<p>Simple and easy, but you can&#x27;t see the breakdown, and you can&#x27;t tell how much markup the acquirer added.</p>
+<ul><li>IC++ (Interchange Plus Plus): three slices itemized clearly. Interchange this much, scheme fee that much, acquirer markup this much. All spelled out.</li></ul>
+<p>Small merchants usually go with Blended for convenience. Large merchants prefer</p>
+<p>IC++ so they can see the numbers and negotiate.</p>
+<p>Trap two: cross-border stacks the rate higher.</p>
+<p>Domestic card payments might run under 1%. Cross-border often climbs to 3–4% or more. That&#x27;s because you&#x27;re layering several extra costs onto the base rate: crossborder interchange is more expensive to begin with, there&#x27;s a currency conversion fee (covered in Part 8), and there may be one or two extra hops in the middle, each taking a cut.</p>
+<p>For merchants doing cross-border business, those percentage points add up to real money over a year.</p>
+<h2>4. Stablecoins: driving the toll to near zero</h2>
+<p>Back to what we do every day. Stablecoin payments don&#x27;t have the issuer / scheme / acquirer stack layered on top of each other (this is the &quot;cutting out the middleman&quot; story from Part 4). So there&#x27;s no interchange, no scheme fee.</p>
+<p>The main cost is the on-chain gas fee (network fee), typically a few cents flat, and largely independent of the payment size.</p>
+<p>Compare the coffee again: card payment loses $0.45; stablecoin might cost a few cents in network fees. The larger the amount, and the more cross-border you go, the wider the gap. On a $10,000 cross-border payment, card can eat $200–300; stablecoin still costs a few cents.</p>
+<p>Card fees aren&#x27;t pure waste, of course. Part of that 3% pays for the issuer&#x27;s risk controls, dispute handling, and consumer protection (Part 3). Stablecoins push fees to near zero, which means those &quot;extras&quot; need to come from you or your platform another way. So the low-fee model fits best where you don&#x27;t rely on those extras:</p>
+<p>B2B, cross-border, businesses with clear delivery.</p>
+<p>What AllScale does is help merchants skip this whole cascade of middlemen,</p>
+<p>dropping cross-border collection costs from &quot;a few percent&quot; to &quot;a few cents in network fees.&quot;</p>
+<p>Recap MDR: the total fee rate per card payment. Interchange: the big slice, goes to the issuer. Scheme fee: small slice, goes to Visa/Mastercard. Acquirer markup: what the acquirer earns, and the only slice you can negotiate.</p>
+<p>One line: the $0.45 skimmed from your $15 coffee mostly went to the issuer.</p>
+<p>Stablecoins basically don&#x27;t charge this toll.</p>
+<p>Next up, a scenario piece: we thread the last three articles (four players, lifecycle, fees) into one full story. A cross-border card payment, from customer clicking &quot;Pay&quot; to merchant actually receiving the money. Who&#x27;s involved, how many days it takes, how much gets skimmed off.</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>Keep learning with AllScale</h2>
+    <p>Future articles and payment education updates will be published through AllScale channels.</p>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/en/articles/auth-capture-settlement/"><small>Previous</small><strong>Auth, Capture, Settlement: The full journey before the money lands in the pocket</strong></a><a href="/en/articles/cross-border-card-payment/"><small>Next</small><strong>The real journey of a cross-border card payment: 5 players, 6 days, 12 dollars lost</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "A 100-yuan cup of coffee: card vs stablecoin, how much less does the merchant actually get?", "description": "Use a concrete purchase to unpack MDR, interchange, network fees, acquirer markup, and stablecoin network costs.", "image": "https://payment.0xhowe.top/articles/assets/en-card-vs-stablecoin-fees.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/en/articles/card-vs-stablecoin-fees/", "inLanguage": "en"}</script>
+</body>
+</html>

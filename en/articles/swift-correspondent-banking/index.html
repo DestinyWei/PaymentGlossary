@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SWIFT, correspondent banks, intermediary banks: what cross-border money goes through | AllScale</title>
+  <meta name="description" content="Understand SWIFT messages, correspondent banking, Nostro/Vostro accounts, and why wires take time.">
+  <link rel="canonical" href="https://payment.0xhowe.top/en/articles/swift-correspondent-banking/">
+  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/articles/swift-correspondent-banking/">
+  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/articles/swift-correspondent-banking/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="AllScale Payments Knowledge Base">
+  <meta property="og:title" content="SWIFT, correspondent banks, intermediary banks: what cross-border money goes through | AllScale">
+  <meta property="og:description" content="Understand SWIFT messages, correspondent banking, Nostro/Vostro accounts, and why wires take time.">
+  <meta property="og:url" content="https://payment.0xhowe.top/en/articles/swift-correspondent-banking/">
+  <meta property="og:image" content="https://payment.0xhowe.top/articles/assets/en-swift-correspondent-banking.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="/articles/styles.css">
+  <script defer src="/analytics.js" data-allscale-analytics></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a class="brand" href="/en/" aria-label="AllScale Glossary">
+      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/en/">Glossary</a>
+      <a href="/en/articles/" class="active">Articles</a>
+      <a class="language-link" href="/zh/articles/swift-correspondent-banking/">中文</a>
+      <a class="social-link" href="https://x.com/allscale" target="_blank" rel="noreferrer">AllScale ↗</a>
+    </nav>
+  </div>
+</header>
+<main class="article-shell">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/en/">Glossary</a><span>/</span><a href="/en/articles/">Articles</a><span>/</span><span>09</span>
+  </nav>
+  <article>
+    <header class="article-header">
+      <div class="article-kicker">AllScale Payment Glossary · 09</div>
+      <h1>SWIFT, correspondent banks, intermediary banks: what cross-border money goes through</h1>
+      <p class="article-deck">Understand SWIFT messages, correspondent banking, Nostro/Vostro accounts, and why wires take time.</p>
+    </header>
+    <img class="article-hero-image" src="/articles/assets/en-swift-correspondent-banking.webp" alt="SWIFT, correspondent banks, intermediary banks: what cross-border money goes through">
+    <div class="article-body"><p>Part 7 showed a cross-border payment passing through SWIFT, correspondent banks, and intermediary banks in a slow, expensive relay. We only touched on it briefly there. This article pulls the cross-border infrastructure apart and answers one question: how does money actually get &quot;moved&quot; across borders?</p>
+<h2>1. SWIFT doesn&#x27;t move money, it moves messages</h2>
+<p>A lot of people think cross-border transfers work by &quot;money flying overseas via SWIFT.&quot; That&#x27;s not what happens.</p>
+<p>SWIFT is an encrypted messaging system between banks. Think of it as the banks&#x27; private encrypted WeChat. One bank uses it to send another bank a message in a standard format: &quot;Please debit this from me, credit account X for amount Y.&quot;</p>
+<p>Notice, it transmits instructions, not money itself. No money ever flows through SWIFT&#x27;s network. So how does the money actually flow?</p>
+<h2>2. Money moves because banks hold accounts with</h2>
+<p>each other This is the most counterintuitive and most important part of the system: banks hold accounts at each other.</p>
+<p>From Bank A&#x27;s point of view:</p>
+<ul><li>The account it holds at Bank B is called Nostro (Latin for &quot;ours&quot;) — &quot;our money parked with you&quot;;</li><li>The account Bank B holds at Bank A is called Vostro (Latin for &quot;yours&quot;) — &quot;your money parked with us.&quot;</li></ul>
+<p>Don&#x27;t worry about memorizing the names. One line to remember: banks hold deposits and accounts with each other. So a &quot;cross-border payment&quot; is really just addition and subtraction on these account balances. When Bank A receives a SWIFT instruction, it credits Bank B&#x27;s account on its books and debits the payer&#x27;s account.</p>
+<p>The money has &quot;arrived.&quot; No physical currency needs to fly across borders.</p>
+<h2>3. What if there&#x27;s no direct link: relay chains, and the</h2>
+<p>float Which leads to the obvious question: no bank holds accounts with every other bank in the world.</p>
+<p>So when Bank A and the recipient&#x27;s bank don&#x27;t have a direct account relationship, the payment routes through a third bank both sides do have accounts with. That middleman is called a correspondent bank. If no shared correspondent exists, you add an intermediary bank to the relay.</p>
+<p>A payment might travel: paying bank → correspondent bank → (intermediary bank) → receiving bank. Every extra hop adds a fee, a day or two, and possibly</p>
+<p>another spread on FX conversion (Part 8). Information in the SWIFT message may also get truncated as it&#x27;s passed along, causing delays or reconciliation headaches (see Part 2 on the pain of reconciliation).</p>
+<p>There&#x27;s also something most people don&#x27;t notice: float. From the moment money leaves the paying bank until it arrives at the receiving bank, it sits in some intermediary account. Whoever holds the money in transit can earn interest on it.</p>
+<p>Cross-border amounts are large and settlement is slow, so this interest is meaningful.</p>
+<p>In other words, the system is &quot;slow&quot; partly because someone doesn&#x27;t want it to be fast. Slow itself makes money.</p>
+<h2>4. Stablecoins: swap the &quot;web of trust&quot; for one shared</h2>
+<p>ledger Stablecoins run on a different logic than SWIFT.</p>
+<p>An on-chain stablecoin is a &quot;globally usable&quot; asset by design. Transferring it doesn&#x27;t need the Nostro/Vostro web of interbank accounts. It doesn&#x27;t need SWIFT to send an instruction and wait for the other side to move balances. It doesn&#x27;t need correspondent or intermediary banks to relay. The payer&#x27;s wallet sends, the recipient&#x27;s wallet receives, peer-to-peer in minutes. Money no longer &quot;sits on the road,&quot; and float basically disappears.</p>
+<p>Stablecoins aren&#x27;t &quot;infrastructure-free.&quot; They swap the traditional &quot;multi-party trust + messaging + mutual accounts&quot; arrangement for &quot;one shared public ledger.&quot; And when you want to turn stablecoins back into local fiat to spend, you still hook into the traditional system for that step (off-ramping, covered in Part 11). What stablecoins really erase is the long relay chain and the transit wait in the middle.</p>
+<p>That&#x27;s exactly what AllScale is doing: letting cross-border money travel peer-to-peer on the stablecoin layer, bypassing the whole slow, opaque relay of SWIFT, correspondent banks, and intermediary banks.</p>
+<p>Recap SWIFT: an encrypted messaging system between banks. It transmits instructions, not money. Nostro / Vostro: accounts banks hold at each other. Cross-border payments are really adjustments to these balances. Correspondent / intermediary bank: a third bank relaying between two banks that don&#x27;t hold accounts with each other. Each extra hop means another fee and more delay. Float: the money sitting in transit before arrival. Whoever holds it earns interest, which is one reason the system isn&#x27;t in a hurry to speed up.</p>
+<p>Next up we switch angles: after all this talk about cross-border pain, what exactly is a stablecoin, and what makes it &quot;stable&quot;? We&#x27;ll cover stablecoins themselves and the Mint / Burn mechanism that pegs them to fiat.</p></div>
+  </article>
+
+  <section class="social-cta">
+    <h2>Keep learning with AllScale</h2>
+    <p>Future articles and payment education updates will be published through AllScale channels.</p>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale ↗</a>
+  </section>
+  <nav class="article-pagination" aria-label="Article pagination"><a href="/en/articles/fx-spread/"><small>Previous</small><strong>Mid-market rate vs. what you actually get: the hidden spread</strong></a><a href="/en/articles/stablecoins/"><small>Next</small><strong>What exactly is a stablecoin? And how does it stay &quot;stable&quot; at $1?</strong></a></nav>
+</main>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>© 2026 AllScale · Payments Knowledge Base</span>
+    <a href="https://x.com/allscale" target="_blank" rel="noreferrer">Follow AllScale</a>
+  </div>
+</footer>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SWIFT, correspondent banks, intermediary banks: what cross-border money goes through", "description": "Understand SWIFT messages, correspondent banking, Nostro/Vostro accounts, and why wires take time.", "image": "https://payment.0xhowe.top/articles/assets/en-swift-correspondent-banking.webp", "author": {"@type": "Organization", "name": "AllScale"}, "publisher": {"@type": "Organization", "name": "AllScale"}, "mainEntityOfPage": "https://payment.0xhowe.top/en/articles/swift-correspondent-banking/", "inLanguage": "en"}</script>
+</body>
+</html>
