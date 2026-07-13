@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ARTICLES_DIR = ROOT / "articles"
 SITE_URL = "https://payment.0xhowe.top"
 ZH_SOCIAL_URL = "https://x.com/allscale_zh"
-EN_SOCIAL_URL = "https://x.com/allscale"
+EN_SOCIAL_URL = "https://x.com/allscaleio"
 
 
 @dataclass(frozen=True)
