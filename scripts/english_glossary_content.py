@@ -295,13 +295,47 @@ def build_english_sections() -> str:
 <p class="section-desc">At least five roles participate behind one card transaction, each with a clear profit model and risk boundary.</p>
 <div class="card">
   <div class="card-title">Hierarchy diagram</div>
-  <p class="prose"><strong>Solid lines = fund flow; dashed lines = data / instruction flow</strong></p>
-  <div class="diagram"><svg viewBox="0 0 760 520" role="img" aria-label="Institution role hierarchy" style="width:100%;height:auto">
+  <p class="prose"><strong>Main role path:</strong> checkout data enters the gateway, merchant-side roles connect into the scheme, and the issuer makes the cardholder-side decision.</p>
+  <div class="diagram"><svg viewBox="0 0 760 500" role="img" aria-label="Institution role hierarchy" style="width:100%;height:auto">
     <defs><marker id="arrow-role-en" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5"></path></marker></defs>
-    <rect width="760" height="520" fill="#F2F8F5"></rect>
-    <g fill="none" stroke="#0E7C6B" stroke-width="1.4" marker-end="url(#arrow-role-en)"><path d="M380 95V145"></path><path d="M290 190L180 260"></path><path d="M380 200V260"></path><path d="M470 190L580 260"></path><path d="M180 320L330 360"></path><path d="M380 320V360"></path><path d="M580 320L430 360"></path><path d="M380 420V460"></path></g>
-    <g fill="none" stroke="#B0C4BB" stroke-width="1.2" stroke-dasharray="5 5"><path d="M270 145H170"></path><path d="M490 145H590"></path><path d="M180 260L120 340"></path><path d="M580 260L640 340"></path></g>
-    <g font-family="Inter, sans-serif" text-anchor="middle"><rect x="300" y="35" width="160" height="50" rx="8" fill="#F9E8F0" stroke="#A6396A"></rect><text x="380" y="65" fill="#A6396A" font-weight="700">Cardholder</text><rect x="275" y="135" width="210" height="58" rx="8" fill="#F8EFDB" stroke="#8C5A11"></rect><text x="380" y="160" fill="#8C5A11" font-weight="700">Gateway</text><text x="380" y="180" fill="#8C5A11" font-size="12">encrypt · tokenize · route</text><rect x="80" y="255" width="170" height="58" rx="8" fill="#E0F2EE" stroke="#0E7C6B"></rect><text x="165" y="280" fill="#0E7C6B" font-weight="700">PSP / PayFac</text><text x="165" y="300" fill="#0E7C6B" font-size="12">payment service · submerchant</text><rect x="295" y="255" width="170" height="58" rx="8" fill="#E0F2EE" stroke="#0E7C6B"></rect><text x="380" y="280" fill="#0E7C6B" font-weight="700">MoR</text><text x="380" y="300" fill="#0E7C6B" font-size="12">tax · refund · compliance</text><rect x="510" y="255" width="170" height="58" rx="8" fill="#E0F2EE" stroke="#0E7C6B"></rect><text x="595" y="280" fill="#0E7C6B" font-weight="700">Acquirer</text><text x="595" y="300" fill="#0E7C6B" font-size="12">merchant contract · settlement</text><rect x="300" y="360" width="320" height="58" rx="8" fill="#ECE9F8" stroke="#5C4BB0"></rect><text x="460" y="385" fill="#5C4BB0" font-weight="700">Scheme / Network</text><text x="460" y="405" fill="#5C4BB0" font-size="12">Visa · Mastercard · UnionPay · Amex</text><rect x="300" y="455" width="320" height="48" rx="8" fill="#ECE9F8" stroke="#5C4BB0"></rect><text x="460" y="484" fill="#5C4BB0" font-weight="700">Issuer</text><rect x="75" y="365" width="150" height="50" rx="8" fill="#ECF1EE" stroke="#B0C4BB"></rect><text x="150" y="395" fill="#5C6B64" font-weight="700">ISO</text><rect x="620" y="365" width="150" height="50" rx="8" fill="#ECF1EE" stroke="#B0C4BB"></rect><text x="695" y="395" fill="#5C6B64" font-weight="700">Processor</text></g>
+    <rect width="760" height="500" fill="#F2F8F5"></rect>
+    <g fill="none" stroke="#0E7C6B" stroke-width="1.5" marker-end="url(#arrow-role-en)">
+      <path d="M380 84V118"></path>
+      <path d="M380 178V214"></path>
+      <path d="M380 178C305 190 222 205 174 234"></path>
+      <path d="M380 178C455 190 538 205 586 234"></path>
+      <path d="M174 292C230 322 300 342 380 354"></path>
+      <path d="M380 292V350"></path>
+      <path d="M586 292C530 322 460 342 380 354"></path>
+      <path d="M380 414V446"></path>
+    </g>
+    <g font-family="Inter, sans-serif" text-anchor="middle">
+      <rect x="300" y="30" width="160" height="54" rx="8" fill="#F9E8F0" stroke="#A6396A"></rect>
+      <text x="380" y="63" fill="#A6396A" font-size="16" font-weight="700">Cardholder</text>
+      <rect x="260" y="118" width="240" height="60" rx="8" fill="#F8EFDB" stroke="#8C5A11"></rect>
+      <text x="380" y="143" fill="#8C5A11" font-size="16" font-weight="700">Gateway</text>
+      <text x="380" y="164" fill="#8C5A11" font-size="12">encrypt · tokenize · route</text>
+      <rect x="72" y="234" width="204" height="58" rx="8" fill="#E0F2EE" stroke="#0E7C6B"></rect>
+      <text x="174" y="258" fill="#0E7C6B" font-size="15" font-weight="700">PSP / PayFac</text>
+      <text x="174" y="278" fill="#0E7C6B" font-size="11">payment service · submerchant</text>
+      <rect x="278" y="234" width="204" height="58" rx="8" fill="#E0F2EE" stroke="#0E7C6B"></rect>
+      <text x="380" y="258" fill="#0E7C6B" font-size="15" font-weight="700">MoR</text>
+      <text x="380" y="278" fill="#0E7C6B" font-size="11">tax · refund · compliance</text>
+      <rect x="484" y="234" width="204" height="58" rx="8" fill="#E0F2EE" stroke="#0E7C6B"></rect>
+      <text x="586" y="258" fill="#0E7C6B" font-size="15" font-weight="700">Acquirer</text>
+      <text x="586" y="278" fill="#0E7C6B" font-size="11">merchant contract · settlement</text>
+      <rect x="260" y="354" width="240" height="60" rx="8" fill="#ECE9F8" stroke="#5C4BB0"></rect>
+      <text x="380" y="379" fill="#5C4BB0" font-size="16" font-weight="700">Scheme / Network</text>
+      <text x="380" y="400" fill="#5C4BB0" font-size="12">Visa · Mastercard · UnionPay · Amex</text>
+      <rect x="260" y="446" width="240" height="42" rx="8" fill="#ECE9F8" stroke="#5C4BB0"></rect>
+      <text x="380" y="472" fill="#5C4BB0" font-size="16" font-weight="700">Issuer</text>
+      <rect x="72" y="360" width="150" height="48" rx="8" fill="#ECF1EE" stroke="#B0C4BB"></rect>
+      <text x="147" y="380" fill="#5C6B64" font-size="13" font-weight="700">ISO</text>
+      <text x="147" y="397" fill="#5C6B64" font-size="10">sales partner</text>
+      <rect x="538" y="360" width="150" height="48" rx="8" fill="#ECF1EE" stroke="#B0C4BB"></rect>
+      <text x="613" y="380" fill="#5C6B64" font-size="13" font-weight="700">Processor</text>
+      <text x="613" y="397" fill="#5C6B64" font-size="10">technical operator</text>
+    </g>
   </svg></div>
   <p class="prose"><strong>Issuer earns interchange; Scheme earns network fees; Acquirer / PSP earns markup.</strong></p>
 </div>
