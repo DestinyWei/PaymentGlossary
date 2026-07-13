@@ -289,6 +289,8 @@ def extract_chinese_design_css() -> str:
     css += """
 
 .header-top { position: relative; }
+.header-logo-link { display: inline-flex; align-items: center; }
+.header-logo-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
 .glossary-site-links {
   display: flex;
   align-items: center;
@@ -837,7 +839,9 @@ def build_html() -> str:
 <body>
 <header>
   <div class="header-top">
-    <img class="header-logo" src="/articles/assets/allscale-logo.png" alt="AllScale">
+    <a class="header-logo-link" href="/en/" aria-label="AllScale home">
+      <img class="header-logo" src="/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
     <div class="header-top-div"></div>
     <span class="header-top-label">Checkout · Knowledge Base</span>
     <div class="glossary-site-links" role="navigation" aria-label="Site navigation">
