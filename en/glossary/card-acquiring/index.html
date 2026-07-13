@@ -620,706 +620,344 @@ hr.div { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
   <a href="#" onclick="show('biz')" ><span class="nav-dot" style="background:#8C5A11"></span>Business Metrics</a>
 </nav>
 <main>
+<!-- Fund Flow -->
 <div id="sec-fund" class="section active">
-        <h2 class="section-title">Fund Flow</h2>
-        <p class="section-desc">How money moves from payer to payee. This section mirrors the Chinese fund-flow chapter: collection, payout, clearing, settlement, netting, reconciliation, ledgers, pooled accounts, reserves, and treasury controls.</p>
-<div class="card" data-en-visual="fund">
-  <div class="card-title">Payment movement: collection -> clearing -> settlement -> payout</div>
-  <div class="chain">
-    <div class="chain-node cn-gray">Customer pays</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-blue">COBO collection<br><small style="font-weight:400;font-size:10px">platform receives funds</small></div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-amber">Clearing<br><small style="font-weight:400;font-size:10px">fees, FX, net positions</small></div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-teal">Settlement<br><small style="font-weight:400;font-size:10px">money actually moves</small></div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-green">POBO payout</div>
+<h2 class="section-title">Fund Flow</h2>
+<p class="section-desc">How money moves from A to B. From COBO and POBO to cross-border clearing, this is the skeleton of payments.</p>
+
+<div class="card">
+  <div class="card-title"><span class="abbr">COBO + POBO</span> — collection and payment on behalf of others</div>
+  <div class="grid2">
+    <div class="grid-card"><div class="label">COBO · Collection On Behalf Of</div><div class="body">Company A collects money for Company B. Customer funds enter A's account, while the platform records the balance under B and transfers it periodically.</div></div>
+    <div class="grid-card"><div class="label">POBO · Payment On Behalf Of</div><div class="body">Company A pays suppliers for Company B. Funds leave A's account, but the payment is made in B's business context.</div></div>
   </div>
-  <div class="case-box teal">
-    <div class="case-label teal">Example: group treasury pool</div>
-    Subsidiaries in Germany, France, and Poland collect into a UK treasury account, then pay suppliers centrally. Benefits: lower bank fees, centralized FX hedging, and real-time visibility into group cash.
+  <div class="case-box"><div class="case-label">Example: European retail treasury pool</div>German, French, and Polish subsidiaries collect customer payments into the UK headquarters account (COBO), while supplier payments are paid centrally by HQ (POBO). Benefits: lower bank fees, centralized FX hedging, and real-time group cash visibility.<br><br><strong>Crypto analogy:</strong> an exchange omnibus wallet receives many users' deposits into one on-chain address. Users see virtual balances, but the operating logic is COBO.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Clearing vs Settlement vs Netting</div>
+  <div class="chain"><div class="chain-node cn-gray">Transaction</div><div class="chain-arrow">-></div><div class="chain-node cn-blue">Clearing<br><small style="font-size:10px;font-weight:400">reconcile data and net positions</small></div><div class="chain-arrow">-></div><div class="chain-node cn-teal">Settlement<br><small style="font-size:10px;font-weight:400">money actually moves</small></div><div class="chain-arrow">-></div><div class="chain-node cn-green">T+0 / T+1 / T+2 arrival</div></div>
+  <p class="prose"><strong>Netting:</strong> if Bank A owes Bank B $10M and Bank B owes Bank A $8M, only $2M moves. Netting dramatically reduces system liquidity needs.</p>
+  <p class="prose"><strong>Float:</strong> funds that have been initiated but not yet arrived. Early PayPal earned interest from user float.</p>
+  <p class="prose"><strong>Escrow:</strong> a neutral third party holds funds and releases them when conditions are met. Smart contracts are the on-chain, trust-minimized version of escrow.</p>
+  <div class="case-box teal"><div class="case-label teal">Crypto comparison</div>On-chain block production is settlement. There is no separate clearing layer and finality can be T+0. This is the strongest attack point for stablecoin payments: traditional cross-border transfers charge fees at each correspondent bank and create one to two days of float; stablecoins compress that into one chain transaction.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Cross-border settlement systems quick reference</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">SWIFT</div><div class="term-en">Society for Worldwide Interbank Financial Telecommunication</div><div class="term-zh">A cross-border bank messaging system using BIC identifiers. T+1 to T+5; each intermediary may charge fees.</div></div>
+    <div class="term-item"><div class="term-abbr">RTGS</div><div class="term-en">Real-Time Gross Settlement</div><div class="term-zh">Large-value payments settled one by one in real time, such as Fedwire or China's large-value payment system.</div></div>
+    <div class="term-item"><div class="term-abbr">ACH</div><div class="term-en">Automated Clearing House</div><div class="term-zh">US batch electronic transfers, usually T+1, suited for payroll and bill payments.</div></div>
+    <div class="term-item"><div class="term-abbr">SEPA</div><div class="term-en">Single Euro Payments Area</div><div class="term-zh">EU euro transfers use a common format and should not cost more than domestic euro transfers. Usually T+1.</div></div>
+    <div class="term-item"><div class="term-abbr">FPS</div><div class="term-en">Faster Payment System</div><div class="term-zh">The UK and Hong Kong both use this name for instant payment systems with second-level arrival.</div></div>
+    <div class="term-item"><div class="term-abbr">BACS</div><div class="term-en">Bankers' Automated Clearing Services</div><div class="term-zh">UK batch clearing for direct debit and payroll, typically T+3.</div></div>
+    <div class="term-item"><div class="term-abbr">IBAN</div><div class="term-en">International Bank Account Number</div><div class="term-zh">Standardized account number used in Europe and the Middle East, up to 34 characters.</div></div>
+    <div class="term-item"><div class="term-abbr">Wire / TT</div><div class="term-en">Wire Transfer / Telegraphic Transfer</div><div class="term-zh">Mostly synonymous. TT is more common in Asia and usually arrives same day or next day.</div></div>
+    <div class="term-item"><div class="term-abbr">Nostro / Vostro</div><div class="term-en">Correspondent bank accounts</div><div class="term-zh">Nostro is our account at another bank; Vostro is another bank's account with us.</div></div>
   </div>
 </div>
-        <div class="card">
-          <div class="card-title">COBO + POBO — collection and payout on behalf of another party</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">COBO · Collection On Behalf Of</div><div class="term-zh">A platform collects money for a merchant, subsidiary, seller, or user. The payer sees the platform or a collection account, while the underlying economic owner is another party.</div></div>
-            <div class="term-item"><div class="term-abbr">POBO · Payment On Behalf Of</div><div class="term-zh">A platform pays suppliers, sellers, creators, drivers, contractors, or group entities on behalf of another company.</div></div>
-            <div class="term-item"><div class="term-abbr">Omnibus Account</div><div class="term-zh">A pooled bank or wallet account holding many users' funds together, while internal ledgers track each user's balance and movements.</div></div>
-            <div class="term-item"><div class="term-abbr">Ledger Balance</div><div class="term-zh">The balance shown in the platform's internal books. It may differ from bank balance because of pending transactions, fees, reversals, and reserves.</div></div>
-          </div>
-          <div class="case-box">Example: a marketplace collects customer funds into one bank account, records each seller's receivable internally, then pays sellers out later. In crypto, an exchange omnibus wallet follows the same logic: one chain address, many internal user balances.</div>
-        </div>
-        <div class="card">
-          <div class="card-title">Clearing vs Settlement vs Netting</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Clearing</div><div class="term-zh">Calculating who owes what after authorization or transaction submission. It includes transaction data, fees, interchange, scheme fees, FX, and dispute adjustments.</div></div>
-            <div class="term-item"><div class="term-abbr">Settlement</div><div class="term-zh">The actual movement of net funds between banks, schemes, processors, merchants, or wallets.</div></div>
-            <div class="term-item"><div class="term-abbr">Netting</div><div class="term-zh">Offsetting payables and receivables so only the net amount is moved. This reduces bank transfers and liquidity needs.</div></div>
-            <div class="term-item"><div class="term-abbr">Gross Settlement</div><div class="term-zh">Every transaction settles individually without offsetting. It is clearer, but more expensive and liquidity-heavy.</div></div>
-          </div>
-          <div class="case-box">A card network may clear millions of transactions, net each participant's position, and settle only the final net amount. Stablecoin transfers often look like gross settlement because each on-chain transfer is visible individually.</div>
-        </div>
-        <div class="card">
-          <div class="card-title">Balances, reserves, and reconciliation</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Available Balance</div><div class="term-zh">Funds the merchant can actually withdraw or use after pending transactions, reserves, and holds are excluded.</div></div>
-            <div class="term-item"><div class="term-abbr">Pending Balance</div><div class="term-zh">Funds expected to settle but not yet available because clearing, risk review, or banking cut-offs are not complete.</div></div>
-            <div class="term-item"><div class="term-abbr">Rolling Reserve</div><div class="term-zh">A percentage of merchant volume held back for a period to cover refunds, disputes, fraud, or future chargebacks.</div></div>
-            <div class="term-item"><div class="term-abbr">Chargeback Reserve</div><div class="term-zh">A specific reserve against expected card disputes and chargeback liabilities.</div></div>
-            <div class="term-item"><div class="term-abbr">Reconciliation</div><div class="term-zh">Matching transactions, invoices, bank statements, processor reports, refunds, fees, and settlements until every cent has an owner.</div></div>
-            <div class="term-item"><div class="term-abbr">Settlement Report</div><div class="term-zh">A processor or bank file showing transactions, fees, adjustments, and the final payout amount.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Fund-flow operating controls</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Safeguarding</div><div class="term-zh">Keeping customer funds separate from company operating funds, commonly required for e-money and payment institutions.</div></div>
-            <div class="term-item"><div class="term-abbr">Float</div><div class="term-zh">Money temporarily held by a platform between collection and payout. It creates liquidity and compliance obligations.</div></div>
-            <div class="term-item"><div class="term-abbr">Treasury</div><div class="term-zh">The function that manages cash, liquidity, bank accounts, FX exposure, reserves, and settlement timing.</div></div>
-            <div class="term-item"><div class="term-abbr">Four-eye Approval</div><div class="term-zh">A control requiring two independent approvals before large payouts, account changes, or treasury movements.</div></div>
-          </div>
-        </div>
-      </div>
+</div>
 
+<!-- Card Acquiring -->
 <div id="sec-card" class="section">
-        <h2 class="section-title">Card Acquiring</h2>
-        <p class="section-desc">The card-payment stack from checkout to authorization, capture, clearing, settlement, disputes, merchant payout, fees, authentication, and PCI scope.</p>
-<div class="card" data-en-visual="card">
-  <div class="card-title">A $100 online card payment, step by step</div>
-  <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Card data enters checkout.</strong> The browser sends encrypted card data to the gateway.</div></div>
-  <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Tokenization.</strong> The gateway replaces raw PAN with a token and routes the auth request.</div></div>
-  <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Network routing.</strong> The acquirer sends the request through Visa/Mastercard to the issuer.</div></div>
-  <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Issuer decision.</strong> The issuer checks balance, CVV, fraud signals, and places a hold. No final settlement yet.</div></div>
-  <div class="step"><div class="step-num green">5</div><div class="step-body"><strong>Capture, clearing, settlement.</strong> The merchant captures after fulfillment; the network clears and settles net funds, usually T+1/T+2.</div></div>
-  <hr class="div">
-  <div class="chain"><div class="chain-node cn-blue">MDR</div><div class="chain-arrow">=</div><div class="chain-node cn-pink">Interchange</div><div class="chain-arrow">+</div><div class="chain-node cn-purple">Scheme fee</div><div class="chain-arrow">+</div><div class="chain-node cn-teal">Acquirer markup</div></div>
-</div>
-        <div class="card">
-          <div class="card-title">The five visible roles in a card payment</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Cardholder</div><div class="term-zh">The buyer who owns and uses the card.</div></div>
-            <div class="term-item"><div class="term-abbr">Merchant</div><div class="term-zh">The business selling goods or services and accepting the card payment.</div></div>
-            <div class="term-item"><div class="term-abbr">Issuer</div><div class="term-zh">The bank or fintech that issued the card, holds the cardholder relationship, and approves or declines authorization.</div></div>
-            <div class="term-item"><div class="term-abbr">Card Scheme / Network</div><div class="term-zh">Visa, Mastercard, Amex, UnionPay, and similar networks that set rules, route messages, and calculate fees.</div></div>
-            <div class="term-item"><div class="term-abbr">Acquirer</div><div class="term-zh">The merchant-side financial institution that enables card acceptance and ultimately receives settlement for the merchant.</div></div>
-            <div class="term-item"><div class="term-abbr">Processor</div><div class="term-zh">The technical operator handling authorization messages, clearing files, settlement files, and reporting.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Gateway, PSP, PayFac, ISO</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Payment Gateway</div><div class="term-zh">The technical entry point that tokenizes, encrypts, and routes payment data from checkout to processor or acquirer.</div></div>
-            <div class="term-item"><div class="term-abbr">PSP · Payment Service Provider</div><div class="term-zh">A merchant-facing platform that combines gateway, acquiring connectivity, payment methods, reporting, and operations.</div></div>
-            <div class="term-item"><div class="term-abbr">PayFac · Payment Facilitator</div><div class="term-zh">A platform that onboards sub-merchants under a master merchant account, reducing onboarding friction but taking more risk.</div></div>
-            <div class="term-item"><div class="term-abbr">ISO · Independent Sales Organization</div><div class="term-zh">A sales or distribution partner that refers merchants to an acquirer or processor.</div></div>
-          </div>
-          <div class="case-box">Stripe and Adyen are often discussed as PSPs, but their exact role varies by region, merchant setup, and license stack.</div>
-        </div>
-        <div class="card">
-          <div class="card-title">Transaction lifecycle inside cards</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Authorization / Auth</div><div class="term-zh">The issuer checks card validity, funds, risk, and permissions, then places a hold. No final money movement yet.</div></div>
-            <div class="term-item"><div class="term-abbr">Capture</div><div class="term-zh">The merchant confirms that the authorized payment should be charged.</div></div>
-            <div class="term-item"><div class="term-abbr">Clearing</div><div class="term-zh">Transaction details and fees are exchanged between acquirer, network, and issuer.</div></div>
-            <div class="term-item"><div class="term-abbr">Settlement</div><div class="term-zh">Net funds move through the card network and banking rails.</div></div>
-            <div class="term-item"><div class="term-abbr">Payout</div><div class="term-zh">The PSP or acquirer transfers available funds to the merchant bank account.</div></div>
-            <div class="term-item"><div class="term-abbr">Void</div><div class="term-zh">Canceling an authorization before capture. The hold is released, and the transaction never becomes a charge.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Card fees and risk terms</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">MDR · Merchant Discount Rate</div><div class="term-zh">The total card acceptance cost paid by the merchant, usually shown as a percentage plus a fixed fee.</div></div>
-            <div class="term-item"><div class="term-abbr">Interchange Fee</div><div class="term-zh">The fee paid to the issuer. It is often the largest component of card cost.</div></div>
-            <div class="term-item"><div class="term-abbr">Scheme Fee</div><div class="term-zh">Fees charged by card networks for routing, assessment, cross-border processing, and other network services.</div></div>
-            <div class="term-item"><div class="term-abbr">Acquirer Markup</div><div class="term-zh">The acquirer or PSP's commercial margin on top of interchange and scheme fees.</div></div>
-            <div class="term-item"><div class="term-abbr">3DS / SCA</div><div class="term-zh">Authentication flows that ask the cardholder to prove identity, often shifting fraud liability.</div></div>
-            <div class="term-item"><div class="term-abbr">PCI DSS</div><div class="term-zh">Security standards for handling cardholder data. Hosted checkout can reduce a merchant's PCI scope.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Disputes, chargebacks, and reversals</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Refund</div><div class="term-zh">The merchant voluntarily sends funds back after settlement.</div></div>
-            <div class="term-item"><div class="term-abbr">Chargeback</div><div class="term-zh">The cardholder disputes through the issuer, and funds may be pulled back from the merchant.</div></div>
-            <div class="term-item"><div class="term-abbr">Representment</div><div class="term-zh">The merchant's response package arguing that the chargeback is invalid.</div></div>
-            <div class="term-item"><div class="term-abbr">ARN · Acquirer Reference Number</div><div class="term-zh">A tracking identifier used to trace refunds and card settlements through the acquiring chain.</div></div>
-          </div>
-        </div>
-      </div>
+<h2 class="section-title">Card Acquiring</h2>
+<p class="section-desc">There are at least five roles behind one card payment. Understanding this relationship map is the prerequisite for understanding the payments business model.</p>
 
+<div class="card">
+  <div class="card-title">Complete card-payment chain, step by step</div>
+  <p class="prose">Example: a customer buys a $100 product on a Shopify independent store with a Visa credit card.</p>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><strong>The user enters card number / CVV and clicks Pay.</strong> The browser sends encrypted card data to the gateway.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><strong>The gateway performs tokenization.</strong> It replaces the real card number with a token and routes the authorization request to the acquirer. It is a data pipe and does not touch funds.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><strong>The acquirer routes through the Visa network.</strong> The authorization request goes to the issuer through Visa's IP network, not SWIFT.</div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><strong>The issuer verifies the card.</strong> It checks balance, CVV, and fraud models, then freezes a $100 authorization hold. This is not a final debit. It takes about 1-3 seconds.</div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><strong>The authorization code returns along the same route.</strong> The user sees payment success, but funds are only reserved.</div></div>
+  <div class="step"><div class="step-num">6</div><div class="step-body"><strong>Capture:</strong> after fulfillment, the merchant formally submits the charge. If canceled before this point, the merchant sends a void.</div></div>
+  <div class="step"><div class="step-num">7</div><div class="step-body"><strong>Clearing:</strong> that night, Visa aggregates captures and nets what banks owe each other.</div></div>
+  <div class="step"><div class="step-num green">8</div><div class="step-body"><strong>Settlement T+2:</strong> the issuer transfers net funds to the acquirer. After MDR, the merchant receives about $97-$98.</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Fee structure: <span class="abbr">MDR = IC + Scheme fee + Markup</span></div>
+  <div class="case-box teal"><div class="case-label teal">Core formula</div>MDR (Merchant Discount Rate) = IC (Interchange Fee) + Scheme fee + Acquirer Markup.<br><br><strong>Markup:</strong> the acquirer charges a margin above IC and scheme fees to cover operations, chargeback reserve, and sales commission.</div>
+  <div class="grid2">
+    <div class="grid-card"><div class="label">Blended Rate</div><div class="body">A packaged price such as Stripe 2.9% + $0.30. It is easy to understand, but actual cost varies by card type.</div></div>
+    <div class="grid-card"><div class="label">IC++</div><div class="body">Actual interchange + scheme fees + a fixed markup. It is transparent and usually better for high-volume merchants.</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Security and authentication</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">Tokenization</div><div class="term-en">Card number -> random token</div><div class="term-zh">Merchants store tokens rather than raw PAN. Apple Pay and Google Pay are built on this logic.</div></div>
+    <div class="term-item"><div class="term-abbr">3DS2</div><div class="term-en">3-D Secure 2.0</div><div class="term-zh">Low-risk transactions pass frictionlessly; high-risk ones trigger SMS, app, or biometric challenge.</div></div>
+    <div class="term-item"><div class="term-abbr">SCA</div><div class="term-en">Strong Customer Authentication</div><div class="term-zh">PSD2 requires two factors from knowledge, possession, and inherence.</div></div>
+    <div class="term-item"><div class="term-abbr">BIN / IIN</div><div class="term-en">Issuer identification number</div><div class="term-zh">The first 6-8 digits identify issuer, card type, tier, and country.</div></div>
+    <div class="term-item"><div class="term-abbr">AVS</div><div class="term-en">Address Verification System</div><div class="term-zh">Checks billing address against issuer records. Common in US e-commerce.</div></div>
+    <div class="term-item"><div class="term-abbr">CVV / CVC</div><div class="term-en">Card security code</div><div class="term-zh">The three digits on the back of a card, or four digits on the front of Amex.</div></div>
+    <div class="term-item"><div class="term-abbr">PCI DSS</div><div class="term-en">Payment Card Industry Data Security Standard</div><div class="term-zh">Mandatory security standard for systems that touch cardholder data.</div></div>
+  </div>
+  <div class="case-box red"><div class="case-label red">Chargeback flow</div>Cardholder complaint -> issuer freezes dispute -> acquirer notifies merchant -> merchant submits evidence within about 30 days -> scheme arbitration -> funds pulled back plus fees. If CBR exceeds 1%, card networks warn the merchant; above 2%, merchant eligibility can be terminated. RDR can refund before escalation so CBR does not rise.</div>
+</div>
+</div>
+
+<!-- Trade Payments -->
 <div id="sec-trade" class="section">
-        <h2 class="section-title">Trade Payments</h2>
-        <p class="section-desc">B2B collection, invoices, payment terms, escrow, supplier payouts, letters of credit, trade finance, and the operational gap between delivery and payment.</p>
-<div class="card" data-en-visual="trade">
-  <div class="card-title">Trade-payment instruments by risk allocation</div>
-  <table class="tbl">
-    <tbody><tr><th>Instrument</th><th>When buyer pays</th><th>Who carries risk</th><th>Typical use</th></tr>
-    <tr><td><span class="badge badge-blue">LC</span> Letter of Credit</td><td>Bank pays when documents match</td><td>Bank-backed, lowest seller risk</td><td>Large first-time international deals</td></tr>
-    <tr><td><span class="badge badge-teal">D/P</span> Documents against Payment</td><td>Buyer pays before receiving documents</td><td>Moderate seller protection</td><td>Medium-trust trade flows</td></tr>
-    <tr><td><span class="badge badge-amber">D/A</span> Documents against Acceptance</td><td>Buyer accepts bill and pays later</td><td>Seller carries buyer credit risk</td><td>Long-term buyers with bargaining power</td></tr>
-  </tbody></table>
-  <div class="case-box amber">
-    <div class="case-label amber">LC flow</div>
-    Contract -> buyer asks issuing bank to open LC -> advising bank notifies seller -> seller ships goods -> documents are checked -> bank pays -> buyer reimburses bank and collects goods.
+<h2 class="section-title">Trade Payments</h2>
+<p class="section-desc">Payment tools in international trade. Each tool is a different allocation of risk between buyer, seller, and bank.</p>
+
+<div class="card">
+  <div class="card-title">LC / D/P / D/A comparison</div>
+  <table class="tbl"><tbody><tr><th>Tool</th><th>Full name</th><th>Payment timing</th><th>Risk owner</th><th>Best fit</th></tr><tr><td><span class="badge badge-blue">LC</span></td><td>Letter of Credit</td><td>Bank pays when documents match</td><td>Bank guarantee, lowest risk</td><td>Large first deal where buyer credit is unknown</td></tr><tr><td><span class="badge badge-teal">D/P</span></td><td>Documents against Payment</td><td>Buyer pays before receiving documents</td><td>Seller is relatively protected</td><td>Medium trust; seller wants faster cash recovery</td></tr><tr><td><span class="badge badge-amber">D/A</span></td><td>Documents against Acceptance</td><td>Buyer accepts a bill, takes documents, pays later</td><td>Seller takes buyer credit risk</td><td>Powerful buyer or long-term relationship</td></tr></tbody></table>
+  <div class="case-box amber"><div class="case-label amber">Why choose D/A?</div>D/A means the seller trades balance-sheet risk for market access. Buyers may demand D/A when they are large customers, goods are durable industrial products, FX controls require goods before payment, or long relationships rely on credit terms. D/A is a commercial strategy, not simply a fallback from D/P.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Complete LC process, 7 steps</div>
+  <div class="case-box teal"><div class="case-label teal">Key point: LC must be opened before shipment</div>The bank guarantees payment first, then the factory ships. It is not something requested after goods have shipped.</div>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Buyer and seller sign a contract</strong> and agree to settle by LC.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><strong>The buyer asks the issuing bank to open an LC.</strong> The bank reviews buyer credit and issues the LC.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><strong>The issuing bank sends the LC to the advising bank.</strong> The advising bank notifies the factory that the LC is in place.</div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><strong>The factory ships goods and obtains documents</strong> such as bill of lading, packing list, and invoice. It may also finance against the LC.</div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><strong>The factory submits documents to the advising bank</strong> for review against LC terms.</div></div>
+  <div class="step"><div class="step-num">6</div><div class="step-body"><strong>The advising bank claims from the issuing bank.</strong> The issuing bank pays if documents comply.</div></div>
+  <div class="step"><div class="step-num green">7</div><div class="step-body"><strong>The buyer reimburses the issuing bank</strong> and uses the documents to take delivery.</div></div>
+  <div class="case-box"><div class="case-label">Crypto RWA direction</div>If LC moves on-chain, a smart contract can arbitrate. Customs API data such as "goods cleared" can trigger automatic USDC release with T+0 settlement.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Additional trade terms</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">Beneficiary</div><div class="term-en">Payee</div><div class="term-zh">The final receiver of funds. In LC context, usually the exporter or seller.</div></div>
+    <div class="term-item"><div class="term-abbr">Remitter</div><div class="term-en">Sender</div><div class="term-zh">The sender of funds. Remitter data is core to AML screening in SWIFT messages.</div></div>
+    <div class="term-item"><div class="term-abbr">Escrow</div><div class="term-en">Third-party custody</div><div class="term-zh">Funds are held by a neutral party and released when contract conditions are met.</div></div>
+    <div class="term-item"><div class="term-abbr">Remittance</div><div class="term-en">Cross-border personal transfer</div><div class="term-zh">Often used for migrant worker transfers. Wise and Western Union focus on this market.</div></div>
   </div>
 </div>
-        <div class="card">
-          <div class="card-title">Invoice-led payments</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Invoice</div><div class="term-zh">A document stating who pays whom, for what, how much, in what currency, and by when.</div></div>
-            <div class="term-item"><div class="term-abbr">Invoicing</div><div class="term-zh">The end-to-end process of issuing, sending, collecting, matching, and closing an invoice.</div></div>
-            <div class="term-item"><div class="term-abbr">Beneficiary</div><div class="term-zh">The party that ultimately receives the money.</div></div>
-            <div class="term-item"><div class="term-abbr">Remitter</div><div class="term-zh">The party sending the payment.</div></div>
-            <div class="term-item"><div class="term-abbr">Payment Terms</div><div class="term-zh">The agreed timing and conditions for payment, such as Net 30, due on receipt, or milestone-based payment.</div></div>
-            <div class="term-item"><div class="term-abbr">Net 30 / Net 60</div><div class="term-zh">Payment must be made within 30 or 60 days after invoice receipt or issue date.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">B2B finance operations</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">AP · Accounts Payable</div><div class="term-zh">The buyer-side workflow for bills owed to suppliers.</div></div>
-            <div class="term-item"><div class="term-abbr">AR · Accounts Receivable</div><div class="term-zh">The seller-side workflow for invoices waiting to be collected.</div></div>
-            <div class="term-item"><div class="term-abbr">Purchase Order / PO</div><div class="term-zh">A buyer-issued document confirming intent to purchase under agreed terms.</div></div>
-            <div class="term-item"><div class="term-abbr">Goods Receipt</div><div class="term-zh">A record that goods or services were received, often needed before AP approves payment.</div></div>
-            <div class="term-item"><div class="term-abbr">Three-way Match</div><div class="term-zh">Matching purchase order, invoice, and goods receipt before paying a supplier.</div></div>
-            <div class="term-item"><div class="term-abbr">Remittance Advice</div><div class="term-zh">A notice explaining what invoice or invoices a payment is intended to settle.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Escrow and trade assurance</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Escrow</div><div class="term-zh">A neutral holding arrangement where funds are released only after agreed conditions are met.</div></div>
-            <div class="term-item"><div class="term-abbr">Milestone Payment</div><div class="term-zh">Payment released in stages as project milestones are completed.</div></div>
-            <div class="term-item"><div class="term-abbr">Letter of Credit / LC</div><div class="term-zh">A bank guarantee used in international trade, promising payment if documents meet the agreed conditions.</div></div>
-            <div class="term-item"><div class="term-abbr">Documentary Collection</div><div class="term-zh">A trade process where banks handle shipping and payment documents but do not guarantee payment.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Trade finance and supplier liquidity</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Factoring</div><div class="term-zh">Selling receivables to a finance provider for earlier cash.</div></div>
-            <div class="term-item"><div class="term-abbr">Invoice Discounting</div><div class="term-zh">Borrowing against receivables while keeping customer collection in-house.</div></div>
-            <div class="term-item"><div class="term-abbr">Dynamic Discounting</div><div class="term-zh">The buyer pays earlier in exchange for a discount.</div></div>
-            <div class="term-item"><div class="term-abbr">Supply Chain Finance</div><div class="term-zh">A program where suppliers get early payment based on the buyer's credit quality.</div></div>
-          </div>
-        </div>
-      </div>
+</div>
 
+<!-- FX -->
 <div id="sec-fx" class="section">
-        <h2 class="section-title">FX &amp; Cross-Border</h2>
-        <p class="section-desc">Cross-border money movement is a stack of messaging, bank accounts, FX conversion, compliance checks, cut-off times, local rails, and liquidity partners.</p>
-<div class="card" data-en-visual="fx">
-  <div class="card-title">Where cross-border cost hides</div>
-  <div class="chain">
-    <div class="chain-node cn-gray">Sender currency</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-amber">FX quote<br><small style="font-weight:400;font-size:10px">mid-market +/- spread</small></div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-blue">Correspondent chain</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-teal">Local rail</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-green">Beneficiary receives</div>
-  </div>
-  <div class="grid2">
-    <div class="grid-card"><div class="label">Bank wire</div><div class="body">Costs can appear as transfer fees, intermediary deductions, FX spread, and delayed value date.</div></div>
-    <div class="grid-card"><div class="label">Stablecoin rail</div><div class="body">The chain transfer can settle quickly, but on/off-ramp spread, liquidity, and compliance still determine final cost.</div></div>
+<h2 class="section-title">FX & Cross-Border</h2>
+<p class="section-desc">Understanding FX cost is central to cross-border payments. Many "zero fee" products hide profit inside the exchange-rate spread.</p>
+
+<div class="card">
+  <div class="card-title">Mid-market Rate vs Spread: who has pricing power?</div>
+  <div class="case-box teal"><div class="case-label teal">Core formula</div>User exchange rate = Mid-market Rate +/- Spread<br>Institutional profit = Spread x FX amount</div>
+  <div class="step"><div class="step-num amber">1</div><div class="step-body"><strong>Traditional banks (0.5%-3%):</strong> Nostro account management and hedging cost matter, but the real reason is information opacity. Users do not know the true mid-market rate.</div></div>
+  <div class="step"><div class="step-num amber">2</div><div class="step-body"><strong>Wise / Airwallex (0.2%-0.6%):</strong> local matching lowers cost by maintaining local accounts and minimizing true cross-border fund movement.</div></div>
+  <div class="step"><div class="step-num amber">3</div><div class="step-body"><strong>CEX (0.1%-0.5%):</strong> deep order books and market makers reduce matching cost. Large OTC trades can negotiate lower spreads.</div></div>
+  <div class="step"><div class="step-num green">4</div><div class="step-body"><strong>Stablecoins (near zero):</strong> cross-border "FX" becomes receiving USDC and off-ramping locally. If off-ramp markets are competitive, total cost can approach zero.</div></div>
+  <p class="prose"><strong>Source of pricing power:</strong> liquidity scale, information transparency, local fund matching, and regulatory compliance cost.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Virtual Account / Multi-currency / SAFE</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">Virtual Account</div><div class="term-en">Sub-account under a bank master account</div><div class="term-zh">Each customer receives a local-looking account number; funds auto-reconcile into the master account. Crypto analogy: unique deposit addresses.</div></div>
+    <div class="term-item"><div class="term-abbr">Multi-currency</div><div class="term-en">One account with multiple currency balances</div><div class="term-zh">Balances can be held and converted internally. Crypto analogy: a CEX account holding BTC, ETH, and USDC.</div></div>
+    <div class="term-item"><div class="term-abbr">SAFE</div><div class="term-en">State Administration of Foreign Exchange</div><div class="term-zh">China's foreign-exchange regulator. SAFE compliance is the first gate for foreign companies collecting in China.</div></div>
   </div>
 </div>
-        <div class="card">
-          <div class="card-title">SWIFT and correspondent banking</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">SWIFT</div><div class="term-zh">A secure bank messaging network. It transmits instructions, not the money itself.</div></div>
-            <div class="term-item"><div class="term-abbr">Correspondent Bank</div><div class="term-zh">A bank that holds accounts for another bank to support international payments.</div></div>
-            <div class="term-item"><div class="term-abbr">Intermediary Bank</div><div class="term-zh">A bank in the middle of a transfer chain. It may deduct fees and add delay.</div></div>
-            <div class="term-item"><div class="term-abbr">Nostro Account</div><div class="term-zh">Our account with your bank, typically in a foreign currency.</div></div>
-            <div class="term-item"><div class="term-abbr">Vostro Account</div><div class="term-zh">Your account with our bank, from the receiving bank's perspective.</div></div>
-            <div class="term-item"><div class="term-abbr">MT103</div><div class="term-zh">A SWIFT customer credit transfer message often used to trace international wires.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">FX pricing</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Mid-market Rate</div><div class="term-zh">The midpoint between buy and sell prices in the wholesale FX market.</div></div>
-            <div class="term-item"><div class="term-abbr">Spread</div><div class="term-zh">The difference between the mid-market rate and the rate quoted to the customer.</div></div>
-            <div class="term-item"><div class="term-abbr">Markup</div><div class="term-zh">The provider's commercial margin added into the FX quote.</div></div>
-            <div class="term-item"><div class="term-abbr">Slippage</div><div class="term-zh">The difference between expected and executed rate, often caused by volatility or low liquidity.</div></div>
-            <div class="term-item"><div class="term-abbr">Spot FX</div><div class="term-zh">A currency exchange for near-immediate settlement, commonly T+0 to T+2.</div></div>
-            <div class="term-item"><div class="term-abbr">Forward FX</div><div class="term-zh">A contract locking in an exchange rate for a future date.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Settlement timing and rails</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Cut-off Time</div><div class="term-zh">The daily deadline after which payment processing moves to the next business day.</div></div>
-            <div class="term-item"><div class="term-abbr">Value Date</div><div class="term-zh">The date funds are considered settled and available.</div></div>
-            <div class="term-item"><div class="term-abbr">ACH</div><div class="term-zh">A US batch bank transfer rail, often cheaper but slower than instant payment rails.</div></div>
-            <div class="term-item"><div class="term-abbr">SEPA</div><div class="term-zh">Euro-area bank transfer schemes, including SEPA Credit Transfer and SEPA Instant.</div></div>
-            <div class="term-item"><div class="term-abbr">FPS / Faster Payments</div><div class="term-zh">Local fast bank-transfer systems such as UK Faster Payments or Hong Kong FPS.</div></div>
-            <div class="term-item"><div class="term-abbr">RTGS</div><div class="term-zh">Real-time gross settlement systems used for high-value bank payments.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Why cross-border card payments lose value</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Cross-border Fee</div><div class="term-zh">A card network or acquirer fee applied when issuer, merchant, or settlement countries differ.</div></div>
-            <div class="term-item"><div class="term-abbr">DCC · Dynamic Currency Conversion</div><div class="term-zh">Offering the cardholder a local-currency price at checkout, often with an embedded FX markup.</div></div>
-            <div class="term-item"><div class="term-abbr">Withholding / Reserve</div><div class="term-zh">Funds held back for risk, refunds, and disputes, especially for cross-border merchants.</div></div>
-            <div class="term-item"><div class="term-abbr">Beneficiary Deduction</div><div class="term-zh">Fees deducted along the transfer path before the final beneficiary receives funds.</div></div>
-          </div>
-        </div>
-      </div>
+</div>
 
+<!-- Crypto Payments -->
 <div id="sec-crypto" class="section">
-        <h2 class="section-title">Crypto Payments</h2>
-        <p class="section-desc">Stablecoin payments, wallets, on-chain settlement, ramps, custody, token standards, chain selection, and crypto-native checkout flows.</p>
-<div class="card" data-en-visual="crypto">
-  <div class="card-title">Stablecoin checkout lifecycle</div>
-  <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Payment request.</strong> Merchant creates an invoice, QR code, address, asset, network, and expiry window.</div></div>
-  <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Broadcast.</strong> Payer signs and submits the transaction from a wallet or exchange account.</div></div>
-  <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Detection.</strong> Payment provider monitors mempool and confirmations, then fires a webhook.</div></div>
-  <div class="step"><div class="step-num green">4</div><div class="step-body"><strong>Settlement choice.</strong> Merchant keeps stablecoins, swaps to another asset, or off-ramps to fiat.</div></div>
-  <table class="tbl">
-    <tbody><tr><th>License trigger</th><th>Why it matters</th></tr>
-    <tr><td>VASP / CASP</td><td>Custody, exchange, broker, transfer, or crypto-asset service activity.</td></tr>
-    <tr><td>MSB / MTL / EMI</td><td>Fiat movement, money transmission, stored value, or e-money issuance.</td></tr>
-  </tbody></table>
-</div>
-        <div class="card">
-          <div class="card-title">Stablecoin primitives</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Stablecoin</div><div class="term-zh">A token designed to maintain stable value, most often pegged to USD.</div></div>
-            <div class="term-item"><div class="term-abbr">USDT</div><div class="term-zh">Tether's USD-pegged stablecoin, widely used for global crypto payments.</div></div>
-            <div class="term-item"><div class="term-abbr">USDC</div><div class="term-zh">Circle's USD-pegged stablecoin, often used in regulated and institutional flows.</div></div>
-            <div class="term-item"><div class="term-abbr">Reserve</div><div class="term-zh">The cash, bank deposits, T-bills, or other assets backing a stablecoin.</div></div>
-            <div class="term-item"><div class="term-abbr">Mint</div><div class="term-zh">Issuing new tokens after reserve assets are received.</div></div>
-            <div class="term-item"><div class="term-abbr">Burn / Redeem</div><div class="term-zh">Destroying tokens and returning fiat or reserve value to the holder.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Checkout, invoices, and payment links</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Crypto Checkout</div><div class="term-zh">A checkout flow where the buyer pays with wallet funds or stablecoins rather than card rails.</div></div>
-            <div class="term-item"><div class="term-abbr">Payment Link</div><div class="term-zh">A URL containing amount, asset, network, merchant, and payment instructions.</div></div>
-            <div class="term-item"><div class="term-abbr">QR Payment</div><div class="term-zh">A wallet-scannable representation of the payment request.</div></div>
-            <div class="term-item"><div class="term-abbr">On-chain Receipt</div><div class="term-zh">The transaction hash and chain data proving payment occurred.</div></div>
-            <div class="term-item"><div class="term-abbr">Webhook</div><div class="term-zh">A server callback notifying the merchant system that a payment was detected or confirmed.</div></div>
-            <div class="term-item"><div class="term-abbr">Confirmation Count</div><div class="term-zh">The number of blocks after a transaction, used to judge settlement confidence.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Wallet and network vocabulary</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Wallet Address</div><div class="term-zh">A public blockchain address used to receive assets.</div></div>
-            <div class="term-item"><div class="term-abbr">Private Key</div><div class="term-zh">The secret that controls asset movement. Whoever controls it controls the funds.</div></div>
-            <div class="term-item"><div class="term-abbr">Seed Phrase</div><div class="term-zh">A human-readable backup for wallet keys.</div></div>
-            <div class="term-item"><div class="term-abbr">Gas Fee</div><div class="term-zh">The network fee paid to execute a blockchain transaction.</div></div>
-            <div class="term-item"><div class="term-abbr">Token Standard</div><div class="term-zh">Rules such as ERC-20, TRC-20, or SPL defining how tokens behave on a chain.</div></div>
-            <div class="term-item"><div class="term-abbr">Bridge</div><div class="term-zh">Infrastructure for moving value or representations of value across chains.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Ramps and liquidity</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">On-ramp</div><div class="term-zh">Fiat into crypto or stablecoins.</div></div>
-            <div class="term-item"><div class="term-abbr">Off-ramp</div><div class="term-zh">Crypto or stablecoins back into fiat bank money.</div></div>
-            <div class="term-item"><div class="term-abbr">CEX</div><div class="term-zh">Centralized exchange. Easier onboarding and liquidity, but assets are typically custodial.</div></div>
-            <div class="term-item"><div class="term-abbr">DEX</div><div class="term-zh">Decentralized exchange. On-chain swaps without a central order custodian.</div></div>
-            <div class="term-item"><div class="term-abbr">OTC Desk</div><div class="term-zh">Over-the-counter trading desk for larger conversions and negotiated pricing.</div></div>
-            <div class="term-item"><div class="term-abbr">Settlement Finality</div><div class="term-zh">The point after which the transfer is practically irreversible.</div></div>
-          </div>
-        </div>
-      </div>
+<h2 class="section-title">Crypto Payments</h2>
+<p class="section-desc">This is familiar territory for crypto operators, but payment context reveals different dimensions of the same terms.</p>
 
+<div class="card">
+  <div class="card-title">On-ramp & Off-ramp and related licenses</div>
+  <div class="grid2">
+    <div class="grid-card"><div class="label">On-ramp: fiat -> crypto</div><div class="body">Buying USDC by card or bank transfer. Providers must handle payment routing, fraud, FX, and MDR cost.</div></div>
+    <div class="grid-card"><div class="label">Off-ramp: crypto -> fiat</div><div class="body">A merchant receives USDC and converts it to local currency. This requires local bank accounts, KYC, AML, and clearing access.</div></div>
+  </div>
+  <div class="case-box red"><div class="case-label red">Why does off-ramp require a license?</div>Off-ramp legally performs accepting crypto, exchanging it into fiat, and transferring fiat to a user account. That triggers MSB/MTL in the US, EMI/PI in Europe, or VASP rules in many jurisdictions.</div>
+  <table class="tbl"><tbody><tr><th>License</th><th>Full name</th><th>Jurisdiction</th><th>Difficulty</th><th>Timeline</th></tr><tr><td><span class="badge badge-blue">MTL</span></td><td>Money Transmitter License</td><td>US states</td><td>Very hard</td><td>2-3 years, state by state</td></tr><tr><td><span class="badge badge-blue">MSB</span></td><td>Money Services Business</td><td>US FinCEN</td><td>Relatively easy</td><td>14-day registration; still needs MTL</td></tr><tr><td><span class="badge badge-amber">VASP</span></td><td>Virtual Asset Service Provider</td><td>FATF framework</td><td>Medium</td><td>3-12 months</td></tr><tr><td><span class="badge badge-teal">MPI+DPT</span></td><td>Major Payment Institution + Digital Payment Token</td><td>Singapore MAS</td><td>Medium-high</td><td>12-18 months</td></tr><tr><td><span class="badge badge-pink">VATP</span></td><td>Virtual Asset Trading Platform</td><td>Hong Kong SFC</td><td>High</td><td>12-24 months</td></tr><tr><td><span class="badge badge-blue">EMI</span></td><td>Electronic Money Institution</td><td>EU central banks</td><td>Medium</td><td>6-18 months</td></tr></tbody></table>
+</div>
+
+<div class="card">
+  <div class="card-title">Omnibus Wallet implementation logic</div>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><strong>On-chain structure:</strong> the platform holds all user funds in one main address.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Off-chain ledger:</strong> the internal database records user balances. Internal transfers update the database and cost zero gas.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Deposit recognition:</strong> each user receives a unique deposit address, then funds are swept to the omnibus address.</div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Withdrawal:</strong> the platform sends an on-chain transaction from the omnibus wallet and deducts the internal balance.</div></div>
+  <div class="step"><div class="step-num red">!</div><div class="step-body"><strong>Regulatory risk:</strong> MiCA and Hong Kong VATP emphasize client-asset segregation. Moving from omnibus to per-user addresses can multiply gas cost.</div></div>
+  <div class="case-box"><div class="case-label">Cost comparison</div>For one million users with ten transfers each: omnibus may need about one million on-chain operations, while per-user addresses may need ten million. On Ethereum mainnet, the cost gap can be 10-100x.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Travel Rule</div>
+  <p class="prose">FATF requires that when VASPs transfer above a threshold, usually around $1,000 in many countries, the sending VASP passes identity information to the receiving VASP. The challenge: on-chain transfers are address-to-address and do not naturally carry identity data.</p>
+  <table class="tbl"><tbody><tr><th>Protocol</th><th>Implementation logic</th><th>Main users</th></tr><tr><td>Notabene</td><td>VASP directory plus encrypted API; identity package is shared off-chain before broadcast.</td><td>Kraken, Bitfinex</td></tr><tr><td>Sygna Bridge</td><td>IVMS101 standard format and white-label SDK, strong APAC coverage.</td><td>APAC VASPs</td></tr><tr><td>OpenVASP</td><td>Open protocol using Ethereum ENS addressing and P2P connectivity.</td><td>European projects</td></tr><tr><td>VerifyVASP</td><td>Korea-led network integrated with Korean, Japanese, and Singaporean exchanges.</td><td>Upbit, Bithumb</td></tr></tbody></table>
+</div>
+
+<div class="card">
+  <div class="card-title">Crypto terms quick reference</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">OTC</div><div class="term-en">Over The Counter</div><div class="term-zh">Large bilateral trades outside exchanges, often above $100k, without moving public order books.</div></div>
+    <div class="term-item"><div class="term-abbr">DEX / CEX</div><div class="term-en">Decentralized / Centralized exchange</div><div class="term-zh">DEX uses on-chain AMM and no custody; CEX requires KYC, custody, and regulation.</div></div>
+    <div class="term-item"><div class="term-abbr">MPC</div><div class="term-en">Multi-Party Computation</div><div class="term-zh">Private-key shares are split among parties and sign jointly. Preferred for institutional wallets.</div></div>
+    <div class="term-item"><div class="term-abbr">TVL</div><div class="term-en">Total Value Locked</div><div class="term-zh">Total assets locked in a DeFi protocol. In payments, high TVL means stronger settlement capacity.</div></div>
+    <div class="term-item"><div class="term-abbr">RWA</div><div class="term-en">Real World Assets</div><div class="term-zh">Tokenized traditional assets such as treasuries or letters of credit.</div></div>
+    <div class="term-item"><div class="term-abbr">Bridge / Gas</div><div class="term-en">Cross-chain bridge / network fee</div><div class="term-zh">Bridge moves assets across chains; gas cost determines small-payment feasibility.</div></div>
+    <div class="term-item"><div class="term-abbr">Mint / Burn</div><div class="term-en">Stablecoin issuance and redemption</div><div class="term-zh">$1 deposited -> 1 USDC minted; redemption burns 1 USDC and returns $1.</div></div>
+  </div>
+</div>
+</div>
+
+<!-- Crypto Cards -->
 <div id="sec-ucard" class="section">
-        <h2 class="section-title">Crypto Cards</h2>
-        <p class="section-desc">Crypto cards connect wallet balances, stablecoins, issuer processors, BIN sponsors, card networks, compliance, authorization, and merchant acceptance.</p>
-<div class="card" data-en-visual="ucard">
-  <div class="card-title">Crypto card spend flow, inside roughly 200ms</div>
-  <div class="chain">
-    <div class="chain-node cn-gray">Card tap</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-purple">Visa/MC auth</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-amber">Issuer checks crypto balance</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-teal">Real-time off-ramp</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-green">Merchant receives fiat</div>
-  </div>
+<h2 class="section-title">Crypto Cards</h2>
+<p class="section-desc">A product that inserts crypto assets into the traditional card-payment shell. The technology is mature; the bottleneck is compliance.</p>
+
+<div class="card">
+  <div class="card-title">Essence and swipe moment, within roughly 200ms</div>
+  <p class="prose">A crypto card is a real-time off-ramp plus card-network product. The user holds crypto assets, while the merchant sees an ordinary Visa or Mastercard payment.</p>
+  <div class="step"><div class="step-num">1</div><div class="step-body">The user spends $5 at Starbucks. The POS sends an authorization request through Visa to the crypto card issuer.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body">The issuer system immediately deducts equivalent USDC or BTC from the user's crypto account.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body">The internal off-ramp engine converts USDC to USD and books it into the custodial fiat account.</div></div>
+  <div class="step"><div class="step-num green">4</div><div class="step-body">The issuer returns approval to Visa. Starbucks receives a normal USD card payment and never sees crypto.</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Pre-conversion vs real-time conversion</div>
   <div class="grid2">
-    <div class="grid-card"><div class="label">Pre-converted balance</div><div class="body">Crypto is converted to fiat before spending. Simpler UX and lower spend-time volatility.</div></div>
-    <div class="grid-card"><div class="label">Real-time conversion</div><div class="body">Crypto remains crypto until authorization. More flexible, but depends on instant liquidity and risk controls.</div></div>
+    <div class="grid-card"><div class="label">Pre-conversion model</div><div class="body">Crypto is converted to fiat at top-up and stored in a custodial account.<br><br><strong>Pros:</strong> fixed FX and simple UX.<br><strong>Cons:</strong> user gives up upside while holding fiat.<br><br><strong>Example:</strong> Crypto.com Card.</div></div>
+    <div class="grid-card"><div class="label">Real-time conversion model</div><div class="body">Assets remain crypto until the spend moment.<br><br><strong>Pros:</strong> flexible exposure.<br><strong>Cons:</strong> slippage and high technical complexity within 200ms.<br><br><strong>Example:</strong> Wirex Card.</div></div>
   </div>
 </div>
-        <div class="card">
-          <div class="card-title">Crypto card operating model</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Crypto Card</div><div class="term-zh">A card product where spending is funded by crypto or stablecoin balances, often converted before card settlement.</div></div>
-            <div class="term-item"><div class="term-abbr">Prepaid Card</div><div class="term-zh">A card funded in advance from a stored balance rather than a credit line.</div></div>
-            <div class="term-item"><div class="term-abbr">Debit Card</div><div class="term-zh">A card that draws from a deposit or wallet balance.</div></div>
-            <div class="term-item"><div class="term-abbr">Virtual Card</div><div class="term-zh">A card number issued digitally for online spending.</div></div>
-            <div class="term-item"><div class="term-abbr">Physical Card</div><div class="term-zh">A plastic or metal card used at POS terminals and ATMs.</div></div>
-            <div class="term-item"><div class="term-abbr">Card Funding</div><div class="term-zh">The process that moves wallet value into the card spend account or available balance.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Program stack</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">BIN Sponsor</div><div class="term-zh">A licensed financial institution sponsoring the card program into a card network.</div></div>
-            <div class="term-item"><div class="term-abbr">Issuer Processor</div><div class="term-zh">The processor that authorizes card spend, manages balances, and connects to networks.</div></div>
-            <div class="term-item"><div class="term-abbr">Program Manager</div><div class="term-zh">The company orchestrating card UX, compliance, operations, vendors, and commercial rules.</div></div>
-            <div class="term-item"><div class="term-abbr">Card Network</div><div class="term-zh">Visa, Mastercard, or another network handling acceptance and rules.</div></div>
-            <div class="term-item"><div class="term-abbr">Settlement Account</div><div class="term-zh">The fiat account used to settle card network obligations.</div></div>
-            <div class="term-item"><div class="term-abbr">Float Account</div><div class="term-zh">A funding account holding value available for card authorization.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Authorization and conversion</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Spend Authorization</div><div class="term-zh">Real-time decision to approve or decline a card transaction based on balance, risk, compliance, and limits.</div></div>
-            <div class="term-item"><div class="term-abbr">Pre-funding</div><div class="term-zh">Holding enough fiat or stablecoin liquidity in advance to support card settlement.</div></div>
-            <div class="term-item"><div class="term-abbr">Just-in-time Funding</div><div class="term-zh">Moving or converting funds at the moment of authorization.</div></div>
-            <div class="term-item"><div class="term-abbr">Crypto-to-Fiat Conversion</div><div class="term-zh">Converting stablecoins or crypto to fiat so the card network can settle in supported currencies.</div></div>
-            <div class="term-item"><div class="term-abbr">FX Markup</div><div class="term-zh">Additional spread or fee when the card spend currency differs from the funding currency.</div></div>
-            <div class="term-item"><div class="term-abbr">Velocity Limit</div><div class="term-zh">A risk rule limiting spend frequency or amount over a time window.</div></div>
-          </div>
-        </div>
-      </div>
 
+<div class="card">
+  <div class="card-title">Three-layer compliance architecture</div>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Card-network access through BIN sponsor:</strong> Visa/MC usually work through a licensed bank or EMI. Compliance responsibility ultimately sits with the sponsor bank.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Off-ramp license:</strong> real-time exchange plus remittance requires MSB/MTL in the US, EMI/PI in Europe, or equivalent VASP permissions.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Dual KYC/AML and tax risk:</strong> one KYC journey must satisfy both card/bank rules and VASP rules. Each crypto-to-fiat spend may be a taxable event in some jurisdictions.</div></div>
+  <div class="case-box amber"><div class="case-label amber">Core bottleneck</div>The hard parts are BIN sponsor banking relationships, license acquisition time and cost, continuous on-chain AML monitoring, and jurisdiction-specific tax treatment.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Main crypto card project license paths</div>
+  <table class="tbl"><tbody><tr><th>Project</th><th>BIN sponsor</th><th>Core licenses</th><th>Market coverage</th></tr><tr><td>Crypto.com Visa</td><td>Sutton Bank in the US</td><td>Lithuania EMI, Singapore MPI</td><td>US, EU, Singapore, Australia</td></tr><tr><td>Wirex</td><td>Partner licensed banks</td><td>UK FCA EMI, EU passporting</td><td>UK, EU, some US states</td></tr><tr><td>Binance Card</td><td>Moorwand licensed EMI</td><td>Europe through BIN sponsor; US restricted</td><td>Mainly Europe</td></tr><tr><td>Coinbase Card</td><td>Sutton Bank in the US</td><td>BitLicense, state MTLs</td><td>US, UK</td></tr></tbody></table>
+</div>
+</div>
+
+<!-- Compliance -->
 <div id="sec-comp" class="section">
-        <h2 class="section-title">Compliance</h2>
-        <p class="section-desc">Identity, business verification, sanctions, AML monitoring, fraud signals, Travel Rule, risk scoring, reporting, and evidence trails.</p>
-<div class="card" data-en-visual="comp">
-  <div class="card-title">Compliance pipeline for payment and crypto flows</div>
-  <div class="chain">
-    <div class="chain-node cn-blue">KYC / KYB</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-purple">Sanctions screening</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-amber">Transaction monitoring</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-red">Alert review</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-teal">SAR / STR filing</div>
-  </div>
-  <table class="tbl">
-    <tbody><tr><th>Regulator / standard setter</th><th>Scope</th></tr>
-    <tr><td>FinCEN / OFAC</td><td>US MSB registration, AML reporting, and sanctions enforcement.</td></tr>
-    <tr><td>FATF</td><td>Global AML/CFT standards including Travel Rule for VASPs.</td></tr>
-    <tr><td>MAS / SFC / FCA / EBA</td><td>Regional payment, e-money, virtual asset, and conduct supervision.</td></tr>
-  </tbody></table>
-</div>
-        <div class="card">
-          <div class="card-title">KYC, KYB, AML, CFT</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">KYC · Know Your Customer</div><div class="term-zh">Verifying the identity of an individual customer.</div></div>
-            <div class="term-item"><div class="term-abbr">KYB · Know Your Business</div><div class="term-zh">Verifying a company, its registration, business activity, ownership, and controllers.</div></div>
-            <div class="term-item"><div class="term-abbr">UBO · Ultimate Beneficial Owner</div><div class="term-zh">The natural person who ultimately owns or controls a business.</div></div>
-            <div class="term-item"><div class="term-abbr">AML · Anti-Money Laundering</div><div class="term-zh">Controls for detecting and preventing money laundering.</div></div>
-            <div class="term-item"><div class="term-abbr">CFT / CTF</div><div class="term-zh">Countering the financing of terrorism.</div></div>
-            <div class="term-item"><div class="term-abbr">EDD · Enhanced Due Diligence</div><div class="term-zh">Deeper review for higher-risk users, geographies, industries, or transaction patterns.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Screening and monitoring</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Sanctions Screening</div><div class="term-zh">Checking customers and counterparties against restricted-party lists such as OFAC, UN, EU, or UK lists.</div></div>
-            <div class="term-item"><div class="term-abbr">PEP Screening</div><div class="term-zh">Identifying politically exposed persons whose positions create higher corruption or bribery risk.</div></div>
-            <div class="term-item"><div class="term-abbr">Adverse Media</div><div class="term-zh">Negative news or public records used in risk assessment.</div></div>
-            <div class="term-item"><div class="term-abbr">Transaction Monitoring</div><div class="term-zh">Rules and models that flag unusual or suspicious behavior.</div></div>
-            <div class="term-item"><div class="term-abbr">Risk Score</div><div class="term-zh">A numeric or categorical rating combining identity, geography, behavior, device, and transaction signals.</div></div>
-            <div class="term-item"><div class="term-abbr">Case Management</div><div class="term-zh">The workflow for reviewing alerts, documenting decisions, and escalating suspicious activity.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Crypto compliance</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">VASP</div><div class="term-zh">Virtual Asset Service Provider, such as an exchange, custodian, broker, transfer platform, or hosted wallet provider.</div></div>
-            <div class="term-item"><div class="term-abbr">Travel Rule</div><div class="term-zh">A requirement that originator and beneficiary information travels with qualifying transfers.</div></div>
-            <div class="term-item"><div class="term-abbr">Wallet Screening</div><div class="term-zh">Checking blockchain addresses for sanctions, hacks, scams, mixers, dark markets, or high-risk exposure.</div></div>
-            <div class="term-item"><div class="term-abbr">Source of Funds</div><div class="term-zh">Evidence explaining where the money came from.</div></div>
-            <div class="term-item"><div class="term-abbr">Source of Wealth</div><div class="term-zh">Evidence explaining how the customer accumulated wealth.</div></div>
-            <div class="term-item"><div class="term-abbr">Suspicious Activity Report</div><div class="term-zh">A regulatory report filed when activity may indicate money laundering, fraud, or other illicit finance.</div></div>
-          </div>
-        </div>
-      </div>
+<h2 class="section-title">Compliance</h2>
+<p class="section-desc">These acronyms are familiar to crypto operators, but payments context adds important differences.</p>
 
+<div class="card">
+  <div class="card-title">KYC / KYB / KYT three-layer verification system</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">KYC</div><div class="term-en">Know Your Customer</div><div class="term-zh">Personal verification: passport, selfie, address proof. Higher tiers require stronger checks.</div></div>
+    <div class="term-item"><div class="term-abbr">KYB</div><div class="term-en">Know Your Business</div><div class="term-zh">Company verification: registration, UBO look-through, bank statement, sanctions checks.</div></div>
+    <div class="term-item"><div class="term-abbr">KYT</div><div class="term-en">Know Your Transaction</div><div class="term-zh">Real-time transaction monitoring using tools such as Chainalysis or Elliptic.</div></div>
+    <div class="term-item"><div class="term-abbr">CDD / EDD</div><div class="term-en">Due diligence levels</div><div class="term-zh">CDD is standard review; EDD is deeper review for PEPs, high-risk countries, or large values.</div></div>
+    <div class="term-item"><div class="term-abbr">PEP</div><div class="term-en">Politically Exposed Person</div><div class="term-zh">Important public officials and close associates. Often triggers EDD or rejection.</div></div>
+    <div class="term-item"><div class="term-abbr">UBO</div><div class="term-en">Ultimate Beneficial Owner</div><div class="term-zh">Natural person who controls the company or owns 25%+ equity.</div></div>
+    <div class="term-item"><div class="term-abbr">SOF / SOW</div><div class="term-en">Source of Funds / Wealth</div><div class="term-zh">SOF asks where this money came from; SOW asks how the total wealth was built.</div></div>
+    <div class="term-item"><div class="term-abbr">AML / CTF</div><div class="term-en">Anti-Money Laundering / Counter-Terrorism Financing</div><div class="term-zh">The core compliance operating obligation for payment institutions.</div></div>
+    <div class="term-item"><div class="term-abbr">STR / SAR</div><div class="term-en">Suspicious Transaction / Activity Report</div><div class="term-zh">Suspicious activity is reported to regulators, and customers cannot be tipped off.</div></div>
+    <div class="term-item"><div class="term-abbr">FATF</div><div class="term-en">Financial Action Task Force</div><div class="term-zh">Global AML/CFT standard setter; grey-listing creates financial isolation pressure.</div></div>
+    <div class="term-item"><div class="term-abbr">Sanctions screening</div><div class="term-en">OFAC / EU / UN list screening</div><div class="term-zh">Checks whether counterparties or addresses appear on sanctions lists.</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Major regulators</div>
+  <table class="tbl"><tbody><tr><th>Agency</th><th>Full name</th><th>Jurisdiction</th><th>Role</th></tr><tr><td><span class="badge badge-blue">FinCEN</span></td><td>Financial Crimes Enforcement Network</td><td>US</td><td>MSB registration, SAR collection, AML oversight</td></tr><tr><td><span class="badge badge-blue">OFAC</span></td><td>Office of Foreign Assets Control</td><td>US</td><td>SDN sanctions list and economic sanctions enforcement</td></tr><tr><td><span class="badge badge-teal">MAS</span></td><td>Monetary Authority of Singapore</td><td>Singapore</td><td>Central bank and financial regulator; MPI/DPT licenses</td></tr><tr><td><span class="badge badge-pink">SFC</span></td><td>Securities and Futures Commission</td><td>Hong Kong</td><td>VATP license and securities/futures supervision</td></tr><tr><td><span class="badge badge-pink">HKMA</span></td><td>Hong Kong Monetary Authority</td><td>Hong Kong</td><td>Banking, SVF license, stablecoin issuance</td></tr><tr><td><span class="badge badge-gray">SAFE</span></td><td>State Administration of Foreign Exchange</td><td>China</td><td>FX control and cross-border RMB settlement</td></tr></tbody></table>
+</div>
+</div>
+
+<!-- License Map -->
 <div id="sec-lic" class="section">
-        <h2 class="section-title">License Map</h2>
-        <p class="section-desc">Payments are territorial. A company operating globally usually needs a stack of local licenses, registrations, exemptions, bank partners, and compliance programs.</p>
-<div class="card" data-en-visual="lic">
-  <div class="card-title">World license map, simplified by operating region</div>
-  <div class="diagram">
-    <svg viewBox="0 0 760 320" role="img" aria-label="Simplified world license map">
-      <rect width="760" height="320" fill="#F2F8F5"></rect>
-      <ellipse cx="155" cy="125" rx="105" ry="58" fill="#CFE0F2" stroke="#2E6DA4"></ellipse>
-      <ellipse cx="215" cy="225" rx="70" ry="46" fill="#D8D2F2" stroke="#5C4BB0"></ellipse>
-      <ellipse cx="380" cy="108" rx="82" ry="48" fill="#BFE6D6" stroke="#0E7C6B"></ellipse>
-      <ellipse cx="455" cy="170" rx="58" ry="36" fill="#EFD9AE" stroke="#8C5A11"></ellipse>
-      <ellipse cx="430" cy="235" rx="72" ry="48" fill="#C9E0AE" stroke="#047857"></ellipse>
-      <ellipse cx="590" cy="150" rx="125" ry="68" fill="#EFC6D4" stroke="#A6396A"></ellipse>
-      <text x="155" y="116" text-anchor="middle" fill="#2E6DA4" font-size="15" font-weight="700">US / Canada</text>
-      <text x="155" y="137" text-anchor="middle" fill="#2E6DA4" font-size="12">MSB · MTL · BitLicense</text>
-      <text x="215" y="222" text-anchor="middle" fill="#5C4BB0" font-size="15" font-weight="700">LatAm</text>
-      <text x="215" y="243" text-anchor="middle" fill="#5C4BB0" font-size="12">PSP · Pix</text>
-      <text x="380" y="101" text-anchor="middle" fill="#0E7C6B" font-size="15" font-weight="700">Europe / UK</text>
-      <text x="380" y="122" text-anchor="middle" fill="#0E7C6B" font-size="12">EMI · PI · MiCA</text>
-      <text x="455" y="166" text-anchor="middle" fill="#8C5A11" font-size="15" font-weight="700">Middle East</text>
-      <text x="455" y="187" text-anchor="middle" fill="#8C5A11" font-size="12">VARA · ADGM</text>
-      <text x="430" y="232" text-anchor="middle" fill="#047857" font-size="15" font-weight="700">Africa</text>
-      <text x="430" y="253" text-anchor="middle" fill="#047857" font-size="12">PSO · PSP</text>
-      <text x="590" y="145" text-anchor="middle" fill="#A6396A" font-size="15" font-weight="700">APAC</text>
-      <text x="590" y="166" text-anchor="middle" fill="#A6396A" font-size="12">MPI · VATP · SVF</text>
+<h2 class="section-title">License Map</h2>
+<p class="section-desc">Different markets require different licenses for payment operations. Use the map and tables to understand regional license stacks.</p>
+
+<div class="card">
+  <div class="map-legend"><div class="map-leg" style="color:#2E6DA4"><span style="background:#2E6DA4"></span>US / Canada</div><div class="map-leg" style="color:#5C4BB0"><span style="background:#5C4BB0"></span>Latin America</div><div class="map-leg" style="color:#0E7C6B"><span style="background:#0E7C6B"></span>Europe</div><div class="map-leg" style="color:#A6396A"><span style="background:#A6396A"></span>APAC</div><div class="map-leg" style="color:#8C5A11"><span style="background:#8C5A11"></span>Middle East</div><div class="map-leg" style="color:#047857"><span style="background:#047857"></span>Africa</div></div>
+  <div class="map-container" style="background:var(--bg2);border-radius:8px;padding:14px;overflow:hidden">
+    <svg id="world-map" viewBox="0 0 960 500" role="img" aria-label="World payment license map" style="display:block;width:100%;height:auto">
+      <image href="/assets/world-license-map-en.svg" width="960" height="500"></image>
     </svg>
   </div>
-  <div class="case-box teal"><div class="case-label teal">How to read it</div>Licensing is activity-based and jurisdiction-specific. The same product may need payment, e-money, money transmission, virtual asset, custody, and FX permissions in different markets.</div>
+  <div class="map-tip"><div id="map-tip-title">Click a country or legend area to review regional license details</div><div id="map-tip-items"></div></div>
 </div>
-        <div class="card">
-          <div class="card-title">United States and Canada</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">MSB Registration</div><div class="term-zh">US federal money services business registration with FinCEN. It is not the same as state licensing.</div></div>
-            <div class="term-item"><div class="term-abbr">MTL · Money Transmitter License</div><div class="term-zh">State-by-state US licensing for money transmission.</div></div>
-            <div class="term-item"><div class="term-abbr">BitLicense</div><div class="term-zh">New York's virtual currency business license, one of the strictest US crypto regimes.</div></div>
-            <div class="term-item"><div class="term-abbr">National Bank Charter</div><div class="term-zh">A federal bank charter that can change state licensing requirements but has a much higher entry bar.</div></div>
-            <div class="term-item"><div class="term-abbr">FINTRAC MSB</div><div class="term-zh">Canadian money services business registration and AML supervision.</div></div>
-            <div class="term-item"><div class="term-abbr">State Money Movement Exemptions</div><div class="term-zh">Agency, payment processor, closed-loop, or other exemptions that may apply only under narrow facts.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Europe and the UK</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">EMI · Electronic Money Institution</div><div class="term-zh">Authorization to issue e-money and provide payment services.</div></div>
-            <div class="term-item"><div class="term-abbr">PI · Payment Institution</div><div class="term-zh">Authorization for payment services without issuing e-money.</div></div>
-            <div class="term-item"><div class="term-abbr">Small EMI / Small PI</div><div class="term-zh">Lower-scale regimes with limits on volume, geography, or services.</div></div>
-            <div class="term-item"><div class="term-abbr">Passporting</div><div class="term-zh">EU mechanism allowing a licensed institution in one member state to operate across other member states.</div></div>
-            <div class="term-item"><div class="term-abbr">FCA E-money</div><div class="term-zh">UK e-money and payment authorization after Brexit, separate from EU passporting.</div></div>
-            <div class="term-item"><div class="term-abbr">AISP / PISP</div><div class="term-zh">PSD2 account information and payment initiation service provider permissions.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Asia-Pacific and Middle East</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Singapore MPI</div><div class="term-zh">Major Payment Institution license regulated by MAS, covering payment services above specified thresholds.</div></div>
-            <div class="term-item"><div class="term-abbr">DPT Service</div><div class="term-zh">Singapore digital payment token service activity.</div></div>
-            <div class="term-item"><div class="term-abbr">Hong Kong MSO</div><div class="term-zh">Money Service Operator license for money changing and remittance.</div></div>
-            <div class="term-item"><div class="term-abbr">Hong Kong SVF</div><div class="term-zh">Stored Value Facility license for wallet and stored-value operations.</div></div>
-            <div class="term-item"><div class="term-abbr">Japan Crypto-Asset Exchange Registration</div><div class="term-zh">JFSA registration for crypto-asset exchange services.</div></div>
-            <div class="term-item"><div class="term-abbr">Dubai VARA VASP License</div><div class="term-zh">Dubai virtual asset licensing regime for specific virtual asset activities.</div></div>
-          </div>
-        </div>
-      </div>
 
+<div class="card">
+  <div class="card-title">License quick tables</div>
+  <h4>Americas</h4><table class="tbl"><tbody><tr><th>License</th><th>Full name</th><th>Authority</th><th>Key point</th></tr><tr><td>MTL</td><td>Money Transmitter License</td><td>US states</td><td>48 states + DC, 2-3 years, multi-million cost</td></tr><tr><td>MSB</td><td>Money Services Business</td><td>FinCEN</td><td>14-day registration, still requires state MTL</td></tr><tr><td>BitLicense</td><td>-</td><td>NYDFS</td><td>Strictest US crypto license, 2-3 year approval</td></tr><tr><td>Brazil PSP</td><td>Payment Service Provider</td><td>BCB</td><td>Open banking and Pix real-time payments</td></tr><tr><td>Mexico PSSP</td><td>Payment Service Provider / Institution</td><td>CNBV</td><td>2018 Fintech Law framework</td></tr></tbody></table>
+  <h4>Europe</h4><table class="tbl"><tbody><tr><th>License</th><th>Full name</th><th>Authority</th><th>Key point</th></tr><tr><td>EMI</td><td>Electronic Money Institution</td><td>National central banks / EBA</td><td>Passport to 27 EU states, EUR350k capital</td></tr><tr><td>PI</td><td>Payment Institution</td><td>National central banks</td><td>Payment services only, EUR125k capital</td></tr><tr><td>AISP/PISP</td><td>Account / Payment Initiation Service Provider</td><td>PSD2</td><td>Lowest threshold for account info and payment initiation</td></tr><tr><td>MiCA CASP</td><td>Crypto-Asset Service Provider</td><td>EU MiCA</td><td>Unified EU crypto regulation with passporting</td></tr></tbody></table>
+  <h4>APAC</h4><table class="tbl"><tbody><tr><th>License</th><th>Full name</th><th>Authority</th><th>Key point</th></tr><tr><td>MPI+DPT</td><td>Major Payment Institution + Digital Payment Token</td><td>Singapore MAS</td><td>No payment-volume cap; Asian benchmark</td></tr><tr><td>VATP</td><td>Virtual Asset Trading Platform</td><td>Hong Kong SFC</td><td>Effective June 2023; HK$5M capital</td></tr><tr><td>SVF</td><td>Stored Value Facility</td><td>Hong Kong HKMA</td><td>Octopus / Alipay HK license type; stablecoin prerequisite</td></tr><tr><td>SEA PSP</td><td>Payment Service Provider</td><td>Local central banks</td><td>Indonesia OJK, Philippines BSP, Thailand BOT; often foreign ownership limits</td></tr></tbody></table>
+  <h4>Middle East & Africa</h4><table class="tbl"><tbody><tr><th>License</th><th>Full name</th><th>Authority</th><th>Key point</th></tr><tr><td>Dubai VASP</td><td>Virtual Asset Service Provider License</td><td>VARA</td><td>Founded in 2022, relatively friendly approval</td></tr><tr><td>ADGM FSRA</td><td>Financial Services Regulatory Authority</td><td>ADGM</td><td>Institutional business and Web3 funds</td></tr><tr><td>Nigeria PSO</td><td>Payment Service Operator</td><td>CBN</td><td>Core market for Flutterwave and Paystack</td></tr><tr><td>Kenya PSP</td><td>Payment Service Provider</td><td>CBK</td><td>M-Pesa birthplace and advanced mobile payments</td></tr></tbody></table>
+</div>
+</div>
+
+<!-- Stablecoin Licenses -->
 <div id="sec-stable" class="section">
-        <h2 class="section-title">Stablecoin Licenses</h2>
-        <p class="section-desc">Stablecoin activity can touch e-money, payment services, virtual asset services, custody, brokerage, exchange, reserve management, and consumer protection rules.</p>
-<div class="card" data-en-visual="stable">
-  <div class="card-title">Stablecoin license and trust stack</div>
-  <div class="chain"><div class="chain-node cn-blue">Issuer</div><div class="chain-arrow">-></div><div class="chain-node cn-teal">Segregated reserve</div><div class="chain-arrow">-></div><div class="chain-node cn-amber">Attestation</div><div class="chain-arrow">-></div><div class="chain-node cn-purple">Redemption right</div><div class="chain-arrow">-></div><div class="chain-node cn-green">Payment utility</div></div>
-  <table class="tbl">
-    <tbody><tr><th>Project type</th><th>Typical compliance signal</th><th>Why users care</th></tr>
-    <tr><td>USDC-style issuer</td><td>US state licenses, money service registration, reserve attestations</td><td>Institutional trust and redemption confidence.</td></tr>
-    <tr><td>MiCA EMT issuer</td><td>EU e-money token authorization</td><td>EU market access and clearer consumer rights.</td></tr>
-    <tr><td>Payment platform</td><td>Payment/e-money licenses plus crypto permissions</td><td>Can combine checkout, settlement, conversion, and payout.</td></tr>
-  </tbody></table>
+<h2 class="section-title">Stablecoin Project Licenses</h2>
+<p class="section-desc">Licenses are the core compliance moat for stablecoin payment projects. More jurisdictions mean broader market access.</p>
+<div class="card">
+  <table class="tbl"><tbody><tr><th>Project</th><th>Core licenses</th><th>Key timeline</th><th>Core edge</th></tr><tr><td>Circle (USDC)</td><td>US state MTLs, MSB, France ACPR EMI, Singapore MPI</td><td>MTLs 2015-2021; EU EMI 2023</td><td>Most compliance-forward USDC issuer with treasury reserves and monthly attestations</td></tr><tr><td>Tether (USDT)</td><td>El Salvador digital asset service provider; avoids US MSB posture</td><td>El Salvador 2024</td><td>Deepest liquidity, but reserve-transparency concerns remain</td></tr><tr><td>Stripe / Bridge</td><td>US MSB + MTL stack, Ireland EMI, Bridge MTLs</td><td>EU EMI 2022</td><td>Strongest distribution through Stripe's merchant ecosystem</td></tr><tr><td>Ripple (RLUSD)</td><td>NYDFS BitLicense, Singapore MPI, UAE ADGM FSRA, UK FCA</td><td>BitLicense Dec 2023</td><td>Institutional signal from NYDFS and XRP clearing network</td></tr><tr><td>PayPal (PYUSD)</td><td>NYDFS BitLicense plus PayPal US MTL stack</td><td>BitLicense Aug 2023</td><td>400M user base and large financial institution trust</td></tr><tr><td>Paxos</td><td>NYDFS BitLicense and trust charter, Singapore MPI, UAE ADGM</td><td>BitLicense 2015</td><td>Earliest BitLicense; shifted toward institutional white-label business</td></tr><tr><td>Coinbase</td><td>BitLicense, state MTLs + MSB, Singapore MPI + DPT</td><td>BitLicense 2017</td><td>Circle partner and listed-company institutional entry point</td></tr><tr><td>Alchemy Pay</td><td>US MSB, Lithuania EMI, Canada FINTRAC MSB, Australia AUSTRAC</td><td>Lithuania EMI 2023</td><td>Focused on on/off-ramp with fiat rails across 200+ countries</td></tr></tbody></table>
+  <div class="case-box"><div class="case-label">License competitiveness</div><strong>Full US MTL coverage ($10M+ cost)</strong> creates a high barrier. <strong>EU EMI</strong> passports to 27 countries and is highly cost-effective. <strong>NYDFS BitLicense</strong> is globally strict and trusted by institutions. <strong>MAS MPI + DPT</strong> is the Asian benchmark and a signal for Hong Kong and Japan.</div>
 </div>
-        <div class="card">
-          <div class="card-title">Stablecoin issuer model</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Issuer</div><div class="term-zh">The entity minting, redeeming, and operating the stablecoin.</div></div>
-            <div class="term-item"><div class="term-abbr">Reserve Asset</div><div class="term-zh">Cash, bank deposits, government bills, or other assets backing the token.</div></div>
-            <div class="term-item"><div class="term-abbr">Segregated Reserve</div><div class="term-zh">Reserve assets separated from the issuer's operating assets.</div></div>
-            <div class="term-item"><div class="term-abbr">Attestation</div><div class="term-zh">A periodic third-party report on reserves and liabilities.</div></div>
-            <div class="term-item"><div class="term-abbr">Redemption Right</div><div class="term-zh">The holder's right to redeem tokens for fiat or equivalent value.</div></div>
-            <div class="term-item"><div class="term-abbr">Run Risk</div><div class="term-zh">The risk that many holders redeem at once and reserves or liquidity are insufficient.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Regulatory categories</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">MiCA EMT</div><div class="term-zh">EU e-money token category under the Markets in Crypto-Assets regulation.</div></div>
-            <div class="term-item"><div class="term-abbr">MiCA ART</div><div class="term-zh">EU asset-referenced token category for tokens referencing multiple assets or baskets.</div></div>
-            <div class="term-item"><div class="term-abbr">CASP</div><div class="term-zh">Crypto-Asset Service Provider under MiCA.</div></div>
-            <div class="term-item"><div class="term-abbr">Payment Stablecoin</div><div class="term-zh">A stablecoin intended for payment or settlement use rather than only trading.</div></div>
-            <div class="term-item"><div class="term-abbr">Custody License</div><div class="term-zh">Authorization to hold crypto assets or private keys for clients.</div></div>
-            <div class="term-item"><div class="term-abbr">Exchange / Broker License</div><div class="term-zh">Authorization for buying, selling, or arranging trades in crypto assets.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Operational obligations</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Reserve Management</div><div class="term-zh">Investment, liquidity, and safeguarding controls for backing assets.</div></div>
-            <div class="term-item"><div class="term-abbr">Whitepaper / Disclosure</div><div class="term-zh">Public disclosures describing rights, risks, reserves, technology, and issuer obligations.</div></div>
-            <div class="term-item"><div class="term-abbr">Redemption SLA</div><div class="term-zh">The promised timeframe for redeeming stablecoins into fiat.</div></div>
-            <div class="term-item"><div class="term-abbr">Chain Governance</div><div class="term-zh">Rules for minting, freezing, burning, blacklist controls, and supported networks.</div></div>
-            <div class="term-item"><div class="term-abbr">Financial Crime Controls</div><div class="term-zh">KYC, wallet screening, sanctions, Travel Rule, and transaction monitoring for stablecoin flows.</div></div>
-            <div class="term-item"><div class="term-abbr">Consumer Complaint Process</div><div class="term-zh">Required process for handling user complaints, errors, and disputes.</div></div>
-          </div>
-        </div>
-      </div>
+</div>
 
+<!-- Roles -->
 <div id="sec-roles" class="section">
-        <h2 class="section-title">Institutional Roles</h2>
-        <p class="section-desc">Modern payment products are assembled from many institutional roles: licensed entities, bank partners, processors, networks, liquidity providers, compliance vendors, custodians, and program managers.</p>
-<div class="card" data-en-visual="roles">
-  <div class="card-title">Institution role map</div>
-  <div class="diagram">
-    <svg viewBox="0 0 700 360" role="img" aria-label="Payment institution role map">
-      <defs><marker id="arrow-en" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5"/></marker></defs>
-      <rect width="700" height="360" fill="#F2F8F5"></rect>
-      <g fill="#FFFFFF" stroke="#C5DDD4" stroke-width="1">
-        <rect x="260" y="24" width="180" height="48" rx="8"></rect>
-        <rect x="250" y="102" width="200" height="54" rx="8"></rect>
-        <rect x="45" y="205" width="150" height="54" rx="8"></rect>
-        <rect x="275" y="205" width="150" height="54" rx="8"></rect>
-        <rect x="505" y="205" width="150" height="54" rx="8"></rect>
-        <rect x="250" y="292" width="200" height="44" rx="8"></rect>
-      </g>
-      <g fill="none" stroke="#83968F" marker-end="url(#arrow-en)">
-        <path d="M350 72V102"></path><path d="M250 129H195"></path><path d="M450 129H505"></path>
-        <path d="M120 205L300 156"></path><path d="M350 156V205"></path><path d="M580 205L400 156"></path><path d="M350 259V292"></path>
-      </g>
-      <g font-family="Inter, sans-serif" text-anchor="middle" font-size="13" fill="#0C3124" font-weight="700">
-        <text x="350" y="53">Cardholder / Buyer</text><text x="350" y="128">Gateway</text><text x="350" y="146" font-size="11" fill="#83968F" font-weight="500">encrypt · tokenize · route</text>
-        <text x="120" y="230">PSP / PayFac</text><text x="350" y="230">Acquirer / MoR</text><text x="580" y="230">Processor</text><text x="350" y="318">Network / Issuer</text>
-      </g>
-    </svg>
-  </div>
-  <div class="case-box"><div class="case-label">Risk ownership</div>The entity touching the customer is not always the regulated principal. Contracts, sponsorship, agency status, and outsourcing rules decide who owns settlement, chargeback, safeguarding, and AML risk.</div>
+<h2 class="section-title">Institutional Role Map</h2>
+<p class="section-desc">At least five roles participate behind one card transaction, each with a clear profit model and risk boundary.</p>
+<div class="card">
+  <div class="card-title">Hierarchy diagram</div>
+  <p class="prose"><strong>Solid lines = fund flow; dashed lines = data / instruction flow</strong></p>
+  <div class="diagram"><svg viewBox="0 0 760 520" role="img" aria-label="Institution role hierarchy" style="width:100%;height:auto">
+    <defs><marker id="arrow-role-en" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5"></path></marker></defs>
+    <rect width="760" height="520" fill="#F2F8F5"></rect>
+    <g fill="none" stroke="#0E7C6B" stroke-width="1.4" marker-end="url(#arrow-role-en)"><path d="M380 95V145"></path><path d="M290 190L180 260"></path><path d="M380 200V260"></path><path d="M470 190L580 260"></path><path d="M180 320L330 360"></path><path d="M380 320V360"></path><path d="M580 320L430 360"></path><path d="M380 420V460"></path></g>
+    <g fill="none" stroke="#B0C4BB" stroke-width="1.2" stroke-dasharray="5 5"><path d="M270 145H170"></path><path d="M490 145H590"></path><path d="M180 260L120 340"></path><path d="M580 260L640 340"></path></g>
+    <g font-family="Inter, sans-serif" text-anchor="middle"><rect x="300" y="35" width="160" height="50" rx="8" fill="#F9E8F0" stroke="#A6396A"></rect><text x="380" y="65" fill="#A6396A" font-weight="700">Cardholder</text><rect x="275" y="135" width="210" height="58" rx="8" fill="#F8EFDB" stroke="#8C5A11"></rect><text x="380" y="160" fill="#8C5A11" font-weight="700">Gateway</text><text x="380" y="180" fill="#8C5A11" font-size="12">encrypt · tokenize · route</text><rect x="80" y="255" width="170" height="58" rx="8" fill="#E0F2EE" stroke="#0E7C6B"></rect><text x="165" y="280" fill="#0E7C6B" font-weight="700">PSP / PayFac</text><text x="165" y="300" fill="#0E7C6B" font-size="12">payment service · submerchant</text><rect x="295" y="255" width="170" height="58" rx="8" fill="#E0F2EE" stroke="#0E7C6B"></rect><text x="380" y="280" fill="#0E7C6B" font-weight="700">MoR</text><text x="380" y="300" fill="#0E7C6B" font-size="12">tax · refund · compliance</text><rect x="510" y="255" width="170" height="58" rx="8" fill="#E0F2EE" stroke="#0E7C6B"></rect><text x="595" y="280" fill="#0E7C6B" font-weight="700">Acquirer</text><text x="595" y="300" fill="#0E7C6B" font-size="12">merchant contract · settlement</text><rect x="300" y="360" width="320" height="58" rx="8" fill="#ECE9F8" stroke="#5C4BB0"></rect><text x="460" y="385" fill="#5C4BB0" font-weight="700">Scheme / Network</text><text x="460" y="405" fill="#5C4BB0" font-size="12">Visa · Mastercard · UnionPay · Amex</text><rect x="300" y="455" width="320" height="48" rx="8" fill="#ECE9F8" stroke="#5C4BB0"></rect><text x="460" y="484" fill="#5C4BB0" font-weight="700">Issuer</text><rect x="75" y="365" width="150" height="50" rx="8" fill="#ECF1EE" stroke="#B0C4BB"></rect><text x="150" y="395" fill="#5C6B64" font-weight="700">ISO</text><rect x="620" y="365" width="150" height="50" rx="8" fill="#ECF1EE" stroke="#B0C4BB"></rect><text x="695" y="395" fill="#5C6B64" font-weight="700">Processor</text></g>
+  </svg></div>
+  <p class="prose"><strong>Issuer earns interchange; Scheme earns network fees; Acquirer / PSP earns markup.</strong></p>
 </div>
-        <div class="card">
-          <div class="card-title">Merchant-facing roles</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Merchant of Record / MoR</div><div class="term-zh">The legal seller responsible for taxes, refunds, disputes, and customer payment obligations.</div></div>
-            <div class="term-item"><div class="term-abbr">Seller of Record</div><div class="term-zh">The party recorded as the seller in commerce and tax workflows.</div></div>
-            <div class="term-item"><div class="term-abbr">Platform</div><div class="term-zh">A marketplace, SaaS product, or network coordinating merchants, buyers, and payments.</div></div>
-            <div class="term-item"><div class="term-abbr">Sub-merchant</div><div class="term-zh">A merchant onboarded under a PayFac or platform structure.</div></div>
-            <div class="term-item"><div class="term-abbr">Beneficiary</div><div class="term-zh">The recipient of funds.</div></div>
-            <div class="term-item"><div class="term-abbr">Counterparty</div><div class="term-zh">The other side of a transaction or settlement obligation.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Infrastructure roles</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Banking Partner</div><div class="term-zh">A bank providing accounts, safeguarding, payment rails, sponsorship, or settlement services.</div></div>
-            <div class="term-item"><div class="term-abbr">Processor</div><div class="term-zh">The transaction-processing infrastructure layer for authorization, clearing, settlement, or reporting.</div></div>
-            <div class="term-item"><div class="term-abbr">Network</div><div class="term-zh">A card, bank, or blockchain network setting rules and routing transactions.</div></div>
-            <div class="term-item"><div class="term-abbr">Custodian</div><div class="term-zh">A licensed entity holding client assets or private keys.</div></div>
-            <div class="term-item"><div class="term-abbr">Liquidity Provider</div><div class="term-zh">A partner supplying fiat, FX, crypto, or stablecoin liquidity.</div></div>
-            <div class="term-item"><div class="term-abbr">Compliance Vendor</div><div class="term-zh">A provider for KYC, KYB, AML, sanctions, fraud, device, or blockchain analytics.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Risk ownership</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Principal</div><div class="term-zh">The licensed entity ultimately responsible for a regulated activity.</div></div>
-            <div class="term-item"><div class="term-abbr">Agent</div><div class="term-zh">An entity acting on behalf of a principal under permission or registration.</div></div>
-            <div class="term-item"><div class="term-abbr">Outsourcing</div><div class="term-zh">Delegating operations to a vendor while retaining regulatory responsibility.</div></div>
-            <div class="term-item"><div class="term-abbr">Material Outsourcing</div><div class="term-zh">A critical outsourced function that needs governance, monitoring, and sometimes regulatory notification.</div></div>
-          </div>
-        </div>
-      </div>
+<div class="card">
+  <div class="card-title">Complete role descriptions</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">Cardholder</div><div class="term-en">Payment initiator</div><div class="term-zh">Can initiate chargeback through issuer; comparable to a private-key holder, but with bank protection.</div></div>
+    <div class="term-item"><div class="term-abbr">Gateway</div><div class="term-en">Data pipe</div><div class="term-zh">Encrypts card data, tokenizes, and routes authorization requests. It does not touch funds.</div></div>
+    <div class="term-item"><div class="term-abbr">PSP / PayFac</div><div class="term-en">One-stop payment access</div><div class="term-zh">Combines gateway and acquiring access. PayFac can onboard submerchants quickly and takes more risk.</div></div>
+    <div class="term-item"><div class="term-abbr">MoR</div><div class="term-en">Merchant of Record</div><div class="term-zh">The legal seller responsible for tax, refunds, and PCI obligations. Examples: Paddle, FastSpring.</div></div>
+    <div class="term-item"><div class="term-abbr">Acquirer</div><div class="term-en">Acquiring bank</div><div class="term-zh">Signs the merchant agreement, submits auth, joins clearing, and settles to merchant.</div></div>
+    <div class="term-item"><div class="term-abbr">Scheme</div><div class="term-en">Card network</div><div class="term-zh">Sets rules, routes authorization, calculates clearing net positions, and manages brand trust.</div></div>
+    <div class="term-item"><div class="term-abbr">Issuer</div><div class="term-en">Issuing bank</div><div class="term-zh">Issues cards, approves authorization, owns cardholder relationship, and earns interchange.</div></div>
+    <div class="term-item"><div class="term-abbr">ISO</div><div class="term-en">Independent Sales Organization</div><div class="term-zh">Sells merchant accounts for acquirers and earns residual revenue without taking fund risk.</div></div>
+    <div class="term-item"><div class="term-abbr">Processor</div><div class="term-en">Technical processing operator</div><div class="term-zh">Handles authorization, clearing files, settlement files, and reporting.</div></div>
+    <div class="term-item"><div class="term-abbr">VASP</div><div class="term-en">Virtual Asset Service Provider</div><div class="term-zh">CEX, OTC desk, custodian, or stablecoin payment provider under FATF framework.</div></div>
+    <div class="term-item"><div class="term-abbr">POS / mPOS</div><div class="term-en">Point of Sale / Mobile POS</div><div class="term-zh">Physical terminal, phone reader, or SoftPOS accepting NFC or card-present payments.</div></div>
+  </div>
+  <div class="case-box"><div class="case-label">Fee ownership summary</div>Every card payment's MDR splits into interchange for the issuer, scheme fee for the network, and markup for the acquirer / PSP. The merchant pays all MDR, and consumers usually experience it only through product pricing.</div>
+</div>
+</div>
 
+<!-- Transaction Lifecycle -->
 <div id="sec-txlife" class="section">
-        <h2 class="section-title">Transaction Lifecycle</h2>
-        <p class="section-desc">The complete journey of a transaction before it is authorized, captured, cleared, settled, reconciled, refunded, disputed, paid out, and closed in the ledger.</p>
-<div class="card" data-en-visual="txlife">
-  <div class="card-title">Transaction lifecycle overview</div>
-  <div class="chain">
-    <div class="chain-node cn-gray">Auth</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-blue">Capture</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-blue">Clearing</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-teal">Settlement</div><div class="chain-arrow">-></div>
-    <div class="chain-node cn-green">Payout</div><div class="chain-arrow">/</div>
-    <div class="chain-node cn-red">Refund or dispute</div>
-  </div>
-  <div class="grid2">
-    <div class="grid-card" style="border-left:3px solid #8C5A11"><div class="label" style="color:var(--amber)">Void</div><div class="body">Before capture: release the hold, no new money movement, usually no fee.</div></div>
-    <div class="grid-card" style="border-left:3px solid #C13A2D"><div class="label" style="color:var(--red)">Refund</div><div class="body">After settlement: reverse value back to the payer, usually slower and costlier.</div></div>
-  </div>
+<h2 class="section-title">Transaction Lifecycle</h2>
+<p class="section-desc">From authorization to settlement, each phase happens at a different point in time, and processing cost plus reversal difficulty increases along the path.</p>
+<div class="card"><div class="card-title">Overview</div><div class="chain"><div class="chain-node cn-gray">Auth</div><div class="chain-arrow">-></div><div class="chain-node cn-blue">Capture</div><div class="chain-arrow">-></div><div class="chain-node cn-blue">Clearing</div><div class="chain-arrow">-></div><div class="chain-node cn-teal">Settlement</div><div class="chain-arrow"><-></div><div class="chain-node cn-amber">Void</div><div class="chain-arrow">or</div><div class="chain-node cn-red">Refund</div></div></div>
+<div class="card"><div class="card-title"><span class="abbr">Auth</span> — Authorization</div><p class="prose">The issuer verifies that the account can pay and reserves a hold. It is not a real debit. Validity is often seven days.</p><hr class="div"><div class="card-title" style="margin-top:0">Pre-auth</div><p class="prose">Authorize an estimated amount first and adjust the final capture later. Hotels and gas stations are classic examples. Capture can be lower than auth, but not higher without a new authorization.</p></div>
+<div class="card"><div class="card-title"><span class="abbr">Capture</span> — submit for payment</div><p class="prose">After goods ship or service completes, the merchant formally initiates fund movement. It normally must happen before the authorization expires.</p><div class="grid2"><div class="grid-card"><div class="label">Full Capture</div><div class="body">The most common flow: capture the full authorized amount once.</div></div><div class="grid-card"><div class="label">Partial Capture</div><div class="body">Capture only part of the authorized amount, often for split shipments; the remaining hold is released.</div></div></div></div>
+<div class="card"><div class="card-title">Void vs Refund</div><div class="grid2"><div class="grid-card" style="border-left:3px solid #8C5A11"><div class="label" style="color:var(--amber)">Void</div><div class="body">Before capture: cancel the authorization, release funds, no fund movement, usually no fee, no CBR impact.</div></div><div class="grid-card" style="border-left:3px solid #C13A2D"><div class="label" style="color:var(--red)">Refund</div><div class="body">After settlement: initiate reverse fund movement. Original route, T+3 to T+5, plus per-transaction fee.</div></div></div><p class="prose"><strong>ARN:</strong> Acquirer Reference Number, a unique tracking number used by banks to locate a refund.</p></div>
+<div class="card"><div class="card-title"><span class="abbr">Recurring</span> — subscription payments</div><p class="prose">The cardholder authorizes the merchant to charge periodically. The cardholder is the authorization subject; the merchant executes.</p><hr class="div"><div class="grid2"><div class="grid-card"><div class="label">CIT · Cardholder-Initiated Transaction</div><div class="body">Cardholder is present and triggers the payment; 3DS/SCA may apply.</div></div><div class="grid-card"><div class="label">MIT · Merchant-Initiated Transaction</div><div class="body">Cardholder is absent; merchant charges using a mandate. More liability sits with merchant/acquirer.</div></div></div><div class="step"><div class="step-num">1</div><div class="step-body"><strong>Initial CIT:</strong> user starts the subscription, enters card details, triggers 3DS, and creates a mandate.</div></div><div class="step"><div class="step-num">2</div><div class="step-body"><strong>Subsequent MIT:</strong> monthly auto-charge attaches MIT flag and mandate ID, often skipping 3DS.</div></div><div class="step"><div class="step-num red">!</div><div class="step-body"><strong>Chargeback risk:</strong> "I do not remember authorizing this." Merchants must preserve original mandate evidence.</div></div><div class="warn-box"><strong>Dunning:</strong> when MIT fails, retry strategy matters. Excessive retrying can trigger fraud signals; Stripe Billing and Chargebee include dunning engines.</div></div>
+<div class="card"><div class="card-title">Four PCI DSS compliance levels</div><div class="level-grid"><div class="level-card" style="border-left:3px solid #C13A2D"><div class="level-head"><span class="badge badge-red">Level 1</span>over 6M transactions/year</div><div class="level-body">Annual QSA onsite audit. Any business with a breach may be forced into Level 1.</div></div><div class="level-card" style="border-left:3px solid #8C5A11"><div class="level-head"><span class="badge badge-amber">Level 2</span>1M-6M</div><div class="level-body">SAQ plus QSA/ISA sign-off and quarterly ASV scans.</div></div><div class="level-card" style="border-left:3px solid #047857"><div class="level-head"><span class="badge badge-green">Level 3</span>20k-1M e-commerce</div><div class="level-body">SAQ and quarterly scans; no onsite audit.</div></div><div class="level-card" style="border-left:3px solid #2E6DA4"><div class="level-head"><span class="badge badge-blue">Level 4</span>under 20k</div><div class="level-body">Simplest SAQ; hosted checkout can reduce scope close to zero.</div></div></div><div class="case-box teal"><div class="case-label teal">Why Stripe Checkout can reduce PCI scope to SAQ-A</div>Card data goes directly from the cardholder browser to Stripe. The merchant server never sees card data, so compliance scope is dramatically reduced compared with storing cards in-house.</div></div>
 </div>
-        <div class="card">
-          <div class="card-title">Card lifecycle</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Authorization</div><div class="term-zh">The issuer approves a payment request and places a hold on funds.</div></div>
-            <div class="term-item"><div class="term-abbr">Partial Authorization</div><div class="term-zh">The issuer approves only part of the requested amount.</div></div>
-            <div class="term-item"><div class="term-abbr">Incremental Authorization</div><div class="term-zh">An additional authorization used when the final amount increases, common in hotels or car rentals.</div></div>
-            <div class="term-item"><div class="term-abbr">Capture</div><div class="term-zh">The merchant confirms the transaction should be charged.</div></div>
-            <div class="term-item"><div class="term-abbr">Clearing</div><div class="term-zh">Transaction data and fees are exchanged between institutions.</div></div>
-            <div class="term-item"><div class="term-abbr">Settlement</div><div class="term-zh">Net funds move between banks or counterparties.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">After settlement</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Payout</div><div class="term-zh">The acquirer or PSP sends funds to the merchant bank account or wallet.</div></div>
-            <div class="term-item"><div class="term-abbr">Refund</div><div class="term-zh">The merchant sends money back after a transaction has settled.</div></div>
-            <div class="term-item"><div class="term-abbr">Chargeback</div><div class="term-zh">A cardholder dispute routed through the issuer and card network.</div></div>
-            <div class="term-item"><div class="term-abbr">Reversal</div><div class="term-zh">A transaction adjustment that cancels or corrects a previous message.</div></div>
-            <div class="term-item"><div class="term-abbr">Adjustment</div><div class="term-zh">A settlement correction for fees, disputes, errors, or manual operations.</div></div>
-            <div class="term-item"><div class="term-abbr">Write-off</div><div class="term-zh">Recognizing that a receivable is unlikely to be collected.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Stablecoin lifecycle</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Payment Request</div><div class="term-zh">The invoice, checkout session, QR code, or address generated for the payer.</div></div>
-            <div class="term-item"><div class="term-abbr">Broadcast</div><div class="term-zh">The payer signs and submits the transaction to the network.</div></div>
-            <div class="term-item"><div class="term-abbr">Mempool</div><div class="term-zh">The set of pending transactions waiting for block inclusion.</div></div>
-            <div class="term-item"><div class="term-abbr">Confirmation</div><div class="term-zh">A block includes the transaction; additional blocks increase confidence.</div></div>
-            <div class="term-item"><div class="term-abbr">Finality</div><div class="term-zh">The point where the payment is practically irreversible.</div></div>
-            <div class="term-item"><div class="term-abbr">Webhook Confirmation</div><div class="term-zh">The merchant system receives a server notification and updates order status.</div></div>
-          </div>
-        </div>
-      </div>
 
+<!-- Business Metrics -->
 <div id="sec-biz" class="section">
-        <h2 class="section-title">Business Metrics</h2>
-        <p class="section-desc">The metrics payment teams, operators, and investors use to understand scale, margin, retention, risk, conversion, and capital efficiency.</p>
-<div class="card" data-en-visual="biz">
-  <div class="card-title">Core payment-business math</div>
-  <div class="chain">
-    <div class="chain-node cn-blue">TPV</div><div class="chain-arrow">x</div>
-    <div class="chain-node cn-amber">Take rate</div><div class="chain-arrow">=</div>
-    <div class="chain-node cn-teal">Gross revenue</div><div class="chain-arrow">-</div>
-    <div class="chain-node cn-purple">Pass-through costs</div><div class="chain-arrow">=</div>
-    <div class="chain-node cn-green">Net revenue</div>
-  </div>
-  <div class="grid2">
-    <div class="grid-card"><div class="label">GMV</div><div class="body">Total commerce value on a platform, including transactions not processed by the platform's own payment stack.</div></div>
-    <div class="grid-card"><div class="label">TPV</div><div class="body">Payment value actually processed. Payment-company valuation usually starts from TPV, take rate, and margin quality.</div></div>
-  </div>
+<h2 class="section-title">Business Metrics</h2>
+<p class="section-desc">These metrics are common in payments and crypto, but payment context changes the details.</p>
+<div class="card"><div class="card-title">Core metric relationship</div><div class="chain"><div class="chain-node cn-blue">TPV</div><div class="chain-arrow">x</div><div class="chain-node cn-amber">Take Rate</div><div class="chain-arrow">=</div><div class="chain-node cn-teal">Net Revenue</div></div><hr class="div"><div class="card-title" style="margin-top:0">GMV vs TPV: platform vs payment system</div><div class="grid2"><div class="grid-card"><div class="label">GMV · Gross Merchandise Volume</div><div class="body">Total value of goods or services traded on a platform, including all payment methods.</div></div><div class="grid-card"><div class="label">TPV · Total Payment Volume</div><div class="body">The portion processed by the platform's own payment system. Transactions outside the payment stack do not count.</div></div></div><div class="case-box"><div class="case-label">Example: Shopify GMV vs TPV</div>Shopify's GMV is hundreds of billions of dollars, but TPV through Shopify Payments is only part of GMV. Many merchants use Stripe or PayPal, so Shopify does not capture payment revenue there. Investors use TPV for payment companies and GMV for commerce platforms. Typical take rate: Stripe around 2.9% blended; Adyen around 0.3%-0.5% IC++.</div></div>
+<div class="card"><div class="card-title">Full metric quick reference</div><div class="term-grid"><div class="term-item"><div class="term-abbr">TPV</div><div class="term-en">Total Payment Volume</div><div class="term-zh">Actual payment amount processed by the platform; core valuation base for payment companies.</div></div><div class="term-item"><div class="term-abbr">GMV</div><div class="term-en">Gross Merchandise Volume</div><div class="term-zh">Total commerce value on a platform, including all payment methods.</div></div><div class="term-item"><div class="term-abbr">Take Rate</div><div class="term-en">Revenue / TPV</div><div class="term-zh">Usually 0.5%-3%; higher means more pricing power or value-added services.</div></div><div class="term-item"><div class="term-abbr">NRR</div><div class="term-en">Net Revenue Retention</div><div class="term-zh">Above 100% means expansion; payment companies often have high NRR because migration cost is high.</div></div><div class="term-item"><div class="term-abbr">LTV / CAC</div><div class="term-en">Lifetime Value / Customer Acquisition Cost</div><div class="term-zh">LTV/CAC above 3 is generally healthy.</div></div><div class="term-item"><div class="term-abbr">MRR / ARR</div><div class="term-en">Monthly / Annual Recurring Revenue</div><div class="term-zh">ARR = MRR x 12. Fixed monthly fees count here; TPV-linked fees are variable.</div></div><div class="term-item"><div class="term-abbr">ARPU</div><div class="term-en">Average Revenue Per User</div><div class="term-zh">Total revenue divided by active users; common for consumer platforms.</div></div><div class="term-item"><div class="term-abbr">PEPM</div><div class="term-en">Per Employee Per Month</div><div class="term-zh">Pricing model for HR or corporate card products; revenue expands as the enterprise grows.</div></div></div></div>
 </div>
-        <div class="card">
-          <div class="card-title">Volume and monetization</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">TPV · Total Payment Volume</div><div class="term-zh">The value of payments processed through the platform.</div></div>
-            <div class="term-item"><div class="term-abbr">GMV · Gross Merchandise Volume</div><div class="term-zh">Total commerce value, including transactions not processed by the platform's own payment stack.</div></div>
-            <div class="term-item"><div class="term-abbr">Take Rate</div><div class="term-zh">Net revenue divided by TPV or GMV, depending on the business model.</div></div>
-            <div class="term-item"><div class="term-abbr">Net Revenue</div><div class="term-zh">Revenue after pass-through costs such as interchange, scheme fees, network fees, or partner costs.</div></div>
-            <div class="term-item"><div class="term-abbr">Gross Margin</div><div class="term-zh">Revenue minus direct costs, expressed as a percentage of revenue.</div></div>
-            <div class="term-item"><div class="term-abbr">Contribution Margin</div><div class="term-zh">Margin after variable costs such as processing, risk losses, support, and incentives.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Retention and customer economics</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">NRR · Net Revenue Retention</div><div class="term-zh">Existing-customer revenue after expansion, contraction, and churn.</div></div>
-            <div class="term-item"><div class="term-abbr">GRR · Gross Revenue Retention</div><div class="term-zh">Revenue retained before expansion.</div></div>
-            <div class="term-item"><div class="term-abbr">LTV · Lifetime Value</div><div class="term-zh">Total expected contribution from a customer over its lifecycle.</div></div>
-            <div class="term-item"><div class="term-abbr">CAC · Customer Acquisition Cost</div><div class="term-zh">Sales and marketing cost required to acquire a customer.</div></div>
-            <div class="term-item"><div class="term-abbr">Payback Period</div><div class="term-zh">Time needed to recover CAC from gross profit.</div></div>
-            <div class="term-item"><div class="term-abbr">Churn</div><div class="term-zh">Customer, account, or revenue loss over a period.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Payment operations metrics</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">Authorization Rate</div><div class="term-zh">Approved authorization attempts divided by total attempts.</div></div>
-            <div class="term-item"><div class="term-abbr">Conversion Rate</div><div class="term-zh">Checkout sessions that successfully become paid transactions.</div></div>
-            <div class="term-item"><div class="term-abbr">Dispute Rate</div><div class="term-zh">Disputed transactions divided by successful transactions or volume.</div></div>
-            <div class="term-item"><div class="term-abbr">Fraud Loss Rate</div><div class="term-zh">Fraud losses as a percentage of payment volume.</div></div>
-            <div class="term-item"><div class="term-abbr">Settlement SLA</div><div class="term-zh">Expected time from transaction to merchant payout or wallet receipt.</div></div>
-            <div class="term-item"><div class="term-abbr">Reconciliation Break Rate</div><div class="term-zh">Share of transactions that fail automatic matching and need manual investigation.</div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Recurring revenue metrics</div>
-          <div class="grid2">
-            <div class="term-item"><div class="term-abbr">MRR</div><div class="term-zh">Monthly recurring revenue from subscriptions or platform fees.</div></div>
-            <div class="term-item"><div class="term-abbr">ARR</div><div class="term-zh">Annual recurring revenue, commonly MRR multiplied by twelve.</div></div>
-            <div class="term-item"><div class="term-abbr">ARPU</div><div class="term-zh">Average revenue per user or account.</div></div>
-            <div class="term-item"><div class="term-abbr">PEPM</div><div class="term-zh">Per employee per month, common in HR, benefits, payroll, and corporate card pricing.</div></div>
-          </div>
-        </div>
-      </div>
 </main>
 </div>
 

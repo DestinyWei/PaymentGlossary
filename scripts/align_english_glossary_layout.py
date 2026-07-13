@@ -8,6 +8,8 @@ import re
 from html import escape
 from pathlib import Path
 
+from english_glossary_content import build_english_sections
+
 
 ROOT = Path(__file__).resolve().parents[1]
 ZH_INDEX = ROOT / "zh" / "index.html"
@@ -408,23 +410,7 @@ def transform_section(section_html: str, source_id: str) -> str:
 
 
 def extract_english_sections() -> str:
-    html = EN_INDEX.read_text()
-
-    if 'id="sec-fund"' in html:
-        main = re.search(r"<main>\s*(.*?)\s*</main>", html, re.S)
-        if not main:
-            raise RuntimeError("Could not find aligned English <main> content")
-        return enrich_sections(main.group(1).strip())
-
-    sections = []
-    for match in re.finditer(r'<section class="section[^"]*" id="([^"]+)">.*?</section>', html, re.S):
-        source_id = match.group(1)
-        if source_id not in SECTION_ID_MAP:
-            continue
-        sections.append(transform_section(match.group(0), source_id))
-    if len(sections) != len(SECTION_ID_MAP):
-        raise RuntimeError(f"Expected {len(SECTION_ID_MAP)} English sections, found {len(sections)}")
-    return enrich_sections("\n\n".join(sections))
+    return build_english_sections()
 
 
 def enrich_sections(main_html: str) -> str:
