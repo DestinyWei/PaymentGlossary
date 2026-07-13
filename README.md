@@ -17,6 +17,7 @@ PaymentGlossary 是 AllScale 的双语支付知识站，包括中英文支付行
 - `articles/content.en.json`：英文文章标题、摘要和正文的结构化数据源。
 - `articles/assets/`：文章插图、系列封面和 AllScale Logo。
 - `articles/styles.css`：文章索引和正文页共用样式。
+- `scripts/align_english_glossary_layout.py`：将英文术语手册重建为中文页同款视觉结构，并保留英文术语内容。
 - `scripts/build_articles.py`：根据 `content.json` 生成文章页、站点地图和爬虫配置。
 - `scripts/import_articles.py`：从完整合集 PDF 导入首批文章及插图的一次性工具。
 - `scripts/import_english_articles.py`：从英文完整合集 PDF 导入英文文章及英文头图的一次性工具。
@@ -103,6 +104,7 @@ DOCX 图片导入必须在对应 PDF 正文导入之后执行，否则正文导�
 ## 更新流程
 
 1. 更新 `zh/index.html`、`en/index.html` 或文章 JSON 中的内容。
-2. 修改文章后运行 `python3 scripts/build_articles.py` 重新生成静态页面。
-3. 本地预览并检查 `/zh/`、`/en/`、`/zh/glossary/<section>/`、`/en/glossary/<section>/`、中英文文章页、语言切换、搜索和移动端布局。
-4. 执行基础校验后提交并推送到 `main`，交由 Vercel 自动部署。
+2. 若英文术语主页内容有更新，先运行 `python3 scripts/align_english_glossary_layout.py`，保持英文页与中文页视觉结构一致。
+3. 修改文章或术语主页后运行 `python3 scripts/build_articles.py` 重新生成静态页面和各语言 SEO 路由。
+4. 本地预览并检查 `/zh/`、`/en/`、`/zh/glossary/<section>/`、`/en/glossary/<section>/`、中英文文章页、语言切换、搜索和移动端布局。
+5. 执行基础校验后提交并推送到 `main`，交由 Vercel 自动部署。

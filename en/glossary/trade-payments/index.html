@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Payment Industry Glossary | AllScale</title>
-  <meta name="description" content="AllScale bilingual payment glossary covering fund flows, card acquiring, cross-border payments, stablecoins, compliance, payment licenses, and payment business metrics.">
+  <title>Payment Industry Glossary — AllScale</title>
+  <meta name="description" content="AllScale English payment glossary covering fund flows, card acquiring, trade payments, cross-border FX, crypto payments, compliance, licensing, operating roles, transaction lifecycles, and payment metrics.">
   <link rel="canonical" href="https://payment.0xhowe.top/en/">
   <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/">
   <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/">
@@ -14,786 +14,1288 @@
   <link rel="manifest" href="/site.webmanifest">
   <script defer src="/analytics.js" data-allscale-analytics></script>
   <style>
-    :root {
-      --bg: #fdfffe;
-      --wash: #f2f8f5;
-      --line: #dce9e4;
-      --line-strong: #c5ddd4;
-      --paper: #fff;
-      --green: #009859;
-      --green-dark: #063d2c;
-      --text: #12372c;
-      --muted: #6f857e;
-      --blue: #2e6da4;
-      --amber: #8c5a11;
-      --pink: #a6396a;
-      --shadow: 0 12px 30px rgba(8, 60, 43, .08);
-      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      --mono: "SFMono-Regular", Consolas, ui-monospace, monospace;
-      --serif: Georgia, "Times New Roman", serif;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.65; }
-    a { color: inherit; }
-    img { max-width: 100%; display: block; }
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      border-bottom: 1px solid var(--line);
-      background: rgba(253, 255, 254, .96);
-      backdrop-filter: blur(14px);
-    }
-    .topbar-inner, .hero-inner, .layout { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
-    .topbar-inner { display: flex; align-items: center; min-height: 72px; gap: 22px; }
-    .brand { display: inline-flex; align-items: center; text-decoration: none; }
-    .brand img { width: 124px; }
-    .tagline { color: var(--muted); font-family: var(--mono); font-size: 13px; }
-    .nav { display: flex; align-items: center; gap: 8px; margin-left: auto; }
-    .nav a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 40px;
-      border: 1px solid var(--line-strong);
-      border-radius: 6px;
-      background: var(--paper);
-      padding: 8px 13px;
-      color: var(--green-dark);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 750;
-    }
-    .nav a.primary { border-color: var(--green); background: var(--green); color: #fff; }
-    .hero { border-bottom: 1px solid var(--line); background: linear-gradient(180deg, #fff 0%, var(--wash) 100%); }
-    .hero-inner { padding: 62px 0 40px; }
-    .eyebrow { color: var(--green); font-family: var(--mono); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-    h1 { max-width: 840px; margin: 14px 0 18px; color: var(--green-dark); font-family: var(--serif); font-size: clamp(42px, 6vw, 72px); font-weight: 500; line-height: 1.08; }
-    h1 em { color: var(--green); font-style: normal; }
-    .hero p { max-width: 760px; margin: 0; color: var(--muted); font-size: 18px; }
-    .meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-    .meta span { border: 1px solid var(--line); background: var(--paper); padding: 7px 12px; color: var(--muted); font-family: var(--mono); font-size: 12px; }
-    .search { position: relative; max-width: 620px; margin-top: 28px; }
-    .search-box { display: flex; align-items: center; gap: 10px; height: 48px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: var(--shadow); padding: 0 14px; }
-    .search-box span { color: var(--green); font-family: var(--mono); font-size: 18px; }
-    .search input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--text); font: 15px/1.4 var(--sans); }
-    .results { display: none; position: absolute; z-index: 30; top: calc(100% + 8px); left: 0; right: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: 0 16px 38px rgba(8, 60, 43, .12); }
-    .results.open { display: block; }
-    .result { display: grid; width: 100%; gap: 2px; border: 0; border-bottom: 1px solid var(--line); background: transparent; padding: 11px 14px; text-align: left; cursor: pointer; font: 14px/1.35 var(--sans); color: var(--text); }
-    .result:hover, .result:focus { background: var(--wash); outline: 0; }
-    .result small { color: var(--muted); font-family: var(--mono); font-size: 11px; }
-    .layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 42px; padding: 42px 0 76px; }
-    aside { position: sticky; top: 92px; align-self: start; border-right: 1px solid var(--line); padding-right: 22px; }
-    aside h2 { margin: 0 0 12px; color: var(--muted); font-family: var(--mono); font-size: 12px; text-transform: uppercase; }
-    .side-link { display: block; border-left: 3px solid transparent; padding: 8px 10px; color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 720; }
-    .side-link.active, .side-link:hover { border-left-color: var(--green); background: var(--wash); color: var(--green-dark); }
-    .section { display: none; }
-    .section.active { display: block; }
-    .section h2 { margin: 0 0 8px; color: var(--green-dark); font-family: var(--serif); font-size: clamp(32px, 4vw, 48px); font-weight: 500; }
-    .section-desc { margin: 0 0 26px; color: var(--muted); font-size: 17px; }
-    .card { border: 1px solid var(--line); border-radius: 8px; background: var(--paper); box-shadow: var(--shadow); padding: 24px; margin-bottom: 18px; }
-    .card h3 { margin: 0 0 14px; color: var(--green-dark); font-size: 21px; line-height: 1.35; }
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-    .term { border: 1px solid var(--line); border-radius: 8px; background: var(--wash); padding: 15px; }
-    .term b { display: block; color: var(--green-dark); font-size: 15px; }
-    .term span { display: block; margin-top: 4px; color: var(--muted); font-size: 14px; }
-    .note { border-left: 4px solid var(--green); background: var(--wash); padding: 14px 16px; color: var(--text); }
-    .hit { animation: pulse 1.4s ease; }
-    @keyframes pulse { 25% { box-shadow: 0 0 0 3px rgba(0, 152, 89, .2), var(--shadow); } }
-    @media (max-width: 850px) {
-      .topbar-inner, .hero-inner, .layout { width: min(100% - 28px, 1180px); }
-      .topbar-inner { flex-wrap: wrap; padding: 12px 0; }
-      .tagline { display: none; }
-      .nav { width: 100%; margin-left: 0; overflow-x: auto; }
-      .layout { grid-template-columns: 1fr; }
-      aside { position: static; border-right: 0; border-bottom: 1px solid var(--line); padding: 0 0 18px; }
-      .grid { grid-template-columns: 1fr; }
-    }
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* latin-ext */
+/* latin */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+:root {
+  /* AllScale — Payment Link design system (APP register) */
+  --bg: #FDFFFE;          /* page background — barely-there mint white */
+  --bg2: #F2F8F5;         /* tinted-green hover / map band */
+  --bg3: #E5EEEA;         /* pressed surface / scrollbar */
+  --surface: #FFFFFF;     /* cards, nav */
+  --surface2: #F2F8F5;    /* inner tiles inside white cards */
+  --border: #E5EEEA;      /* default card / row / input border */
+  --border2: #C5DDD4;     /* emphasized / hover border */
+  --text: #0C3124;        /* primary — deep green-black */
+  --text2: #83968F;       /* secondary — muted sage */
+  --text3: #B0C4BB;       /* tertiary / placeholder */
+  --ink: #0D0D0D;         /* pure near-black */
+
+  /* brand / primary chrome (AllScale green) */
+  --accent: #009859;      /* brand green — active nav, eyebrows, abbr code, links */
+  --accent-hover: #0CAA67;
+  --accent2: #047857;     /* deep green text on light */
+
+  /* categorical palette — retuned to sit harmoniously with brand green */
+  --blue: #2E6DA4;   --blue2: #E8F0F8;
+  --teal: #0E7C6B;   --teal2: #E0F2EE;
+  --amber: #8C5A11;  --amber2: #F8EFDB;
+  --pink: #A6396A;   --pink2: #F9E8F0;
+  --purple: #5C4BB0; --purple2: #ECE9F8;
+  --red: #C13A2D;    --red2: #FAE8E6;
+  --green: #047857;  --green2: #E7F4EE;
+  --gray: #5C6B64;   --gray2: #ECF1EE;
+
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --mono: 'SFMono-Regular', Consolas, ui-monospace, monospace;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --shadow: 0 1px 2px rgba(12,49,36,0.04), 0 4px 18px rgba(12,49,36,0.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* ── Header ── */
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 30px 48px 26px;
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.header-logo { height: 24px; width: auto; display: block; }
+.header-top-div { width: 1px; height: 18px; background: var(--border2); }
+.header-top-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: var(--text2);
+}
+.header-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+header h1 {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  max-width: 600px;
+}
+header h1 em { font-style: italic; color: var(--accent); }
+.header-meta {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.header-badge {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  border-radius: var(--radius-full);
+  padding: 5px 13px;
+  font-size: 12px;
+  font-family: var(--mono);
+}
+
+/* ── Layout ── */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 140px);
+}
+
+/* ── Sidebar nav ── */
+nav {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.nav-section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 0 20px;
+  margin: 16px 0 6px;
+}
+.nav-section-label:first-child { margin-top: 0; }
+nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  font-size: 13px;
+  color: var(--text2);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all .15s;
+  line-height: 1.3;
+}
+nav a:hover { background: var(--bg2); color: var(--text); border-left-color: var(--border2); }
+nav a.active { background: var(--bg2); color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+.nav-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── Main content ── */
+main {
+  flex: 1;
+  padding: 32px 48px;
+  max-width: 900px;
+  min-width: 0;
+}
+
+/* ── Section ── */
+.section { display: none; }
+.section.active { display: block; }
+
+.section-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.section-desc {
+  font-size: 14px;
+  color: var(--text2);
+  margin-bottom: 24px;
+  line-height: 1.7;
+  max-width: 640px;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+.card-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.card-title .abbr {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+.prose { font-size: 13px; line-height: 1.75; color: var(--text2); }
+.prose strong { color: var(--text); font-weight: 500; }
+
+/* ── Case box ── */
+.case-box {
+  background: var(--surface2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 14px;
+  margin: 12px 0;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--text);
+}
+.case-box.teal { border-left-color: var(--teal); }
+.case-box.amber { border-left-color: var(--amber); }
+.case-box.red { border-left-color: var(--red); }
+.case-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.case-label.teal { color: var(--teal); }
+.case-label.amber { color: var(--amber); }
+.case-label.red { color: var(--red); }
+
+/* ── Divider ── */
+hr.div { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+/* ── Grid ── */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px; }
+.grid-card {
+  background: var(--surface2);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+}
+.grid-card .label { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.grid-card .body { font-size: 12px; color: var(--text2); line-height: 1.6; }
+.grid-card .body strong { color: var(--text); font-weight: 500; }
+
+/* ── Term grid ── */
+.term-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.term-item {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 13px;
+  flex: 1;
+  min-width: 160px;
+}
+.term-abbr { font-size: 13px; font-weight: 500; color: var(--text); font-family: var(--mono); }
+.term-en { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.term-zh { font-size: 12px; color: var(--text2); margin-top: 4px; line-height: 1.5; }
+
+/* ── Highlight ── */
+.hl { background: var(--amber2); color: var(--amber); border-radius: 3px; padding: 0 3px; font-weight: 500; }
+.hlb { background: var(--blue2); color: var(--blue); border-radius: 3px; padding: 0 3px; }
+.hlg { background: var(--green2); color: var(--green); border-radius: 3px; padding: 0 3px; }
+.hlr { background: var(--red2); color: var(--red); border-radius: 3px; padding: 0 3px; }
+.hlp { background: var(--purple2); color: var(--purple); border-radius: 3px; padding: 0 3px; }
+
+/* ── Badge ── */
+.badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-right: 4px;
+}
+.badge-blue { background: var(--blue2); color: var(--blue); }
+.badge-teal { background: var(--teal2); color: var(--teal); }
+.badge-amber { background: var(--amber2); color: var(--amber); }
+.badge-pink { background: var(--pink2); color: var(--pink); }
+.badge-gray { background: var(--gray2); color: var(--gray); }
+.badge-red { background: var(--red2); color: var(--red); }
+.badge-purple { background: var(--purple2); color: var(--purple); }
+.badge-green { background: var(--green2); color: var(--green); }
+
+/* ── Chain row ── */
+.chain { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; padding: 8px 0; }
+.chain-node {
+  border-radius: var(--radius);
+  padding: 6px 11px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1.3;
+  text-align: center;
+}
+.cn-blue { background: var(--blue2); color: var(--blue); }
+.cn-teal { background: var(--teal2); color: var(--teal); }
+.cn-amber { background: var(--amber2); color: var(--amber); }
+.cn-green { background: var(--green2); color: var(--green); }
+.cn-pink { background: var(--pink2); color: var(--pink); }
+.cn-gray { background: var(--gray2); color: var(--gray); }
+.cn-red { background: var(--red2); color: var(--red); }
+.cn-purple { background: var(--purple2); color: var(--purple); }
+.chain-arrow { color: var(--text3); font-size: 14px; flex-shrink: 0; }
+
+/* ── Steps ── */
+.step { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+.step-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--blue2); color: var(--blue);
+  font-size: 11px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+  font-family: var(--mono);
+}
+.step-num.amber { background: var(--amber2); color: var(--amber); }
+.step-num.red { background: var(--red2); color: var(--red); }
+.step-num.green { background: var(--green2); color: var(--green); }
+.step-body { font-size: 13px; line-height: 1.7; color: var(--text2); flex: 1; }
+.step-body strong { color: var(--text); font-weight: 500; }
+
+/* ── Table ── */
+.tbl { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
+.tbl th {
+  text-align: left; font-weight: 600; padding: 7px 9px;
+  border-bottom: 1px solid var(--border2);
+  color: var(--text); font-size: 12px; background: var(--surface2);
+}
+.tbl td { padding: 6px 9px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:hover td { background: var(--bg2); }
+
+/* ── Section label ── */
+.slabel {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin: 18px 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Level cards ── */
+.level-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.level-card { border-radius: var(--radius); padding: 11px 13px; border: 1px solid var(--border); }
+.level-head { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.level-body { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+/* ── Role card ── */
+.role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.role-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+.role-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.role-badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 8px; font-family: var(--mono); }
+.role-title { font-size: 13px; font-weight: 500; color: var(--text); }
+.role-body { font-size: 12px; line-height: 1.65; color: var(--text2); }
+.role-body strong { color: var(--text); font-weight: 500; }
+
+/* ── SVG diagram container ── */
+.diagram { width: 100%; overflow: hidden; border-radius: var(--radius); margin: 12px 0; background: var(--surface2); }
+.diagram svg { width: 100%; height: auto; display: block; }
+
+/* ── World map ── */
+#map-svg { width: 100%; height: auto; display: block; background: var(--bg2); border-radius: var(--radius); }
+.country { stroke: var(--surface); stroke-width: 0.4; transition: opacity .12s; cursor: default; }
+.country.clickable { cursor: pointer; }
+.country.clickable:hover { opacity: 0.75; }
+.map-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.map-leg { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text2); cursor: pointer; padding: 3px 8px; border-radius: 20px; border: 1px solid transparent; transition: all .15s; }
+.map-leg:hover { background: var(--bg2); border-color: var(--border); }
+.map-leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.map-tip {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  margin-top: 10px;
+  min-height: 60px;
+  box-shadow: var(--shadow);
+}
+.map-tip-title { font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+.map-tip-items { display: flex; flex-direction: column; gap: 5px; }
+.map-tip-item { background: var(--surface2); border-radius: var(--radius); padding: 7px 10px; font-size: 12px; color: var(--text2); line-height: 1.55; }
+.map-tip-item strong { color: var(--text); font-weight: 500; font-family: var(--mono); font-size: 11px; }
+
+/* ── Warn box ── */
+.warn-box {
+  background: var(--amber2);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 11px 14px;
+  margin: 10px 0;
+  font-size: 13px;
+  color: var(--amber);
+  line-height: 1.7;
+}
+.warn-box strong { color: var(--amber); font-weight: 500; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .layout { flex-direction: column; }
+  nav { width: 100%; height: auto; position: static; display: flex; flex-wrap: wrap; padding: 12px; gap: 4px; border-right: none; border-bottom: 1px solid var(--border); }
+  nav a { border-left: none; border-radius: 20px; padding: 5px 12px; font-size: 12px; }
+  nav a.active { background: var(--accent); color: #fff; }
+  .nav-section-label { display: none; }
+  main { padding: 20px 16px; }
+  header { padding: 24px 20px; }
+  header h1 { font-size: 26px; }
+  .grid2, .role-grid, .level-grid { grid-template-columns: 1fr; }
+  .grid3 { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  nav { display: none; }
+  main { padding: 20px; max-width: 100%; }
+  .section { display: block !important; page-break-before: always; }
+  .section:first-child { page-break-before: auto; }
+}
+
+
+.header-top { position: relative; }
+.glossary-site-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  margin-left: auto;
+}
+.glossary-site-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-height: 40px;
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 8px 14px;
+  text-decoration: none;
+  font: 13px/1.2 var(--sans);
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(12,49,36,0.06);
+}
+.glossary-site-links a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.glossary-site-links a:first-child {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 7px 18px rgba(0,152,89,0.22);
+}
+.glossary-search { position: relative; max-width: 560px; margin-top: 22px; }
+.glossary-search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: 0 14px;
+}
+.glossary-search-icon { color: var(--accent); font-family: var(--mono); font-size: 18px; line-height: 1; }
+.glossary-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: 14px/1.4 var(--sans);
+}
+.glossary-search input::placeholder { color: var(--text3); }
+.glossary-search-results {
+  display: none;
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 12px 34px rgba(12,49,36,0.12);
+}
+.glossary-search-results.open { display: block; }
+.glossary-search-result {
+  display: grid;
+  gap: 3px;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  padding: 11px 14px;
+  text-align: left;
+  font: 13px/1.35 var(--sans);
+}
+.glossary-search-result:hover,
+.glossary-search-result:focus { background: var(--bg2); outline: 0; }
+.glossary-search-result small { color: var(--text2); font: 11px/1.3 var(--mono); }
+.glossary-search-empty { padding: 12px 14px; color: var(--text2); font: 13px/1.4 var(--sans); }
+.glossary-hit { animation: glossary-pulse 1.6s ease; }
+@keyframes glossary-pulse {
+  0%, 100% { box-shadow: var(--shadow); }
+  25% { box-shadow: 0 0 0 3px rgba(0,152,89,0.18), var(--shadow); }
+}
+@media (max-width: 720px) {
+  .glossary-search { max-width: none; }
+  .header-top-label, .header-top-div { display: none; }
+  .glossary-site-links { gap: 5px; }
+  .glossary-site-links a { min-height: 36px; padding: 7px 11px; font-size: 12px; }
+  .glossary-site-links a:last-child { display: none; }
+}
+
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="/en/" aria-label="AllScale Payment Glossary">
-        <img src="/articles/assets/allscale-logo.png" alt="AllScale">
-      </a>
-      <div class="tagline">Checkout · Knowledge Base</div>
-      <nav class="nav" aria-label="Primary navigation">
-        <a class="primary" href="/en/articles/">Articles →</a>
-        <a href="/zh/">中文</a>
-        <a href="https://x.com/allscaleio" target="_blank" rel="noreferrer">AllScale ↗</a>
-      </nav>
+<header>
+  <div class="header-top">
+    <img class="header-logo" src="/articles/assets/allscale-logo.png" alt="AllScale">
+    <div class="header-top-div"></div>
+    <span class="header-top-label">Checkout · Knowledge Base</span>
+    <div class="glossary-site-links" role="navigation" aria-label="Site navigation">
+      <a href="/en/articles/">Articles →</a>
+      <a href="/zh/">中文</a>
+      <a href="https://x.com/allscaleio" target="_blank" rel="noreferrer">AllScale ↗</a>
     </div>
-  </header>
-
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="eyebrow">Payments Reference</div>
-      <h1>Payment Industry <em>Glossary</em></h1>
-      <p>A practical English reference for the payment terms behind checkout, acquiring, cross-border settlement, stablecoins, compliance, licensing, and business metrics.</p>
-      <div class="meta"><span>v3.0 · Bilingual</span><span>12 sections</span><span>200+ terms</span></div>
-      <form class="search" role="search">
-        <div class="search-box"><span>⌕</span><input type="search" autocomplete="off" spellcheck="false" placeholder="Search terms, e.g. TPV, COBO, PCI, stablecoin"></div>
-        <div class="results" aria-live="polite"></div>
-      </form>
+  </div>
+  <div class="header-eyebrow">Payments Reference</div>
+  <h1>Payment Industry <em>Glossary</em></h1>
+  <div class="header-meta">
+    <span class="header-badge">v3.0 · March 2026</span>
+    <span class="header-badge">12 sections · 200+ terms</span>
+    <span class="header-badge">For Crypto operators</span>
+  </div>
+  <form class="glossary-search" role="search">
+    <div class="glossary-search-box">
+      <span class="glossary-search-icon">⌕</span>
+      <input type="search" autocomplete="off" spellcheck="false" placeholder="Search terms, e.g. TPV, COBO, PCI, stablecoin">
     </div>
-  </section>
+    <div class="glossary-search-results" aria-live="polite"></div>
+  </form>
+</header>
 
-  <div class="layout">
-    <aside>
-      <h2>Core Architecture</h2>
-      <a class="side-link" href="/en/glossary/fund-flow/" data-section="fund-flow">Fund Flow</a>
-      <a class="side-link" href="/en/glossary/card-acquiring/" data-section="card-acquiring">Card Acquiring</a>
-      <a class="side-link" href="/en/glossary/trade-payments/" data-section="trade-payments">Trade Payments</a>
-      <a class="side-link" href="/en/glossary/fx-cross-border/" data-section="fx-cross-border">FX & Cross-Border</a>
-      <h2>Crypto</h2>
-      <a class="side-link" href="/en/glossary/crypto-payments/" data-section="crypto-payments">Crypto Payments</a>
-      <a class="side-link" href="/en/glossary/crypto-card/" data-section="crypto-card">Crypto Cards</a>
-      <h2>Compliance</h2>
-      <a class="side-link" href="/en/glossary/compliance/" data-section="compliance">Compliance</a>
-      <a class="side-link" href="/en/glossary/licenses/" data-section="licenses">License Map</a>
-      <a class="side-link" href="/en/glossary/stablecoin-licenses/" data-section="stablecoin-licenses">Stablecoin Licenses</a>
-      <h2>Operations</h2>
-      <a class="side-link" href="/en/glossary/institutional-roles/" data-section="institutional-roles">Institutional Roles</a>
-      <a class="side-link" href="/en/glossary/transaction-lifecycle/" data-section="transaction-lifecycle">Transaction Lifecycle</a>
-      <a class="side-link" href="/en/glossary/business-metrics/" data-section="business-metrics">Business Metrics</a>
-    </aside>
-
-    <main>
-      <section class="section active" id="fund-flow">
-        <h2>Fund Flow</h2>
+<div class="layout">
+<nav id="sidebar">
+  <div class="nav-section-label">Core Architecture</div>
+  <a href="#" onclick="show('fund')"  class="active"><span class="nav-dot" style="background:#2E6DA4"></span>Fund Flow</a>
+  <a href="#" onclick="show('card')" ><span class="nav-dot" style="background:#2E6DA4"></span>Card Acquiring</a>
+  <a href="#" onclick="show('trade')" ><span class="nav-dot" style="background:#2E6DA4"></span>Trade Payments</a>
+  <a href="#" onclick="show('fx')" ><span class="nav-dot" style="background:#2E6DA4"></span>FX &amp; Cross-Border</a>
+  <div class="nav-section-label">Crypto</div>
+  <a href="#" onclick="show('crypto')" ><span class="nav-dot" style="background:#0E7C6B"></span>Crypto Payments</a>
+  <a href="#" onclick="show('ucard')" ><span class="nav-dot" style="background:#0E7C6B"></span>Crypto Cards</a>
+  <div class="nav-section-label">Compliance &amp; Regulation</div>
+  <a href="#" onclick="show('comp')" ><span class="nav-dot" style="background:#A6396A"></span>Compliance</a>
+  <a href="#" onclick="show('lic')" ><span class="nav-dot" style="background:#A6396A"></span>License Map</a>
+  <a href="#" onclick="show('stable')" ><span class="nav-dot" style="background:#A6396A"></span>Stablecoin Licenses</a>
+  <div class="nav-section-label">Institutions &amp; Operations</div>
+  <a href="#" onclick="show('roles')" ><span class="nav-dot" style="background:#8C5A11"></span>Institutional Roles</a>
+  <a href="#" onclick="show('txlife')" ><span class="nav-dot" style="background:#8C5A11"></span>Transaction Lifecycle</a>
+  <a href="#" onclick="show('biz')" ><span class="nav-dot" style="background:#8C5A11"></span>Business Metrics</a>
+</nav>
+<main>
+<div id="sec-fund" class="section active">
+        <h2 class="section-title">Fund Flow</h2>
         <p class="section-desc">How money moves from payer to payee. This section mirrors the Chinese fund-flow chapter: collection, payout, clearing, settlement, netting, reconciliation, ledgers, pooled accounts, reserves, and treasury controls.</p>
         <div class="card">
-          <h3>COBO + POBO — collection and payout on behalf of another party</h3>
-          <div class="grid">
-            <div class="term"><b>COBO · Collection On Behalf Of</b><span>A platform collects money for a merchant, subsidiary, seller, or user. The payer sees the platform or a collection account, while the underlying economic owner is another party.</span></div>
-            <div class="term"><b>POBO · Payment On Behalf Of</b><span>A platform pays suppliers, sellers, creators, drivers, contractors, or group entities on behalf of another company.</span></div>
-            <div class="term"><b>Omnibus Account</b><span>A pooled bank or wallet account holding many users' funds together, while internal ledgers track each user's balance and movements.</span></div>
-            <div class="term"><b>Ledger Balance</b><span>The balance shown in the platform's internal books. It may differ from bank balance because of pending transactions, fees, reversals, and reserves.</span></div>
+          <div class="card-title">COBO + POBO — collection and payout on behalf of another party</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">COBO · Collection On Behalf Of</div><div class="term-zh">A platform collects money for a merchant, subsidiary, seller, or user. The payer sees the platform or a collection account, while the underlying economic owner is another party.</div></div>
+            <div class="term-item"><div class="term-abbr">POBO · Payment On Behalf Of</div><div class="term-zh">A platform pays suppliers, sellers, creators, drivers, contractors, or group entities on behalf of another company.</div></div>
+            <div class="term-item"><div class="term-abbr">Omnibus Account</div><div class="term-zh">A pooled bank or wallet account holding many users' funds together, while internal ledgers track each user's balance and movements.</div></div>
+            <div class="term-item"><div class="term-abbr">Ledger Balance</div><div class="term-zh">The balance shown in the platform's internal books. It may differ from bank balance because of pending transactions, fees, reversals, and reserves.</div></div>
           </div>
-          <p class="note">Example: a marketplace collects customer funds into one bank account, records each seller's receivable internally, then pays sellers out later. In crypto, an exchange omnibus wallet follows the same logic: one chain address, many internal user balances.</p>
+          <div class="case-box">Example: a marketplace collects customer funds into one bank account, records each seller's receivable internally, then pays sellers out later. In crypto, an exchange omnibus wallet follows the same logic: one chain address, many internal user balances.</div>
         </div>
         <div class="card">
-          <h3>Clearing vs Settlement vs Netting</h3>
-          <div class="grid">
-            <div class="term"><b>Clearing</b><span>Calculating who owes what after authorization or transaction submission. It includes transaction data, fees, interchange, scheme fees, FX, and dispute adjustments.</span></div>
-            <div class="term"><b>Settlement</b><span>The actual movement of net funds between banks, schemes, processors, merchants, or wallets.</span></div>
-            <div class="term"><b>Netting</b><span>Offsetting payables and receivables so only the net amount is moved. This reduces bank transfers and liquidity needs.</span></div>
-            <div class="term"><b>Gross Settlement</b><span>Every transaction settles individually without offsetting. It is clearer, but more expensive and liquidity-heavy.</span></div>
+          <div class="card-title">Clearing vs Settlement vs Netting</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Clearing</div><div class="term-zh">Calculating who owes what after authorization or transaction submission. It includes transaction data, fees, interchange, scheme fees, FX, and dispute adjustments.</div></div>
+            <div class="term-item"><div class="term-abbr">Settlement</div><div class="term-zh">The actual movement of net funds between banks, schemes, processors, merchants, or wallets.</div></div>
+            <div class="term-item"><div class="term-abbr">Netting</div><div class="term-zh">Offsetting payables and receivables so only the net amount is moved. This reduces bank transfers and liquidity needs.</div></div>
+            <div class="term-item"><div class="term-abbr">Gross Settlement</div><div class="term-zh">Every transaction settles individually without offsetting. It is clearer, but more expensive and liquidity-heavy.</div></div>
           </div>
-          <p class="note">A card network may clear millions of transactions, net each participant's position, and settle only the final net amount. Stablecoin transfers often look like gross settlement because each on-chain transfer is visible individually.</p>
+          <div class="case-box">A card network may clear millions of transactions, net each participant's position, and settle only the final net amount. Stablecoin transfers often look like gross settlement because each on-chain transfer is visible individually.</div>
         </div>
         <div class="card">
-          <h3>Balances, reserves, and reconciliation</h3>
-          <div class="grid">
-            <div class="term"><b>Available Balance</b><span>Funds the merchant can actually withdraw or use after pending transactions, reserves, and holds are excluded.</span></div>
-            <div class="term"><b>Pending Balance</b><span>Funds expected to settle but not yet available because clearing, risk review, or banking cut-offs are not complete.</span></div>
-            <div class="term"><b>Rolling Reserve</b><span>A percentage of merchant volume held back for a period to cover refunds, disputes, fraud, or future chargebacks.</span></div>
-            <div class="term"><b>Chargeback Reserve</b><span>A specific reserve against expected card disputes and chargeback liabilities.</span></div>
-            <div class="term"><b>Reconciliation</b><span>Matching transactions, invoices, bank statements, processor reports, refunds, fees, and settlements until every cent has an owner.</span></div>
-            <div class="term"><b>Settlement Report</b><span>A processor or bank file showing transactions, fees, adjustments, and the final payout amount.</span></div>
+          <div class="card-title">Balances, reserves, and reconciliation</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Available Balance</div><div class="term-zh">Funds the merchant can actually withdraw or use after pending transactions, reserves, and holds are excluded.</div></div>
+            <div class="term-item"><div class="term-abbr">Pending Balance</div><div class="term-zh">Funds expected to settle but not yet available because clearing, risk review, or banking cut-offs are not complete.</div></div>
+            <div class="term-item"><div class="term-abbr">Rolling Reserve</div><div class="term-zh">A percentage of merchant volume held back for a period to cover refunds, disputes, fraud, or future chargebacks.</div></div>
+            <div class="term-item"><div class="term-abbr">Chargeback Reserve</div><div class="term-zh">A specific reserve against expected card disputes and chargeback liabilities.</div></div>
+            <div class="term-item"><div class="term-abbr">Reconciliation</div><div class="term-zh">Matching transactions, invoices, bank statements, processor reports, refunds, fees, and settlements until every cent has an owner.</div></div>
+            <div class="term-item"><div class="term-abbr">Settlement Report</div><div class="term-zh">A processor or bank file showing transactions, fees, adjustments, and the final payout amount.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Fund-flow operating controls</h3>
-          <div class="grid">
-            <div class="term"><b>Safeguarding</b><span>Keeping customer funds separate from company operating funds, commonly required for e-money and payment institutions.</span></div>
-            <div class="term"><b>Float</b><span>Money temporarily held by a platform between collection and payout. It creates liquidity and compliance obligations.</span></div>
-            <div class="term"><b>Treasury</b><span>The function that manages cash, liquidity, bank accounts, FX exposure, reserves, and settlement timing.</span></div>
-            <div class="term"><b>Four-eye Approval</b><span>A control requiring two independent approvals before large payouts, account changes, or treasury movements.</span></div>
+          <div class="card-title">Fund-flow operating controls</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Safeguarding</div><div class="term-zh">Keeping customer funds separate from company operating funds, commonly required for e-money and payment institutions.</div></div>
+            <div class="term-item"><div class="term-abbr">Float</div><div class="term-zh">Money temporarily held by a platform between collection and payout. It creates liquidity and compliance obligations.</div></div>
+            <div class="term-item"><div class="term-abbr">Treasury</div><div class="term-zh">The function that manages cash, liquidity, bank accounts, FX exposure, reserves, and settlement timing.</div></div>
+            <div class="term-item"><div class="term-abbr">Four-eye Approval</div><div class="term-zh">A control requiring two independent approvals before large payouts, account changes, or treasury movements.</div></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section" id="card-acquiring">
-        <h2>Card Acquiring</h2>
+<div id="sec-card" class="section">
+        <h2 class="section-title">Card Acquiring</h2>
         <p class="section-desc">The card-payment stack from checkout to authorization, capture, clearing, settlement, disputes, merchant payout, fees, authentication, and PCI scope.</p>
         <div class="card">
-          <h3>The five visible roles in a card payment</h3>
-          <div class="grid">
-            <div class="term"><b>Cardholder</b><span>The buyer who owns and uses the card.</span></div>
-            <div class="term"><b>Merchant</b><span>The business selling goods or services and accepting the card payment.</span></div>
-            <div class="term"><b>Issuer</b><span>The bank or fintech that issued the card, holds the cardholder relationship, and approves or declines authorization.</span></div>
-            <div class="term"><b>Card Scheme / Network</b><span>Visa, Mastercard, Amex, UnionPay, and similar networks that set rules, route messages, and calculate fees.</span></div>
-            <div class="term"><b>Acquirer</b><span>The merchant-side financial institution that enables card acceptance and ultimately receives settlement for the merchant.</span></div>
-            <div class="term"><b>Processor</b><span>The technical operator handling authorization messages, clearing files, settlement files, and reporting.</span></div>
+          <div class="card-title">The five visible roles in a card payment</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Cardholder</div><div class="term-zh">The buyer who owns and uses the card.</div></div>
+            <div class="term-item"><div class="term-abbr">Merchant</div><div class="term-zh">The business selling goods or services and accepting the card payment.</div></div>
+            <div class="term-item"><div class="term-abbr">Issuer</div><div class="term-zh">The bank or fintech that issued the card, holds the cardholder relationship, and approves or declines authorization.</div></div>
+            <div class="term-item"><div class="term-abbr">Card Scheme / Network</div><div class="term-zh">Visa, Mastercard, Amex, UnionPay, and similar networks that set rules, route messages, and calculate fees.</div></div>
+            <div class="term-item"><div class="term-abbr">Acquirer</div><div class="term-zh">The merchant-side financial institution that enables card acceptance and ultimately receives settlement for the merchant.</div></div>
+            <div class="term-item"><div class="term-abbr">Processor</div><div class="term-zh">The technical operator handling authorization messages, clearing files, settlement files, and reporting.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Gateway, PSP, PayFac, ISO</h3>
-          <div class="grid">
-            <div class="term"><b>Payment Gateway</b><span>The technical entry point that tokenizes, encrypts, and routes payment data from checkout to processor or acquirer.</span></div>
-            <div class="term"><b>PSP · Payment Service Provider</b><span>A merchant-facing platform that combines gateway, acquiring connectivity, payment methods, reporting, and operations.</span></div>
-            <div class="term"><b>PayFac · Payment Facilitator</b><span>A platform that onboards sub-merchants under a master merchant account, reducing onboarding friction but taking more risk.</span></div>
-            <div class="term"><b>ISO · Independent Sales Organization</b><span>A sales or distribution partner that refers merchants to an acquirer or processor.</span></div>
+          <div class="card-title">Gateway, PSP, PayFac, ISO</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Payment Gateway</div><div class="term-zh">The technical entry point that tokenizes, encrypts, and routes payment data from checkout to processor or acquirer.</div></div>
+            <div class="term-item"><div class="term-abbr">PSP · Payment Service Provider</div><div class="term-zh">A merchant-facing platform that combines gateway, acquiring connectivity, payment methods, reporting, and operations.</div></div>
+            <div class="term-item"><div class="term-abbr">PayFac · Payment Facilitator</div><div class="term-zh">A platform that onboards sub-merchants under a master merchant account, reducing onboarding friction but taking more risk.</div></div>
+            <div class="term-item"><div class="term-abbr">ISO · Independent Sales Organization</div><div class="term-zh">A sales or distribution partner that refers merchants to an acquirer or processor.</div></div>
           </div>
-          <p class="note">Stripe and Adyen are often discussed as PSPs, but their exact role varies by region, merchant setup, and license stack.</p>
+          <div class="case-box">Stripe and Adyen are often discussed as PSPs, but their exact role varies by region, merchant setup, and license stack.</div>
         </div>
         <div class="card">
-          <h3>Transaction lifecycle inside cards</h3>
-          <div class="grid">
-            <div class="term"><b>Authorization / Auth</b><span>The issuer checks card validity, funds, risk, and permissions, then places a hold. No final money movement yet.</span></div>
-            <div class="term"><b>Capture</b><span>The merchant confirms that the authorized payment should be charged.</span></div>
-            <div class="term"><b>Clearing</b><span>Transaction details and fees are exchanged between acquirer, network, and issuer.</span></div>
-            <div class="term"><b>Settlement</b><span>Net funds move through the card network and banking rails.</span></div>
-            <div class="term"><b>Payout</b><span>The PSP or acquirer transfers available funds to the merchant bank account.</span></div>
-            <div class="term"><b>Void</b><span>Canceling an authorization before capture. The hold is released, and the transaction never becomes a charge.</span></div>
-          </div>
-        </div>
-        <div class="card">
-          <h3>Card fees and risk terms</h3>
-          <div class="grid">
-            <div class="term"><b>MDR · Merchant Discount Rate</b><span>The total card acceptance cost paid by the merchant, usually shown as a percentage plus a fixed fee.</span></div>
-            <div class="term"><b>Interchange Fee</b><span>The fee paid to the issuer. It is often the largest component of card cost.</span></div>
-            <div class="term"><b>Scheme Fee</b><span>Fees charged by card networks for routing, assessment, cross-border processing, and other network services.</span></div>
-            <div class="term"><b>Acquirer Markup</b><span>The acquirer or PSP's commercial margin on top of interchange and scheme fees.</span></div>
-            <div class="term"><b>3DS / SCA</b><span>Authentication flows that ask the cardholder to prove identity, often shifting fraud liability.</span></div>
-            <div class="term"><b>PCI DSS</b><span>Security standards for handling cardholder data. Hosted checkout can reduce a merchant's PCI scope.</span></div>
+          <div class="card-title">Transaction lifecycle inside cards</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Authorization / Auth</div><div class="term-zh">The issuer checks card validity, funds, risk, and permissions, then places a hold. No final money movement yet.</div></div>
+            <div class="term-item"><div class="term-abbr">Capture</div><div class="term-zh">The merchant confirms that the authorized payment should be charged.</div></div>
+            <div class="term-item"><div class="term-abbr">Clearing</div><div class="term-zh">Transaction details and fees are exchanged between acquirer, network, and issuer.</div></div>
+            <div class="term-item"><div class="term-abbr">Settlement</div><div class="term-zh">Net funds move through the card network and banking rails.</div></div>
+            <div class="term-item"><div class="term-abbr">Payout</div><div class="term-zh">The PSP or acquirer transfers available funds to the merchant bank account.</div></div>
+            <div class="term-item"><div class="term-abbr">Void</div><div class="term-zh">Canceling an authorization before capture. The hold is released, and the transaction never becomes a charge.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Disputes, chargebacks, and reversals</h3>
-          <div class="grid">
-            <div class="term"><b>Refund</b><span>The merchant voluntarily sends funds back after settlement.</span></div>
-            <div class="term"><b>Chargeback</b><span>The cardholder disputes through the issuer, and funds may be pulled back from the merchant.</span></div>
-            <div class="term"><b>Representment</b><span>The merchant's response package arguing that the chargeback is invalid.</span></div>
-            <div class="term"><b>ARN · Acquirer Reference Number</b><span>A tracking identifier used to trace refunds and card settlements through the acquiring chain.</span></div>
+          <div class="card-title">Card fees and risk terms</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">MDR · Merchant Discount Rate</div><div class="term-zh">The total card acceptance cost paid by the merchant, usually shown as a percentage plus a fixed fee.</div></div>
+            <div class="term-item"><div class="term-abbr">Interchange Fee</div><div class="term-zh">The fee paid to the issuer. It is often the largest component of card cost.</div></div>
+            <div class="term-item"><div class="term-abbr">Scheme Fee</div><div class="term-zh">Fees charged by card networks for routing, assessment, cross-border processing, and other network services.</div></div>
+            <div class="term-item"><div class="term-abbr">Acquirer Markup</div><div class="term-zh">The acquirer or PSP's commercial margin on top of interchange and scheme fees.</div></div>
+            <div class="term-item"><div class="term-abbr">3DS / SCA</div><div class="term-zh">Authentication flows that ask the cardholder to prove identity, often shifting fraud liability.</div></div>
+            <div class="term-item"><div class="term-abbr">PCI DSS</div><div class="term-zh">Security standards for handling cardholder data. Hosted checkout can reduce a merchant's PCI scope.</div></div>
           </div>
         </div>
-      </section>
+        <div class="card">
+          <div class="card-title">Disputes, chargebacks, and reversals</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Refund</div><div class="term-zh">The merchant voluntarily sends funds back after settlement.</div></div>
+            <div class="term-item"><div class="term-abbr">Chargeback</div><div class="term-zh">The cardholder disputes through the issuer, and funds may be pulled back from the merchant.</div></div>
+            <div class="term-item"><div class="term-abbr">Representment</div><div class="term-zh">The merchant's response package arguing that the chargeback is invalid.</div></div>
+            <div class="term-item"><div class="term-abbr">ARN · Acquirer Reference Number</div><div class="term-zh">A tracking identifier used to trace refunds and card settlements through the acquiring chain.</div></div>
+          </div>
+        </div>
+      </div>
 
-      <section class="section" id="trade-payments">
-        <h2>Trade Payments</h2>
+<div id="sec-trade" class="section">
+        <h2 class="section-title">Trade Payments</h2>
         <p class="section-desc">B2B collection, invoices, payment terms, escrow, supplier payouts, letters of credit, trade finance, and the operational gap between delivery and payment.</p>
         <div class="card">
-          <h3>Invoice-led payments</h3>
-          <div class="grid">
-            <div class="term"><b>Invoice</b><span>A document stating who pays whom, for what, how much, in what currency, and by when.</span></div>
-            <div class="term"><b>Invoicing</b><span>The end-to-end process of issuing, sending, collecting, matching, and closing an invoice.</span></div>
-            <div class="term"><b>Beneficiary</b><span>The party that ultimately receives the money.</span></div>
-            <div class="term"><b>Remitter</b><span>The party sending the payment.</span></div>
-            <div class="term"><b>Payment Terms</b><span>The agreed timing and conditions for payment, such as Net 30, due on receipt, or milestone-based payment.</span></div>
-            <div class="term"><b>Net 30 / Net 60</b><span>Payment must be made within 30 or 60 days after invoice receipt or issue date.</span></div>
+          <div class="card-title">Invoice-led payments</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Invoice</div><div class="term-zh">A document stating who pays whom, for what, how much, in what currency, and by when.</div></div>
+            <div class="term-item"><div class="term-abbr">Invoicing</div><div class="term-zh">The end-to-end process of issuing, sending, collecting, matching, and closing an invoice.</div></div>
+            <div class="term-item"><div class="term-abbr">Beneficiary</div><div class="term-zh">The party that ultimately receives the money.</div></div>
+            <div class="term-item"><div class="term-abbr">Remitter</div><div class="term-zh">The party sending the payment.</div></div>
+            <div class="term-item"><div class="term-abbr">Payment Terms</div><div class="term-zh">The agreed timing and conditions for payment, such as Net 30, due on receipt, or milestone-based payment.</div></div>
+            <div class="term-item"><div class="term-abbr">Net 30 / Net 60</div><div class="term-zh">Payment must be made within 30 or 60 days after invoice receipt or issue date.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>B2B finance operations</h3>
-          <div class="grid">
-            <div class="term"><b>AP · Accounts Payable</b><span>The buyer-side workflow for bills owed to suppliers.</span></div>
-            <div class="term"><b>AR · Accounts Receivable</b><span>The seller-side workflow for invoices waiting to be collected.</span></div>
-            <div class="term"><b>Purchase Order / PO</b><span>A buyer-issued document confirming intent to purchase under agreed terms.</span></div>
-            <div class="term"><b>Goods Receipt</b><span>A record that goods or services were received, often needed before AP approves payment.</span></div>
-            <div class="term"><b>Three-way Match</b><span>Matching purchase order, invoice, and goods receipt before paying a supplier.</span></div>
-            <div class="term"><b>Remittance Advice</b><span>A notice explaining what invoice or invoices a payment is intended to settle.</span></div>
+          <div class="card-title">B2B finance operations</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">AP · Accounts Payable</div><div class="term-zh">The buyer-side workflow for bills owed to suppliers.</div></div>
+            <div class="term-item"><div class="term-abbr">AR · Accounts Receivable</div><div class="term-zh">The seller-side workflow for invoices waiting to be collected.</div></div>
+            <div class="term-item"><div class="term-abbr">Purchase Order / PO</div><div class="term-zh">A buyer-issued document confirming intent to purchase under agreed terms.</div></div>
+            <div class="term-item"><div class="term-abbr">Goods Receipt</div><div class="term-zh">A record that goods or services were received, often needed before AP approves payment.</div></div>
+            <div class="term-item"><div class="term-abbr">Three-way Match</div><div class="term-zh">Matching purchase order, invoice, and goods receipt before paying a supplier.</div></div>
+            <div class="term-item"><div class="term-abbr">Remittance Advice</div><div class="term-zh">A notice explaining what invoice or invoices a payment is intended to settle.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Escrow and trade assurance</h3>
-          <div class="grid">
-            <div class="term"><b>Escrow</b><span>A neutral holding arrangement where funds are released only after agreed conditions are met.</span></div>
-            <div class="term"><b>Milestone Payment</b><span>Payment released in stages as project milestones are completed.</span></div>
-            <div class="term"><b>Letter of Credit / LC</b><span>A bank guarantee used in international trade, promising payment if documents meet the agreed conditions.</span></div>
-            <div class="term"><b>Documentary Collection</b><span>A trade process where banks handle shipping and payment documents but do not guarantee payment.</span></div>
+          <div class="card-title">Escrow and trade assurance</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Escrow</div><div class="term-zh">A neutral holding arrangement where funds are released only after agreed conditions are met.</div></div>
+            <div class="term-item"><div class="term-abbr">Milestone Payment</div><div class="term-zh">Payment released in stages as project milestones are completed.</div></div>
+            <div class="term-item"><div class="term-abbr">Letter of Credit / LC</div><div class="term-zh">A bank guarantee used in international trade, promising payment if documents meet the agreed conditions.</div></div>
+            <div class="term-item"><div class="term-abbr">Documentary Collection</div><div class="term-zh">A trade process where banks handle shipping and payment documents but do not guarantee payment.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Trade finance and supplier liquidity</h3>
-          <div class="grid">
-            <div class="term"><b>Factoring</b><span>Selling receivables to a finance provider for earlier cash.</span></div>
-            <div class="term"><b>Invoice Discounting</b><span>Borrowing against receivables while keeping customer collection in-house.</span></div>
-            <div class="term"><b>Dynamic Discounting</b><span>The buyer pays earlier in exchange for a discount.</span></div>
-            <div class="term"><b>Supply Chain Finance</b><span>A program where suppliers get early payment based on the buyer's credit quality.</span></div>
+          <div class="card-title">Trade finance and supplier liquidity</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Factoring</div><div class="term-zh">Selling receivables to a finance provider for earlier cash.</div></div>
+            <div class="term-item"><div class="term-abbr">Invoice Discounting</div><div class="term-zh">Borrowing against receivables while keeping customer collection in-house.</div></div>
+            <div class="term-item"><div class="term-abbr">Dynamic Discounting</div><div class="term-zh">The buyer pays earlier in exchange for a discount.</div></div>
+            <div class="term-item"><div class="term-abbr">Supply Chain Finance</div><div class="term-zh">A program where suppliers get early payment based on the buyer's credit quality.</div></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section" id="fx-cross-border">
-        <h2>FX &amp; Cross-Border</h2>
+<div id="sec-fx" class="section">
+        <h2 class="section-title">FX &amp; Cross-Border</h2>
         <p class="section-desc">Cross-border money movement is a stack of messaging, bank accounts, FX conversion, compliance checks, cut-off times, local rails, and liquidity partners.</p>
         <div class="card">
-          <h3>SWIFT and correspondent banking</h3>
-          <div class="grid">
-            <div class="term"><b>SWIFT</b><span>A secure bank messaging network. It transmits instructions, not the money itself.</span></div>
-            <div class="term"><b>Correspondent Bank</b><span>A bank that holds accounts for another bank to support international payments.</span></div>
-            <div class="term"><b>Intermediary Bank</b><span>A bank in the middle of a transfer chain. It may deduct fees and add delay.</span></div>
-            <div class="term"><b>Nostro Account</b><span>Our account with your bank, typically in a foreign currency.</span></div>
-            <div class="term"><b>Vostro Account</b><span>Your account with our bank, from the receiving bank's perspective.</span></div>
-            <div class="term"><b>MT103</b><span>A SWIFT customer credit transfer message often used to trace international wires.</span></div>
+          <div class="card-title">SWIFT and correspondent banking</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">SWIFT</div><div class="term-zh">A secure bank messaging network. It transmits instructions, not the money itself.</div></div>
+            <div class="term-item"><div class="term-abbr">Correspondent Bank</div><div class="term-zh">A bank that holds accounts for another bank to support international payments.</div></div>
+            <div class="term-item"><div class="term-abbr">Intermediary Bank</div><div class="term-zh">A bank in the middle of a transfer chain. It may deduct fees and add delay.</div></div>
+            <div class="term-item"><div class="term-abbr">Nostro Account</div><div class="term-zh">Our account with your bank, typically in a foreign currency.</div></div>
+            <div class="term-item"><div class="term-abbr">Vostro Account</div><div class="term-zh">Your account with our bank, from the receiving bank's perspective.</div></div>
+            <div class="term-item"><div class="term-abbr">MT103</div><div class="term-zh">A SWIFT customer credit transfer message often used to trace international wires.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>FX pricing</h3>
-          <div class="grid">
-            <div class="term"><b>Mid-market Rate</b><span>The midpoint between buy and sell prices in the wholesale FX market.</span></div>
-            <div class="term"><b>Spread</b><span>The difference between the mid-market rate and the rate quoted to the customer.</span></div>
-            <div class="term"><b>Markup</b><span>The provider's commercial margin added into the FX quote.</span></div>
-            <div class="term"><b>Slippage</b><span>The difference between expected and executed rate, often caused by volatility or low liquidity.</span></div>
-            <div class="term"><b>Spot FX</b><span>A currency exchange for near-immediate settlement, commonly T+0 to T+2.</span></div>
-            <div class="term"><b>Forward FX</b><span>A contract locking in an exchange rate for a future date.</span></div>
+          <div class="card-title">FX pricing</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Mid-market Rate</div><div class="term-zh">The midpoint between buy and sell prices in the wholesale FX market.</div></div>
+            <div class="term-item"><div class="term-abbr">Spread</div><div class="term-zh">The difference between the mid-market rate and the rate quoted to the customer.</div></div>
+            <div class="term-item"><div class="term-abbr">Markup</div><div class="term-zh">The provider's commercial margin added into the FX quote.</div></div>
+            <div class="term-item"><div class="term-abbr">Slippage</div><div class="term-zh">The difference between expected and executed rate, often caused by volatility or low liquidity.</div></div>
+            <div class="term-item"><div class="term-abbr">Spot FX</div><div class="term-zh">A currency exchange for near-immediate settlement, commonly T+0 to T+2.</div></div>
+            <div class="term-item"><div class="term-abbr">Forward FX</div><div class="term-zh">A contract locking in an exchange rate for a future date.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Settlement timing and rails</h3>
-          <div class="grid">
-            <div class="term"><b>Cut-off Time</b><span>The daily deadline after which payment processing moves to the next business day.</span></div>
-            <div class="term"><b>Value Date</b><span>The date funds are considered settled and available.</span></div>
-            <div class="term"><b>ACH</b><span>A US batch bank transfer rail, often cheaper but slower than instant payment rails.</span></div>
-            <div class="term"><b>SEPA</b><span>Euro-area bank transfer schemes, including SEPA Credit Transfer and SEPA Instant.</span></div>
-            <div class="term"><b>FPS / Faster Payments</b><span>Local fast bank-transfer systems such as UK Faster Payments or Hong Kong FPS.</span></div>
-            <div class="term"><b>RTGS</b><span>Real-time gross settlement systems used for high-value bank payments.</span></div>
+          <div class="card-title">Settlement timing and rails</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Cut-off Time</div><div class="term-zh">The daily deadline after which payment processing moves to the next business day.</div></div>
+            <div class="term-item"><div class="term-abbr">Value Date</div><div class="term-zh">The date funds are considered settled and available.</div></div>
+            <div class="term-item"><div class="term-abbr">ACH</div><div class="term-zh">A US batch bank transfer rail, often cheaper but slower than instant payment rails.</div></div>
+            <div class="term-item"><div class="term-abbr">SEPA</div><div class="term-zh">Euro-area bank transfer schemes, including SEPA Credit Transfer and SEPA Instant.</div></div>
+            <div class="term-item"><div class="term-abbr">FPS / Faster Payments</div><div class="term-zh">Local fast bank-transfer systems such as UK Faster Payments or Hong Kong FPS.</div></div>
+            <div class="term-item"><div class="term-abbr">RTGS</div><div class="term-zh">Real-time gross settlement systems used for high-value bank payments.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Why cross-border card payments lose value</h3>
-          <div class="grid">
-            <div class="term"><b>Cross-border Fee</b><span>A card network or acquirer fee applied when issuer, merchant, or settlement countries differ.</span></div>
-            <div class="term"><b>DCC · Dynamic Currency Conversion</b><span>Offering the cardholder a local-currency price at checkout, often with an embedded FX markup.</span></div>
-            <div class="term"><b>Withholding / Reserve</b><span>Funds held back for risk, refunds, and disputes, especially for cross-border merchants.</span></div>
-            <div class="term"><b>Beneficiary Deduction</b><span>Fees deducted along the transfer path before the final beneficiary receives funds.</span></div>
+          <div class="card-title">Why cross-border card payments lose value</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Cross-border Fee</div><div class="term-zh">A card network or acquirer fee applied when issuer, merchant, or settlement countries differ.</div></div>
+            <div class="term-item"><div class="term-abbr">DCC · Dynamic Currency Conversion</div><div class="term-zh">Offering the cardholder a local-currency price at checkout, often with an embedded FX markup.</div></div>
+            <div class="term-item"><div class="term-abbr">Withholding / Reserve</div><div class="term-zh">Funds held back for risk, refunds, and disputes, especially for cross-border merchants.</div></div>
+            <div class="term-item"><div class="term-abbr">Beneficiary Deduction</div><div class="term-zh">Fees deducted along the transfer path before the final beneficiary receives funds.</div></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section" id="crypto-payments">
-        <h2>Crypto Payments</h2>
+<div id="sec-crypto" class="section">
+        <h2 class="section-title">Crypto Payments</h2>
         <p class="section-desc">Stablecoin payments, wallets, on-chain settlement, ramps, custody, token standards, chain selection, and crypto-native checkout flows.</p>
         <div class="card">
-          <h3>Stablecoin primitives</h3>
-          <div class="grid">
-            <div class="term"><b>Stablecoin</b><span>A token designed to maintain stable value, most often pegged to USD.</span></div>
-            <div class="term"><b>USDT</b><span>Tether's USD-pegged stablecoin, widely used for global crypto payments.</span></div>
-            <div class="term"><b>USDC</b><span>Circle's USD-pegged stablecoin, often used in regulated and institutional flows.</span></div>
-            <div class="term"><b>Reserve</b><span>The cash, bank deposits, T-bills, or other assets backing a stablecoin.</span></div>
-            <div class="term"><b>Mint</b><span>Issuing new tokens after reserve assets are received.</span></div>
-            <div class="term"><b>Burn / Redeem</b><span>Destroying tokens and returning fiat or reserve value to the holder.</span></div>
+          <div class="card-title">Stablecoin primitives</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Stablecoin</div><div class="term-zh">A token designed to maintain stable value, most often pegged to USD.</div></div>
+            <div class="term-item"><div class="term-abbr">USDT</div><div class="term-zh">Tether's USD-pegged stablecoin, widely used for global crypto payments.</div></div>
+            <div class="term-item"><div class="term-abbr">USDC</div><div class="term-zh">Circle's USD-pegged stablecoin, often used in regulated and institutional flows.</div></div>
+            <div class="term-item"><div class="term-abbr">Reserve</div><div class="term-zh">The cash, bank deposits, T-bills, or other assets backing a stablecoin.</div></div>
+            <div class="term-item"><div class="term-abbr">Mint</div><div class="term-zh">Issuing new tokens after reserve assets are received.</div></div>
+            <div class="term-item"><div class="term-abbr">Burn / Redeem</div><div class="term-zh">Destroying tokens and returning fiat or reserve value to the holder.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Checkout, invoices, and payment links</h3>
-          <div class="grid">
-            <div class="term"><b>Crypto Checkout</b><span>A checkout flow where the buyer pays with wallet funds or stablecoins rather than card rails.</span></div>
-            <div class="term"><b>Payment Link</b><span>A URL containing amount, asset, network, merchant, and payment instructions.</span></div>
-            <div class="term"><b>QR Payment</b><span>A wallet-scannable representation of the payment request.</span></div>
-            <div class="term"><b>On-chain Receipt</b><span>The transaction hash and chain data proving payment occurred.</span></div>
-            <div class="term"><b>Webhook</b><span>A server callback notifying the merchant system that a payment was detected or confirmed.</span></div>
-            <div class="term"><b>Confirmation Count</b><span>The number of blocks after a transaction, used to judge settlement confidence.</span></div>
+          <div class="card-title">Checkout, invoices, and payment links</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Crypto Checkout</div><div class="term-zh">A checkout flow where the buyer pays with wallet funds or stablecoins rather than card rails.</div></div>
+            <div class="term-item"><div class="term-abbr">Payment Link</div><div class="term-zh">A URL containing amount, asset, network, merchant, and payment instructions.</div></div>
+            <div class="term-item"><div class="term-abbr">QR Payment</div><div class="term-zh">A wallet-scannable representation of the payment request.</div></div>
+            <div class="term-item"><div class="term-abbr">On-chain Receipt</div><div class="term-zh">The transaction hash and chain data proving payment occurred.</div></div>
+            <div class="term-item"><div class="term-abbr">Webhook</div><div class="term-zh">A server callback notifying the merchant system that a payment was detected or confirmed.</div></div>
+            <div class="term-item"><div class="term-abbr">Confirmation Count</div><div class="term-zh">The number of blocks after a transaction, used to judge settlement confidence.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Wallet and network vocabulary</h3>
-          <div class="grid">
-            <div class="term"><b>Wallet Address</b><span>A public blockchain address used to receive assets.</span></div>
-            <div class="term"><b>Private Key</b><span>The secret that controls asset movement. Whoever controls it controls the funds.</span></div>
-            <div class="term"><b>Seed Phrase</b><span>A human-readable backup for wallet keys.</span></div>
-            <div class="term"><b>Gas Fee</b><span>The network fee paid to execute a blockchain transaction.</span></div>
-            <div class="term"><b>Token Standard</b><span>Rules such as ERC-20, TRC-20, or SPL defining how tokens behave on a chain.</span></div>
-            <div class="term"><b>Bridge</b><span>Infrastructure for moving value or representations of value across chains.</span></div>
+          <div class="card-title">Wallet and network vocabulary</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Wallet Address</div><div class="term-zh">A public blockchain address used to receive assets.</div></div>
+            <div class="term-item"><div class="term-abbr">Private Key</div><div class="term-zh">The secret that controls asset movement. Whoever controls it controls the funds.</div></div>
+            <div class="term-item"><div class="term-abbr">Seed Phrase</div><div class="term-zh">A human-readable backup for wallet keys.</div></div>
+            <div class="term-item"><div class="term-abbr">Gas Fee</div><div class="term-zh">The network fee paid to execute a blockchain transaction.</div></div>
+            <div class="term-item"><div class="term-abbr">Token Standard</div><div class="term-zh">Rules such as ERC-20, TRC-20, or SPL defining how tokens behave on a chain.</div></div>
+            <div class="term-item"><div class="term-abbr">Bridge</div><div class="term-zh">Infrastructure for moving value or representations of value across chains.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Ramps and liquidity</h3>
-          <div class="grid">
-            <div class="term"><b>On-ramp</b><span>Fiat into crypto or stablecoins.</span></div>
-            <div class="term"><b>Off-ramp</b><span>Crypto or stablecoins back into fiat bank money.</span></div>
-            <div class="term"><b>CEX</b><span>Centralized exchange. Easier onboarding and liquidity, but assets are typically custodial.</span></div>
-            <div class="term"><b>DEX</b><span>Decentralized exchange. On-chain swaps without a central order custodian.</span></div>
-            <div class="term"><b>OTC Desk</b><span>Over-the-counter trading desk for larger conversions and negotiated pricing.</span></div>
-            <div class="term"><b>Settlement Finality</b><span>The point after which the transfer is practically irreversible.</span></div>
+          <div class="card-title">Ramps and liquidity</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">On-ramp</div><div class="term-zh">Fiat into crypto or stablecoins.</div></div>
+            <div class="term-item"><div class="term-abbr">Off-ramp</div><div class="term-zh">Crypto or stablecoins back into fiat bank money.</div></div>
+            <div class="term-item"><div class="term-abbr">CEX</div><div class="term-zh">Centralized exchange. Easier onboarding and liquidity, but assets are typically custodial.</div></div>
+            <div class="term-item"><div class="term-abbr">DEX</div><div class="term-zh">Decentralized exchange. On-chain swaps without a central order custodian.</div></div>
+            <div class="term-item"><div class="term-abbr">OTC Desk</div><div class="term-zh">Over-the-counter trading desk for larger conversions and negotiated pricing.</div></div>
+            <div class="term-item"><div class="term-abbr">Settlement Finality</div><div class="term-zh">The point after which the transfer is practically irreversible.</div></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section" id="crypto-card">
-        <h2>Crypto Cards</h2>
+<div id="sec-ucard" class="section">
+        <h2 class="section-title">Crypto Cards</h2>
         <p class="section-desc">Crypto cards connect wallet balances, stablecoins, issuer processors, BIN sponsors, card networks, compliance, authorization, and merchant acceptance.</p>
         <div class="card">
-          <h3>Crypto card operating model</h3>
-          <div class="grid">
-            <div class="term"><b>Crypto Card</b><span>A card product where spending is funded by crypto or stablecoin balances, often converted before card settlement.</span></div>
-            <div class="term"><b>Prepaid Card</b><span>A card funded in advance from a stored balance rather than a credit line.</span></div>
-            <div class="term"><b>Debit Card</b><span>A card that draws from a deposit or wallet balance.</span></div>
-            <div class="term"><b>Virtual Card</b><span>A card number issued digitally for online spending.</span></div>
-            <div class="term"><b>Physical Card</b><span>A plastic or metal card used at POS terminals and ATMs.</span></div>
-            <div class="term"><b>Card Funding</b><span>The process that moves wallet value into the card spend account or available balance.</span></div>
+          <div class="card-title">Crypto card operating model</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Crypto Card</div><div class="term-zh">A card product where spending is funded by crypto or stablecoin balances, often converted before card settlement.</div></div>
+            <div class="term-item"><div class="term-abbr">Prepaid Card</div><div class="term-zh">A card funded in advance from a stored balance rather than a credit line.</div></div>
+            <div class="term-item"><div class="term-abbr">Debit Card</div><div class="term-zh">A card that draws from a deposit or wallet balance.</div></div>
+            <div class="term-item"><div class="term-abbr">Virtual Card</div><div class="term-zh">A card number issued digitally for online spending.</div></div>
+            <div class="term-item"><div class="term-abbr">Physical Card</div><div class="term-zh">A plastic or metal card used at POS terminals and ATMs.</div></div>
+            <div class="term-item"><div class="term-abbr">Card Funding</div><div class="term-zh">The process that moves wallet value into the card spend account or available balance.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Program stack</h3>
-          <div class="grid">
-            <div class="term"><b>BIN Sponsor</b><span>A licensed financial institution sponsoring the card program into a card network.</span></div>
-            <div class="term"><b>Issuer Processor</b><span>The processor that authorizes card spend, manages balances, and connects to networks.</span></div>
-            <div class="term"><b>Program Manager</b><span>The company orchestrating card UX, compliance, operations, vendors, and commercial rules.</span></div>
-            <div class="term"><b>Card Network</b><span>Visa, Mastercard, or another network handling acceptance and rules.</span></div>
-            <div class="term"><b>Settlement Account</b><span>The fiat account used to settle card network obligations.</span></div>
-            <div class="term"><b>Float Account</b><span>A funding account holding value available for card authorization.</span></div>
+          <div class="card-title">Program stack</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">BIN Sponsor</div><div class="term-zh">A licensed financial institution sponsoring the card program into a card network.</div></div>
+            <div class="term-item"><div class="term-abbr">Issuer Processor</div><div class="term-zh">The processor that authorizes card spend, manages balances, and connects to networks.</div></div>
+            <div class="term-item"><div class="term-abbr">Program Manager</div><div class="term-zh">The company orchestrating card UX, compliance, operations, vendors, and commercial rules.</div></div>
+            <div class="term-item"><div class="term-abbr">Card Network</div><div class="term-zh">Visa, Mastercard, or another network handling acceptance and rules.</div></div>
+            <div class="term-item"><div class="term-abbr">Settlement Account</div><div class="term-zh">The fiat account used to settle card network obligations.</div></div>
+            <div class="term-item"><div class="term-abbr">Float Account</div><div class="term-zh">A funding account holding value available for card authorization.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Authorization and conversion</h3>
-          <div class="grid">
-            <div class="term"><b>Spend Authorization</b><span>Real-time decision to approve or decline a card transaction based on balance, risk, compliance, and limits.</span></div>
-            <div class="term"><b>Pre-funding</b><span>Holding enough fiat or stablecoin liquidity in advance to support card settlement.</span></div>
-            <div class="term"><b>Just-in-time Funding</b><span>Moving or converting funds at the moment of authorization.</span></div>
-            <div class="term"><b>Crypto-to-Fiat Conversion</b><span>Converting stablecoins or crypto to fiat so the card network can settle in supported currencies.</span></div>
-            <div class="term"><b>FX Markup</b><span>Additional spread or fee when the card spend currency differs from the funding currency.</span></div>
-            <div class="term"><b>Velocity Limit</b><span>A risk rule limiting spend frequency or amount over a time window.</span></div>
+          <div class="card-title">Authorization and conversion</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Spend Authorization</div><div class="term-zh">Real-time decision to approve or decline a card transaction based on balance, risk, compliance, and limits.</div></div>
+            <div class="term-item"><div class="term-abbr">Pre-funding</div><div class="term-zh">Holding enough fiat or stablecoin liquidity in advance to support card settlement.</div></div>
+            <div class="term-item"><div class="term-abbr">Just-in-time Funding</div><div class="term-zh">Moving or converting funds at the moment of authorization.</div></div>
+            <div class="term-item"><div class="term-abbr">Crypto-to-Fiat Conversion</div><div class="term-zh">Converting stablecoins or crypto to fiat so the card network can settle in supported currencies.</div></div>
+            <div class="term-item"><div class="term-abbr">FX Markup</div><div class="term-zh">Additional spread or fee when the card spend currency differs from the funding currency.</div></div>
+            <div class="term-item"><div class="term-abbr">Velocity Limit</div><div class="term-zh">A risk rule limiting spend frequency or amount over a time window.</div></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section" id="compliance">
-        <h2>Compliance</h2>
+<div id="sec-comp" class="section">
+        <h2 class="section-title">Compliance</h2>
         <p class="section-desc">Identity, business verification, sanctions, AML monitoring, fraud signals, Travel Rule, risk scoring, reporting, and evidence trails.</p>
         <div class="card">
-          <h3>KYC, KYB, AML, CFT</h3>
-          <div class="grid">
-            <div class="term"><b>KYC · Know Your Customer</b><span>Verifying the identity of an individual customer.</span></div>
-            <div class="term"><b>KYB · Know Your Business</b><span>Verifying a company, its registration, business activity, ownership, and controllers.</span></div>
-            <div class="term"><b>UBO · Ultimate Beneficial Owner</b><span>The natural person who ultimately owns or controls a business.</span></div>
-            <div class="term"><b>AML · Anti-Money Laundering</b><span>Controls for detecting and preventing money laundering.</span></div>
-            <div class="term"><b>CFT / CTF</b><span>Countering the financing of terrorism.</span></div>
-            <div class="term"><b>EDD · Enhanced Due Diligence</b><span>Deeper review for higher-risk users, geographies, industries, or transaction patterns.</span></div>
+          <div class="card-title">KYC, KYB, AML, CFT</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">KYC · Know Your Customer</div><div class="term-zh">Verifying the identity of an individual customer.</div></div>
+            <div class="term-item"><div class="term-abbr">KYB · Know Your Business</div><div class="term-zh">Verifying a company, its registration, business activity, ownership, and controllers.</div></div>
+            <div class="term-item"><div class="term-abbr">UBO · Ultimate Beneficial Owner</div><div class="term-zh">The natural person who ultimately owns or controls a business.</div></div>
+            <div class="term-item"><div class="term-abbr">AML · Anti-Money Laundering</div><div class="term-zh">Controls for detecting and preventing money laundering.</div></div>
+            <div class="term-item"><div class="term-abbr">CFT / CTF</div><div class="term-zh">Countering the financing of terrorism.</div></div>
+            <div class="term-item"><div class="term-abbr">EDD · Enhanced Due Diligence</div><div class="term-zh">Deeper review for higher-risk users, geographies, industries, or transaction patterns.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Screening and monitoring</h3>
-          <div class="grid">
-            <div class="term"><b>Sanctions Screening</b><span>Checking customers and counterparties against restricted-party lists such as OFAC, UN, EU, or UK lists.</span></div>
-            <div class="term"><b>PEP Screening</b><span>Identifying politically exposed persons whose positions create higher corruption or bribery risk.</span></div>
-            <div class="term"><b>Adverse Media</b><span>Negative news or public records used in risk assessment.</span></div>
-            <div class="term"><b>Transaction Monitoring</b><span>Rules and models that flag unusual or suspicious behavior.</span></div>
-            <div class="term"><b>Risk Score</b><span>A numeric or categorical rating combining identity, geography, behavior, device, and transaction signals.</span></div>
-            <div class="term"><b>Case Management</b><span>The workflow for reviewing alerts, documenting decisions, and escalating suspicious activity.</span></div>
+          <div class="card-title">Screening and monitoring</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Sanctions Screening</div><div class="term-zh">Checking customers and counterparties against restricted-party lists such as OFAC, UN, EU, or UK lists.</div></div>
+            <div class="term-item"><div class="term-abbr">PEP Screening</div><div class="term-zh">Identifying politically exposed persons whose positions create higher corruption or bribery risk.</div></div>
+            <div class="term-item"><div class="term-abbr">Adverse Media</div><div class="term-zh">Negative news or public records used in risk assessment.</div></div>
+            <div class="term-item"><div class="term-abbr">Transaction Monitoring</div><div class="term-zh">Rules and models that flag unusual or suspicious behavior.</div></div>
+            <div class="term-item"><div class="term-abbr">Risk Score</div><div class="term-zh">A numeric or categorical rating combining identity, geography, behavior, device, and transaction signals.</div></div>
+            <div class="term-item"><div class="term-abbr">Case Management</div><div class="term-zh">The workflow for reviewing alerts, documenting decisions, and escalating suspicious activity.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Crypto compliance</h3>
-          <div class="grid">
-            <div class="term"><b>VASP</b><span>Virtual Asset Service Provider, such as an exchange, custodian, broker, transfer platform, or hosted wallet provider.</span></div>
-            <div class="term"><b>Travel Rule</b><span>A requirement that originator and beneficiary information travels with qualifying transfers.</span></div>
-            <div class="term"><b>Wallet Screening</b><span>Checking blockchain addresses for sanctions, hacks, scams, mixers, dark markets, or high-risk exposure.</span></div>
-            <div class="term"><b>Source of Funds</b><span>Evidence explaining where the money came from.</span></div>
-            <div class="term"><b>Source of Wealth</b><span>Evidence explaining how the customer accumulated wealth.</span></div>
-            <div class="term"><b>Suspicious Activity Report</b><span>A regulatory report filed when activity may indicate money laundering, fraud, or other illicit finance.</span></div>
+          <div class="card-title">Crypto compliance</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">VASP</div><div class="term-zh">Virtual Asset Service Provider, such as an exchange, custodian, broker, transfer platform, or hosted wallet provider.</div></div>
+            <div class="term-item"><div class="term-abbr">Travel Rule</div><div class="term-zh">A requirement that originator and beneficiary information travels with qualifying transfers.</div></div>
+            <div class="term-item"><div class="term-abbr">Wallet Screening</div><div class="term-zh">Checking blockchain addresses for sanctions, hacks, scams, mixers, dark markets, or high-risk exposure.</div></div>
+            <div class="term-item"><div class="term-abbr">Source of Funds</div><div class="term-zh">Evidence explaining where the money came from.</div></div>
+            <div class="term-item"><div class="term-abbr">Source of Wealth</div><div class="term-zh">Evidence explaining how the customer accumulated wealth.</div></div>
+            <div class="term-item"><div class="term-abbr">Suspicious Activity Report</div><div class="term-zh">A regulatory report filed when activity may indicate money laundering, fraud, or other illicit finance.</div></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section" id="licenses">
-        <h2>License Map</h2>
+<div id="sec-lic" class="section">
+        <h2 class="section-title">License Map</h2>
         <p class="section-desc">Payments are territorial. A company operating globally usually needs a stack of local licenses, registrations, exemptions, bank partners, and compliance programs.</p>
         <div class="card">
-          <h3>United States and Canada</h3>
-          <div class="grid">
-            <div class="term"><b>MSB Registration</b><span>US federal money services business registration with FinCEN. It is not the same as state licensing.</span></div>
-            <div class="term"><b>MTL · Money Transmitter License</b><span>State-by-state US licensing for money transmission.</span></div>
-            <div class="term"><b>BitLicense</b><span>New York's virtual currency business license, one of the strictest US crypto regimes.</span></div>
-            <div class="term"><b>National Bank Charter</b><span>A federal bank charter that can change state licensing requirements but has a much higher entry bar.</span></div>
-            <div class="term"><b>FINTRAC MSB</b><span>Canadian money services business registration and AML supervision.</span></div>
-            <div class="term"><b>State Money Movement Exemptions</b><span>Agency, payment processor, closed-loop, or other exemptions that may apply only under narrow facts.</span></div>
+          <div class="card-title">United States and Canada</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">MSB Registration</div><div class="term-zh">US federal money services business registration with FinCEN. It is not the same as state licensing.</div></div>
+            <div class="term-item"><div class="term-abbr">MTL · Money Transmitter License</div><div class="term-zh">State-by-state US licensing for money transmission.</div></div>
+            <div class="term-item"><div class="term-abbr">BitLicense</div><div class="term-zh">New York's virtual currency business license, one of the strictest US crypto regimes.</div></div>
+            <div class="term-item"><div class="term-abbr">National Bank Charter</div><div class="term-zh">A federal bank charter that can change state licensing requirements but has a much higher entry bar.</div></div>
+            <div class="term-item"><div class="term-abbr">FINTRAC MSB</div><div class="term-zh">Canadian money services business registration and AML supervision.</div></div>
+            <div class="term-item"><div class="term-abbr">State Money Movement Exemptions</div><div class="term-zh">Agency, payment processor, closed-loop, or other exemptions that may apply only under narrow facts.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Europe and the UK</h3>
-          <div class="grid">
-            <div class="term"><b>EMI · Electronic Money Institution</b><span>Authorization to issue e-money and provide payment services.</span></div>
-            <div class="term"><b>PI · Payment Institution</b><span>Authorization for payment services without issuing e-money.</span></div>
-            <div class="term"><b>Small EMI / Small PI</b><span>Lower-scale regimes with limits on volume, geography, or services.</span></div>
-            <div class="term"><b>Passporting</b><span>EU mechanism allowing a licensed institution in one member state to operate across other member states.</span></div>
-            <div class="term"><b>FCA E-money</b><span>UK e-money and payment authorization after Brexit, separate from EU passporting.</span></div>
-            <div class="term"><b>AISP / PISP</b><span>PSD2 account information and payment initiation service provider permissions.</span></div>
+          <div class="card-title">Europe and the UK</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">EMI · Electronic Money Institution</div><div class="term-zh">Authorization to issue e-money and provide payment services.</div></div>
+            <div class="term-item"><div class="term-abbr">PI · Payment Institution</div><div class="term-zh">Authorization for payment services without issuing e-money.</div></div>
+            <div class="term-item"><div class="term-abbr">Small EMI / Small PI</div><div class="term-zh">Lower-scale regimes with limits on volume, geography, or services.</div></div>
+            <div class="term-item"><div class="term-abbr">Passporting</div><div class="term-zh">EU mechanism allowing a licensed institution in one member state to operate across other member states.</div></div>
+            <div class="term-item"><div class="term-abbr">FCA E-money</div><div class="term-zh">UK e-money and payment authorization after Brexit, separate from EU passporting.</div></div>
+            <div class="term-item"><div class="term-abbr">AISP / PISP</div><div class="term-zh">PSD2 account information and payment initiation service provider permissions.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Asia-Pacific and Middle East</h3>
-          <div class="grid">
-            <div class="term"><b>Singapore MPI</b><span>Major Payment Institution license regulated by MAS, covering payment services above specified thresholds.</span></div>
-            <div class="term"><b>DPT Service</b><span>Singapore digital payment token service activity.</span></div>
-            <div class="term"><b>Hong Kong MSO</b><span>Money Service Operator license for money changing and remittance.</span></div>
-            <div class="term"><b>Hong Kong SVF</b><span>Stored Value Facility license for wallet and stored-value operations.</span></div>
-            <div class="term"><b>Japan Crypto-Asset Exchange Registration</b><span>JFSA registration for crypto-asset exchange services.</span></div>
-            <div class="term"><b>Dubai VARA VASP License</b><span>Dubai virtual asset licensing regime for specific virtual asset activities.</span></div>
+          <div class="card-title">Asia-Pacific and Middle East</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Singapore MPI</div><div class="term-zh">Major Payment Institution license regulated by MAS, covering payment services above specified thresholds.</div></div>
+            <div class="term-item"><div class="term-abbr">DPT Service</div><div class="term-zh">Singapore digital payment token service activity.</div></div>
+            <div class="term-item"><div class="term-abbr">Hong Kong MSO</div><div class="term-zh">Money Service Operator license for money changing and remittance.</div></div>
+            <div class="term-item"><div class="term-abbr">Hong Kong SVF</div><div class="term-zh">Stored Value Facility license for wallet and stored-value operations.</div></div>
+            <div class="term-item"><div class="term-abbr">Japan Crypto-Asset Exchange Registration</div><div class="term-zh">JFSA registration for crypto-asset exchange services.</div></div>
+            <div class="term-item"><div class="term-abbr">Dubai VARA VASP License</div><div class="term-zh">Dubai virtual asset licensing regime for specific virtual asset activities.</div></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section" id="stablecoin-licenses">
-        <h2>Stablecoin Licenses</h2>
+<div id="sec-stable" class="section">
+        <h2 class="section-title">Stablecoin Licenses</h2>
         <p class="section-desc">Stablecoin activity can touch e-money, payment services, virtual asset services, custody, brokerage, exchange, reserve management, and consumer protection rules.</p>
         <div class="card">
-          <h3>Stablecoin issuer model</h3>
-          <div class="grid">
-            <div class="term"><b>Issuer</b><span>The entity minting, redeeming, and operating the stablecoin.</span></div>
-            <div class="term"><b>Reserve Asset</b><span>Cash, bank deposits, government bills, or other assets backing the token.</span></div>
-            <div class="term"><b>Segregated Reserve</b><span>Reserve assets separated from the issuer's operating assets.</span></div>
-            <div class="term"><b>Attestation</b><span>A periodic third-party report on reserves and liabilities.</span></div>
-            <div class="term"><b>Redemption Right</b><span>The holder's right to redeem tokens for fiat or equivalent value.</span></div>
-            <div class="term"><b>Run Risk</b><span>The risk that many holders redeem at once and reserves or liquidity are insufficient.</span></div>
+          <div class="card-title">Stablecoin issuer model</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Issuer</div><div class="term-zh">The entity minting, redeeming, and operating the stablecoin.</div></div>
+            <div class="term-item"><div class="term-abbr">Reserve Asset</div><div class="term-zh">Cash, bank deposits, government bills, or other assets backing the token.</div></div>
+            <div class="term-item"><div class="term-abbr">Segregated Reserve</div><div class="term-zh">Reserve assets separated from the issuer's operating assets.</div></div>
+            <div class="term-item"><div class="term-abbr">Attestation</div><div class="term-zh">A periodic third-party report on reserves and liabilities.</div></div>
+            <div class="term-item"><div class="term-abbr">Redemption Right</div><div class="term-zh">The holder's right to redeem tokens for fiat or equivalent value.</div></div>
+            <div class="term-item"><div class="term-abbr">Run Risk</div><div class="term-zh">The risk that many holders redeem at once and reserves or liquidity are insufficient.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Regulatory categories</h3>
-          <div class="grid">
-            <div class="term"><b>MiCA EMT</b><span>EU e-money token category under the Markets in Crypto-Assets regulation.</span></div>
-            <div class="term"><b>MiCA ART</b><span>EU asset-referenced token category for tokens referencing multiple assets or baskets.</span></div>
-            <div class="term"><b>CASP</b><span>Crypto-Asset Service Provider under MiCA.</span></div>
-            <div class="term"><b>Payment Stablecoin</b><span>A stablecoin intended for payment or settlement use rather than only trading.</span></div>
-            <div class="term"><b>Custody License</b><span>Authorization to hold crypto assets or private keys for clients.</span></div>
-            <div class="term"><b>Exchange / Broker License</b><span>Authorization for buying, selling, or arranging trades in crypto assets.</span></div>
+          <div class="card-title">Regulatory categories</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">MiCA EMT</div><div class="term-zh">EU e-money token category under the Markets in Crypto-Assets regulation.</div></div>
+            <div class="term-item"><div class="term-abbr">MiCA ART</div><div class="term-zh">EU asset-referenced token category for tokens referencing multiple assets or baskets.</div></div>
+            <div class="term-item"><div class="term-abbr">CASP</div><div class="term-zh">Crypto-Asset Service Provider under MiCA.</div></div>
+            <div class="term-item"><div class="term-abbr">Payment Stablecoin</div><div class="term-zh">A stablecoin intended for payment or settlement use rather than only trading.</div></div>
+            <div class="term-item"><div class="term-abbr">Custody License</div><div class="term-zh">Authorization to hold crypto assets or private keys for clients.</div></div>
+            <div class="term-item"><div class="term-abbr">Exchange / Broker License</div><div class="term-zh">Authorization for buying, selling, or arranging trades in crypto assets.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Operational obligations</h3>
-          <div class="grid">
-            <div class="term"><b>Reserve Management</b><span>Investment, liquidity, and safeguarding controls for backing assets.</span></div>
-            <div class="term"><b>Whitepaper / Disclosure</b><span>Public disclosures describing rights, risks, reserves, technology, and issuer obligations.</span></div>
-            <div class="term"><b>Redemption SLA</b><span>The promised timeframe for redeeming stablecoins into fiat.</span></div>
-            <div class="term"><b>Chain Governance</b><span>Rules for minting, freezing, burning, blacklist controls, and supported networks.</span></div>
-            <div class="term"><b>Financial Crime Controls</b><span>KYC, wallet screening, sanctions, Travel Rule, and transaction monitoring for stablecoin flows.</span></div>
-            <div class="term"><b>Consumer Complaint Process</b><span>Required process for handling user complaints, errors, and disputes.</span></div>
+          <div class="card-title">Operational obligations</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Reserve Management</div><div class="term-zh">Investment, liquidity, and safeguarding controls for backing assets.</div></div>
+            <div class="term-item"><div class="term-abbr">Whitepaper / Disclosure</div><div class="term-zh">Public disclosures describing rights, risks, reserves, technology, and issuer obligations.</div></div>
+            <div class="term-item"><div class="term-abbr">Redemption SLA</div><div class="term-zh">The promised timeframe for redeeming stablecoins into fiat.</div></div>
+            <div class="term-item"><div class="term-abbr">Chain Governance</div><div class="term-zh">Rules for minting, freezing, burning, blacklist controls, and supported networks.</div></div>
+            <div class="term-item"><div class="term-abbr">Financial Crime Controls</div><div class="term-zh">KYC, wallet screening, sanctions, Travel Rule, and transaction monitoring for stablecoin flows.</div></div>
+            <div class="term-item"><div class="term-abbr">Consumer Complaint Process</div><div class="term-zh">Required process for handling user complaints, errors, and disputes.</div></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section" id="institutional-roles">
-        <h2>Institutional Roles</h2>
+<div id="sec-roles" class="section">
+        <h2 class="section-title">Institutional Roles</h2>
         <p class="section-desc">Modern payment products are assembled from many institutional roles: licensed entities, bank partners, processors, networks, liquidity providers, compliance vendors, custodians, and program managers.</p>
         <div class="card">
-          <h3>Merchant-facing roles</h3>
-          <div class="grid">
-            <div class="term"><b>Merchant of Record / MoR</b><span>The legal seller responsible for taxes, refunds, disputes, and customer payment obligations.</span></div>
-            <div class="term"><b>Seller of Record</b><span>The party recorded as the seller in commerce and tax workflows.</span></div>
-            <div class="term"><b>Platform</b><span>A marketplace, SaaS product, or network coordinating merchants, buyers, and payments.</span></div>
-            <div class="term"><b>Sub-merchant</b><span>A merchant onboarded under a PayFac or platform structure.</span></div>
-            <div class="term"><b>Beneficiary</b><span>The recipient of funds.</span></div>
-            <div class="term"><b>Counterparty</b><span>The other side of a transaction or settlement obligation.</span></div>
+          <div class="card-title">Merchant-facing roles</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Merchant of Record / MoR</div><div class="term-zh">The legal seller responsible for taxes, refunds, disputes, and customer payment obligations.</div></div>
+            <div class="term-item"><div class="term-abbr">Seller of Record</div><div class="term-zh">The party recorded as the seller in commerce and tax workflows.</div></div>
+            <div class="term-item"><div class="term-abbr">Platform</div><div class="term-zh">A marketplace, SaaS product, or network coordinating merchants, buyers, and payments.</div></div>
+            <div class="term-item"><div class="term-abbr">Sub-merchant</div><div class="term-zh">A merchant onboarded under a PayFac or platform structure.</div></div>
+            <div class="term-item"><div class="term-abbr">Beneficiary</div><div class="term-zh">The recipient of funds.</div></div>
+            <div class="term-item"><div class="term-abbr">Counterparty</div><div class="term-zh">The other side of a transaction or settlement obligation.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Infrastructure roles</h3>
-          <div class="grid">
-            <div class="term"><b>Banking Partner</b><span>A bank providing accounts, safeguarding, payment rails, sponsorship, or settlement services.</span></div>
-            <div class="term"><b>Processor</b><span>The transaction-processing infrastructure layer for authorization, clearing, settlement, or reporting.</span></div>
-            <div class="term"><b>Network</b><span>A card, bank, or blockchain network setting rules and routing transactions.</span></div>
-            <div class="term"><b>Custodian</b><span>A licensed entity holding client assets or private keys.</span></div>
-            <div class="term"><b>Liquidity Provider</b><span>A partner supplying fiat, FX, crypto, or stablecoin liquidity.</span></div>
-            <div class="term"><b>Compliance Vendor</b><span>A provider for KYC, KYB, AML, sanctions, fraud, device, or blockchain analytics.</span></div>
+          <div class="card-title">Infrastructure roles</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Banking Partner</div><div class="term-zh">A bank providing accounts, safeguarding, payment rails, sponsorship, or settlement services.</div></div>
+            <div class="term-item"><div class="term-abbr">Processor</div><div class="term-zh">The transaction-processing infrastructure layer for authorization, clearing, settlement, or reporting.</div></div>
+            <div class="term-item"><div class="term-abbr">Network</div><div class="term-zh">A card, bank, or blockchain network setting rules and routing transactions.</div></div>
+            <div class="term-item"><div class="term-abbr">Custodian</div><div class="term-zh">A licensed entity holding client assets or private keys.</div></div>
+            <div class="term-item"><div class="term-abbr">Liquidity Provider</div><div class="term-zh">A partner supplying fiat, FX, crypto, or stablecoin liquidity.</div></div>
+            <div class="term-item"><div class="term-abbr">Compliance Vendor</div><div class="term-zh">A provider for KYC, KYB, AML, sanctions, fraud, device, or blockchain analytics.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Risk ownership</h3>
-          <div class="grid">
-            <div class="term"><b>Principal</b><span>The licensed entity ultimately responsible for a regulated activity.</span></div>
-            <div class="term"><b>Agent</b><span>An entity acting on behalf of a principal under permission or registration.</span></div>
-            <div class="term"><b>Outsourcing</b><span>Delegating operations to a vendor while retaining regulatory responsibility.</span></div>
-            <div class="term"><b>Material Outsourcing</b><span>A critical outsourced function that needs governance, monitoring, and sometimes regulatory notification.</span></div>
+          <div class="card-title">Risk ownership</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Principal</div><div class="term-zh">The licensed entity ultimately responsible for a regulated activity.</div></div>
+            <div class="term-item"><div class="term-abbr">Agent</div><div class="term-zh">An entity acting on behalf of a principal under permission or registration.</div></div>
+            <div class="term-item"><div class="term-abbr">Outsourcing</div><div class="term-zh">Delegating operations to a vendor while retaining regulatory responsibility.</div></div>
+            <div class="term-item"><div class="term-abbr">Material Outsourcing</div><div class="term-zh">A critical outsourced function that needs governance, monitoring, and sometimes regulatory notification.</div></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section" id="transaction-lifecycle">
-        <h2>Transaction Lifecycle</h2>
+<div id="sec-txlife" class="section">
+        <h2 class="section-title">Transaction Lifecycle</h2>
         <p class="section-desc">The complete journey of a transaction before it is authorized, captured, cleared, settled, reconciled, refunded, disputed, paid out, and closed in the ledger.</p>
         <div class="card">
-          <h3>Card lifecycle</h3>
-          <div class="grid">
-            <div class="term"><b>Authorization</b><span>The issuer approves a payment request and places a hold on funds.</span></div>
-            <div class="term"><b>Partial Authorization</b><span>The issuer approves only part of the requested amount.</span></div>
-            <div class="term"><b>Incremental Authorization</b><span>An additional authorization used when the final amount increases, common in hotels or car rentals.</span></div>
-            <div class="term"><b>Capture</b><span>The merchant confirms the transaction should be charged.</span></div>
-            <div class="term"><b>Clearing</b><span>Transaction data and fees are exchanged between institutions.</span></div>
-            <div class="term"><b>Settlement</b><span>Net funds move between banks or counterparties.</span></div>
+          <div class="card-title">Card lifecycle</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Authorization</div><div class="term-zh">The issuer approves a payment request and places a hold on funds.</div></div>
+            <div class="term-item"><div class="term-abbr">Partial Authorization</div><div class="term-zh">The issuer approves only part of the requested amount.</div></div>
+            <div class="term-item"><div class="term-abbr">Incremental Authorization</div><div class="term-zh">An additional authorization used when the final amount increases, common in hotels or car rentals.</div></div>
+            <div class="term-item"><div class="term-abbr">Capture</div><div class="term-zh">The merchant confirms the transaction should be charged.</div></div>
+            <div class="term-item"><div class="term-abbr">Clearing</div><div class="term-zh">Transaction data and fees are exchanged between institutions.</div></div>
+            <div class="term-item"><div class="term-abbr">Settlement</div><div class="term-zh">Net funds move between banks or counterparties.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>After settlement</h3>
-          <div class="grid">
-            <div class="term"><b>Payout</b><span>The acquirer or PSP sends funds to the merchant bank account or wallet.</span></div>
-            <div class="term"><b>Refund</b><span>The merchant sends money back after a transaction has settled.</span></div>
-            <div class="term"><b>Chargeback</b><span>A cardholder dispute routed through the issuer and card network.</span></div>
-            <div class="term"><b>Reversal</b><span>A transaction adjustment that cancels or corrects a previous message.</span></div>
-            <div class="term"><b>Adjustment</b><span>A settlement correction for fees, disputes, errors, or manual operations.</span></div>
-            <div class="term"><b>Write-off</b><span>Recognizing that a receivable is unlikely to be collected.</span></div>
+          <div class="card-title">After settlement</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Payout</div><div class="term-zh">The acquirer or PSP sends funds to the merchant bank account or wallet.</div></div>
+            <div class="term-item"><div class="term-abbr">Refund</div><div class="term-zh">The merchant sends money back after a transaction has settled.</div></div>
+            <div class="term-item"><div class="term-abbr">Chargeback</div><div class="term-zh">A cardholder dispute routed through the issuer and card network.</div></div>
+            <div class="term-item"><div class="term-abbr">Reversal</div><div class="term-zh">A transaction adjustment that cancels or corrects a previous message.</div></div>
+            <div class="term-item"><div class="term-abbr">Adjustment</div><div class="term-zh">A settlement correction for fees, disputes, errors, or manual operations.</div></div>
+            <div class="term-item"><div class="term-abbr">Write-off</div><div class="term-zh">Recognizing that a receivable is unlikely to be collected.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Stablecoin lifecycle</h3>
-          <div class="grid">
-            <div class="term"><b>Payment Request</b><span>The invoice, checkout session, QR code, or address generated for the payer.</span></div>
-            <div class="term"><b>Broadcast</b><span>The payer signs and submits the transaction to the network.</span></div>
-            <div class="term"><b>Mempool</b><span>The set of pending transactions waiting for block inclusion.</span></div>
-            <div class="term"><b>Confirmation</b><span>A block includes the transaction; additional blocks increase confidence.</span></div>
-            <div class="term"><b>Finality</b><span>The point where the payment is practically irreversible.</span></div>
-            <div class="term"><b>Webhook Confirmation</b><span>The merchant system receives a server notification and updates order status.</span></div>
+          <div class="card-title">Stablecoin lifecycle</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Payment Request</div><div class="term-zh">The invoice, checkout session, QR code, or address generated for the payer.</div></div>
+            <div class="term-item"><div class="term-abbr">Broadcast</div><div class="term-zh">The payer signs and submits the transaction to the network.</div></div>
+            <div class="term-item"><div class="term-abbr">Mempool</div><div class="term-zh">The set of pending transactions waiting for block inclusion.</div></div>
+            <div class="term-item"><div class="term-abbr">Confirmation</div><div class="term-zh">A block includes the transaction; additional blocks increase confidence.</div></div>
+            <div class="term-item"><div class="term-abbr">Finality</div><div class="term-zh">The point where the payment is practically irreversible.</div></div>
+            <div class="term-item"><div class="term-abbr">Webhook Confirmation</div><div class="term-zh">The merchant system receives a server notification and updates order status.</div></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section class="section" id="business-metrics">
-        <h2>Business Metrics</h2>
+<div id="sec-biz" class="section">
+        <h2 class="section-title">Business Metrics</h2>
         <p class="section-desc">The metrics payment teams, operators, and investors use to understand scale, margin, retention, risk, conversion, and capital efficiency.</p>
         <div class="card">
-          <h3>Volume and monetization</h3>
-          <div class="grid">
-            <div class="term"><b>TPV · Total Payment Volume</b><span>The value of payments processed through the platform.</span></div>
-            <div class="term"><b>GMV · Gross Merchandise Volume</b><span>Total commerce value, including transactions not processed by the platform's own payment stack.</span></div>
-            <div class="term"><b>Take Rate</b><span>Net revenue divided by TPV or GMV, depending on the business model.</span></div>
-            <div class="term"><b>Net Revenue</b><span>Revenue after pass-through costs such as interchange, scheme fees, network fees, or partner costs.</span></div>
-            <div class="term"><b>Gross Margin</b><span>Revenue minus direct costs, expressed as a percentage of revenue.</span></div>
-            <div class="term"><b>Contribution Margin</b><span>Margin after variable costs such as processing, risk losses, support, and incentives.</span></div>
+          <div class="card-title">Volume and monetization</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">TPV · Total Payment Volume</div><div class="term-zh">The value of payments processed through the platform.</div></div>
+            <div class="term-item"><div class="term-abbr">GMV · Gross Merchandise Volume</div><div class="term-zh">Total commerce value, including transactions not processed by the platform's own payment stack.</div></div>
+            <div class="term-item"><div class="term-abbr">Take Rate</div><div class="term-zh">Net revenue divided by TPV or GMV, depending on the business model.</div></div>
+            <div class="term-item"><div class="term-abbr">Net Revenue</div><div class="term-zh">Revenue after pass-through costs such as interchange, scheme fees, network fees, or partner costs.</div></div>
+            <div class="term-item"><div class="term-abbr">Gross Margin</div><div class="term-zh">Revenue minus direct costs, expressed as a percentage of revenue.</div></div>
+            <div class="term-item"><div class="term-abbr">Contribution Margin</div><div class="term-zh">Margin after variable costs such as processing, risk losses, support, and incentives.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Retention and customer economics</h3>
-          <div class="grid">
-            <div class="term"><b>NRR · Net Revenue Retention</b><span>Existing-customer revenue after expansion, contraction, and churn.</span></div>
-            <div class="term"><b>GRR · Gross Revenue Retention</b><span>Revenue retained before expansion.</span></div>
-            <div class="term"><b>LTV · Lifetime Value</b><span>Total expected contribution from a customer over its lifecycle.</span></div>
-            <div class="term"><b>CAC · Customer Acquisition Cost</b><span>Sales and marketing cost required to acquire a customer.</span></div>
-            <div class="term"><b>Payback Period</b><span>Time needed to recover CAC from gross profit.</span></div>
-            <div class="term"><b>Churn</b><span>Customer, account, or revenue loss over a period.</span></div>
+          <div class="card-title">Retention and customer economics</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">NRR · Net Revenue Retention</div><div class="term-zh">Existing-customer revenue after expansion, contraction, and churn.</div></div>
+            <div class="term-item"><div class="term-abbr">GRR · Gross Revenue Retention</div><div class="term-zh">Revenue retained before expansion.</div></div>
+            <div class="term-item"><div class="term-abbr">LTV · Lifetime Value</div><div class="term-zh">Total expected contribution from a customer over its lifecycle.</div></div>
+            <div class="term-item"><div class="term-abbr">CAC · Customer Acquisition Cost</div><div class="term-zh">Sales and marketing cost required to acquire a customer.</div></div>
+            <div class="term-item"><div class="term-abbr">Payback Period</div><div class="term-zh">Time needed to recover CAC from gross profit.</div></div>
+            <div class="term-item"><div class="term-abbr">Churn</div><div class="term-zh">Customer, account, or revenue loss over a period.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Payment operations metrics</h3>
-          <div class="grid">
-            <div class="term"><b>Authorization Rate</b><span>Approved authorization attempts divided by total attempts.</span></div>
-            <div class="term"><b>Conversion Rate</b><span>Checkout sessions that successfully become paid transactions.</span></div>
-            <div class="term"><b>Dispute Rate</b><span>Disputed transactions divided by successful transactions or volume.</span></div>
-            <div class="term"><b>Fraud Loss Rate</b><span>Fraud losses as a percentage of payment volume.</span></div>
-            <div class="term"><b>Settlement SLA</b><span>Expected time from transaction to merchant payout or wallet receipt.</span></div>
-            <div class="term"><b>Reconciliation Break Rate</b><span>Share of transactions that fail automatic matching and need manual investigation.</span></div>
+          <div class="card-title">Payment operations metrics</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">Authorization Rate</div><div class="term-zh">Approved authorization attempts divided by total attempts.</div></div>
+            <div class="term-item"><div class="term-abbr">Conversion Rate</div><div class="term-zh">Checkout sessions that successfully become paid transactions.</div></div>
+            <div class="term-item"><div class="term-abbr">Dispute Rate</div><div class="term-zh">Disputed transactions divided by successful transactions or volume.</div></div>
+            <div class="term-item"><div class="term-abbr">Fraud Loss Rate</div><div class="term-zh">Fraud losses as a percentage of payment volume.</div></div>
+            <div class="term-item"><div class="term-abbr">Settlement SLA</div><div class="term-zh">Expected time from transaction to merchant payout or wallet receipt.</div></div>
+            <div class="term-item"><div class="term-abbr">Reconciliation Break Rate</div><div class="term-zh">Share of transactions that fail automatic matching and need manual investigation.</div></div>
           </div>
         </div>
         <div class="card">
-          <h3>Recurring revenue metrics</h3>
-          <div class="grid">
-            <div class="term"><b>MRR</b><span>Monthly recurring revenue from subscriptions or platform fees.</span></div>
-            <div class="term"><b>ARR</b><span>Annual recurring revenue, commonly MRR multiplied by twelve.</span></div>
-            <div class="term"><b>ARPU</b><span>Average revenue per user or account.</span></div>
-            <div class="term"><b>PEPM</b><span>Per employee per month, common in HR, benefits, payroll, and corporate card pricing.</span></div>
+          <div class="card-title">Recurring revenue metrics</div>
+          <div class="grid2">
+            <div class="term-item"><div class="term-abbr">MRR</div><div class="term-zh">Monthly recurring revenue from subscriptions or platform fees.</div></div>
+            <div class="term-item"><div class="term-abbr">ARR</div><div class="term-zh">Annual recurring revenue, commonly MRR multiplied by twelve.</div></div>
+            <div class="term-item"><div class="term-abbr">ARPU</div><div class="term-zh">Average revenue per user or account.</div></div>
+            <div class="term-item"><div class="term-abbr">PEPM</div><div class="term-zh">Per employee per month, common in HR, benefits, payroll, and corporate card pricing.</div></div>
           </div>
         </div>
-      </section>
-    </main>
-  </div>
+      </div>
+</main>
+</div>
 
-  <script>
-    const sections = [...document.querySelectorAll('.section')];
-    const navLinks = [...document.querySelectorAll('.side-link')];
-    const results = document.querySelector('.results');
-    const input = document.querySelector('.search input');
-    const items = [];
+<script>
+const slugById = {"fund": "fund-flow", "card": "card-acquiring", "trade": "trade-payments", "fx": "fx-cross-border", "crypto": "crypto-payments", "ucard": "crypto-card", "comp": "compliance", "lic": "licenses", "stable": "stablecoin-licenses", "roles": "institutional-roles", "txlife": "transaction-lifecycle", "biz": "business-metrics"};
+const idBySlug = Object.fromEntries(Object.entries(slugById).map(([id, slug]) => [slug, id]));
+const localeBase = '/en';
+const sections = Array.from(document.querySelectorAll('.section[id^="sec-"]'));
+const navLinks = Array.from(document.querySelectorAll('#sidebar a'));
+const searchInput = document.querySelector('.glossary-search input');
+const searchResults = document.querySelector('.glossary-search-results');
+const anchorBySlug = {};
+const searchItems = [];
+const slugCounts = {};
 
-    function normalize(text) {
-      return (text || '').toLowerCase().replace(/\s+/g, ' ').trim();
-    }
+function normalize(text) {
+  return (text || '').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+function escapeHtml(text) {
+  return String(text).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function readableTitle(el, sectionTitle) {
+  if (el.classList.contains('term-item')) {
+    return [el.querySelector('.term-abbr'), el.querySelector('.term-en'), el.querySelector('.term-zh')]
+      .map(node => node ? node.textContent.trim() : '').filter(Boolean).join(' · ');
+  }
+  const titleNode = el.querySelector('.card-title, .label, .level-head, .case-label, .section-title');
+  return titleNode ? titleNode.textContent.replace(/\s+/g, ' ').trim() : sectionTitle;
+}
+function makeSlug(text, fallback) {
+  const base = (text || fallback).toLowerCase().replace(/&/g, ' and ').replace(/\+/g, ' plus ')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 48) || fallback;
+  slugCounts[base] = (slugCounts[base] || 0) + 1;
+  return slugCounts[base] === 1 ? base : base + '-' + slugCounts[base];
+}
+function sectionUrl(sectionSlug, targetSlug = '') {
+  return localeBase + '/glossary/' + sectionSlug + '/' + (targetSlug ? '#' + encodeURIComponent(targetSlug) : '');
+}
+function setActiveSection(id, options = {}) {
+  const section = document.getElementById('sec-' + id);
+  if (!section) return false;
+  sections.forEach(item => item.classList.remove('active'));
+  navLinks.forEach(item => item.classList.remove('active'));
+  section.classList.add('active');
+  const link = navLinks.find(item => item.dataset.sectionId === id);
+  if (link) link.classList.add('active');
+  const slug = slugById[id] || id;
+  const targetSlug = options.target && options.target !== section ? options.target.dataset.glossaryAnchor : '';
+  if (options.updateUrl !== false) history.pushState(null, '', sectionUrl(slug, targetSlug));
+  const target = options.target || section;
+  if (options.scroll !== false) target.scrollIntoView({ behavior: options.instant ? 'auto' : 'smooth', block: 'start' });
+  if (options.target) {
+    options.target.classList.remove('glossary-hit');
+    void options.target.offsetWidth;
+    options.target.classList.add('glossary-hit');
+    window.setTimeout(() => options.target.classList.remove('glossary-hit'), 1600);
+  }
+  return true;
+}
+navLinks.forEach(link => {
+  const raw = link.getAttribute('onclick') || '';
+  const match = raw.match(/show\('([^']+)'\)/);
+  if (!match) return;
+  const id = match[1];
+  link.dataset.sectionId = id;
+  link.href = sectionUrl(slugById[id] || id);
+  link.removeAttribute('onclick');
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    setActiveSection(id, { updateUrl: true });
+  });
+});
+sections.forEach(section => {
+  const sectionId = section.id.replace(/^sec-/, '');
+  const sectionSlug = slugById[sectionId] || sectionId;
+  const sectionTitle = readableTitle(section, sectionId);
+  const sectionAnchor = makeSlug(sectionTitle, sectionSlug);
+  section.dataset.glossaryAnchor = sectionAnchor;
+  anchorBySlug[sectionSlug] = section;
+  searchItems.push({ title: sectionTitle, context: 'Section', text: normalize(section.innerText), sectionId, sectionSlug, targetSlug: sectionAnchor, target: section });
+  Array.from(section.querySelectorAll('.term-item, .grid-card, .level-card, .card')).forEach((el, index) => {
+    const title = readableTitle(el, sectionTitle);
+    if (!title || title === sectionTitle) return;
+    const targetSlug = makeSlug(title, sectionSlug + '-' + index);
+    el.dataset.glossaryAnchor = targetSlug;
+    anchorBySlug[sectionSlug + '/' + targetSlug] = el;
+    searchItems.push({ title, context: sectionTitle, text: normalize(el.innerText), sectionId, sectionSlug, targetSlug, target: el });
+  });
+});
+window.show = function(id) { return setActiveSection(id, { updateUrl: true }); };
+function routeFromLocation(options = {}) {
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  const glossaryIndex = parts.indexOf('glossary');
+  const pathSlug = glossaryIndex >= 0 ? parts[glossaryIndex + 1] : '';
+  const hashSlug = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+  const sectionId = idBySlug[pathSlug] || 'fund';
+  const sectionSlug = slugById[sectionId] || sectionId;
+  const target = hashSlug ? anchorBySlug[sectionSlug + '/' + hashSlug] : null;
+  setActiveSection(sectionId, { target, updateUrl: false, scroll: !!target, instant: options.instant });
+}
+function findMatches(query) {
+  const q = normalize(query);
+  if (!q) return [];
+  return searchItems.map(item => {
+    const title = normalize(item.title);
+    let score = 0;
+    if (title === q) score += 120;
+    if (title.startsWith(q)) score += 80;
+    if (title.includes(q)) score += 55;
+    if (item.text.includes(q)) score += 20;
+    return { ...item, score };
+  }).filter(item => item.score > 0).sort((a, b) => b.score - a.score || a.title.length - b.title.length).slice(0, 8);
+}
+function renderSearch(matches) {
+  if (!searchInput.value.trim()) {
+    searchResults.innerHTML = '';
+    searchResults.classList.remove('open');
+    return;
+  }
+  if (!matches.length) {
+    searchResults.innerHTML = '<div class="glossary-search-empty">No matching terms found</div>';
+    searchResults.classList.add('open');
+    return;
+  }
+  searchResults.innerHTML = matches.map((item, index) => `
+    <button type="button" class="glossary-search-result" data-index="${index}">
+      <span>${escapeHtml(item.title)}</span>
+      <small>${escapeHtml(item.context)}</small>
+    </button>`).join('');
+  searchResults.classList.add('open');
+}
+let activeMatches = [];
+function jump(item) {
+  if (!item) return;
+  searchInput.value = item.title;
+  searchResults.classList.remove('open');
+  setActiveSection(item.sectionId, { target: item.target, updateUrl: true });
+}
+document.querySelector('.glossary-search').addEventListener('submit', event => {
+  event.preventDefault();
+  jump(activeMatches[0]);
+});
+searchInput.addEventListener('input', () => {
+  activeMatches = findMatches(searchInput.value);
+  renderSearch(activeMatches);
+});
+searchInput.addEventListener('focus', () => {
+  activeMatches = findMatches(searchInput.value);
+  renderSearch(activeMatches);
+});
+searchResults.addEventListener('click', event => {
+  const button = event.target.closest('.glossary-search-result');
+  if (button) jump(activeMatches[Number(button.dataset.index)]);
+});
+document.addEventListener('click', event => {
+  if (!document.querySelector('.glossary-search').contains(event.target)) searchResults.classList.remove('open');
+});
+routeFromLocation({ instant: true });
+window.addEventListener('popstate', () => routeFromLocation({ instant: true }));
+window.addEventListener('hashchange', () => routeFromLocation({ instant: true }));
+</script>
 
-    function sectionUrl(slug, target = '') {
-      return '/en/glossary/' + slug + '/' + (target ? '#' + encodeURIComponent(target) : '');
-    }
-
-    sections.forEach(section => {
-      const slug = section.id;
-      const title = section.querySelector('h2').textContent.trim();
-      items.push({ title, context: 'Section', text: normalize(section.innerText), slug, target: section });
-      [...section.querySelectorAll('.term, .card')].forEach((el, index) => {
-        const label = el.querySelector('b, h3')?.textContent.trim();
-        if (!label) return;
-        const anchor = label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || slug + '-' + index;
-        el.dataset.anchor = anchor;
-        items.push({ title: label, context: title, text: normalize(el.innerText), slug, anchor, target: el });
-      });
-    });
-
-    function setActive(slug, options = {}) {
-      const section = document.getElementById(slug) || document.getElementById('fund-flow');
-      sections.forEach(item => item.classList.remove('active'));
-      navLinks.forEach(item => item.classList.toggle('active', item.dataset.section === section.id));
-      section.classList.add('active');
-      const target = options.target || section;
-      if (options.updateUrl !== false) history.pushState(null, '', sectionUrl(section.id, options.anchor || ''));
-      if (options.scroll) target.scrollIntoView({ behavior: options.instant ? 'auto' : 'smooth', block: 'start' });
-      if (options.target) {
-        options.target.classList.remove('hit');
-        void options.target.offsetWidth;
-        options.target.classList.add('hit');
-        setTimeout(() => options.target.classList.remove('hit'), 1400);
-      }
-    }
-
-    function route() {
-      const parts = location.pathname.split('/').filter(Boolean);
-      const slug = parts[parts.indexOf('glossary') + 1] || 'fund-flow';
-      const hash = decodeURIComponent(location.hash.replace(/^#/, ''));
-      const section = document.getElementById(slug) ? slug : 'fund-flow';
-      const target = hash ? document.querySelector('#' + CSS.escape(section) + ' [data-anchor="' + CSS.escape(hash) + '"]') : null;
-      setActive(section, { updateUrl: false, scroll: !!target, target, anchor: hash, instant: true });
-    }
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', event => {
-        event.preventDefault();
-        setActive(link.dataset.section, { updateUrl: true, scroll: true });
-      });
-    });
-
-    function matches(query) {
-      const q = normalize(query);
-      if (!q) return [];
-      return items.map(item => {
-        const title = normalize(item.title);
-        let score = 0;
-        if (title === q) score += 120;
-        if (title.startsWith(q)) score += 80;
-        if (title.includes(q)) score += 55;
-        if (item.text.includes(q)) score += 20;
-        return { ...item, score };
-      }).filter(item => item.score > 0).sort((a, b) => b.score - a.score).slice(0, 8);
-    }
-
-    function render(found) {
-      if (!input.value.trim()) {
-        results.classList.remove('open');
-        results.innerHTML = '';
-        return;
-      }
-      if (!found.length) {
-        results.innerHTML = '<div class="result"><span>No matching terms</span></div>';
-        results.classList.add('open');
-        return;
-      }
-      results.innerHTML = found.map((item, index) => '<button type="button" class="result" data-index="' + index + '"><span>' + item.title + '</span><small>' + item.context + '</small></button>').join('');
-      results.classList.add('open');
-      results._matches = found;
-    }
-
-    function jump(item) {
-      if (!item) return;
-      input.value = item.title;
-      input.blur();
-      results.classList.remove('open');
-      setActive(item.slug, { target: item.target, anchor: item.anchor || '', updateUrl: true, scroll: true });
-    }
-
-    document.querySelector('.search').addEventListener('submit', event => {
-      event.preventDefault();
-      jump((results._matches || [])[0]);
-    });
-    input.addEventListener('input', () => render(matches(input.value)));
-    input.addEventListener('focus', () => render(matches(input.value)));
-    results.addEventListener('click', event => {
-      const button = event.target.closest('.result');
-      if (!button || !results._matches) return;
-      jump(results._matches[Number(button.dataset.index)]);
-    });
-    document.addEventListener('click', event => {
-      if (!event.target.closest('.search')) results.classList.remove('open');
-    });
-    addEventListener('popstate', route);
-    addEventListener('hashchange', route);
-    route();
-  </script>
 </body>
 </html>
