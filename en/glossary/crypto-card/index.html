@@ -558,6 +558,10 @@ hr.div { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
 .glossary-search-result small { color: var(--text2); font: 11px/1.3 var(--mono); }
 .glossary-search-empty { padding: 12px 14px; color: var(--text2); font: 13px/1.4 var(--sans); }
 .glossary-hit { animation: glossary-pulse 1.6s ease; }
+.map-leg { cursor: pointer; border-radius: 999px; padding: 2px 6px; }
+.map-leg > span { display: inline-block; width: 9px; height: 9px; border-radius: 999px; flex-shrink: 0; }
+.map-leg:hover,
+.map-leg.active { background: var(--bg2); }
 @keyframes glossary-pulse {
   0%, 100% { box-shadow: var(--shadow); }
   25% { box-shadow: 0 0 0 3px rgba(0,152,89,0.18), var(--shadow); }
@@ -876,11 +880,10 @@ hr.div { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
 <p class="section-desc">Different markets require different licenses for payment operations. Use the map and tables to understand regional license stacks.</p>
 
 <div class="card">
-  <div class="map-legend"><div class="map-leg" style="color:#2E6DA4"><span style="background:#2E6DA4"></span>US / Canada</div><div class="map-leg" style="color:#5C4BB0"><span style="background:#5C4BB0"></span>Latin America</div><div class="map-leg" style="color:#0E7C6B"><span style="background:#0E7C6B"></span>Europe</div><div class="map-leg" style="color:#A6396A"><span style="background:#A6396A"></span>APAC</div><div class="map-leg" style="color:#8C5A11"><span style="background:#8C5A11"></span>Middle East</div><div class="map-leg" style="color:#047857"><span style="background:#047857"></span>Africa</div></div>
+  <div class="map-legend"><div class="map-leg" data-region="americas" style="color:#2E6DA4"><span style="background:#2E6DA4"></span>US / Canada</div><div class="map-leg" data-region="latam" style="color:#5C4BB0"><span style="background:#5C4BB0"></span>Latin America</div><div class="map-leg" data-region="europe" style="color:#0E7C6B"><span style="background:#0E7C6B"></span>Europe</div><div class="map-leg" data-region="apac" style="color:#A6396A"><span style="background:#A6396A"></span>APAC</div><div class="map-leg" data-region="me" style="color:#8C5A11"><span style="background:#8C5A11"></span>Middle East</div><div class="map-leg" data-region="africa" style="color:#047857"><span style="background:#047857"></span>Africa</div></div>
   <div class="map-container" style="background:var(--bg2);border-radius:8px;padding:14px;overflow:hidden">
-    <svg id="world-map" viewBox="0 0 960 500" role="img" aria-label="World payment license map" style="display:block;width:100%;height:auto">
-      <image href="/assets/world-license-map-en.svg" width="960" height="500"></image>
-    </svg>
+    <div id="loading-map" style="text-align:center;color:var(--text3);padding:60px 0;font-size:12px">Loading license map...</div>
+    <svg id="world-map" viewBox="0 0 960 500" role="img" aria-label="World payment license map" style="display:none;width:100%;height:auto"></svg>
   </div>
   <div class="map-tip"><div id="map-tip-title">Click a country or legend area to review regional license details</div><div id="map-tip-items"></div></div>
 </div>
@@ -998,6 +1001,8 @@ hr.div { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
 </div>
 </main>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
 
 <script>
 const slugById = {"fund": "fund-flow", "card": "card-acquiring", "trade": "trade-payments", "fx": "fx-cross-border", "crypto": "crypto-payments", "ucard": "crypto-card", "comp": "compliance", "lic": "licenses", "stable": "stablecoin-licenses", "roles": "institutional-roles", "txlife": "transaction-lifecycle", "biz": "business-metrics"};
@@ -1156,6 +1161,182 @@ document.addEventListener('click', event => {
 routeFromLocation({ instant: true });
 window.addEventListener('popstate', () => routeFromLocation({ instant: true }));
 window.addEventListener('hashchange', () => routeFromLocation({ instant: true }));
+</script>
+
+
+<script>
+const LICENSE_REGION_META = {
+  americas: { name: 'US / Canada', color: '#2E6DA4',
+    items: [
+      { n: 'MTL', d: 'Money Transmitter License — state-by-state approval across 48 states + DC, typically 2-3 years and multi-million cost.' },
+      { n: 'MSB', d: 'Money Services Business — FinCEN federal registration, usually completed in about 14 days, but still requires state MTL coverage.' },
+      { n: 'BitLicense', d: 'NYDFS crypto license — one of the strictest US crypto approvals, with heavy legal, compliance, and review burden.' },
+      { n: 'National Bank Charter', d: 'OCC federal bank charter — can reduce state-by-state money transmission exposure, but the threshold is extremely high.' },
+      { n: 'FINTRAC MSB', d: 'Canada money services business registration — comparatively accessible, with ongoing AML reporting obligations.' },
+    ]
+  },
+  latam: { name: 'Latin America', color: '#5C4BB0',
+    items: [
+      { n: 'Brazil PSP License', d: 'BCB payment service provider framework; open banking and Pix real-time payments have become a global reference model.' },
+      { n: 'Mexico PSSP', d: 'Payment Service Provider / Institution under the 2018 Fintech Law framework, a key digital-payment license in Latin America.' },
+      { n: 'Regional PSP', d: 'Argentina, Colombia, Chile, and others regulate PSP activity through local central-bank frameworks with fast-growing demand.' },
+    ]
+  },
+  europe: { name: 'Europe / UK', color: '#0E7C6B',
+    items: [
+      { n: 'EMI', d: 'Electronic Money Institution — one EU license can passport across 27 member states; Lithuania is a common application hub.' },
+      { n: 'PI', d: 'Payment Institution — payment services only, lower capital requirement than EMI, and no stored-value issuance.' },
+      { n: 'Small EMI / PI', d: 'Simplified low-volume regimes in some markets, useful for early-stage market validation.' },
+      { n: 'AISP / PISP', d: 'PSD2 account information and payment initiation permissions with the lowest payment-regulatory threshold.' },
+      { n: 'MiCA CASP', d: 'Crypto-Asset Service Provider authorization under MiCA, creating an EU-level crypto regulatory passport.' },
+      { n: 'UK FCA E-money', d: 'Post-Brexit UK e-money permission is separate from the EU passport and is required for UK coverage.' },
+    ]
+  },
+  apac: { name: 'APAC', color: '#A6396A',
+    items: [
+      { n: 'MPI + DPT', d: 'Singapore MAS Major Payment Institution plus Digital Payment Token permissions; no payment-volume cap and an Asian benchmark.' },
+      { n: 'VATP', d: 'Hong Kong SFC Virtual Asset Trading Platform regime, effective from June 2023 with custody and capital requirements.' },
+      { n: 'SVF', d: 'Hong Kong HKMA Stored Value Facility license; the same category behind Octopus and Alipay HK and a stablecoin prerequisite.' },
+      { n: 'MSO', d: 'Hong Kong Customs Money Service Operator license for money changing and remittance activity.' },
+      { n: 'JFSA', d: 'Japan crypto-asset exchange registration under the Financial Services Agency; mature but compliance-heavy.' },
+      { n: 'AUSTRAC', d: 'Australia digital currency exchange provider registration under the FATF-style AML framework.' },
+      { n: 'SEA PSP', d: 'Indonesia OJK, Philippines BSP, Thailand BOT, Vietnam SBV and others regulate PSP activity locally, often with foreign ownership limits.' },
+    ]
+  },
+  me: { name: 'Middle East', color: '#8C5A11',
+    items: [
+      { n: 'Dubai VARA VASP', d: 'Dubai Virtual Assets Regulatory Authority license, established in 2022 and relatively friendly to crypto operators.' },
+      { n: 'ADGM FSRA', d: 'Abu Dhabi Global Market Financial Services Regulatory Authority framework, favored by institutional Web3 businesses and funds.' },
+      { n: 'CBUAE SVF + RPP', d: 'UAE Central Bank stored value and retail payment service permissions for wallets and payment gateways.' },
+    ]
+  },
+  africa: { name: 'Africa', color: '#047857',
+    items: [
+      { n: 'Nigeria PSO', d: 'Central Bank of Nigeria Payment Service Operator regime; key market for Flutterwave, Paystack, and regional payment growth.' },
+      { n: 'Kenya PSP', d: 'Central Bank of Kenya payment service provider framework; M-Pesa birthplace and a leading mobile-money market.' },
+      { n: 'South Africa EMI', d: 'South African Reserve Bank framework in one of Africa’s most mature financial markets, often compared with European e-money models.' },
+    ]
+  }
+};
+
+const LICENSE_COUNTRY_REGION = {
+  840:'americas', 124:'americas',
+  484:'latam', 76:'latam', 32:'latam', 152:'latam', 170:'latam', 604:'latam', 858:'latam', 862:'latam', 600:'latam', 328:'latam', 740:'latam', 531:'latam', 630:'latam',
+  276:'europe', 250:'europe', 826:'europe', 380:'europe', 724:'europe', 620:'europe', 528:'europe', 56:'europe', 40:'europe', 756:'europe', 578:'europe', 752:'europe', 208:'europe', 246:'europe', 233:'europe', 428:'europe', 440:'europe', 616:'europe', 203:'europe', 703:'europe', 348:'europe', 642:'europe', 100:'europe', 300:'europe', 191:'europe', 705:'europe', 372:'europe', 352:'europe', 470:'europe', 442:'europe', 196:'europe', 112:'europe', 804:'europe', 498:'europe', 688:'europe', 807:'europe', 8:'europe',
+  702:'apac', 344:'apac', 392:'apac', 36:'apac', 410:'apac', 356:'apac', 360:'apac', 764:'apac', 704:'apac', 458:'apac', 608:'apac', 50:'apac', 144:'apac', 524:'apac', 104:'apac', 116:'apac', 418:'apac', 496:'apac', 887:'apac', 586:'apac', 64:'apac',
+  682:'me', 784:'me', 512:'me', 634:'me', 414:'me', 368:'me', 400:'me', 376:'me',
+  566:'africa', 404:'africa', 710:'africa', 818:'africa', 288:'africa', 231:'africa', 716:'africa', 504:'africa', 12:'africa', 686:'africa', 332:'africa', 466:'africa', 120:'africa', 24:'africa', 516:'africa', 508:'africa', 800:'africa', 834:'africa', 894:'africa', 426:'africa', 748:'africa', 140:'africa', 646:'africa', 108:'africa', 270:'africa', 324:'africa', 384:'africa', 204:'africa', 854:'africa', 562:'africa', 768:'africa', 174:'africa',
+};
+
+const LICENSE_REGION_FILL = {
+  americas:'#CFE0F2', latam:'#D8D2F2', europe:'#BFE6D6',
+  apac:'#EFC6D4', me:'#EFD9AE', africa:'#C9E0AE'
+};
+const LICENSE_REGION_HOVER = {
+  americas:'#2E6DA4', latam:'#5C4BB0', europe:'#0E7C6B',
+  apac:'#A6396A', me:'#8C5A11', africa:'#047857'
+};
+
+let licenseCurrentRegion = null;
+let licenseMapSvg = null;
+
+async function initEnglishLicenseMap() {
+  const loading = document.getElementById('loading-map');
+  const mapEl = document.getElementById('world-map');
+  if (!loading || !mapEl) return;
+  if (!window.d3 || !window.topojson) {
+    loading.textContent = 'Map libraries failed to load. Please refresh the page.';
+    return;
+  }
+  try {
+    const atlasUrl = (window.__resources && window.__resources.worldAtlas) || 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+    const world = await d3.json(atlasUrl);
+    loading.style.display = 'none';
+    mapEl.style.display = 'block';
+    licenseMapSvg = d3.select('#world-map');
+    licenseMapSvg.selectAll('*').remove();
+    const projection = d3.geoNaturalEarth1().scale(153).translate([480, 250]);
+    const pathGen = d3.geoPath().projection(projection);
+
+    licenseMapSvg.append('rect').attr('width', 960).attr('height', 500).attr('fill', 'var(--bg2)');
+    licenseMapSvg.append('path').datum({ type: 'Sphere' }).attr('d', pathGen).attr('fill', '#DCEAF2').attr('opacity', '0.5');
+    licenseMapSvg.append('path').datum(d3.geoGraticule()()).attr('d', pathGen).attr('fill', 'none').attr('stroke', 'rgba(0,0,0,0.06)').attr('stroke-width', '0.3');
+
+    const countries = topojson.feature(world, world.objects.countries);
+    licenseMapSvg.selectAll('.country')
+      .data(countries.features)
+      .enter().append('path')
+      .attr('class', 'country')
+      .classed('clickable', d => !!LICENSE_COUNTRY_REGION[+d.id])
+      .attr('d', pathGen)
+      .attr('fill', d => {
+        const region = LICENSE_COUNTRY_REGION[+d.id];
+        return region ? LICENSE_REGION_FILL[region] : 'var(--bg3)';
+      })
+      .on('click', function(event, d) {
+        const region = LICENSE_COUNTRY_REGION[+d.id];
+        if (region) highlightEnglishLicenseRegion(region);
+      })
+      .on('mouseover', function(event, d) {
+        const region = LICENSE_COUNTRY_REGION[+d.id];
+        if (region) d3.select(this).attr('fill', LICENSE_REGION_HOVER[region]);
+      })
+      .on('mouseout', function(event, d) {
+        const region = LICENSE_COUNTRY_REGION[+d.id];
+        if (region) d3.select(this).attr('fill', licenseCurrentRegion === region ? LICENSE_REGION_HOVER[region] : LICENSE_REGION_FILL[region]);
+      });
+
+    const labels = [
+      { r:'americas', x:135, y:170, t:'North America', s:'MTL · BitLicense' },
+      { r:'latam', x:200, y:315, t:'Latin America', s:'PSP · Pix' },
+      { r:'europe', x:480, y:125, t:'Europe', s:'EMI · MiCA' },
+      { r:'apac', x:730, y:195, t:'APAC', s:'MPI · VATP' },
+      { r:'me', x:570, y:200, t:'Middle East', s:'VARA · FSRA' },
+      { r:'africa', x:490, y:315, t:'Africa', s:'PSO · PSP' },
+    ];
+    labels.forEach(label => {
+      const group = licenseMapSvg.append('g').style('cursor', 'pointer').on('click', () => highlightEnglishLicenseRegion(label.r));
+      const hitWidth = label.t === 'Latin America' || label.t === 'Middle East' ? 96 : 82;
+      group.append('rect').attr('x', label.x - hitWidth / 2).attr('y', label.y - 15).attr('width', hitWidth).attr('height', 34).attr('rx', 6).attr('fill', 'transparent').attr('pointer-events', 'all');
+      group.append('text').attr('x', label.x).attr('y', label.y).attr('text-anchor', 'middle').attr('fill', LICENSE_REGION_HOVER[label.r]).attr('font-size', '11').attr('font-weight', '600').attr('font-family', 'Inter, sans-serif').text(label.t);
+      group.append('text').attr('x', label.x).attr('y', label.y + 13).attr('text-anchor', 'middle').attr('fill', LICENSE_REGION_HOVER[label.r]).attr('font-size', '9').attr('opacity', '0.8').attr('font-family', 'SFMono-Regular, Consolas, ui-monospace, monospace').text(label.s);
+    });
+
+    document.querySelectorAll('.map-leg[data-region]').forEach(item => {
+      item.addEventListener('click', () => highlightEnglishLicenseRegion(item.dataset.region));
+    });
+  } catch (error) {
+    loading.textContent = 'Map data failed to load. Please check the network and refresh.';
+    console.error(error);
+  }
+}
+
+function highlightEnglishLicenseRegion(region) {
+  licenseCurrentRegion = region;
+  if (licenseMapSvg) {
+    licenseMapSvg.selectAll('.country').attr('fill', d => {
+      const countryRegion = LICENSE_COUNTRY_REGION[+d.id];
+      if (!countryRegion) return 'var(--bg3)';
+      return countryRegion === region ? LICENSE_REGION_HOVER[countryRegion] : LICENSE_REGION_FILL[countryRegion];
+    });
+  }
+  document.querySelectorAll('.map-leg[data-region]').forEach(item => {
+    item.classList.toggle('active', item.dataset.region === region);
+  });
+  const meta = LICENSE_REGION_META[region];
+  if (!meta) return;
+  const titleEl = document.getElementById('map-tip-title');
+  const itemsEl = document.getElementById('map-tip-items');
+  titleEl.textContent = meta.name;
+  titleEl.style.color = meta.color;
+  itemsEl.innerHTML = meta.items.map(item => `<div class="map-tip-item"><strong>${item.n}</strong> — ${item.d}</div>`).join('');
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initEnglishLicenseMap);
+} else {
+  initEnglishLicenseMap();
+}
 </script>
 
 </body>

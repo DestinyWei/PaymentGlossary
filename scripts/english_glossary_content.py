@@ -261,11 +261,10 @@ def build_english_sections() -> str:
 <p class="section-desc">Different markets require different licenses for payment operations. Use the map and tables to understand regional license stacks.</p>
 
 <div class="card">
-  <div class="map-legend"><div class="map-leg" style="color:#2E6DA4"><span style="background:#2E6DA4"></span>US / Canada</div><div class="map-leg" style="color:#5C4BB0"><span style="background:#5C4BB0"></span>Latin America</div><div class="map-leg" style="color:#0E7C6B"><span style="background:#0E7C6B"></span>Europe</div><div class="map-leg" style="color:#A6396A"><span style="background:#A6396A"></span>APAC</div><div class="map-leg" style="color:#8C5A11"><span style="background:#8C5A11"></span>Middle East</div><div class="map-leg" style="color:#047857"><span style="background:#047857"></span>Africa</div></div>
+  <div class="map-legend"><div class="map-leg" data-region="americas" style="color:#2E6DA4"><span style="background:#2E6DA4"></span>US / Canada</div><div class="map-leg" data-region="latam" style="color:#5C4BB0"><span style="background:#5C4BB0"></span>Latin America</div><div class="map-leg" data-region="europe" style="color:#0E7C6B"><span style="background:#0E7C6B"></span>Europe</div><div class="map-leg" data-region="apac" style="color:#A6396A"><span style="background:#A6396A"></span>APAC</div><div class="map-leg" data-region="me" style="color:#8C5A11"><span style="background:#8C5A11"></span>Middle East</div><div class="map-leg" data-region="africa" style="color:#047857"><span style="background:#047857"></span>Africa</div></div>
   <div class="map-container" style="background:var(--bg2);border-radius:8px;padding:14px;overflow:hidden">
-    <svg id="world-map" viewBox="0 0 960 500" role="img" aria-label="World payment license map" style="display:block;width:100%;height:auto">
-      <image href="/assets/world-license-map-en.svg" width="960" height="500"></image>
-    </svg>
+    <div id="loading-map" style="text-align:center;color:var(--text3);padding:60px 0;font-size:12px">Loading license map...</div>
+    <svg id="world-map" viewBox="0 0 960 500" role="img" aria-label="World payment license map" style="display:none;width:100%;height:auto"></svg>
   </div>
   <div class="map-tip"><div id="map-tip-title">Click a country or legend area to review regional license details</div><div id="map-tip-items"></div></div>
 </div>
