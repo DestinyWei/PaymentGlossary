@@ -295,7 +295,7 @@ def build_english_sections() -> str:
 <p class="section-desc">At least five roles participate behind one card transaction, each with a clear profit model and risk boundary.</p>
 <div class="card">
   <div class="card-title">Hierarchy diagram</div>
-  <p class="prose"><strong>Main role path:</strong> checkout data enters the gateway, merchant-side roles connect into the scheme, and the issuer makes the cardholder-side decision.</p>
+  <p class="prose"><strong>Main role path:</strong> solid lines show the core card-payment path; dashed lines show ISO sales and processor support relationships.</p>
   <div class="diagram"><svg viewBox="0 0 760 500" role="img" aria-label="Institution role hierarchy" style="width:100%;height:auto">
     <defs><marker id="arrow-role-en" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5"></path></marker></defs>
     <rect width="760" height="500" fill="#F2F8F5"></rect>
@@ -308,6 +308,10 @@ def build_english_sections() -> str:
       <path d="M380 292V350"></path>
       <path d="M586 292C530 322 460 342 380 354"></path>
       <path d="M380 414V446"></path>
+    </g>
+    <g fill="none" stroke="#B0C4BB" stroke-width="1.4" stroke-dasharray="5 5" marker-end="url(#arrow-role-en)">
+      <path d="M174 292V354"></path>
+      <path d="M586 292V354"></path>
     </g>
     <g font-family="Inter, sans-serif" text-anchor="middle">
       <rect x="300" y="30" width="160" height="54" rx="8" fill="#F9E8F0" stroke="#A6396A"></rect>
