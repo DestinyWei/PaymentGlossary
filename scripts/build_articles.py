@@ -306,6 +306,12 @@ def build_index(locale: Locale, articles: list[dict[str, object]]) -> None:
     }
     structured_data = json.dumps(item_list, ensure_ascii=False).replace("</", "<\\/")
     facts = "".join(f"<span>{esc(fact)}</span>" for fact in locale.facts)
+    practice_link = (
+        '<a class="series-practice-link" href="https://practice.tryallscale.top/" '
+        'target="_blank" rel="noreferrer">支付术语答题练习 →</a>'
+        if locale.code == "zh"
+        else ""
+    )
     canonical = locale_url(locale, "/articles/")
     page = f"""{page_head(locale, locale.index_title, locale.index_description, canonical, locale.cover_image, "/articles/")}
 <body>
@@ -327,7 +333,10 @@ def build_index(locale: Locale, articles: list[dict[str, object]]) -> None:
         <div class="eyebrow">{esc(locale.about_eyebrow)}</div>
         <h2>{esc(locale.about_title)}</h2>
         <p>{esc(locale.about_copy)}</p>
-        <a href="{locale.social_url}" target="_blank" rel="noreferrer">{esc(locale.about_link)}</a>
+        <div class="series-actions">
+          <a href="{locale.social_url}" target="_blank" rel="noreferrer">{esc(locale.about_link)}</a>
+{practice_link}
+        </div>
       </div>
     </section>
 
