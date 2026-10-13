@@ -6,7 +6,7 @@
   <link rel="canonical" href="https://www.allscale.io/glossary/zh/crypto-payments/">
   <link rel="alternate" hreflang="zh" href="https://www.allscale.io/glossary/zh/crypto-payments/">
   <link rel="alternate" hreflang="en" href="https://www.allscale.io/glossary/en/crypto-payments/">
-  <link rel="alternate" hreflang="x-default" href="https://www.allscale.io/glossary/">
+  <link rel="alternate" hreflang="x-default" href="https://www.allscale.io/glossary/zh/crypto-payments/">
   <link rel="icon" href="/glossary/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="/glossary/favicon-32x32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/glossary/apple-touch-icon.png">
@@ -486,11 +486,12 @@ function ensureSiteMetadata() {
   const sectionSlug = sectionId ? (slugById[sectionId] || sectionId) : '';
   const canonicalPath = sectionSlug ? localeBase + '/' + sectionSlug + '/' : localeBase + '/';
   const alternatePath = sectionSlug ? alternateBase + '/' + sectionSlug + '/' : alternateBase + '/';
+  const xDefaultPath = sectionSlug ? '/glossary/zh/' + sectionSlug + '/' : '/glossary/zh/';
   const links = [
     { rel: 'canonical', href: siteOrigin + canonicalPath },
     { rel: 'alternate', href: siteOrigin + canonicalPath, hreflang: 'zh' },
     { rel: 'alternate', href: siteOrigin + alternatePath, hreflang: 'en' },
-    { rel: 'alternate', href: siteOrigin + '/glossary/', hreflang: 'x-default' },
+    { rel: 'alternate', href: siteOrigin + xDefaultPath, hreflang: 'x-default' },
     { rel: 'icon', href: '/glossary/favicon.ico', sizes: 'any' },
     { rel: 'icon', href: '/glossary/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     { rel: 'apple-touch-icon', href: '/glossary/apple-touch-icon.png' },

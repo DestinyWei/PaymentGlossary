@@ -221,7 +221,7 @@ def hreflang_links(path_suffix: str) -> str:
         f'  <link rel="alternate" hreflang="{loc.code}" href="{esc(locale_url(loc, path_suffix))}">'
         for loc in LOCALES.values()
     ]
-    links.append(f'  <link rel="alternate" hreflang="x-default" href="{esc(absolute_url("/"))}">')
+    links.append(f'  <link rel="alternate" hreflang="x-default" href="{esc(locale_url(LOCALES["zh"], "/"))}">')
     return "\n".join(links)
 
 
@@ -489,7 +489,7 @@ def copy_glossary_routes() -> None:
 
 
 def build_discovery_files(articles_by_locale: dict[str, list[dict[str, object]]]) -> None:
-    urls = [absolute_url("/"), locale_url(LOCALES["zh"], "/"), locale_url(LOCALES["en"], "/")]
+    urls = [locale_url(LOCALES["zh"], "/"), locale_url(LOCALES["en"], "/")]
     for locale in LOCALES.values():
         urls.extend(locale_url(locale, f"/{section}/") for section in GLOSSARY_SECTIONS)
         urls.append(locale_url(locale, "/articles/"))
