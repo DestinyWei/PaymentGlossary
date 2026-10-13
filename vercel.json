@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/glossary/_vercel/insights/:path*",
-      "destination": "/_vercel/insights/:path*"
+      "source": "/glossary/_vercel/insights/:path(.*)",
+      "destination": "/_vercel/insights/:path"
     }
   ],
   "redirects": [
@@ -19,63 +19,63 @@
       "permanent": true
     },
     {
-      "source": "/glossary/:path*",
+      "source": "/glossary/:path(.*)",
       "has": [{ "type": "host", "value": "learn.allscale.io" }],
-      "destination": "https://www.allscale.io/glossary/:path*",
+      "destination": "https://www.allscale.io/glossary/:path",
       "permanent": true
     },
     {
-      "source": "/glossary/:path*",
+      "source": "/glossary/:path(.*)",
       "has": [{ "type": "host", "value": "payment.0xhowe.top" }],
-      "destination": "https://www.allscale.io/glossary/:path*",
+      "destination": "https://www.allscale.io/glossary/:path",
       "permanent": true
     },
     {
-      "source": "/articles/:path*",
+      "source": "/articles/:path(.*)",
       "has": [{ "type": "host", "value": "learn.allscale.io" }],
-      "destination": "https://www.allscale.io/glossary/zh/articles/:path*",
+      "destination": "https://www.allscale.io/glossary/zh/articles/:path",
       "permanent": true
     },
     {
-      "source": "/articles/:path*",
+      "source": "/articles/:path(.*)",
       "has": [{ "type": "host", "value": "payment.0xhowe.top" }],
-      "destination": "https://www.allscale.io/glossary/zh/articles/:path*",
+      "destination": "https://www.allscale.io/glossary/zh/articles/:path",
       "permanent": true
     },
     {
-      "source": "/zh/glossary/:path*",
+      "source": "/zh/glossary/:path(.*)",
       "has": [{ "type": "host", "value": "learn.allscale.io" }],
-      "destination": "https://www.allscale.io/glossary/zh/:path*",
+      "destination": "https://www.allscale.io/glossary/zh/:path",
       "permanent": true
     },
     {
-      "source": "/zh/glossary/:path*",
+      "source": "/zh/glossary/:path(.*)",
       "has": [{ "type": "host", "value": "payment.0xhowe.top" }],
-      "destination": "https://www.allscale.io/glossary/zh/:path*",
+      "destination": "https://www.allscale.io/glossary/zh/:path",
       "permanent": true
     },
     {
-      "source": "/en/glossary/:path*",
+      "source": "/en/glossary/:path(.*)",
       "has": [{ "type": "host", "value": "learn.allscale.io" }],
-      "destination": "https://www.allscale.io/glossary/en/:path*",
+      "destination": "https://www.allscale.io/glossary/en/:path",
       "permanent": true
     },
     {
-      "source": "/en/glossary/:path*",
+      "source": "/en/glossary/:path(.*)",
       "has": [{ "type": "host", "value": "payment.0xhowe.top" }],
-      "destination": "https://www.allscale.io/glossary/en/:path*",
+      "destination": "https://www.allscale.io/glossary/en/:path",
       "permanent": true
     },
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "learn.allscale.io" }],
-      "destination": "https://www.allscale.io/glossary/:path*",
+      "destination": "https://www.allscale.io/glossary/:path",
       "permanent": true
     },
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "payment.0xhowe.top" }],
-      "destination": "https://www.allscale.io/glossary/:path*",
+      "destination": "https://www.allscale.io/glossary/:path",
       "permanent": true
     },
     {
@@ -89,28 +89,28 @@
       "permanent": true
     },
     {
-      "source": "/articles/:path*",
-      "destination": "/glossary/zh/articles/:path*",
+      "source": "/articles/:path(.*)",
+      "destination": "/glossary/zh/articles/:path",
       "permanent": true
     },
     {
-      "source": "/zh/glossary/:path*",
-      "destination": "/glossary/zh/:path*",
+      "source": "/zh/glossary/:path(.*)",
+      "destination": "/glossary/zh/:path",
       "permanent": true
     },
     {
-      "source": "/en/glossary/:path*",
-      "destination": "/glossary/en/:path*",
+      "source": "/en/glossary/:path(.*)",
+      "destination": "/glossary/en/:path",
       "permanent": true
     },
     {
-      "source": "/zh/:path*",
-      "destination": "/glossary/zh/:path*",
+      "source": "/zh/:path(.*)",
+      "destination": "/glossary/zh/:path",
       "permanent": true
     },
     {
-      "source": "/en/:path*",
-      "destination": "/glossary/en/:path*",
+      "source": "/en/:path(.*)",
+      "destination": "/glossary/en/:path",
       "permanent": true
     },
     {
