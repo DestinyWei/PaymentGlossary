@@ -92,8 +92,8 @@ def insert_section_image(article: dict[str, object], anchor: str, src: str) -> N
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("docx", type=Path)
-    parser.add_argument("--content", type=Path, default=Path("articles/content.json"))
-    parser.add_argument("--assets", type=Path, default=Path("articles/assets"))
+    parser.add_argument("--content", type=Path, default=Path("glossary/articles/content.json"))
+    parser.add_argument("--assets", type=Path, default=Path("glossary/articles/assets"))
     args = parser.parse_args()
 
     articles = json.loads(args.content.read_text(encoding="utf-8"))

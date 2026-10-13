@@ -5,14 +5,15 @@ from __future__ import annotations
 
 import html
 import json
-import shutil
 from dataclasses import dataclass
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ARTICLES_DIR = ROOT / "articles"
-SITE_URL = "https://payment.0xhowe.top"
+PUBLIC_DIR = ROOT / "glossary"
+ARTICLES_DIR = PUBLIC_DIR / "articles"
+SITE_URL = "https://www.allscale.io"
+BASE_PATH = "/glossary"
 ZH_SOCIAL_URL = "https://x.com/allscale_zh"
 EN_SOCIAL_URL = "https://x.com/allscaleio"
 
@@ -172,12 +173,20 @@ def esc(value: object) -> str:
     return html.escape(str(value), quote=True)
 
 
+def site_path(path: str) -> str:
+    return BASE_PATH + path
+
+
+def absolute_url(path: str) -> str:
+    return SITE_URL + site_path(path)
+
+
 def locale_url(locale: Locale, suffix: str = "") -> str:
-    return SITE_URL + locale.base + suffix
+    return absolute_url(locale.base + suffix)
 
 
 def language_switch_url(locale: Locale, suffix: str = "") -> str:
-    return locale.alternate_base + suffix
+    return site_path(locale.alternate_base + suffix)
 
 
 def site_header(locale: Locale, active: str = "articles", alternate_suffix: str = "/articles/") -> str:
@@ -185,12 +194,12 @@ def site_header(locale: Locale, active: str = "articles", alternate_suffix: str 
     glossary_class = ' class="active"' if active == "glossary" else ""
     return f"""<header class="site-header">
   <div class="site-header-inner">
-    <a class="brand" href="{locale.base}/" aria-label="AllScale {esc(locale.glossary_label)}">
-      <img src="/articles/assets/allscale-logo.png" alt="AllScale">
+    <a class="brand" href="{site_path(locale.base + '/')}" aria-label="AllScale {esc(locale.glossary_label)}">
+      <img src="{site_path('/articles/assets/allscale-logo.png')}" alt="AllScale">
     </a>
     <nav class="site-nav" aria-label="Primary navigation">
-      <a href="{locale.base}/"{glossary_class}>{esc(locale.glossary_label)}</a>
-      <a href="{locale.articles_base}/"{article_class}>{esc(locale.articles_label)}</a>
+      <a href="{site_path(locale.base + '/')}"{glossary_class}>{esc(locale.glossary_label)}</a>
+      <a href="{site_path(locale.articles_base + '/')}"{article_class}>{esc(locale.articles_label)}</a>
       <a class="language-link" href="{language_switch_url(locale, alternate_suffix)}">{esc(locale.alternate_label)}</a>
       <a class="social-link" href="{locale.social_url}" target="_blank" rel="noreferrer">{esc(locale.social_label)}</a>
     </nav>
@@ -208,10 +217,12 @@ def site_footer(locale: Locale) -> str:
 
 
 def hreflang_links(path_suffix: str) -> str:
-    return "\n".join(
+    links = [
         f'  <link rel="alternate" hreflang="{loc.code}" href="{esc(locale_url(loc, path_suffix))}">'
         for loc in LOCALES.values()
-    )
+    ]
+    links.append(f'  <link rel="alternate" hreflang="x-default" href="{esc(locale_url(LOCALES["zh"], "/"))}">')
+    return "\n".join(links)
 
 
 def page_head(locale: Locale, title: str, description: str, canonical: str, image: str, path_suffix: str) -> str:
@@ -224,19 +235,19 @@ def page_head(locale: Locale, title: str, description: str, canonical: str, imag
   <meta name="description" content="{esc(description)}">
   <link rel="canonical" href="{esc(canonical)}">
 {hreflang_links(path_suffix)}
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" href="{site_path('/favicon.ico')}" sizes="any">
+  <link rel="icon" type="image/png" href="{site_path('/favicon-32x32.png')}" sizes="32x32">
+  <link rel="apple-touch-icon" href="{site_path('/apple-touch-icon.png')}">
+  <link rel="manifest" href="{site_path('/site.webmanifest')}">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="{esc(locale.og_site_name)}">
   <meta property="og:title" content="{esc(title)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:url" content="{esc(canonical)}">
-  <meta property="og:image" content="{esc(SITE_URL + image)}">
+  <meta property="og:image" content="{esc(absolute_url(image))}">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/articles/styles.css">
-  <script defer src="/analytics.js" data-allscale-analytics></script>
+  <link rel="stylesheet" href="{site_path('/articles/styles.css')}">
+  <script defer src="{site_path('/_vercel/insights/script.js')}" data-endpoint="{site_path('/_vercel/insights')}" data-allscale-analytics></script>
 </head>"""
 
 
@@ -253,7 +264,7 @@ def render_blocks(blocks: list[dict[str, object]]) -> str:
             rendered.append(f"<{kind}>{items}</{kind}>")
         elif kind == "image":
             rendered.append(
-                f'<figure class="article-figure"><img src="{esc(block["src"])}" '
+                f'<figure class="article-figure"><img src="{esc(site_path(str(block["src"])))}" '
                 f'alt="{esc(block["alt"])}" loading="lazy" decoding="async"></figure>'
             )
     return "\n".join(rendered)
@@ -265,12 +276,12 @@ def redirect_page(destination: str, title: str = "Redirecting") -> str:
 <head>
   <meta charset="utf-8">
   <meta name="robots" content="noindex">
-  <meta http-equiv="refresh" content="0; url={esc(destination)}">
-  <link rel="canonical" href="{esc(SITE_URL + destination)}">
+  <meta http-equiv="refresh" content="0; url={esc(site_path(destination))}">
+  <link rel="canonical" href="{esc(absolute_url(destination))}">
   <title>{esc(title)}</title>
-  <script>location.replace({json.dumps(destination)});</script>
+  <script>location.replace({json.dumps(site_path(destination))});</script>
 </head>
-<body><a href="{esc(destination)}">Continue</a></body>
+<body><a href="{esc(site_path(destination))}">Continue</a></body>
 </html>
 """
 
@@ -280,8 +291,8 @@ def build_index(locale: Locale, articles: list[dict[str, object]]) -> None:
     for article in articles:
         search_text = f"{article['title']} {article['summary']}".lower()
         cards.append(
-            f"""<a class="article-card" href="{locale.articles_base}/{esc(article['slug'])}/" data-search="{esc(search_text)}">
-  <img class="article-card-image" src="{esc(article['image'])}" alt="" loading="lazy">
+            f"""<a class="article-card" href="{site_path(locale.articles_base + '/' + esc(article['slug']) + '/')}" data-search="{esc(search_text)}">
+  <img class="article-card-image" src="{esc(site_path(str(article['image'])))}" alt="" loading="lazy">
   <span class="article-card-copy">
     <span class="series-number">{article['order']:02d}</span>
     <h3>{esc(article['title'])}</h3>
@@ -328,7 +339,7 @@ def build_index(locale: Locale, articles: list[dict[str, object]]) -> None:
 
   <div class="page-shell">
     <section class="series-intro">
-      <img class="series-cover" src="{esc(locale.cover_image)}" alt="{esc(locale.cover_alt)}">
+      <img class="series-cover" src="{esc(site_path(locale.cover_image))}" alt="{esc(locale.cover_alt)}">
       <div class="series-copy">
         <div class="eyebrow">{esc(locale.about_eyebrow)}</div>
         <h2>{esc(locale.about_title)}</h2>
@@ -373,7 +384,7 @@ def build_index(locale: Locale, articles: list[dict[str, object]]) -> None:
 </body>
 </html>
 """
-    output_dir = ROOT / locale.base.strip("/") / "articles"
+    output_dir = PUBLIC_DIR / locale.base.strip("/") / "articles"
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "index.html").write_text(page, encoding="utf-8")
 
@@ -384,13 +395,13 @@ def build_article(locale: Locale, article: dict[str, object], previous: dict[str
     nav_items = []
     if previous:
         nav_items.append(
-            f"<a href=\"{locale.articles_base}/{esc(previous['slug'])}/\"><small>{esc(locale.previous_label)}</small><strong>{esc(previous['title'])}</strong></a>"
+            f"<a href=\"{site_path(locale.articles_base + '/' + esc(previous['slug']) + '/')}\"><small>{esc(locale.previous_label)}</small><strong>{esc(previous['title'])}</strong></a>"
         )
     else:
         nav_items.append("<span></span>")
     if following:
         nav_items.append(
-            f"<a href=\"{locale.articles_base}/{esc(following['slug'])}/\"><small>{esc(locale.next_label)}</small><strong>{esc(following['title'])}</strong></a>"
+            f"<a href=\"{site_path(locale.articles_base + '/' + esc(following['slug']) + '/')}\"><small>{esc(locale.next_label)}</small><strong>{esc(following['title'])}</strong></a>"
         )
     else:
         nav_items.append("<span></span>")
@@ -400,7 +411,7 @@ def build_article(locale: Locale, article: dict[str, object], previous: dict[str
         "@type": "Article",
         "headline": article["title"],
         "description": article["summary"],
-        "image": SITE_URL + article["image"],
+        "image": absolute_url(str(article["image"])),
         "author": {"@type": "Organization", "name": "AllScale"},
         "publisher": {"@type": "Organization", "name": "AllScale"},
         "mainEntityOfPage": canonical,
@@ -412,7 +423,7 @@ def build_article(locale: Locale, article: dict[str, object], previous: dict[str
 {site_header(locale, alternate_suffix=suffix)}
 <main class="article-shell">
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="{locale.base}/">{esc(locale.breadcrumb_glossary)}</a><span>/</span><a href="{locale.articles_base}/">{esc(locale.breadcrumb_articles)}</a><span>/</span><span>{article['order']:02d}</span>
+    <a href="{site_path(locale.base + '/')}">{esc(locale.breadcrumb_glossary)}</a><span>/</span><a href="{site_path(locale.articles_base + '/')}">{esc(locale.breadcrumb_articles)}</a><span>/</span><span>{article['order']:02d}</span>
   </nav>
   <article>
     <header class="article-header">
@@ -420,7 +431,7 @@ def build_article(locale: Locale, article: dict[str, object], previous: dict[str
       <h1>{esc(article['title'])}</h1>
       <p class="article-deck">{esc(article['summary'])}</p>
     </header>
-    <img class="article-hero-image" src="{esc(article['image'])}" alt="{esc(article['title'])}">
+    <img class="article-hero-image" src="{esc(site_path(str(article['image'])))}" alt="{esc(article['title'])}">
     <div class="article-body">{render_blocks(article['blocks'])}</div>
   </article>
 
@@ -436,7 +447,7 @@ def build_article(locale: Locale, article: dict[str, object], previous: dict[str
 </body>
 </html>
 """
-    output_dir = ROOT / locale.base.strip("/") / "articles" / str(article["slug"])
+    output_dir = PUBLIC_DIR / locale.base.strip("/") / "articles" / str(article["slug"])
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "index.html").write_text(page, encoding="utf-8")
 
@@ -464,29 +475,33 @@ def build_legacy_article_redirects(zh_articles: list[dict[str, object]]) -> None
 
 def copy_glossary_routes() -> None:
     for locale in LOCALES.values():
-        source = ROOT / locale.base.strip("/") / "index.html"
+        source = PUBLIC_DIR / locale.base.strip("/") / "index.html"
         if not source.exists():
             continue
+        source_text = source.read_text(encoding="utf-8")
         for section in GLOSSARY_SECTIONS:
-            output_dir = ROOT / locale.base.strip("/") / "glossary" / section
+            output_dir = PUBLIC_DIR / locale.base.strip("/") / section
             output_dir.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, output_dir / "index.html")
+            section_text = source_text
+            for loc in LOCALES.values():
+                section_text = section_text.replace(locale_url(loc, "/"), locale_url(loc, f"/{section}/"))
+            (output_dir / "index.html").write_text(section_text, encoding="utf-8")
 
 
 def build_discovery_files(articles_by_locale: dict[str, list[dict[str, object]]]) -> None:
-    urls = [f"{SITE_URL}/", f"{SITE_URL}/zh/", f"{SITE_URL}/en/"]
+    urls = [locale_url(LOCALES["zh"], "/"), locale_url(LOCALES["en"], "/")]
     for locale in LOCALES.values():
-        urls.extend(f"{SITE_URL}{locale.base}/glossary/{section}/" for section in GLOSSARY_SECTIONS)
-        urls.append(f"{SITE_URL}{locale.articles_base}/")
-        urls.extend(f"{SITE_URL}{locale.articles_base}/{article['slug']}/" for article in articles_by_locale[locale.code])
+        urls.extend(locale_url(locale, f"/{section}/") for section in GLOSSARY_SECTIONS)
+        urls.append(locale_url(locale, "/articles/"))
+        urls.extend(locale_url(locale, f"/articles/{article['slug']}/") for article in articles_by_locale[locale.code])
 
     sitemap = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
     sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
     sitemap += "".join(f"  <url><loc>{esc(url)}</loc></url>\n" for url in urls)
     sitemap += "</urlset>\n"
-    (ROOT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
-    (ROOT / "robots.txt").write_text(
-        f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n",
+    (PUBLIC_DIR / "sitemap.xml").write_text(sitemap, encoding="utf-8")
+    (PUBLIC_DIR / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\nSitemap: {absolute_url('/sitemap.xml')}\n",
         encoding="utf-8",
     )
 

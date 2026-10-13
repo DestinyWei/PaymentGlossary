@@ -272,8 +272,8 @@ def render_assets(pdf_path: Path, output_dir: Path) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("pdf", type=Path)
-    parser.add_argument("--output", type=Path, default=Path("articles/content.json"))
-    parser.add_argument("--assets", type=Path, default=Path("articles/assets"))
+    parser.add_argument("--output", type=Path, default=Path("glossary/articles/content.json"))
+    parser.add_argument("--assets", type=Path, default=Path("glossary/articles/assets"))
     args = parser.parse_args()
 
     reader = PdfReader(str(args.pdf))

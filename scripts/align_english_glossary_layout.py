@@ -12,8 +12,9 @@ from english_glossary_content import build_english_sections
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ZH_INDEX = ROOT / "zh" / "index.html"
-EN_INDEX = ROOT / "en" / "index.html"
+PUBLIC_DIR = ROOT / "glossary"
+ZH_INDEX = PUBLIC_DIR / "zh" / "index.html"
+EN_INDEX = PUBLIC_DIR / "en" / "index.html"
 
 SECTION_ID_MAP = {
     "fund-flow": "fund",
@@ -474,7 +475,7 @@ def build_script() -> str:
 <script>
 const slugById = {json.dumps(slug_by_id, ensure_ascii=False)};
 const idBySlug = Object.fromEntries(Object.entries(slugById).map(([id, slug]) => [slug, id]));
-const localeBase = '/en';
+const localeBase = '/glossary/en';
 const sections = Array.from(document.querySelectorAll('.section[id^="sec-"]'));
 const navLinks = Array.from(document.querySelectorAll('#sidebar a'));
 const searchInput = document.querySelector('.glossary-search input');
@@ -504,7 +505,7 @@ function makeSlug(text, fallback) {{
   return slugCounts[base] === 1 ? base : base + '-' + slugCounts[base];
 }}
 function sectionUrl(sectionSlug, targetSlug = '') {{
-  return localeBase + '/glossary/' + sectionSlug + '/' + (targetSlug ? '#' + encodeURIComponent(targetSlug) : '');
+  return localeBase + '/' + sectionSlug + '/' + (targetSlug ? '#' + encodeURIComponent(targetSlug) : '');
 }}
 function setActiveSection(id, options = {{}}) {{
   const section = document.getElementById('sec-' + id);
@@ -560,8 +561,9 @@ sections.forEach(section => {{
 window.show = function(id) {{ return setActiveSection(id, {{ updateUrl: true }}); }};
 function routeFromLocation(options = {{}}) {{
   const parts = window.location.pathname.split('/').filter(Boolean);
-  const glossaryIndex = parts.indexOf('glossary');
-  const pathSlug = glossaryIndex >= 0 ? parts[glossaryIndex + 1] : '';
+  const localeParts = localeBase.split('/').filter(Boolean);
+  const matchesLocale = localeParts.every((part, index) => parts[index] === part);
+  const pathSlug = matchesLocale ? (parts[localeParts.length] || '') : '';
   const hashSlug = decodeURIComponent(window.location.hash.replace(/^#/, ''));
   const sectionId = idBySlug[pathSlug] || 'fund';
   const sectionSlug = slugById[sectionId] || sectionId;
@@ -824,14 +826,15 @@ def build_html() -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Payment Industry Glossary — AllScale</title>
   <meta name="description" content="AllScale English payment glossary covering fund flows, card acquiring, trade payments, cross-border FX, crypto payments, compliance, licensing, operating roles, transaction lifecycles, and payment metrics.">
-  <link rel="canonical" href="https://payment.0xhowe.top/en/">
-  <link rel="alternate" hreflang="en" href="https://payment.0xhowe.top/en/">
-  <link rel="alternate" hreflang="zh" href="https://payment.0xhowe.top/zh/">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <script defer src="/analytics.js" data-allscale-analytics></script>
+  <link rel="canonical" href="https://www.allscale.io/glossary/en/">
+  <link rel="alternate" hreflang="en" href="https://www.allscale.io/glossary/en/">
+  <link rel="alternate" hreflang="zh" href="https://www.allscale.io/glossary/zh/">
+  <link rel="alternate" hreflang="x-default" href="https://www.allscale.io/glossary/">
+  <link rel="icon" href="/glossary/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/glossary/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/glossary/apple-touch-icon.png">
+  <link rel="manifest" href="/glossary/site.webmanifest">
+  <script defer src="/glossary/_vercel/insights/script.js" data-endpoint="/glossary/_vercel/insights" data-allscale-analytics></script>
   <style>
 {css}
   </style>
@@ -839,14 +842,14 @@ def build_html() -> str:
 <body>
 <header>
   <div class="header-top">
-    <a class="header-logo-link" href="/en/" aria-label="AllScale home">
-      <img class="header-logo" src="/articles/assets/allscale-logo.png" alt="AllScale">
+    <a class="header-logo-link" href="/glossary/en/" aria-label="AllScale home">
+      <img class="header-logo" src="/glossary/articles/assets/allscale-logo.png" alt="AllScale">
     </a>
     <div class="header-top-div"></div>
     <span class="header-top-label">Checkout · Knowledge Base</span>
     <div class="glossary-site-links" role="navigation" aria-label="Site navigation">
-      <a href="/en/articles/">Articles →</a>
-      <a href="/zh/">中文</a>
+      <a href="/glossary/en/articles/">Articles →</a>
+      <a href="/glossary/zh/">中文</a>
       <a href="https://x.com/allscaleio" target="_blank" rel="noreferrer">AllScale ↗</a>
     </div>
   </div>
