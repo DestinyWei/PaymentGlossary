@@ -1,0 +1,16 @@
+{
+  "name": "AllScale 支付知识库",
+  "short_name": "AllScale",
+  "start_url": "/glossary/zh/",
+  "scope": "/glossary/",
+  "icons": [
+    {
+      "src": "/glossary/allscale-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#009859",
+  "background_color": "#fdfffe",
+  "display": "standalone"
+}

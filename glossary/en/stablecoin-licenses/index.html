@@ -1,0 +1,1349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment Industry Glossary — AllScale</title>
+  <meta name="description" content="AllScale English payment glossary covering fund flows, card acquiring, trade payments, cross-border FX, crypto payments, compliance, licensing, operating roles, transaction lifecycles, and payment metrics.">
+  <link rel="canonical" href="https://www.allscale.io/glossary/en/stablecoin-licenses/">
+  <link rel="alternate" hreflang="en" href="https://www.allscale.io/glossary/en/stablecoin-licenses/">
+  <link rel="alternate" hreflang="zh" href="https://www.allscale.io/glossary/zh/stablecoin-licenses/">
+  <link rel="alternate" hreflang="x-default" href="https://www.allscale.io/glossary/">
+  <link rel="icon" href="/glossary/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/glossary/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/glossary/apple-touch-icon.png">
+  <link rel="manifest" href="/glossary/site.webmanifest">
+  <script defer src="/glossary/_vercel/insights/script.js" data-endpoint="/glossary/_vercel/insights" data-allscale-analytics></script>
+  <style>
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* latin-ext */
+/* latin */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+/* cyrillic */
+/* vietnamese */
+/* latin-ext */
+/* latin */
+:root {
+  /* AllScale — Payment Link design system (APP register) */
+  --bg: #FDFFFE;          /* page background — barely-there mint white */
+  --bg2: #F2F8F5;         /* tinted-green hover / map band */
+  --bg3: #E5EEEA;         /* pressed surface / scrollbar */
+  --surface: #FFFFFF;     /* cards, nav */
+  --surface2: #F2F8F5;    /* inner tiles inside white cards */
+  --border: #E5EEEA;      /* default card / row / input border */
+  --border2: #C5DDD4;     /* emphasized / hover border */
+  --text: #0C3124;        /* primary — deep green-black */
+  --text2: #83968F;       /* secondary — muted sage */
+  --text3: #B0C4BB;       /* tertiary / placeholder */
+  --ink: #0D0D0D;         /* pure near-black */
+
+  /* brand / primary chrome (AllScale green) */
+  --accent: #009859;      /* brand green — active nav, eyebrows, abbr code, links */
+  --accent-hover: #0CAA67;
+  --accent2: #047857;     /* deep green text on light */
+
+  /* categorical palette — retuned to sit harmoniously with brand green */
+  --blue: #2E6DA4;   --blue2: #E8F0F8;
+  --teal: #0E7C6B;   --teal2: #E0F2EE;
+  --amber: #8C5A11;  --amber2: #F8EFDB;
+  --pink: #A6396A;   --pink2: #F9E8F0;
+  --purple: #5C4BB0; --purple2: #ECE9F8;
+  --red: #C13A2D;    --red2: #FAE8E6;
+  --green: #047857;  --green2: #E7F4EE;
+  --gray: #5C6B64;   --gray2: #ECF1EE;
+
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --mono: 'SFMono-Regular', Consolas, ui-monospace, monospace;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --shadow: 0 1px 2px rgba(12,49,36,0.04), 0 4px 18px rgba(12,49,36,0.05);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* ── Header ── */
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 30px 48px 26px;
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.header-logo { height: 24px; width: auto; display: block; }
+.header-top-div { width: 1px; height: 18px; background: var(--border2); }
+.header-top-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  color: var(--text2);
+}
+.header-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+header h1 {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  max-width: 600px;
+}
+header h1 em { font-style: italic; color: var(--accent); }
+.header-meta {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.header-badge {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  border-radius: var(--radius-full);
+  padding: 5px 13px;
+  font-size: 12px;
+  font-family: var(--mono);
+}
+
+/* ── Layout ── */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 140px);
+}
+
+/* ── Sidebar nav ── */
+nav {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 24px 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.nav-section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 0 20px;
+  margin: 16px 0 6px;
+}
+.nav-section-label:first-child { margin-top: 0; }
+nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  font-size: 13px;
+  color: var(--text2);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all .15s;
+  line-height: 1.3;
+}
+nav a:hover { background: var(--bg2); color: var(--text); border-left-color: var(--border2); }
+nav a.active { background: var(--bg2); color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+.nav-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── Main content ── */
+main {
+  flex: 1;
+  padding: 32px 48px;
+  max-width: 900px;
+  min-width: 0;
+}
+
+/* ── Section ── */
+.section { display: none; }
+.section.active { display: block; }
+
+.section-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.section-desc {
+  font-size: 14px;
+  color: var(--text2);
+  margin-bottom: 24px;
+  line-height: 1.7;
+  max-width: 640px;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+.card-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.card-title .abbr {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+}
+.prose { font-size: 13px; line-height: 1.75; color: var(--text2); }
+.prose strong { color: var(--text); font-weight: 500; }
+
+/* ── Case box ── */
+.case-box {
+  background: var(--surface2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 12px 14px;
+  margin: 12px 0;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--text);
+}
+.case-box.teal { border-left-color: var(--teal); }
+.case-box.amber { border-left-color: var(--amber); }
+.case-box.red { border-left-color: var(--red); }
+.case-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.case-label.teal { color: var(--teal); }
+.case-label.amber { color: var(--amber); }
+.case-label.red { color: var(--red); }
+
+/* ── Divider ── */
+hr.div { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+/* ── Grid ── */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px; }
+.grid-card {
+  background: var(--surface2);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+}
+.grid-card .label { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.grid-card .body { font-size: 12px; color: var(--text2); line-height: 1.6; }
+.grid-card .body strong { color: var(--text); font-weight: 500; }
+
+/* ── Term grid ── */
+.term-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.term-item {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px 13px;
+  flex: 1;
+  min-width: 160px;
+}
+.term-abbr { font-size: 13px; font-weight: 500; color: var(--text); font-family: var(--mono); }
+.term-en { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.term-zh { font-size: 12px; color: var(--text2); margin-top: 4px; line-height: 1.5; }
+
+/* ── Highlight ── */
+.hl { background: var(--amber2); color: var(--amber); border-radius: 3px; padding: 0 3px; font-weight: 500; }
+.hlb { background: var(--blue2); color: var(--blue); border-radius: 3px; padding: 0 3px; }
+.hlg { background: var(--green2); color: var(--green); border-radius: 3px; padding: 0 3px; }
+.hlr { background: var(--red2); color: var(--red); border-radius: 3px; padding: 0 3px; }
+.hlp { background: var(--purple2); color: var(--purple); border-radius: 3px; padding: 0 3px; }
+
+/* ── Badge ── */
+.badge {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-right: 4px;
+}
+.badge-blue { background: var(--blue2); color: var(--blue); }
+.badge-teal { background: var(--teal2); color: var(--teal); }
+.badge-amber { background: var(--amber2); color: var(--amber); }
+.badge-pink { background: var(--pink2); color: var(--pink); }
+.badge-gray { background: var(--gray2); color: var(--gray); }
+.badge-red { background: var(--red2); color: var(--red); }
+.badge-purple { background: var(--purple2); color: var(--purple); }
+.badge-green { background: var(--green2); color: var(--green); }
+
+/* ── Chain row ── */
+.chain { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; padding: 8px 0; }
+.chain-node {
+  border-radius: var(--radius);
+  padding: 6px 11px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 1.3;
+  text-align: center;
+}
+.cn-blue { background: var(--blue2); color: var(--blue); }
+.cn-teal { background: var(--teal2); color: var(--teal); }
+.cn-amber { background: var(--amber2); color: var(--amber); }
+.cn-green { background: var(--green2); color: var(--green); }
+.cn-pink { background: var(--pink2); color: var(--pink); }
+.cn-gray { background: var(--gray2); color: var(--gray); }
+.cn-red { background: var(--red2); color: var(--red); }
+.cn-purple { background: var(--purple2); color: var(--purple); }
+.chain-arrow { color: var(--text3); font-size: 14px; flex-shrink: 0; }
+
+/* ── Steps ── */
+.step { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+.step-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--blue2); color: var(--blue);
+  font-size: 11px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+  font-family: var(--mono);
+}
+.step-num.amber { background: var(--amber2); color: var(--amber); }
+.step-num.red { background: var(--red2); color: var(--red); }
+.step-num.green { background: var(--green2); color: var(--green); }
+.step-body { font-size: 13px; line-height: 1.7; color: var(--text2); flex: 1; }
+.step-body strong { color: var(--text); font-weight: 500; }
+
+/* ── Table ── */
+.tbl { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 10px; }
+.tbl th {
+  text-align: left; font-weight: 600; padding: 7px 9px;
+  border-bottom: 1px solid var(--border2);
+  color: var(--text); font-size: 12px; background: var(--surface2);
+}
+.tbl td { padding: 6px 9px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:hover td { background: var(--bg2); }
+
+/* ── Section label ── */
+.slabel {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin: 18px 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Level cards ── */
+.level-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+.level-card { border-radius: var(--radius); padding: 11px 13px; border: 1px solid var(--border); }
+.level-head { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.level-body { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+/* ── Role card ── */
+.role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.role-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+.role-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.role-badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 8px; font-family: var(--mono); }
+.role-title { font-size: 13px; font-weight: 500; color: var(--text); }
+.role-body { font-size: 12px; line-height: 1.65; color: var(--text2); }
+.role-body strong { color: var(--text); font-weight: 500; }
+
+/* ── SVG diagram container ── */
+.diagram { width: 100%; overflow: hidden; border-radius: var(--radius); margin: 12px 0; background: var(--surface2); }
+.diagram svg { width: 100%; height: auto; display: block; }
+
+/* ── World map ── */
+#map-svg { width: 100%; height: auto; display: block; background: var(--bg2); border-radius: var(--radius); }
+.country { stroke: var(--surface); stroke-width: 0.4; transition: opacity .12s; cursor: default; }
+.country.clickable { cursor: pointer; }
+.country.clickable:hover { opacity: 0.75; }
+.map-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.map-leg { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text2); cursor: pointer; padding: 3px 8px; border-radius: 20px; border: 1px solid transparent; transition: all .15s; }
+.map-leg:hover { background: var(--bg2); border-color: var(--border); }
+.map-leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.map-tip {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  margin-top: 10px;
+  min-height: 60px;
+  box-shadow: var(--shadow);
+}
+.map-tip-title { font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+.map-tip-items { display: flex; flex-direction: column; gap: 5px; }
+.map-tip-item { background: var(--surface2); border-radius: var(--radius); padding: 7px 10px; font-size: 12px; color: var(--text2); line-height: 1.55; }
+.map-tip-item strong { color: var(--text); font-weight: 500; font-family: var(--mono); font-size: 11px; }
+
+/* ── Warn box ── */
+.warn-box {
+  background: var(--amber2);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 11px 14px;
+  margin: 10px 0;
+  font-size: 13px;
+  color: var(--amber);
+  line-height: 1.7;
+}
+.warn-box strong { color: var(--amber); font-weight: 500; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .layout { flex-direction: column; }
+  nav { width: 100%; height: auto; position: static; display: flex; flex-wrap: wrap; padding: 12px; gap: 4px; border-right: none; border-bottom: 1px solid var(--border); }
+  nav a { border-left: none; border-radius: 20px; padding: 5px 12px; font-size: 12px; }
+  nav a.active { background: var(--accent); color: #fff; }
+  .nav-section-label { display: none; }
+  main { padding: 20px 16px; }
+  header { padding: 24px 20px; }
+  header h1 { font-size: 26px; }
+  .grid2, .role-grid, .level-grid { grid-template-columns: 1fr; }
+  .grid3 { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  nav { display: none; }
+  main { padding: 20px; max-width: 100%; }
+  .section { display: block !important; page-break-before: always; }
+  .section:first-child { page-break-before: auto; }
+}
+
+
+.header-top { position: relative; }
+.header-logo-link { display: inline-flex; align-items: center; }
+.header-logo-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+.glossary-site-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  margin-left: auto;
+}
+.glossary-site-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  min-height: 40px;
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  padding: 8px 14px;
+  text-decoration: none;
+  font: 13px/1.2 var(--sans);
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(12,49,36,0.06);
+}
+.glossary-site-links a:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.glossary-site-links a:first-child {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 7px 18px rgba(0,152,89,0.22);
+}
+.glossary-search { position: relative; max-width: 560px; margin-top: 22px; }
+.glossary-search-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: 0 14px;
+}
+.glossary-search-icon { color: var(--accent); font-family: var(--mono); font-size: 18px; line-height: 1; }
+.glossary-search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text);
+  font: 14px/1.4 var(--sans);
+}
+.glossary-search input::placeholder { color: var(--text3); }
+.glossary-search-results {
+  display: none;
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: 0 12px 34px rgba(12,49,36,0.12);
+}
+.glossary-search-results.open { display: block; }
+.glossary-search-result {
+  display: grid;
+  gap: 3px;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  padding: 11px 14px;
+  text-align: left;
+  font: 13px/1.35 var(--sans);
+}
+.glossary-search-result:hover,
+.glossary-search-result:focus { background: var(--bg2); outline: 0; }
+.glossary-search-result small { color: var(--text2); font: 11px/1.3 var(--mono); }
+.glossary-search-empty { padding: 12px 14px; color: var(--text2); font: 13px/1.4 var(--sans); }
+.glossary-hit { animation: glossary-pulse 1.6s ease; }
+.map-leg { cursor: pointer; border-radius: 999px; padding: 2px 6px; }
+.map-leg > span { display: inline-block; width: 9px; height: 9px; border-radius: 999px; flex-shrink: 0; }
+.map-leg:hover,
+.map-leg.active { background: var(--bg2); }
+@keyframes glossary-pulse {
+  0%, 100% { box-shadow: var(--shadow); }
+  25% { box-shadow: 0 0 0 3px rgba(0,152,89,0.18), var(--shadow); }
+}
+@media (max-width: 720px) {
+  .glossary-search { max-width: none; }
+  .header-top-label, .header-top-div { display: none; }
+  .glossary-site-links { gap: 5px; }
+  .glossary-site-links a { min-height: 36px; padding: 7px 11px; font-size: 12px; }
+  .glossary-site-links a:last-child { display: none; }
+}
+
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-top">
+    <a class="header-logo-link" href="/glossary/en/" aria-label="AllScale home">
+      <img class="header-logo" src="/glossary/articles/assets/allscale-logo.png" alt="AllScale">
+    </a>
+    <div class="header-top-div"></div>
+    <span class="header-top-label">Checkout · Knowledge Base</span>
+    <div class="glossary-site-links" role="navigation" aria-label="Site navigation">
+      <a href="/glossary/en/articles/">Articles →</a>
+      <a href="/glossary/zh/">中文</a>
+      <a href="https://x.com/allscaleio" target="_blank" rel="noreferrer">AllScale ↗</a>
+    </div>
+  </div>
+  <div class="header-eyebrow">Payments Reference</div>
+  <h1>Payment Industry <em>Glossary</em></h1>
+  <div class="header-meta">
+    <span class="header-badge">v3.0 · March 2026</span>
+    <span class="header-badge">12 sections · 200+ terms</span>
+    <span class="header-badge">For Crypto operators</span>
+  </div>
+  <form class="glossary-search" role="search">
+    <div class="glossary-search-box">
+      <span class="glossary-search-icon">⌕</span>
+      <input type="search" autocomplete="off" spellcheck="false" placeholder="Search terms, e.g. TPV, COBO, PCI, stablecoin">
+    </div>
+    <div class="glossary-search-results" aria-live="polite"></div>
+  </form>
+</header>
+
+<div class="layout">
+<nav id="sidebar">
+  <div class="nav-section-label">Core Architecture</div>
+  <a href="#" onclick="show('fund')"  class="active"><span class="nav-dot" style="background:#2E6DA4"></span>Fund Flow</a>
+  <a href="#" onclick="show('card')" ><span class="nav-dot" style="background:#2E6DA4"></span>Card Acquiring</a>
+  <a href="#" onclick="show('trade')" ><span class="nav-dot" style="background:#2E6DA4"></span>Trade Payments</a>
+  <a href="#" onclick="show('fx')" ><span class="nav-dot" style="background:#2E6DA4"></span>FX &amp; Cross-Border</a>
+  <div class="nav-section-label">Crypto</div>
+  <a href="#" onclick="show('crypto')" ><span class="nav-dot" style="background:#0E7C6B"></span>Crypto Payments</a>
+  <a href="#" onclick="show('ucard')" ><span class="nav-dot" style="background:#0E7C6B"></span>Crypto Cards</a>
+  <div class="nav-section-label">Compliance &amp; Regulation</div>
+  <a href="#" onclick="show('comp')" ><span class="nav-dot" style="background:#A6396A"></span>Compliance</a>
+  <a href="#" onclick="show('lic')" ><span class="nav-dot" style="background:#A6396A"></span>License Map</a>
+  <a href="#" onclick="show('stable')" ><span class="nav-dot" style="background:#A6396A"></span>Stablecoin Licenses</a>
+  <div class="nav-section-label">Institutions &amp; Operations</div>
+  <a href="#" onclick="show('roles')" ><span class="nav-dot" style="background:#8C5A11"></span>Institutional Roles</a>
+  <a href="#" onclick="show('txlife')" ><span class="nav-dot" style="background:#8C5A11"></span>Transaction Lifecycle</a>
+  <a href="#" onclick="show('biz')" ><span class="nav-dot" style="background:#8C5A11"></span>Business Metrics</a>
+</nav>
+<main>
+<!-- Fund Flow -->
+<div id="sec-fund" class="section active">
+<h2 class="section-title">Fund Flow</h2>
+<p class="section-desc">How money moves from A to B. From COBO and POBO to cross-border clearing, this is the skeleton of payments.</p>
+
+<div class="card">
+  <div class="card-title"><span class="abbr">COBO + POBO</span> — collection and payment on behalf of others</div>
+  <div class="grid2">
+    <div class="grid-card"><div class="label">COBO · Collection On Behalf Of</div><div class="body">Company A collects money for Company B. Customer funds enter A's account, while the platform records the balance under B and transfers it periodically.</div></div>
+    <div class="grid-card"><div class="label">POBO · Payment On Behalf Of</div><div class="body">Company A pays suppliers for Company B. Funds leave A's account, but the payment is made in B's business context.</div></div>
+  </div>
+  <div class="case-box"><div class="case-label">Example: European retail treasury pool</div>German, French, and Polish subsidiaries collect customer payments into the UK headquarters account (COBO), while supplier payments are paid centrally by HQ (POBO). Benefits: lower bank fees, centralized FX hedging, and real-time group cash visibility.<br><br><strong>Crypto analogy:</strong> an exchange omnibus wallet receives many users' deposits into one on-chain address. Users see virtual balances, but the operating logic is COBO.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Clearing vs Settlement vs Netting</div>
+  <div class="chain"><div class="chain-node cn-gray">Transaction</div><div class="chain-arrow">-></div><div class="chain-node cn-blue">Clearing<br><small style="font-size:10px;font-weight:400">reconcile data and net positions</small></div><div class="chain-arrow">-></div><div class="chain-node cn-teal">Settlement<br><small style="font-size:10px;font-weight:400">money actually moves</small></div><div class="chain-arrow">-></div><div class="chain-node cn-green">T+0 / T+1 / T+2 arrival</div></div>
+  <p class="prose"><strong>Netting:</strong> if Bank A owes Bank B $10M and Bank B owes Bank A $8M, only $2M moves. Netting dramatically reduces system liquidity needs.</p>
+  <p class="prose"><strong>Float:</strong> funds that have been initiated but not yet arrived. Early PayPal earned interest from user float.</p>
+  <p class="prose"><strong>Escrow:</strong> a neutral third party holds funds and releases them when conditions are met. Smart contracts are the on-chain, trust-minimized version of escrow.</p>
+  <div class="case-box teal"><div class="case-label teal">Crypto comparison</div>On-chain block production is settlement. There is no separate clearing layer and finality can be T+0. This is the strongest attack point for stablecoin payments: traditional cross-border transfers charge fees at each correspondent bank and create one to two days of float; stablecoins compress that into one chain transaction.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Cross-border settlement systems quick reference</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">SWIFT</div><div class="term-en">Society for Worldwide Interbank Financial Telecommunication</div><div class="term-zh">A cross-border bank messaging system using BIC identifiers. T+1 to T+5; each intermediary may charge fees.</div></div>
+    <div class="term-item"><div class="term-abbr">RTGS</div><div class="term-en">Real-Time Gross Settlement</div><div class="term-zh">Large-value payments settled one by one in real time, such as Fedwire or China's large-value payment system.</div></div>
+    <div class="term-item"><div class="term-abbr">ACH</div><div class="term-en">Automated Clearing House</div><div class="term-zh">US batch electronic transfers, usually T+1, suited for payroll and bill payments.</div></div>
+    <div class="term-item"><div class="term-abbr">SEPA</div><div class="term-en">Single Euro Payments Area</div><div class="term-zh">EU euro transfers use a common format and should not cost more than domestic euro transfers. Usually T+1.</div></div>
+    <div class="term-item"><div class="term-abbr">FPS</div><div class="term-en">Faster Payment System</div><div class="term-zh">The UK and Hong Kong both use this name for instant payment systems with second-level arrival.</div></div>
+    <div class="term-item"><div class="term-abbr">BACS</div><div class="term-en">Bankers' Automated Clearing Services</div><div class="term-zh">UK batch clearing for direct debit and payroll, typically T+3.</div></div>
+    <div class="term-item"><div class="term-abbr">IBAN</div><div class="term-en">International Bank Account Number</div><div class="term-zh">Standardized account number used in Europe and the Middle East, up to 34 characters.</div></div>
+    <div class="term-item"><div class="term-abbr">Wire / TT</div><div class="term-en">Wire Transfer / Telegraphic Transfer</div><div class="term-zh">Mostly synonymous. TT is more common in Asia and usually arrives same day or next day.</div></div>
+    <div class="term-item"><div class="term-abbr">Nostro / Vostro</div><div class="term-en">Correspondent bank accounts</div><div class="term-zh">Nostro is our account at another bank; Vostro is another bank's account with us.</div></div>
+  </div>
+</div>
+</div>
+
+<!-- Card Acquiring -->
+<div id="sec-card" class="section">
+<h2 class="section-title">Card Acquiring</h2>
+<p class="section-desc">There are at least five roles behind one card payment. Understanding this relationship map is the prerequisite for understanding the payments business model.</p>
+
+<div class="card">
+  <div class="card-title">Complete card-payment chain, step by step</div>
+  <p class="prose">Example: a customer buys a $100 product on a Shopify independent store with a Visa credit card.</p>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><strong>The user enters card number / CVV and clicks Pay.</strong> The browser sends encrypted card data to the gateway.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><strong>The gateway performs tokenization.</strong> It replaces the real card number with a token and routes the authorization request to the acquirer. It is a data pipe and does not touch funds.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><strong>The acquirer routes through the Visa network.</strong> The authorization request goes to the issuer through Visa's IP network, not SWIFT.</div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><strong>The issuer verifies the card.</strong> It checks balance, CVV, and fraud models, then freezes a $100 authorization hold. This is not a final debit. It takes about 1-3 seconds.</div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><strong>The authorization code returns along the same route.</strong> The user sees payment success, but funds are only reserved.</div></div>
+  <div class="step"><div class="step-num">6</div><div class="step-body"><strong>Capture:</strong> after fulfillment, the merchant formally submits the charge. If canceled before this point, the merchant sends a void.</div></div>
+  <div class="step"><div class="step-num">7</div><div class="step-body"><strong>Clearing:</strong> that night, Visa aggregates captures and nets what banks owe each other.</div></div>
+  <div class="step"><div class="step-num green">8</div><div class="step-body"><strong>Settlement T+2:</strong> the issuer transfers net funds to the acquirer. After MDR, the merchant receives about $97-$98.</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Fee structure: <span class="abbr">MDR = IC + Scheme fee + Markup</span></div>
+  <div class="case-box teal"><div class="case-label teal">Core formula</div>MDR (Merchant Discount Rate) = IC (Interchange Fee) + Scheme fee + Acquirer Markup.<br><br><strong>Markup:</strong> the acquirer charges a margin above IC and scheme fees to cover operations, chargeback reserve, and sales commission.</div>
+  <div class="grid2">
+    <div class="grid-card"><div class="label">Blended Rate</div><div class="body">A packaged price such as Stripe 2.9% + $0.30. It is easy to understand, but actual cost varies by card type.</div></div>
+    <div class="grid-card"><div class="label">IC++</div><div class="body">Actual interchange + scheme fees + a fixed markup. It is transparent and usually better for high-volume merchants.</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Security and authentication</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">Tokenization</div><div class="term-en">Card number -> random token</div><div class="term-zh">Merchants store tokens rather than raw PAN. Apple Pay and Google Pay are built on this logic.</div></div>
+    <div class="term-item"><div class="term-abbr">3DS2</div><div class="term-en">3-D Secure 2.0</div><div class="term-zh">Low-risk transactions pass frictionlessly; high-risk ones trigger SMS, app, or biometric challenge.</div></div>
+    <div class="term-item"><div class="term-abbr">SCA</div><div class="term-en">Strong Customer Authentication</div><div class="term-zh">PSD2 requires two factors from knowledge, possession, and inherence.</div></div>
+    <div class="term-item"><div class="term-abbr">BIN / IIN</div><div class="term-en">Issuer identification number</div><div class="term-zh">The first 6-8 digits identify issuer, card type, tier, and country.</div></div>
+    <div class="term-item"><div class="term-abbr">AVS</div><div class="term-en">Address Verification System</div><div class="term-zh">Checks billing address against issuer records. Common in US e-commerce.</div></div>
+    <div class="term-item"><div class="term-abbr">CVV / CVC</div><div class="term-en">Card security code</div><div class="term-zh">The three digits on the back of a card, or four digits on the front of Amex.</div></div>
+    <div class="term-item"><div class="term-abbr">PCI DSS</div><div class="term-en">Payment Card Industry Data Security Standard</div><div class="term-zh">Mandatory security standard for systems that touch cardholder data.</div></div>
+  </div>
+  <div class="case-box red"><div class="case-label red">Chargeback flow</div>Cardholder complaint -> issuer freezes dispute -> acquirer notifies merchant -> merchant submits evidence within about 30 days -> scheme arbitration -> funds pulled back plus fees. If CBR exceeds 1%, card networks warn the merchant; above 2%, merchant eligibility can be terminated. RDR can refund before escalation so CBR does not rise.</div>
+</div>
+</div>
+
+<!-- Trade Payments -->
+<div id="sec-trade" class="section">
+<h2 class="section-title">Trade Payments</h2>
+<p class="section-desc">Payment tools in international trade. Each tool is a different allocation of risk between buyer, seller, and bank.</p>
+
+<div class="card">
+  <div class="card-title">LC / D/P / D/A comparison</div>
+  <table class="tbl"><tbody><tr><th>Tool</th><th>Full name</th><th>Payment timing</th><th>Risk owner</th><th>Best fit</th></tr><tr><td><span class="badge badge-blue">LC</span></td><td>Letter of Credit</td><td>Bank pays when documents match</td><td>Bank guarantee, lowest risk</td><td>Large first deal where buyer credit is unknown</td></tr><tr><td><span class="badge badge-teal">D/P</span></td><td>Documents against Payment</td><td>Buyer pays before receiving documents</td><td>Seller is relatively protected</td><td>Medium trust; seller wants faster cash recovery</td></tr><tr><td><span class="badge badge-amber">D/A</span></td><td>Documents against Acceptance</td><td>Buyer accepts a bill, takes documents, pays later</td><td>Seller takes buyer credit risk</td><td>Powerful buyer or long-term relationship</td></tr></tbody></table>
+  <div class="case-box amber"><div class="case-label amber">Why choose D/A?</div>D/A means the seller trades balance-sheet risk for market access. Buyers may demand D/A when they are large customers, goods are durable industrial products, FX controls require goods before payment, or long relationships rely on credit terms. D/A is a commercial strategy, not simply a fallback from D/P.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Complete LC process, 7 steps</div>
+  <div class="case-box teal"><div class="case-label teal">Key point: LC must be opened before shipment</div>The bank guarantees payment first, then the factory ships. It is not something requested after goods have shipped.</div>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Buyer and seller sign a contract</strong> and agree to settle by LC.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><strong>The buyer asks the issuing bank to open an LC.</strong> The bank reviews buyer credit and issues the LC.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><strong>The issuing bank sends the LC to the advising bank.</strong> The advising bank notifies the factory that the LC is in place.</div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><strong>The factory ships goods and obtains documents</strong> such as bill of lading, packing list, and invoice. It may also finance against the LC.</div></div>
+  <div class="step"><div class="step-num">5</div><div class="step-body"><strong>The factory submits documents to the advising bank</strong> for review against LC terms.</div></div>
+  <div class="step"><div class="step-num">6</div><div class="step-body"><strong>The advising bank claims from the issuing bank.</strong> The issuing bank pays if documents comply.</div></div>
+  <div class="step"><div class="step-num green">7</div><div class="step-body"><strong>The buyer reimburses the issuing bank</strong> and uses the documents to take delivery.</div></div>
+  <div class="case-box"><div class="case-label">Crypto RWA direction</div>If LC moves on-chain, a smart contract can arbitrate. Customs API data such as "goods cleared" can trigger automatic USDC release with T+0 settlement.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Additional trade terms</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">Beneficiary</div><div class="term-en">Payee</div><div class="term-zh">The final receiver of funds. In LC context, usually the exporter or seller.</div></div>
+    <div class="term-item"><div class="term-abbr">Remitter</div><div class="term-en">Sender</div><div class="term-zh">The sender of funds. Remitter data is core to AML screening in SWIFT messages.</div></div>
+    <div class="term-item"><div class="term-abbr">Escrow</div><div class="term-en">Third-party custody</div><div class="term-zh">Funds are held by a neutral party and released when contract conditions are met.</div></div>
+    <div class="term-item"><div class="term-abbr">Remittance</div><div class="term-en">Cross-border personal transfer</div><div class="term-zh">Often used for migrant worker transfers. Wise and Western Union focus on this market.</div></div>
+  </div>
+</div>
+</div>
+
+<!-- FX -->
+<div id="sec-fx" class="section">
+<h2 class="section-title">FX & Cross-Border</h2>
+<p class="section-desc">Understanding FX cost is central to cross-border payments. Many "zero fee" products hide profit inside the exchange-rate spread.</p>
+
+<div class="card">
+  <div class="card-title">Mid-market Rate vs Spread: who has pricing power?</div>
+  <div class="case-box teal"><div class="case-label teal">Core formula</div>User exchange rate = Mid-market Rate +/- Spread<br>Institutional profit = Spread x FX amount</div>
+  <div class="step"><div class="step-num amber">1</div><div class="step-body"><strong>Traditional banks (0.5%-3%):</strong> Nostro account management and hedging cost matter, but the real reason is information opacity. Users do not know the true mid-market rate.</div></div>
+  <div class="step"><div class="step-num amber">2</div><div class="step-body"><strong>Wise / Airwallex (0.2%-0.6%):</strong> local matching lowers cost by maintaining local accounts and minimizing true cross-border fund movement.</div></div>
+  <div class="step"><div class="step-num amber">3</div><div class="step-body"><strong>CEX (0.1%-0.5%):</strong> deep order books and market makers reduce matching cost. Large OTC trades can negotiate lower spreads.</div></div>
+  <div class="step"><div class="step-num green">4</div><div class="step-body"><strong>Stablecoins (near zero):</strong> cross-border "FX" becomes receiving USDC and off-ramping locally. If off-ramp markets are competitive, total cost can approach zero.</div></div>
+  <p class="prose"><strong>Source of pricing power:</strong> liquidity scale, information transparency, local fund matching, and regulatory compliance cost.</p>
+</div>
+
+<div class="card">
+  <div class="card-title">Virtual Account / Multi-currency / SAFE</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">Virtual Account</div><div class="term-en">Sub-account under a bank master account</div><div class="term-zh">Each customer receives a local-looking account number; funds auto-reconcile into the master account. Crypto analogy: unique deposit addresses.</div></div>
+    <div class="term-item"><div class="term-abbr">Multi-currency</div><div class="term-en">One account with multiple currency balances</div><div class="term-zh">Balances can be held and converted internally. Crypto analogy: a CEX account holding BTC, ETH, and USDC.</div></div>
+    <div class="term-item"><div class="term-abbr">SAFE</div><div class="term-en">State Administration of Foreign Exchange</div><div class="term-zh">China's foreign-exchange regulator. SAFE compliance is the first gate for foreign companies collecting in China.</div></div>
+  </div>
+</div>
+</div>
+
+<!-- Crypto Payments -->
+<div id="sec-crypto" class="section">
+<h2 class="section-title">Crypto Payments</h2>
+<p class="section-desc">This is familiar territory for crypto operators, but payment context reveals different dimensions of the same terms.</p>
+
+<div class="card">
+  <div class="card-title">On-ramp & Off-ramp and related licenses</div>
+  <div class="grid2">
+    <div class="grid-card"><div class="label">On-ramp: fiat -> crypto</div><div class="body">Buying USDC by card or bank transfer. Providers must handle payment routing, fraud, FX, and MDR cost.</div></div>
+    <div class="grid-card"><div class="label">Off-ramp: crypto -> fiat</div><div class="body">A merchant receives USDC and converts it to local currency. This requires local bank accounts, KYC, AML, and clearing access.</div></div>
+  </div>
+  <div class="case-box red"><div class="case-label red">Why does off-ramp require a license?</div>Off-ramp legally performs accepting crypto, exchanging it into fiat, and transferring fiat to a user account. That triggers MSB/MTL in the US, EMI/PI in Europe, or VASP rules in many jurisdictions.</div>
+  <table class="tbl"><tbody><tr><th>License</th><th>Full name</th><th>Jurisdiction</th><th>Difficulty</th><th>Timeline</th></tr><tr><td><span class="badge badge-blue">MTL</span></td><td>Money Transmitter License</td><td>US states</td><td>Very hard</td><td>2-3 years, state by state</td></tr><tr><td><span class="badge badge-blue">MSB</span></td><td>Money Services Business</td><td>US FinCEN</td><td>Relatively easy</td><td>14-day registration; still needs MTL</td></tr><tr><td><span class="badge badge-amber">VASP</span></td><td>Virtual Asset Service Provider</td><td>FATF framework</td><td>Medium</td><td>3-12 months</td></tr><tr><td><span class="badge badge-teal">MPI+DPT</span></td><td>Major Payment Institution + Digital Payment Token</td><td>Singapore MAS</td><td>Medium-high</td><td>12-18 months</td></tr><tr><td><span class="badge badge-pink">VATP</span></td><td>Virtual Asset Trading Platform</td><td>Hong Kong SFC</td><td>High</td><td>12-24 months</td></tr><tr><td><span class="badge badge-blue">EMI</span></td><td>Electronic Money Institution</td><td>EU central banks</td><td>Medium</td><td>6-18 months</td></tr></tbody></table>
+</div>
+
+<div class="card">
+  <div class="card-title">Omnibus Wallet implementation logic</div>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><strong>On-chain structure:</strong> the platform holds all user funds in one main address.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Off-chain ledger:</strong> the internal database records user balances. Internal transfers update the database and cost zero gas.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Deposit recognition:</strong> each user receives a unique deposit address, then funds are swept to the omnibus address.</div></div>
+  <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Withdrawal:</strong> the platform sends an on-chain transaction from the omnibus wallet and deducts the internal balance.</div></div>
+  <div class="step"><div class="step-num red">!</div><div class="step-body"><strong>Regulatory risk:</strong> MiCA and Hong Kong VATP emphasize client-asset segregation. Moving from omnibus to per-user addresses can multiply gas cost.</div></div>
+  <div class="case-box"><div class="case-label">Cost comparison</div>For one million users with ten transfers each: omnibus may need about one million on-chain operations, while per-user addresses may need ten million. On Ethereum mainnet, the cost gap can be 10-100x.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Travel Rule</div>
+  <p class="prose">FATF requires that when VASPs transfer above a threshold, usually around $1,000 in many countries, the sending VASP passes identity information to the receiving VASP. The challenge: on-chain transfers are address-to-address and do not naturally carry identity data.</p>
+  <table class="tbl"><tbody><tr><th>Protocol</th><th>Implementation logic</th><th>Main users</th></tr><tr><td>Notabene</td><td>VASP directory plus encrypted API; identity package is shared off-chain before broadcast.</td><td>Kraken, Bitfinex</td></tr><tr><td>Sygna Bridge</td><td>IVMS101 standard format and white-label SDK, strong APAC coverage.</td><td>APAC VASPs</td></tr><tr><td>OpenVASP</td><td>Open protocol using Ethereum ENS addressing and P2P connectivity.</td><td>European projects</td></tr><tr><td>VerifyVASP</td><td>Korea-led network integrated with Korean, Japanese, and Singaporean exchanges.</td><td>Upbit, Bithumb</td></tr></tbody></table>
+</div>
+
+<div class="card">
+  <div class="card-title">Crypto terms quick reference</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">OTC</div><div class="term-en">Over The Counter</div><div class="term-zh">Large bilateral trades outside exchanges, often above $100k, without moving public order books.</div></div>
+    <div class="term-item"><div class="term-abbr">DEX / CEX</div><div class="term-en">Decentralized / Centralized exchange</div><div class="term-zh">DEX uses on-chain AMM and no custody; CEX requires KYC, custody, and regulation.</div></div>
+    <div class="term-item"><div class="term-abbr">MPC</div><div class="term-en">Multi-Party Computation</div><div class="term-zh">Private-key shares are split among parties and sign jointly. Preferred for institutional wallets.</div></div>
+    <div class="term-item"><div class="term-abbr">TVL</div><div class="term-en">Total Value Locked</div><div class="term-zh">Total assets locked in a DeFi protocol. In payments, high TVL means stronger settlement capacity.</div></div>
+    <div class="term-item"><div class="term-abbr">RWA</div><div class="term-en">Real World Assets</div><div class="term-zh">Tokenized traditional assets such as treasuries or letters of credit.</div></div>
+    <div class="term-item"><div class="term-abbr">Bridge / Gas</div><div class="term-en">Cross-chain bridge / network fee</div><div class="term-zh">Bridge moves assets across chains; gas cost determines small-payment feasibility.</div></div>
+    <div class="term-item"><div class="term-abbr">Mint / Burn</div><div class="term-en">Stablecoin issuance and redemption</div><div class="term-zh">$1 deposited -> 1 USDC minted; redemption burns 1 USDC and returns $1.</div></div>
+  </div>
+</div>
+</div>
+
+<!-- Crypto Cards -->
+<div id="sec-ucard" class="section">
+<h2 class="section-title">Crypto Cards</h2>
+<p class="section-desc">A product that inserts crypto assets into the traditional card-payment shell. The technology is mature; the bottleneck is compliance.</p>
+
+<div class="card">
+  <div class="card-title">Essence and swipe moment, within roughly 200ms</div>
+  <p class="prose">A crypto card is a real-time off-ramp plus card-network product. The user holds crypto assets, while the merchant sees an ordinary Visa or Mastercard payment.</p>
+  <div class="step"><div class="step-num">1</div><div class="step-body">The user spends $5 at Starbucks. The POS sends an authorization request through Visa to the crypto card issuer.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body">The issuer system immediately deducts equivalent USDC or BTC from the user's crypto account.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body">The internal off-ramp engine converts USDC to USD and books it into the custodial fiat account.</div></div>
+  <div class="step"><div class="step-num green">4</div><div class="step-body">The issuer returns approval to Visa. Starbucks receives a normal USD card payment and never sees crypto.</div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">Pre-conversion vs real-time conversion</div>
+  <div class="grid2">
+    <div class="grid-card"><div class="label">Pre-conversion model</div><div class="body">Crypto is converted to fiat at top-up and stored in a custodial account.<br><br><strong>Pros:</strong> fixed FX and simple UX.<br><strong>Cons:</strong> user gives up upside while holding fiat.<br><br><strong>Example:</strong> Crypto.com Card.</div></div>
+    <div class="grid-card"><div class="label">Real-time conversion model</div><div class="body">Assets remain crypto until the spend moment.<br><br><strong>Pros:</strong> flexible exposure.<br><strong>Cons:</strong> slippage and high technical complexity within 200ms.<br><br><strong>Example:</strong> Wirex Card.</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Three-layer compliance architecture</div>
+  <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Card-network access through BIN sponsor:</strong> Visa/MC usually work through a licensed bank or EMI. Compliance responsibility ultimately sits with the sponsor bank.</div></div>
+  <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Off-ramp license:</strong> real-time exchange plus remittance requires MSB/MTL in the US, EMI/PI in Europe, or equivalent VASP permissions.</div></div>
+  <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Dual KYC/AML and tax risk:</strong> one KYC journey must satisfy both card/bank rules and VASP rules. Each crypto-to-fiat spend may be a taxable event in some jurisdictions.</div></div>
+  <div class="case-box amber"><div class="case-label amber">Core bottleneck</div>The hard parts are BIN sponsor banking relationships, license acquisition time and cost, continuous on-chain AML monitoring, and jurisdiction-specific tax treatment.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Main crypto card project license paths</div>
+  <table class="tbl"><tbody><tr><th>Project</th><th>BIN sponsor</th><th>Core licenses</th><th>Market coverage</th></tr><tr><td>Crypto.com Visa</td><td>Sutton Bank in the US</td><td>Lithuania EMI, Singapore MPI</td><td>US, EU, Singapore, Australia</td></tr><tr><td>Wirex</td><td>Partner licensed banks</td><td>UK FCA EMI, EU passporting</td><td>UK, EU, some US states</td></tr><tr><td>Binance Card</td><td>Moorwand licensed EMI</td><td>Europe through BIN sponsor; US restricted</td><td>Mainly Europe</td></tr><tr><td>Coinbase Card</td><td>Sutton Bank in the US</td><td>BitLicense, state MTLs</td><td>US, UK</td></tr></tbody></table>
+</div>
+</div>
+
+<!-- Compliance -->
+<div id="sec-comp" class="section">
+<h2 class="section-title">Compliance</h2>
+<p class="section-desc">These acronyms are familiar to crypto operators, but payments context adds important differences.</p>
+
+<div class="card">
+  <div class="card-title">KYC / KYB / KYT three-layer verification system</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">KYC</div><div class="term-en">Know Your Customer</div><div class="term-zh">Personal verification: passport, selfie, address proof. Higher tiers require stronger checks.</div></div>
+    <div class="term-item"><div class="term-abbr">KYB</div><div class="term-en">Know Your Business</div><div class="term-zh">Company verification: registration, UBO look-through, bank statement, sanctions checks.</div></div>
+    <div class="term-item"><div class="term-abbr">KYT</div><div class="term-en">Know Your Transaction</div><div class="term-zh">Real-time transaction monitoring using tools such as Chainalysis or Elliptic.</div></div>
+    <div class="term-item"><div class="term-abbr">CDD / EDD</div><div class="term-en">Due diligence levels</div><div class="term-zh">CDD is standard review; EDD is deeper review for PEPs, high-risk countries, or large values.</div></div>
+    <div class="term-item"><div class="term-abbr">PEP</div><div class="term-en">Politically Exposed Person</div><div class="term-zh">Important public officials and close associates. Often triggers EDD or rejection.</div></div>
+    <div class="term-item"><div class="term-abbr">UBO</div><div class="term-en">Ultimate Beneficial Owner</div><div class="term-zh">Natural person who controls the company or owns 25%+ equity.</div></div>
+    <div class="term-item"><div class="term-abbr">SOF / SOW</div><div class="term-en">Source of Funds / Wealth</div><div class="term-zh">SOF asks where this money came from; SOW asks how the total wealth was built.</div></div>
+    <div class="term-item"><div class="term-abbr">AML / CTF</div><div class="term-en">Anti-Money Laundering / Counter-Terrorism Financing</div><div class="term-zh">The core compliance operating obligation for payment institutions.</div></div>
+    <div class="term-item"><div class="term-abbr">STR / SAR</div><div class="term-en">Suspicious Transaction / Activity Report</div><div class="term-zh">Suspicious activity is reported to regulators, and customers cannot be tipped off.</div></div>
+    <div class="term-item"><div class="term-abbr">FATF</div><div class="term-en">Financial Action Task Force</div><div class="term-zh">Global AML/CFT standard setter; grey-listing creates financial isolation pressure.</div></div>
+    <div class="term-item"><div class="term-abbr">Sanctions screening</div><div class="term-en">OFAC / EU / UN list screening</div><div class="term-zh">Checks whether counterparties or addresses appear on sanctions lists.</div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-title">Major regulators</div>
+  <table class="tbl"><tbody><tr><th>Agency</th><th>Full name</th><th>Jurisdiction</th><th>Role</th></tr><tr><td><span class="badge badge-blue">FinCEN</span></td><td>Financial Crimes Enforcement Network</td><td>US</td><td>MSB registration, SAR collection, AML oversight</td></tr><tr><td><span class="badge badge-blue">OFAC</span></td><td>Office of Foreign Assets Control</td><td>US</td><td>SDN sanctions list and economic sanctions enforcement</td></tr><tr><td><span class="badge badge-teal">MAS</span></td><td>Monetary Authority of Singapore</td><td>Singapore</td><td>Central bank and financial regulator; MPI/DPT licenses</td></tr><tr><td><span class="badge badge-pink">SFC</span></td><td>Securities and Futures Commission</td><td>Hong Kong</td><td>VATP license and securities/futures supervision</td></tr><tr><td><span class="badge badge-pink">HKMA</span></td><td>Hong Kong Monetary Authority</td><td>Hong Kong</td><td>Banking, SVF license, stablecoin issuance</td></tr><tr><td><span class="badge badge-gray">SAFE</span></td><td>State Administration of Foreign Exchange</td><td>China</td><td>FX control and cross-border RMB settlement</td></tr></tbody></table>
+</div>
+</div>
+
+<!-- License Map -->
+<div id="sec-lic" class="section">
+<h2 class="section-title">License Map</h2>
+<p class="section-desc">Different markets require different licenses for payment operations. Use the map and tables to understand regional license stacks.</p>
+
+<div class="card">
+  <div class="map-legend"><div class="map-leg" data-region="americas" style="color:#2E6DA4"><span style="background:#2E6DA4"></span>US / Canada</div><div class="map-leg" data-region="latam" style="color:#5C4BB0"><span style="background:#5C4BB0"></span>Latin America</div><div class="map-leg" data-region="europe" style="color:#0E7C6B"><span style="background:#0E7C6B"></span>Europe</div><div class="map-leg" data-region="apac" style="color:#A6396A"><span style="background:#A6396A"></span>APAC</div><div class="map-leg" data-region="me" style="color:#8C5A11"><span style="background:#8C5A11"></span>Middle East</div><div class="map-leg" data-region="africa" style="color:#047857"><span style="background:#047857"></span>Africa</div></div>
+  <div class="map-container" style="background:var(--bg2);border-radius:8px;padding:14px;overflow:hidden">
+    <div id="loading-map" style="text-align:center;color:var(--text3);padding:60px 0;font-size:12px">Loading license map...</div>
+    <svg id="world-map" viewBox="0 0 960 500" role="img" aria-label="World payment license map" style="display:none;width:100%;height:auto"></svg>
+  </div>
+  <div class="map-tip"><div id="map-tip-title">Click a country or legend area to review regional license details</div><div id="map-tip-items"></div></div>
+</div>
+
+<div class="card">
+  <div class="card-title">License quick tables</div>
+  <h4>Americas</h4><table class="tbl"><tbody><tr><th>License</th><th>Full name</th><th>Authority</th><th>Key point</th></tr><tr><td>MTL</td><td>Money Transmitter License</td><td>US states</td><td>48 states + DC, 2-3 years, multi-million cost</td></tr><tr><td>MSB</td><td>Money Services Business</td><td>FinCEN</td><td>14-day registration, still requires state MTL</td></tr><tr><td>BitLicense</td><td>-</td><td>NYDFS</td><td>Strictest US crypto license, 2-3 year approval</td></tr><tr><td>Brazil PSP</td><td>Payment Service Provider</td><td>BCB</td><td>Open banking and Pix real-time payments</td></tr><tr><td>Mexico PSSP</td><td>Payment Service Provider / Institution</td><td>CNBV</td><td>2018 Fintech Law framework</td></tr></tbody></table>
+  <h4>Europe</h4><table class="tbl"><tbody><tr><th>License</th><th>Full name</th><th>Authority</th><th>Key point</th></tr><tr><td>EMI</td><td>Electronic Money Institution</td><td>National central banks / EBA</td><td>Passport to 27 EU states, EUR350k capital</td></tr><tr><td>PI</td><td>Payment Institution</td><td>National central banks</td><td>Payment services only, EUR125k capital</td></tr><tr><td>AISP/PISP</td><td>Account / Payment Initiation Service Provider</td><td>PSD2</td><td>Lowest threshold for account info and payment initiation</td></tr><tr><td>MiCA CASP</td><td>Crypto-Asset Service Provider</td><td>EU MiCA</td><td>Unified EU crypto regulation with passporting</td></tr></tbody></table>
+  <h4>APAC</h4><table class="tbl"><tbody><tr><th>License</th><th>Full name</th><th>Authority</th><th>Key point</th></tr><tr><td>MPI+DPT</td><td>Major Payment Institution + Digital Payment Token</td><td>Singapore MAS</td><td>No payment-volume cap; Asian benchmark</td></tr><tr><td>VATP</td><td>Virtual Asset Trading Platform</td><td>Hong Kong SFC</td><td>Effective June 2023; HK$5M capital</td></tr><tr><td>SVF</td><td>Stored Value Facility</td><td>Hong Kong HKMA</td><td>Octopus / Alipay HK license type; stablecoin prerequisite</td></tr><tr><td>SEA PSP</td><td>Payment Service Provider</td><td>Local central banks</td><td>Indonesia OJK, Philippines BSP, Thailand BOT; often foreign ownership limits</td></tr></tbody></table>
+  <h4>Middle East & Africa</h4><table class="tbl"><tbody><tr><th>License</th><th>Full name</th><th>Authority</th><th>Key point</th></tr><tr><td>Dubai VASP</td><td>Virtual Asset Service Provider License</td><td>VARA</td><td>Founded in 2022, relatively friendly approval</td></tr><tr><td>ADGM FSRA</td><td>Financial Services Regulatory Authority</td><td>ADGM</td><td>Institutional business and Web3 funds</td></tr><tr><td>Nigeria PSO</td><td>Payment Service Operator</td><td>CBN</td><td>Core market for Flutterwave and Paystack</td></tr><tr><td>Kenya PSP</td><td>Payment Service Provider</td><td>CBK</td><td>M-Pesa birthplace and advanced mobile payments</td></tr></tbody></table>
+</div>
+</div>
+
+<!-- Stablecoin Licenses -->
+<div id="sec-stable" class="section">
+<h2 class="section-title">Stablecoin Project Licenses</h2>
+<p class="section-desc">Licenses are the core compliance moat for stablecoin payment projects. More jurisdictions mean broader market access.</p>
+<div class="card">
+  <table class="tbl"><tbody><tr><th>Project</th><th>Core licenses</th><th>Key timeline</th><th>Core edge</th></tr><tr><td>Circle (USDC)</td><td>US state MTLs, MSB, France ACPR EMI, Singapore MPI</td><td>MTLs 2015-2021; EU EMI 2023</td><td>Most compliance-forward USDC issuer with treasury reserves and monthly attestations</td></tr><tr><td>Tether (USDT)</td><td>El Salvador digital asset service provider; avoids US MSB posture</td><td>El Salvador 2024</td><td>Deepest liquidity, but reserve-transparency concerns remain</td></tr><tr><td>Stripe / Bridge</td><td>US MSB + MTL stack, Ireland EMI, Bridge MTLs</td><td>EU EMI 2022</td><td>Strongest distribution through Stripe's merchant ecosystem</td></tr><tr><td>Ripple (RLUSD)</td><td>NYDFS BitLicense, Singapore MPI, UAE ADGM FSRA, UK FCA</td><td>BitLicense Dec 2023</td><td>Institutional signal from NYDFS and XRP clearing network</td></tr><tr><td>PayPal (PYUSD)</td><td>NYDFS BitLicense plus PayPal US MTL stack</td><td>BitLicense Aug 2023</td><td>400M user base and large financial institution trust</td></tr><tr><td>Paxos</td><td>NYDFS BitLicense and trust charter, Singapore MPI, UAE ADGM</td><td>BitLicense 2015</td><td>Earliest BitLicense; shifted toward institutional white-label business</td></tr><tr><td>Coinbase</td><td>BitLicense, state MTLs + MSB, Singapore MPI + DPT</td><td>BitLicense 2017</td><td>Circle partner and listed-company institutional entry point</td></tr><tr><td>Alchemy Pay</td><td>US MSB, Lithuania EMI, Canada FINTRAC MSB, Australia AUSTRAC</td><td>Lithuania EMI 2023</td><td>Focused on on/off-ramp with fiat rails across 200+ countries</td></tr></tbody></table>
+  <div class="case-box"><div class="case-label">License competitiveness</div><strong>Full US MTL coverage ($10M+ cost)</strong> creates a high barrier. <strong>EU EMI</strong> passports to 27 countries and is highly cost-effective. <strong>NYDFS BitLicense</strong> is globally strict and trusted by institutions. <strong>MAS MPI + DPT</strong> is the Asian benchmark and a signal for Hong Kong and Japan.</div>
+</div>
+</div>
+
+<!-- Roles -->
+<div id="sec-roles" class="section">
+<h2 class="section-title">Institutional Role Map</h2>
+<p class="section-desc">At least five roles participate behind one card transaction, each with a clear profit model and risk boundary.</p>
+<div class="card">
+  <div class="card-title">Hierarchy diagram</div>
+  <p class="prose"><strong>Main role path:</strong> solid lines show the core card-payment path; dashed lines show ISO sales and processor support relationships.</p>
+  <div class="diagram"><svg viewBox="0 0 760 500" role="img" aria-label="Institution role hierarchy" style="width:100%;height:auto">
+    <defs><marker id="arrow-role-en" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5"></path></marker></defs>
+    <rect width="760" height="500" fill="#F2F8F5"></rect>
+    <g fill="none" stroke="#0E7C6B" stroke-width="1.5" marker-end="url(#arrow-role-en)">
+      <path d="M380 84V118"></path>
+      <path d="M380 178V214"></path>
+      <path d="M380 178C305 190 222 205 174 234"></path>
+      <path d="M380 178C455 190 538 205 586 234"></path>
+      <path d="M174 292C230 322 300 342 380 354"></path>
+      <path d="M380 292V350"></path>
+      <path d="M586 292C530 322 460 342 380 354"></path>
+      <path d="M380 414V446"></path>
+    </g>
+    <g fill="none" stroke="#B0C4BB" stroke-width="1.4" stroke-dasharray="5 5" marker-end="url(#arrow-role-en)">
+      <path d="M174 292V354"></path>
+      <path d="M586 292V354"></path>
+    </g>
+    <g font-family="Inter, sans-serif" text-anchor="middle">
+      <rect x="300" y="30" width="160" height="54" rx="8" fill="#F9E8F0" stroke="#A6396A"></rect>
+      <text x="380" y="63" fill="#A6396A" font-size="16" font-weight="700">Cardholder</text>
+      <rect x="260" y="118" width="240" height="60" rx="8" fill="#F8EFDB" stroke="#8C5A11"></rect>
+      <text x="380" y="143" fill="#8C5A11" font-size="16" font-weight="700">Gateway</text>
+      <text x="380" y="164" fill="#8C5A11" font-size="12">encrypt · tokenize · route</text>
+      <rect x="72" y="234" width="204" height="58" rx="8" fill="#E0F2EE" stroke="#0E7C6B"></rect>
+      <text x="174" y="258" fill="#0E7C6B" font-size="15" font-weight="700">PSP / PayFac</text>
+      <text x="174" y="278" fill="#0E7C6B" font-size="11">payment service · submerchant</text>
+      <rect x="278" y="234" width="204" height="58" rx="8" fill="#E0F2EE" stroke="#0E7C6B"></rect>
+      <text x="380" y="258" fill="#0E7C6B" font-size="15" font-weight="700">MoR</text>
+      <text x="380" y="278" fill="#0E7C6B" font-size="11">tax · refund · compliance</text>
+      <rect x="484" y="234" width="204" height="58" rx="8" fill="#E0F2EE" stroke="#0E7C6B"></rect>
+      <text x="586" y="258" fill="#0E7C6B" font-size="15" font-weight="700">Acquirer</text>
+      <text x="586" y="278" fill="#0E7C6B" font-size="11">merchant contract · settlement</text>
+      <rect x="260" y="354" width="240" height="60" rx="8" fill="#ECE9F8" stroke="#5C4BB0"></rect>
+      <text x="380" y="379" fill="#5C4BB0" font-size="16" font-weight="700">Scheme / Network</text>
+      <text x="380" y="400" fill="#5C4BB0" font-size="12">Visa · Mastercard · UnionPay · Amex</text>
+      <rect x="260" y="446" width="240" height="42" rx="8" fill="#ECE9F8" stroke="#5C4BB0"></rect>
+      <text x="380" y="472" fill="#5C4BB0" font-size="16" font-weight="700">Issuer</text>
+      <rect x="72" y="360" width="150" height="48" rx="8" fill="#ECF1EE" stroke="#B0C4BB"></rect>
+      <text x="147" y="380" fill="#5C6B64" font-size="13" font-weight="700">ISO</text>
+      <text x="147" y="397" fill="#5C6B64" font-size="10">sales partner</text>
+      <rect x="538" y="360" width="150" height="48" rx="8" fill="#ECF1EE" stroke="#B0C4BB"></rect>
+      <text x="613" y="380" fill="#5C6B64" font-size="13" font-weight="700">Processor</text>
+      <text x="613" y="397" fill="#5C6B64" font-size="10">technical operator</text>
+    </g>
+  </svg></div>
+  <p class="prose"><strong>Issuer earns interchange; Scheme earns network fees; Acquirer / PSP earns markup.</strong></p>
+</div>
+<div class="card">
+  <div class="card-title">Complete role descriptions</div>
+  <div class="term-grid">
+    <div class="term-item"><div class="term-abbr">Cardholder</div><div class="term-en">Payment initiator</div><div class="term-zh">Can initiate chargeback through issuer; comparable to a private-key holder, but with bank protection.</div></div>
+    <div class="term-item"><div class="term-abbr">Gateway</div><div class="term-en">Data pipe</div><div class="term-zh">Encrypts card data, tokenizes, and routes authorization requests. It does not touch funds.</div></div>
+    <div class="term-item"><div class="term-abbr">PSP / PayFac</div><div class="term-en">One-stop payment access</div><div class="term-zh">Combines gateway and acquiring access. PayFac can onboard submerchants quickly and takes more risk.</div></div>
+    <div class="term-item"><div class="term-abbr">MoR</div><div class="term-en">Merchant of Record</div><div class="term-zh">The legal seller responsible for tax, refunds, and PCI obligations. Examples: Paddle, FastSpring.</div></div>
+    <div class="term-item"><div class="term-abbr">Acquirer</div><div class="term-en">Acquiring bank</div><div class="term-zh">Signs the merchant agreement, submits auth, joins clearing, and settles to merchant.</div></div>
+    <div class="term-item"><div class="term-abbr">Scheme</div><div class="term-en">Card network</div><div class="term-zh">Sets rules, routes authorization, calculates clearing net positions, and manages brand trust.</div></div>
+    <div class="term-item"><div class="term-abbr">Issuer</div><div class="term-en">Issuing bank</div><div class="term-zh">Issues cards, approves authorization, owns cardholder relationship, and earns interchange.</div></div>
+    <div class="term-item"><div class="term-abbr">ISO</div><div class="term-en">Independent Sales Organization</div><div class="term-zh">Sells merchant accounts for acquirers and earns residual revenue without taking fund risk.</div></div>
+    <div class="term-item"><div class="term-abbr">Processor</div><div class="term-en">Technical processing operator</div><div class="term-zh">Handles authorization, clearing files, settlement files, and reporting.</div></div>
+    <div class="term-item"><div class="term-abbr">VASP</div><div class="term-en">Virtual Asset Service Provider</div><div class="term-zh">CEX, OTC desk, custodian, or stablecoin payment provider under FATF framework.</div></div>
+    <div class="term-item"><div class="term-abbr">POS / mPOS</div><div class="term-en">Point of Sale / Mobile POS</div><div class="term-zh">Physical terminal, phone reader, or SoftPOS accepting NFC or card-present payments.</div></div>
+  </div>
+  <div class="case-box"><div class="case-label">Fee ownership summary</div>Every card payment's MDR splits into interchange for the issuer, scheme fee for the network, and markup for the acquirer / PSP. The merchant pays all MDR, and consumers usually experience it only through product pricing.</div>
+</div>
+</div>
+
+<!-- Transaction Lifecycle -->
+<div id="sec-txlife" class="section">
+<h2 class="section-title">Transaction Lifecycle</h2>
+<p class="section-desc">From authorization to settlement, each phase happens at a different point in time, and processing cost plus reversal difficulty increases along the path.</p>
+<div class="card"><div class="card-title">Overview</div><div class="chain"><div class="chain-node cn-gray">Auth</div><div class="chain-arrow">-></div><div class="chain-node cn-blue">Capture</div><div class="chain-arrow">-></div><div class="chain-node cn-blue">Clearing</div><div class="chain-arrow">-></div><div class="chain-node cn-teal">Settlement</div><div class="chain-arrow"><-></div><div class="chain-node cn-amber">Void</div><div class="chain-arrow">or</div><div class="chain-node cn-red">Refund</div></div></div>
+<div class="card"><div class="card-title"><span class="abbr">Auth</span> — Authorization</div><p class="prose">The issuer verifies that the account can pay and reserves a hold. It is not a real debit. Validity is often seven days.</p><hr class="div"><div class="card-title" style="margin-top:0">Pre-auth</div><p class="prose">Authorize an estimated amount first and adjust the final capture later. Hotels and gas stations are classic examples. Capture can be lower than auth, but not higher without a new authorization.</p></div>
+<div class="card"><div class="card-title"><span class="abbr">Capture</span> — submit for payment</div><p class="prose">After goods ship or service completes, the merchant formally initiates fund movement. It normally must happen before the authorization expires.</p><div class="grid2"><div class="grid-card"><div class="label">Full Capture</div><div class="body">The most common flow: capture the full authorized amount once.</div></div><div class="grid-card"><div class="label">Partial Capture</div><div class="body">Capture only part of the authorized amount, often for split shipments; the remaining hold is released.</div></div></div></div>
+<div class="card"><div class="card-title">Void vs Refund</div><div class="grid2"><div class="grid-card" style="border-left:3px solid #8C5A11"><div class="label" style="color:var(--amber)">Void</div><div class="body">Before capture: cancel the authorization, release funds, no fund movement, usually no fee, no CBR impact.</div></div><div class="grid-card" style="border-left:3px solid #C13A2D"><div class="label" style="color:var(--red)">Refund</div><div class="body">After settlement: initiate reverse fund movement. Original route, T+3 to T+5, plus per-transaction fee.</div></div></div><p class="prose"><strong>ARN:</strong> Acquirer Reference Number, a unique tracking number used by banks to locate a refund.</p></div>
+<div class="card"><div class="card-title"><span class="abbr">Recurring</span> — subscription payments</div><p class="prose">The cardholder authorizes the merchant to charge periodically. The cardholder is the authorization subject; the merchant executes.</p><hr class="div"><div class="grid2"><div class="grid-card"><div class="label">CIT · Cardholder-Initiated Transaction</div><div class="body">Cardholder is present and triggers the payment; 3DS/SCA may apply.</div></div><div class="grid-card"><div class="label">MIT · Merchant-Initiated Transaction</div><div class="body">Cardholder is absent; merchant charges using a mandate. More liability sits with merchant/acquirer.</div></div></div><div class="step"><div class="step-num">1</div><div class="step-body"><strong>Initial CIT:</strong> user starts the subscription, enters card details, triggers 3DS, and creates a mandate.</div></div><div class="step"><div class="step-num">2</div><div class="step-body"><strong>Subsequent MIT:</strong> monthly auto-charge attaches MIT flag and mandate ID, often skipping 3DS.</div></div><div class="step"><div class="step-num red">!</div><div class="step-body"><strong>Chargeback risk:</strong> "I do not remember authorizing this." Merchants must preserve original mandate evidence.</div></div><div class="warn-box"><strong>Dunning:</strong> when MIT fails, retry strategy matters. Excessive retrying can trigger fraud signals; Stripe Billing and Chargebee include dunning engines.</div></div>
+<div class="card"><div class="card-title">Four PCI DSS compliance levels</div><div class="level-grid"><div class="level-card" style="border-left:3px solid #C13A2D"><div class="level-head"><span class="badge badge-red">Level 1</span>over 6M transactions/year</div><div class="level-body">Annual QSA onsite audit. Any business with a breach may be forced into Level 1.</div></div><div class="level-card" style="border-left:3px solid #8C5A11"><div class="level-head"><span class="badge badge-amber">Level 2</span>1M-6M</div><div class="level-body">SAQ plus QSA/ISA sign-off and quarterly ASV scans.</div></div><div class="level-card" style="border-left:3px solid #047857"><div class="level-head"><span class="badge badge-green">Level 3</span>20k-1M e-commerce</div><div class="level-body">SAQ and quarterly scans; no onsite audit.</div></div><div class="level-card" style="border-left:3px solid #2E6DA4"><div class="level-head"><span class="badge badge-blue">Level 4</span>under 20k</div><div class="level-body">Simplest SAQ; hosted checkout can reduce scope close to zero.</div></div></div><div class="case-box teal"><div class="case-label teal">Why Stripe Checkout can reduce PCI scope to SAQ-A</div>Card data goes directly from the cardholder browser to Stripe. The merchant server never sees card data, so compliance scope is dramatically reduced compared with storing cards in-house.</div></div>
+</div>
+
+<!-- Business Metrics -->
+<div id="sec-biz" class="section">
+<h2 class="section-title">Business Metrics</h2>
+<p class="section-desc">These metrics are common in payments and crypto, but payment context changes the details.</p>
+<div class="card"><div class="card-title">Core metric relationship</div><div class="chain"><div class="chain-node cn-blue">TPV</div><div class="chain-arrow">x</div><div class="chain-node cn-amber">Take Rate</div><div class="chain-arrow">=</div><div class="chain-node cn-teal">Net Revenue</div></div><hr class="div"><div class="card-title" style="margin-top:0">GMV vs TPV: platform vs payment system</div><div class="grid2"><div class="grid-card"><div class="label">GMV · Gross Merchandise Volume</div><div class="body">Total value of goods or services traded on a platform, including all payment methods.</div></div><div class="grid-card"><div class="label">TPV · Total Payment Volume</div><div class="body">The portion processed by the platform's own payment system. Transactions outside the payment stack do not count.</div></div></div><div class="case-box"><div class="case-label">Example: Shopify GMV vs TPV</div>Shopify's GMV is hundreds of billions of dollars, but TPV through Shopify Payments is only part of GMV. Many merchants use Stripe or PayPal, so Shopify does not capture payment revenue there. Investors use TPV for payment companies and GMV for commerce platforms. Typical take rate: Stripe around 2.9% blended; Adyen around 0.3%-0.5% IC++.</div></div>
+<div class="card"><div class="card-title">Full metric quick reference</div><div class="term-grid"><div class="term-item"><div class="term-abbr">TPV</div><div class="term-en">Total Payment Volume</div><div class="term-zh">Actual payment amount processed by the platform; core valuation base for payment companies.</div></div><div class="term-item"><div class="term-abbr">GMV</div><div class="term-en">Gross Merchandise Volume</div><div class="term-zh">Total commerce value on a platform, including all payment methods.</div></div><div class="term-item"><div class="term-abbr">Take Rate</div><div class="term-en">Revenue / TPV</div><div class="term-zh">Usually 0.5%-3%; higher means more pricing power or value-added services.</div></div><div class="term-item"><div class="term-abbr">NRR</div><div class="term-en">Net Revenue Retention</div><div class="term-zh">Above 100% means expansion; payment companies often have high NRR because migration cost is high.</div></div><div class="term-item"><div class="term-abbr">LTV / CAC</div><div class="term-en">Lifetime Value / Customer Acquisition Cost</div><div class="term-zh">LTV/CAC above 3 is generally healthy.</div></div><div class="term-item"><div class="term-abbr">MRR / ARR</div><div class="term-en">Monthly / Annual Recurring Revenue</div><div class="term-zh">ARR = MRR x 12. Fixed monthly fees count here; TPV-linked fees are variable.</div></div><div class="term-item"><div class="term-abbr">ARPU</div><div class="term-en">Average Revenue Per User</div><div class="term-zh">Total revenue divided by active users; common for consumer platforms.</div></div><div class="term-item"><div class="term-abbr">PEPM</div><div class="term-en">Per Employee Per Month</div><div class="term-zh">Pricing model for HR or corporate card products; revenue expands as the enterprise grows.</div></div></div></div>
+</div>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+
+<script>
+const slugById = {"fund": "fund-flow", "card": "card-acquiring", "trade": "trade-payments", "fx": "fx-cross-border", "crypto": "crypto-payments", "ucard": "crypto-card", "comp": "compliance", "lic": "licenses", "stable": "stablecoin-licenses", "roles": "institutional-roles", "txlife": "transaction-lifecycle", "biz": "business-metrics"};
+const idBySlug = Object.fromEntries(Object.entries(slugById).map(([id, slug]) => [slug, id]));
+const localeBase = '/glossary/en';
+const sections = Array.from(document.querySelectorAll('.section[id^="sec-"]'));
+const navLinks = Array.from(document.querySelectorAll('#sidebar a'));
+const searchInput = document.querySelector('.glossary-search input');
+const searchResults = document.querySelector('.glossary-search-results');
+const anchorBySlug = {};
+const searchItems = [];
+const slugCounts = {};
+
+function normalize(text) {
+  return (text || '').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+function escapeHtml(text) {
+  return String(text).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function readableTitle(el, sectionTitle) {
+  if (el.classList.contains('term-item')) {
+    return [el.querySelector('.term-abbr'), el.querySelector('.term-en'), el.querySelector('.term-zh')]
+      .map(node => node ? node.textContent.trim() : '').filter(Boolean).join(' · ');
+  }
+  const titleNode = el.querySelector('.card-title, .label, .level-head, .case-label, .section-title');
+  return titleNode ? titleNode.textContent.replace(/\s+/g, ' ').trim() : sectionTitle;
+}
+function makeSlug(text, fallback) {
+  const base = (text || fallback).toLowerCase().replace(/&/g, ' and ').replace(/\+/g, ' plus ')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 48) || fallback;
+  slugCounts[base] = (slugCounts[base] || 0) + 1;
+  return slugCounts[base] === 1 ? base : base + '-' + slugCounts[base];
+}
+function sectionUrl(sectionSlug, targetSlug = '') {
+  return localeBase + '/' + sectionSlug + '/' + (targetSlug ? '#' + encodeURIComponent(targetSlug) : '');
+}
+function setActiveSection(id, options = {}) {
+  const section = document.getElementById('sec-' + id);
+  if (!section) return false;
+  sections.forEach(item => item.classList.remove('active'));
+  navLinks.forEach(item => item.classList.remove('active'));
+  section.classList.add('active');
+  const link = navLinks.find(item => item.dataset.sectionId === id);
+  if (link) link.classList.add('active');
+  const slug = slugById[id] || id;
+  const targetSlug = options.target && options.target !== section ? options.target.dataset.glossaryAnchor : '';
+  if (options.updateUrl !== false) history.pushState(null, '', sectionUrl(slug, targetSlug));
+  const target = options.target || section;
+  if (options.scroll !== false) target.scrollIntoView({ behavior: options.instant ? 'auto' : 'smooth', block: 'start' });
+  if (options.target) {
+    options.target.classList.remove('glossary-hit');
+    void options.target.offsetWidth;
+    options.target.classList.add('glossary-hit');
+    window.setTimeout(() => options.target.classList.remove('glossary-hit'), 1600);
+  }
+  return true;
+}
+navLinks.forEach(link => {
+  const raw = link.getAttribute('onclick') || '';
+  const match = raw.match(/show\('([^']+)'\)/);
+  if (!match) return;
+  const id = match[1];
+  link.dataset.sectionId = id;
+  link.href = sectionUrl(slugById[id] || id);
+  link.removeAttribute('onclick');
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    setActiveSection(id, { updateUrl: true });
+  });
+});
+sections.forEach(section => {
+  const sectionId = section.id.replace(/^sec-/, '');
+  const sectionSlug = slugById[sectionId] || sectionId;
+  const sectionTitle = readableTitle(section, sectionId);
+  const sectionAnchor = makeSlug(sectionTitle, sectionSlug);
+  section.dataset.glossaryAnchor = sectionAnchor;
+  anchorBySlug[sectionSlug] = section;
+  searchItems.push({ title: sectionTitle, context: 'Section', text: normalize(section.innerText), sectionId, sectionSlug, targetSlug: sectionAnchor, target: section });
+  Array.from(section.querySelectorAll('.term-item, .grid-card, .level-card, .card')).forEach((el, index) => {
+    const title = readableTitle(el, sectionTitle);
+    if (!title || title === sectionTitle) return;
+    const targetSlug = makeSlug(title, sectionSlug + '-' + index);
+    el.dataset.glossaryAnchor = targetSlug;
+    anchorBySlug[sectionSlug + '/' + targetSlug] = el;
+    searchItems.push({ title, context: sectionTitle, text: normalize(el.innerText), sectionId, sectionSlug, targetSlug, target: el });
+  });
+});
+window.show = function(id) { return setActiveSection(id, { updateUrl: true }); };
+function routeFromLocation(options = {}) {
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  const localeParts = localeBase.split('/').filter(Boolean);
+  const matchesLocale = localeParts.every((part, index) => parts[index] === part);
+  const pathSlug = matchesLocale ? (parts[localeParts.length] || '') : '';
+  const hashSlug = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+  const sectionId = idBySlug[pathSlug] || 'fund';
+  const sectionSlug = slugById[sectionId] || sectionId;
+  const target = hashSlug ? anchorBySlug[sectionSlug + '/' + hashSlug] : null;
+  setActiveSection(sectionId, { target, updateUrl: false, scroll: !!target, instant: options.instant });
+}
+function findMatches(query) {
+  const q = normalize(query);
+  if (!q) return [];
+  return searchItems.map(item => {
+    const title = normalize(item.title);
+    let score = 0;
+    if (title === q) score += 120;
+    if (title.startsWith(q)) score += 80;
+    if (title.includes(q)) score += 55;
+    if (item.text.includes(q)) score += 20;
+    return { ...item, score };
+  }).filter(item => item.score > 0).sort((a, b) => b.score - a.score || a.title.length - b.title.length).slice(0, 8);
+}
+function renderSearch(matches) {
+  if (!searchInput.value.trim()) {
+    searchResults.innerHTML = '';
+    searchResults.classList.remove('open');
+    return;
+  }
+  if (!matches.length) {
+    searchResults.innerHTML = '<div class="glossary-search-empty">No matching terms found</div>';
+    searchResults.classList.add('open');
+    return;
+  }
+  searchResults.innerHTML = matches.map((item, index) => `
+    <button type="button" class="glossary-search-result" data-index="${index}">
+      <span>${escapeHtml(item.title)}</span>
+      <small>${escapeHtml(item.context)}</small>
+    </button>`).join('');
+  searchResults.classList.add('open');
+}
+let activeMatches = [];
+function jump(item) {
+  if (!item) return;
+  searchInput.value = item.title;
+  searchResults.classList.remove('open');
+  setActiveSection(item.sectionId, { target: item.target, updateUrl: true });
+}
+document.querySelector('.glossary-search').addEventListener('submit', event => {
+  event.preventDefault();
+  jump(activeMatches[0]);
+});
+searchInput.addEventListener('input', () => {
+  activeMatches = findMatches(searchInput.value);
+  renderSearch(activeMatches);
+});
+searchInput.addEventListener('focus', () => {
+  activeMatches = findMatches(searchInput.value);
+  renderSearch(activeMatches);
+});
+searchResults.addEventListener('click', event => {
+  const button = event.target.closest('.glossary-search-result');
+  if (button) jump(activeMatches[Number(button.dataset.index)]);
+});
+document.addEventListener('click', event => {
+  if (!document.querySelector('.glossary-search').contains(event.target)) searchResults.classList.remove('open');
+});
+routeFromLocation({ instant: true });
+window.addEventListener('popstate', () => routeFromLocation({ instant: true }));
+window.addEventListener('hashchange', () => routeFromLocation({ instant: true }));
+</script>
+
+
+<script>
+const LICENSE_REGION_META = {
+  americas: { name: 'US / Canada', color: '#2E6DA4',
+    items: [
+      { n: 'MTL', d: 'Money Transmitter License — state-by-state approval across 48 states + DC, typically 2-3 years and multi-million cost.' },
+      { n: 'MSB', d: 'Money Services Business — FinCEN federal registration, usually completed in about 14 days, but still requires state MTL coverage.' },
+      { n: 'BitLicense', d: 'NYDFS crypto license — one of the strictest US crypto approvals, with heavy legal, compliance, and review burden.' },
+      { n: 'National Bank Charter', d: 'OCC federal bank charter — can reduce state-by-state money transmission exposure, but the threshold is extremely high.' },
+      { n: 'FINTRAC MSB', d: 'Canada money services business registration — comparatively accessible, with ongoing AML reporting obligations.' },
+    ]
+  },
+  latam: { name: 'Latin America', color: '#5C4BB0',
+    items: [
+      { n: 'Brazil PSP License', d: 'BCB payment service provider framework; open banking and Pix real-time payments have become a global reference model.' },
+      { n: 'Mexico PSSP', d: 'Payment Service Provider / Institution under the 2018 Fintech Law framework, a key digital-payment license in Latin America.' },
+      { n: 'Regional PSP', d: 'Argentina, Colombia, Chile, and others regulate PSP activity through local central-bank frameworks with fast-growing demand.' },
+    ]
+  },
+  europe: { name: 'Europe / UK', color: '#0E7C6B',
+    items: [
+      { n: 'EMI', d: 'Electronic Money Institution — one EU license can passport across 27 member states; Lithuania is a common application hub.' },
+      { n: 'PI', d: 'Payment Institution — payment services only, lower capital requirement than EMI, and no stored-value issuance.' },
+      { n: 'Small EMI / PI', d: 'Simplified low-volume regimes in some markets, useful for early-stage market validation.' },
+      { n: 'AISP / PISP', d: 'PSD2 account information and payment initiation permissions with the lowest payment-regulatory threshold.' },
+      { n: 'MiCA CASP', d: 'Crypto-Asset Service Provider authorization under MiCA, creating an EU-level crypto regulatory passport.' },
+      { n: 'UK FCA E-money', d: 'Post-Brexit UK e-money permission is separate from the EU passport and is required for UK coverage.' },
+    ]
+  },
+  apac: { name: 'APAC', color: '#A6396A',
+    items: [
+      { n: 'MPI + DPT', d: 'Singapore MAS Major Payment Institution plus Digital Payment Token permissions; no payment-volume cap and an Asian benchmark.' },
+      { n: 'VATP', d: 'Hong Kong SFC Virtual Asset Trading Platform regime, effective from June 2023 with custody and capital requirements.' },
+      { n: 'SVF', d: 'Hong Kong HKMA Stored Value Facility license; the same category behind Octopus and Alipay HK and a stablecoin prerequisite.' },
+      { n: 'MSO', d: 'Hong Kong Customs Money Service Operator license for money changing and remittance activity.' },
+      { n: 'JFSA', d: 'Japan crypto-asset exchange registration under the Financial Services Agency; mature but compliance-heavy.' },
+      { n: 'AUSTRAC', d: 'Australia digital currency exchange provider registration under the FATF-style AML framework.' },
+      { n: 'SEA PSP', d: 'Indonesia OJK, Philippines BSP, Thailand BOT, Vietnam SBV and others regulate PSP activity locally, often with foreign ownership limits.' },
+    ]
+  },
+  me: { name: 'Middle East', color: '#8C5A11',
+    items: [
+      { n: 'Dubai VARA VASP', d: 'Dubai Virtual Assets Regulatory Authority license, established in 2022 and relatively friendly to crypto operators.' },
+      { n: 'ADGM FSRA', d: 'Abu Dhabi Global Market Financial Services Regulatory Authority framework, favored by institutional Web3 businesses and funds.' },
+      { n: 'CBUAE SVF + RPP', d: 'UAE Central Bank stored value and retail payment service permissions for wallets and payment gateways.' },
+    ]
+  },
+  africa: { name: 'Africa', color: '#047857',
+    items: [
+      { n: 'Nigeria PSO', d: 'Central Bank of Nigeria Payment Service Operator regime; key market for Flutterwave, Paystack, and regional payment growth.' },
+      { n: 'Kenya PSP', d: 'Central Bank of Kenya payment service provider framework; M-Pesa birthplace and a leading mobile-money market.' },
+      { n: 'South Africa EMI', d: 'South African Reserve Bank framework in one of Africa’s most mature financial markets, often compared with European e-money models.' },
+    ]
+  }
+};
+
+const LICENSE_COUNTRY_REGION = {
+  840:'americas', 124:'americas',
+  484:'latam', 76:'latam', 32:'latam', 152:'latam', 170:'latam', 604:'latam', 858:'latam', 862:'latam', 600:'latam', 328:'latam', 740:'latam', 531:'latam', 630:'latam',
+  276:'europe', 250:'europe', 826:'europe', 380:'europe', 724:'europe', 620:'europe', 528:'europe', 56:'europe', 40:'europe', 756:'europe', 578:'europe', 752:'europe', 208:'europe', 246:'europe', 233:'europe', 428:'europe', 440:'europe', 616:'europe', 203:'europe', 703:'europe', 348:'europe', 642:'europe', 100:'europe', 300:'europe', 191:'europe', 705:'europe', 372:'europe', 352:'europe', 470:'europe', 442:'europe', 196:'europe', 112:'europe', 804:'europe', 498:'europe', 688:'europe', 807:'europe', 8:'europe',
+  702:'apac', 344:'apac', 392:'apac', 36:'apac', 410:'apac', 356:'apac', 360:'apac', 764:'apac', 704:'apac', 458:'apac', 608:'apac', 50:'apac', 144:'apac', 524:'apac', 104:'apac', 116:'apac', 418:'apac', 496:'apac', 887:'apac', 586:'apac', 64:'apac',
+  682:'me', 784:'me', 512:'me', 634:'me', 414:'me', 368:'me', 400:'me', 376:'me',
+  566:'africa', 404:'africa', 710:'africa', 818:'africa', 288:'africa', 231:'africa', 716:'africa', 504:'africa', 12:'africa', 686:'africa', 332:'africa', 466:'africa', 120:'africa', 24:'africa', 516:'africa', 508:'africa', 800:'africa', 834:'africa', 894:'africa', 426:'africa', 748:'africa', 140:'africa', 646:'africa', 108:'africa', 270:'africa', 324:'africa', 384:'africa', 204:'africa', 854:'africa', 562:'africa', 768:'africa', 174:'africa',
+};
+
+const LICENSE_REGION_FILL = {
+  americas:'#CFE0F2', latam:'#D8D2F2', europe:'#BFE6D6',
+  apac:'#EFC6D4', me:'#EFD9AE', africa:'#C9E0AE'
+};
+const LICENSE_REGION_HOVER = {
+  americas:'#2E6DA4', latam:'#5C4BB0', europe:'#0E7C6B',
+  apac:'#A6396A', me:'#8C5A11', africa:'#047857'
+};
+
+let licenseCurrentRegion = null;
+let licenseMapSvg = null;
+
+async function initEnglishLicenseMap() {
+  const loading = document.getElementById('loading-map');
+  const mapEl = document.getElementById('world-map');
+  if (!loading || !mapEl) return;
+  if (!window.d3 || !window.topojson) {
+    loading.textContent = 'Map libraries failed to load. Please refresh the page.';
+    return;
+  }
+  try {
+    const atlasUrl = (window.__resources && window.__resources.worldAtlas) || 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+    const world = await d3.json(atlasUrl);
+    loading.style.display = 'none';
+    mapEl.style.display = 'block';
+    licenseMapSvg = d3.select('#world-map');
+    licenseMapSvg.selectAll('*').remove();
+    const projection = d3.geoNaturalEarth1().scale(153).translate([480, 250]);
+    const pathGen = d3.geoPath().projection(projection);
+
+    licenseMapSvg.append('rect').attr('width', 960).attr('height', 500).attr('fill', 'var(--bg2)');
+    licenseMapSvg.append('path').datum({ type: 'Sphere' }).attr('d', pathGen).attr('fill', '#DCEAF2').attr('opacity', '0.5');
+    licenseMapSvg.append('path').datum(d3.geoGraticule()()).attr('d', pathGen).attr('fill', 'none').attr('stroke', 'rgba(0,0,0,0.06)').attr('stroke-width', '0.3');
+
+    const countries = topojson.feature(world, world.objects.countries);
+    licenseMapSvg.selectAll('.country')
+      .data(countries.features)
+      .enter().append('path')
+      .attr('class', 'country')
+      .classed('clickable', d => !!LICENSE_COUNTRY_REGION[+d.id])
+      .attr('d', pathGen)
+      .attr('fill', d => {
+        const region = LICENSE_COUNTRY_REGION[+d.id];
+        return region ? LICENSE_REGION_FILL[region] : 'var(--bg3)';
+      })
+      .on('click', function(event, d) {
+        const region = LICENSE_COUNTRY_REGION[+d.id];
+        if (region) highlightEnglishLicenseRegion(region);
+      })
+      .on('mouseover', function(event, d) {
+        const region = LICENSE_COUNTRY_REGION[+d.id];
+        if (region) d3.select(this).attr('fill', LICENSE_REGION_HOVER[region]);
+      })
+      .on('mouseout', function(event, d) {
+        const region = LICENSE_COUNTRY_REGION[+d.id];
+        if (region) d3.select(this).attr('fill', licenseCurrentRegion === region ? LICENSE_REGION_HOVER[region] : LICENSE_REGION_FILL[region]);
+      });
+
+    const labels = [
+      { r:'americas', x:135, y:170, t:'North America', s:'MTL · BitLicense' },
+      { r:'latam', x:200, y:315, t:'Latin America', s:'PSP · Pix' },
+      { r:'europe', x:480, y:125, t:'Europe', s:'EMI · MiCA' },
+      { r:'apac', x:730, y:195, t:'APAC', s:'MPI · VATP' },
+      { r:'me', x:570, y:200, t:'Middle East', s:'VARA · FSRA' },
+      { r:'africa', x:490, y:315, t:'Africa', s:'PSO · PSP' },
+    ];
+    labels.forEach(label => {
+      const group = licenseMapSvg.append('g').style('cursor', 'pointer').on('click', () => highlightEnglishLicenseRegion(label.r));
+      const hitWidth = label.t === 'Latin America' || label.t === 'Middle East' ? 96 : 82;
+      group.append('rect').attr('x', label.x - hitWidth / 2).attr('y', label.y - 15).attr('width', hitWidth).attr('height', 34).attr('rx', 6).attr('fill', 'transparent').attr('pointer-events', 'all');
+      group.append('text').attr('x', label.x).attr('y', label.y).attr('text-anchor', 'middle').attr('fill', LICENSE_REGION_HOVER[label.r]).attr('font-size', '11').attr('font-weight', '600').attr('font-family', 'Inter, sans-serif').text(label.t);
+      group.append('text').attr('x', label.x).attr('y', label.y + 13).attr('text-anchor', 'middle').attr('fill', LICENSE_REGION_HOVER[label.r]).attr('font-size', '9').attr('opacity', '0.8').attr('font-family', 'SFMono-Regular, Consolas, ui-monospace, monospace').text(label.s);
+    });
+
+    document.querySelectorAll('.map-leg[data-region]').forEach(item => {
+      item.addEventListener('click', () => highlightEnglishLicenseRegion(item.dataset.region));
+    });
+  } catch (error) {
+    loading.textContent = 'Map data failed to load. Please check the network and refresh.';
+    console.error(error);
+  }
+}
+
+function highlightEnglishLicenseRegion(region) {
+  licenseCurrentRegion = region;
+  if (licenseMapSvg) {
+    licenseMapSvg.selectAll('.country').attr('fill', d => {
+      const countryRegion = LICENSE_COUNTRY_REGION[+d.id];
+      if (!countryRegion) return 'var(--bg3)';
+      return countryRegion === region ? LICENSE_REGION_HOVER[countryRegion] : LICENSE_REGION_FILL[countryRegion];
+    });
+  }
+  document.querySelectorAll('.map-leg[data-region]').forEach(item => {
+    item.classList.toggle('active', item.dataset.region === region);
+  });
+  const meta = LICENSE_REGION_META[region];
+  if (!meta) return;
+  const titleEl = document.getElementById('map-tip-title');
+  const itemsEl = document.getElementById('map-tip-items');
+  titleEl.textContent = meta.name;
+  titleEl.style.color = meta.color;
+  itemsEl.innerHTML = meta.items.map(item => `<div class="map-tip-item"><strong>${item.n}</strong> — ${item.d}</div>`).join('');
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initEnglishLicenseMap);
+} else {
+  initEnglishLicenseMap();
+}
+</script>
+
+</body>
+</html>
