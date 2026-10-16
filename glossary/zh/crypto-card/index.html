@@ -209,7 +209,7 @@ function enhanceGlossaryNavigation() {
   const searchItems = [];
   const slugCounts = {};
 
-  ensureSiteMetadata();
+  ensureSiteMetadata({ localeBase, alternateBase, slugById, idBySlug });
   injectGlossaryEnhancementStyles();
 
   function normalize(text) {
@@ -476,7 +476,7 @@ function enhanceGlossaryNavigation() {
   window.addEventListener('hashchange', () => routeFromLocation({ instant: true }));
 }
 
-function ensureSiteMetadata() {
+function ensureSiteMetadata({ localeBase, alternateBase, slugById, idBySlug }) {
   const siteOrigin = 'https://www.allscale.io';
   const pathParts = window.location.pathname.split('/').filter(Boolean);
   const localeParts = localeBase.split('/').filter(Boolean);
